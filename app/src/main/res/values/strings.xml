@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ShopifyApp</string>
+    <string name="title_activity_main_tabs">MainTabsActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_category">Category</string>
+    <string name="title_me">Me</string>
 </resources>
