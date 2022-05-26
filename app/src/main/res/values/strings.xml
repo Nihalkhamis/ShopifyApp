@@ -4,4 +4,14 @@
     <string name="title_home">Home</string>
     <string name="title_category">Category</string>
     <string name="title_me">Me</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="cart">Cart</string>
+    <string name="welcome">Welcome</string>
+    <string name="orders">Orders</string>
+    <string name="more">more</string>
+    <string name="wishList">Wish List</string>
+    <string name="price">Price</string>
+    <string name="created_at">Created at</string>
+    <string name="coin">EGP</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp
 
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -29,6 +30,29 @@ class MainTabsActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_category, R.id.navigation_me
             )
         )
+        binding.topBar.setNavigationOnClickListener {
+            Toast.makeText(this,"Search Tap",Toast.LENGTH_LONG).show()
+        }
+        binding.topBar.setOnMenuItemClickListener { menuItem ->
+
+            when(menuItem.itemId){
+                R.id.favorite ->{
+                    Toast.makeText(this,"Favorite Tap",Toast.LENGTH_LONG).show()
+                     true
+                }
+
+                R.id.cart -> {
+                    Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
+                     true
+                }
+                else ->
+                {
+                     false
+                }
+            }
+        }
+
+
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
