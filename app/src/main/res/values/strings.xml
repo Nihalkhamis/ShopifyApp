@@ -14,4 +14,5 @@
     <string name="price">Price</string>
     <string name="created_at">Created at</string>
     <string name="coin">EGP</string>
+    <string name="signup_btn">Sign Up</string>
 </resources>
