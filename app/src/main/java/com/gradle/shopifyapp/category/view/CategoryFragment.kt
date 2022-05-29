@@ -4,40 +4,135 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentCategoryBinding
 import com.gradle.shopifyapp.category.viewmodel.CategoryViewModel
+import com.gradle.shopifyapp.model.SubCategoryModel
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private var _binding: FragmentCategoryBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+
+    lateinit var subCategoryAdapter: SubCategoryAdapter
+    lateinit var subCategoriesList : ArrayList<SubCategoryModel>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(CategoryViewModel::class.java)
+//        val dashboardViewModel =
+//            ViewModelProvider(this).get(CategoryViewModel::class.java)
+
 
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
+
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+       binding.categoryTabLayout.addTab( binding.categoryTabLayout.newTab().setText(R.string.women))
+       binding.categoryTabLayout.addTab( binding.categoryTabLayout.newTab().setText(R.string.men))
+       binding.categoryTabLayout.addTab( binding.categoryTabLayout.newTab().setText(R.string.kids))
+
+        binding.categoryTabLayout.addOnTabSelectedListener(this)
+
+       setAdapter()
+
+    }
+
+    fun setAdapter(){
+        subCategoriesList = ArrayList<SubCategoryModel>()
+
+
+        subCategoryAdapter = SubCategoryAdapter(requireContext(), ArrayList())
+        binding.subCategoryRV.adapter = subCategoryAdapter
+
+        setWomenCategory()
+    }
+
+    private fun setWomenCategory() {
+        subCategoriesList.clear()
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
+        subCategoryAdapter.setSubCategories(subCategoriesList)
+
+    }
+
+
+    private fun setMenCategory() {
+        subCategoriesList.clear()
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
+        subCategoryAdapter.setSubCategories(subCategoriesList)
+
+    }
+
+
+    private fun setKidsCategory() {
+        subCategoriesList.clear()
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
+        subCategoryAdapter.setSubCategories(subCategoriesList)
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onTabSelected(tab: TabLayout.Tab?) {
+        when(tab?.position){
+            0->{setWomenCategory()}
+            1->{setMenCategory()}
+            2->{setKidsCategory()}
+        }
+    }
+
+    override fun onTabUnselected(tab: TabLayout.Tab?) {
+    }
+
+    override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 }
