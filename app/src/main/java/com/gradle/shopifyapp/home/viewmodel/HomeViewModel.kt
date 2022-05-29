@@ -1,13 +1,66 @@
 package com.gradle.shopifyapp.home.viewmodel
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.gradle.shopifyapp.model.ProductModel
+import com.gradle.shopifyapp.model.RepositoryInterface
+import com.kotlin.weatherforecast.utils.Constants
+import com.kotlin.weatherforecast.utils.MyPreference
+import kotlinx.coroutines.*
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+   // val errorMessage = MutableLiveData<String>()
+    val productList = MutableLiveData<ProductModel>()
+//    var job: Job? = null
+//    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+//        onError("Exception handled: ${throwable.localizedMessage}")
+//    }
+//    val loading = MutableLiveData<Boolean>()
+
+    val liveDataProductList : LiveData<ProductModel> = productList
+
+    fun getAllProducts(context: Context) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getAllProducts()
+            Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
+            Log.d("TAG", "getAllProducts: ${response}")
+            productList.postValue(response.body())
+        }
+
+
+//        job = viewModelScope.launch(Dispatchers.IO) {
+//            val response = repo.getAllProducts()
+//
+//             Log.d("TAG", "getAllProducts: $response")
+//            withContext(Dispatchers.Main) {
+//                if (response.isSuccessful) {
+//                    Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
+//                    Log.d("TAG", "getAllProducts: ${response}")
+//                    productList.postValue(response.body())
+//                    loading.value = false
+//                } else {
+//                    onError("Error : ${response.message()} ")
+//                }
+//            }
+//        }
     }
-    val text: LiveData<String> = _text
+
+//    private fun onError(message: String) {
+//        errorMessage.value = message
+//        loading.value = false
+//    }
+//
+//    override fun onCleared() {
+//        super.onCleared()
+//        job?.cancel()
+//    }
+
+//    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+//        throwable.printStackTrace()
+//    }
 }
