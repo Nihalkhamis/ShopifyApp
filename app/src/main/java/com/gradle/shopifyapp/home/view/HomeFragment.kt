@@ -3,6 +3,7 @@ package com.gradle.shopifyapp.home.view
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,9 @@ import androidx.viewpager.widget.ViewPager
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
+import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.network.ApiClient
 
 class HomeFragment : Fragment() {
 
@@ -36,7 +40,9 @@ class HomeFragment : Fragment() {
     var brands_rv: RecyclerView? = null
     lateinit var gridLayoutManager2: GridLayoutManager
 
-
+    //viewModel
+    lateinit var vmFactory: HomeViewModelFactory
+    lateinit var homeViewModel : HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +50,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+//        val homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -76,6 +82,23 @@ class HomeFragment : Fragment() {
         snapHelper.attachToRecyclerView(yourRecyclerView);
         https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
          */
+
+        vmFactory = HomeViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                requireContext()
+            ),requireContext()
+        )
+
+
+
+        homeViewModel = ViewModelProvider(this,vmFactory).get(HomeViewModel::class.java)
+        homeViewModel.getAllProducts(requireContext())
+
+        homeViewModel.liveDataProductList.observe(viewLifecycleOwner){
+            Log.d("TAG", "onCreateView: ${it.products}")
+        }
+
 
         return root
     }
