@@ -6,9 +6,7 @@
     android:padding="@dimen/_10sdp"
     app:cardCornerRadius="@dimen/_8sdp"
     app:elevation="@dimen/_3sdp"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
-    android:layout_marginTop="@dimen/_10sdp">
+    android:layout_margin="@dimen/_5sdp">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
