@@ -8,20 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
 import kotlinx.coroutines.*
 
 class HomeViewModel(private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
-   // val errorMessage = MutableLiveData<String>()
     val productList = MutableLiveData<ProductModel>()
-//    var job: Job? = null
-//    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-//        onError("Exception handled: ${throwable.localizedMessage}")
-//    }
-//    val loading = MutableLiveData<Boolean>()
-
     val liveDataProductList : LiveData<ProductModel> = productList
 
     fun getAllProducts(context: Context) {
@@ -32,22 +23,6 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
             productList.postValue(response.body())
         }
 
-
-//        job = viewModelScope.launch(Dispatchers.IO) {
-//            val response = repo.getAllProducts()
-//
-//             Log.d("TAG", "getAllProducts: $response")
-//            withContext(Dispatchers.Main) {
-//                if (response.isSuccessful) {
-//                    Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
-//                    Log.d("TAG", "getAllProducts: ${response}")
-//                    productList.postValue(response.body())
-//                    loading.value = false
-//                } else {
-//                    onError("Error : ${response.message()} ")
-//                }
-//            }
-//        }
     }
 
 //    private fun onError(message: String) {

@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -9,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gradle.shopifyapp.databinding.ActivityMainTabsBinding
+import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 
 class MainTabsActivity : AppCompatActivity() {
 
@@ -41,9 +43,13 @@ class MainTabsActivity : AppCompatActivity() {
                 R.id.favorite ->{
                     Toast.makeText(this,"Favorite Tap",Toast.LENGTH_LONG).show()
                      true
+
                 }
 
                 R.id.cart -> {
+                    val intent = Intent(this, ShoppingCartActivity::class.java).apply {
+                    }
+                    startActivity(intent)
                     Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
                      true
                 }
