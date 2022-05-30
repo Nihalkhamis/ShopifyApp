@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/filled_heat_icon.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/search_icon.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/shopping_cart_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.264" />
-        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.1" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.1" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.176" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_subcategory.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_women.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/slideshow_layout.xml" value="0.25416666666666665" />

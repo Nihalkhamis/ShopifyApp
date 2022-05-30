@@ -30,6 +30,8 @@ class MainTabsActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_category, R.id.navigation_me
             )
         )
+
+
         binding.topBar.setNavigationOnClickListener {
             Toast.makeText(this,"Search Tap",Toast.LENGTH_LONG).show()
         }
