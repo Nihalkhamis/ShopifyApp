@@ -50,9 +50,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-//        val homeViewModel =
-//            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -72,16 +69,10 @@ class HomeFragment : Fragment() {
 
         //Brands
         brands_rv = binding.brandRowRv
-        gridLayoutManager2 = GridLayoutManager(context,1,GridLayoutManager.HORIZONTAL,false)
-        brands_rv!!.layoutManager = gridLayoutManager2
         brandsAdapter = Brands_adapter(requireContext(),clothes)
         brandsAdapter!!.notifyDataSetChanged()
         brands_rv!!.adapter = brandsAdapter
-        /*
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(yourRecyclerView);
-        https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8
-         */
+
 
         vmFactory = HomeViewModelFactory(
             Repository.getRepoInstance(
