@@ -12,4 +12,6 @@ interface ApiInterface {
     )
     @GET("products.json")
     suspend fun getAllProducts(): Response<ProductModel>
+
+
 }

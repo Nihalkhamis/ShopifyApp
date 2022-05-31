@@ -1,24 +1,18 @@
 package com.gradle.shopifyapp.category.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentCategoryBinding
-import com.gradle.shopifyapp.category.viewmodel.CategoryViewModel
 import com.gradle.shopifyapp.model.SubCategoryModel
+import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 
-class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener {
+class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener {
 
     private var _binding: FragmentCategoryBinding? = null
 
@@ -66,7 +60,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener {
         subCategoriesList = ArrayList<SubCategoryModel>()
 
 
-        subCategoryAdapter = SubCategoryAdapter(requireContext(), ArrayList())
+        subCategoryAdapter = SubCategoryAdapter(requireContext(), ArrayList(),this)
         binding.subCategoryRV.adapter = subCategoryAdapter
 
         setWomenCategory()
@@ -134,5 +128,10 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener {
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
+    }
+
+    override fun onClick(subCategoryModel: SubCategoryModel) {
+        var intent = Intent(requireContext(),ProductBrandActivity::class.java)
+        startActivity(intent)
     }
 }
