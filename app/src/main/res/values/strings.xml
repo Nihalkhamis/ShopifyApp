@@ -21,10 +21,10 @@
     <string name="created_at">Created at</string>
     <string name="coin">EGP</string>
     <string name="signup_btn">Sign Up</string>
-<<<<<<< Updated upstream
+
     <string name="Brands">Brands</string>
 
-=======
+
     <string name="skip">Skip</string>
     <string name="have_account">Have Account</string>
     <string name="login">Login</string>
@@ -34,5 +34,6 @@
     <string name="first_name">First Name</string>
     <string name="second_name">Second Name</string>
     <string name="confirm_password">Confirm Password</string>
->>>>>>> Stashed changes
+    <string name="phone">0123</string>
+
 </resources>
