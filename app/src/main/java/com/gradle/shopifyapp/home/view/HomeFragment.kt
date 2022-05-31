@@ -17,6 +17,7 @@ import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.model.VendorsModel
 import com.gradle.shopifyapp.network.ApiClient
 
 class HomeFragment : Fragment() {
@@ -26,23 +27,23 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    var slideAdapter:SlideAdapter? = null
+    var slideAdapter: SlideAdapter? = null
     var viewPager: ViewPager? = null
-    var clothes = intArrayOf(R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4)
-    var ads = intArrayOf(R.drawable.ad2,R.drawable.ad3,R.drawable.ad4)
+    var clothes = intArrayOf(R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4)
+    var ads = intArrayOf(R.drawable.ad2, R.drawable.ad3, R.drawable.ad4)
     var currentPosition: Int = 0
 
     var couponsAdapter: Coupons_adapter? = null
     var coupons_rv: RecyclerView? = null
     lateinit var gridLayoutManager: GridLayoutManager
 
-    var brandsAdapter: Brands_adapter? = null
-    var brands_rv: RecyclerView? = null
+    lateinit var brandsAdapter: Brands_adapter
+    lateinit var brands_rv: RecyclerView
     lateinit var gridLayoutManager2: GridLayoutManager
 
     //viewModel
     lateinit var vmFactory: HomeViewModelFactory
-    lateinit var homeViewModel : HomeViewModel
+    lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,43 +56,54 @@ class HomeFragment : Fragment() {
 
         //ads slideshow
         viewPager = binding.pageView
-        slideAdapter = SlideAdapter(requireContext(),ads)
+        slideAdapter = SlideAdapter(requireContext(), ads)
         viewPager!!.adapter = slideAdapter
         createSlideshow()
 
         //coupons
         coupons_rv = binding.couponsRowRv
-        gridLayoutManager = GridLayoutManager(context,1,GridLayoutManager.HORIZONTAL,false)
+        gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
         coupons_rv!!.layoutManager = gridLayoutManager
-        couponsAdapter = Coupons_adapter(requireContext(),ads)
+        couponsAdapter = Coupons_adapter(requireContext(), ads)
         couponsAdapter!!.notifyDataSetChanged()
         coupons_rv!!.adapter = couponsAdapter
-
-        //Brands
-        brands_rv = binding.brandRowRv
-        brandsAdapter = Brands_adapter(requireContext(),clothes)
-        brandsAdapter!!.notifyDataSetChanged()
-        brands_rv!!.adapter = brandsAdapter
-
 
         vmFactory = HomeViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 requireContext()
-            ),requireContext()
+            ), requireContext()
         )
 
 
-
-        homeViewModel = ViewModelProvider(this,vmFactory).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
         homeViewModel.getAllProducts(requireContext())
 
-        homeViewModel.liveDataProductList.observe(viewLifecycleOwner){
+        homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: ${it.products}")
         }
 
+        homeViewModel.getAllVendors(requireContext())
+
+        homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
+            Log.d("TAG", "onCreateView: ${it.smart_collections}")
+            bindBrands(it)
+        }
+
+
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //Brands
+        brands_rv = binding.brandRowRv
+        brandsAdapter = Brands_adapter(requireContext())
+//        brandsAdapter!!.notifyDataSetChanged()
+        brands_rv.adapter = brandsAdapter
+
     }
 
     override fun onDestroyView() {
@@ -99,13 +111,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun createSlideshow(){
+    fun createSlideshow() {
         var handler: Handler = Handler()
         var runnable: Runnable = Runnable {
             kotlin.run {
-                if(currentPosition == clothes.size)
+                if (currentPosition == clothes.size)
                     currentPosition = 0
-                viewPager!!.setCurrentItem(currentPosition++,true)
+                viewPager!!.setCurrentItem(currentPosition++, true)
 
             }
         }
@@ -116,13 +128,14 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFinish() {
-               print("done")
+                print("done")
             }
         }.start()
     }
 
-
-
+    private fun bindBrands(vendors: VendorsModel){
+        brandsAdapter.setBrands(vendors.smart_collections)
+    }
 
 
 }

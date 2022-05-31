@@ -3,6 +3,7 @@
     <string name="title_activity_main_tabs">MainTabsActivity</string>
     <string name="title_home">Home</string>
     <string name="title_item">Item name</string>
+    <string name="checkout">Checkout</string>
     <string name="price_item">Item price</string>
     <string name="title_category">Category</string>
     <string name="title_me">Me</string>
@@ -22,5 +23,9 @@
     <string name="coin">EGP</string>
     <string name="signup_btn">Sign Up</string>
     <string name="Brands">Brands</string>
+    <string name="price_EGP">0.0EGP</string>
+    <string name="shopping_bag">Shopping Bag</string>
+
+
 
 </resources>
