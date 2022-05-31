@@ -31,6 +31,20 @@
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_starting.xml" value="0.2" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.113" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_icon.xml" value="0.113" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/edittext.xml" value="0.113" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/favorite_icon.xml" value="0.1" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/remove_icon.xml" value="0.113" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.11778115501519756" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_shopping_cart.xml" value="0.437403400309119" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.2421875" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.16032608695652173" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/order_list_item.xml" value="0.15729166666666666" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/shopping_cart_item.xml" value="0.32142857142857145" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/sub_category_item.xml" value="0.2421875" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.38721804511278196" />
       </map>
     </option>
   </component>

@@ -1,13 +1,13 @@
 package com.gradle.shopifyapp.network
 
 import com.gradle.shopifyapp.model.ProductModel
+import com.gradle.shopifyapp.model.VendorsModel
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 class ApiClient private constructor() : RemoteSource {
-
 
     companion object {
         private var instance: ApiClient? = null
@@ -32,6 +32,11 @@ class ApiClient private constructor() : RemoteSource {
     override suspend fun getAllProducts(): Response<ProductModel> {
         val productsService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return productsService.getAllProducts()
+    }
+
+    override suspend fun getAllVendors(): Response<VendorsModel> {
+        val vendorService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return vendorService.getAllVendors()
     }
 
 
