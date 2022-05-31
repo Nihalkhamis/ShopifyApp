@@ -8,12 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
+import com.gradle.shopifyapp.model.VendorsModel
 import kotlinx.coroutines.*
 
 class HomeViewModel(private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
     val productList = MutableLiveData<ProductModel>()
     val liveDataProductList : LiveData<ProductModel> = productList
+
+    val vendorList = MutableLiveData<VendorsModel>()
+    val liveVendorList : LiveData<VendorsModel> = vendorList
 
     fun getAllProducts(context: Context) {
         viewModelScope.launch(Dispatchers.IO ) {
@@ -22,7 +26,15 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
             Log.d("TAG", "getAllProducts: ${response}")
             productList.postValue(response.body())
         }
+    }
 
+    fun getAllVendors(context: Context) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getAllVendors()
+            Log.d("TAG", "getAllVendors: ${response.raw().request().url()}")
+            Log.d("TAG", "getAllVendors: ${response.body()}")
+            vendorList.postValue(response.body())
+        }
     }
 
 //    private fun onError(message: String) {
