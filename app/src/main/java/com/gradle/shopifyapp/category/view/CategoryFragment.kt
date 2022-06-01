@@ -131,7 +131,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     }
 
     override fun onClick(subCategoryModel: SubCategoryModel) {
-        var intent = Intent(requireContext(),ProductBrandActivity::class.java)
-        startActivity(intent)
+//        var intent = Intent(requireContext(),ProductBrandActivity::class.java)
+//        startActivity(intent)
     }
 }

@@ -1,10 +1,23 @@
 package com.gradle.shopifyapp.productBrand.view
 
 import android.os.Bundle
+import android.provider.SyncStateContract
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityProductBrandBinding
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
+import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.ProductModel
+import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
+import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
+import com.kotlin.weatherforecast.utils.Constants
 
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
@@ -14,22 +27,53 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
     lateinit var productBrandAdapter: ProductBrandAdapter
     lateinit var productBrandsList : ArrayList<ProductModel>
 
+
+    lateinit var vmFactory: ProductBrandViewModelFactory
+    lateinit var homeViewModel: ProductBrandViewModel
+
+    lateinit var brandID : String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_brand)
+       // setContentView(R.layout.activity_product_brand)
 
         binding = ActivityProductBrandBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-     setAdapter()
+        brandID = intent.getStringExtra(Constants.BRANDID).toString()
+        Log.d("TAG", "ID od Brand Inside activity: $brandID")
+
+        binding!!.backBtn.setOnClickListener {
+          finish()
+        }
+
+        vmFactory = ProductBrandViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                this
+            ),this
+        )
+
+        homeViewModel = ViewModelProvider(this,vmFactory).get(ProductBrandViewModel::class.java)
+        homeViewModel.getAllBrandsProducts(this, brandID!!)
+
+         setAdapter()
+
+        homeViewModel.liveDataBrandsProductList.observe(this) {
+            Log.d("TAG", "onCreateView: ${it}")
+            productBrandAdapter.setProductsBrand(it.products)
+        }
 
     }
+
 
     private fun setAdapter() {
-   
+        productBrandAdapter = ProductBrandAdapter(this, ArrayList(), this)
+        binding!!.productBrandRV.adapter = productBrandAdapter
     }
 
-    override fun onClick(productModel: ProductModel) {
+    override fun onClick(productModel: Product) {
 
     }
 }

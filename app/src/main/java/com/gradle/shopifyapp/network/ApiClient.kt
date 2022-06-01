@@ -17,7 +17,7 @@ class ApiClient private constructor() : RemoteSource {
     }
 
     object RetrofitHelper {
-        val baseUrl = "https://madalex20220.myshopify.com/admin/api/2022-04/"
+        val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
 
 
         fun getInstance(): Retrofit {
@@ -38,6 +38,13 @@ class ApiClient private constructor() : RemoteSource {
         val vendorService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return vendorService.getAllVendors()
     }
+
+    override suspend fun getProductsByBrand(id : String): Response<ProductModel> {
+        val brandsProductsService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return brandsProductsService.getProductsByBrand(id)
+    }
+
+
 
 
 }

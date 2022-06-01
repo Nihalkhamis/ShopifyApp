@@ -1,8 +1,10 @@
 package com.gradle.shopifyapp.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.provider.SyncStateContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +19,13 @@ import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.model.SmartCollection
 import com.gradle.shopifyapp.model.VendorsModel
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
+import com.kotlin.weatherforecast.utils.Constants
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnBrandClickListener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -90,8 +95,6 @@ class HomeFragment : Fragment() {
             bindBrands(it)
         }
 
-
-
         return root
     }
 
@@ -100,7 +103,7 @@ class HomeFragment : Fragment() {
 
         //Brands
         brands_rv = binding.brandRowRv
-        brandsAdapter = Brands_adapter(requireContext())
+        brandsAdapter = Brands_adapter(requireContext(),this)
 //        brandsAdapter!!.notifyDataSetChanged()
         brands_rv.adapter = brandsAdapter
 
@@ -135,6 +138,13 @@ class HomeFragment : Fragment() {
 
     private fun bindBrands(vendors: VendorsModel){
         brandsAdapter.setBrands(vendors.smart_collections)
+    }
+
+    override fun onClick(smartCollection: SmartCollection) {
+        Log.d("TAG", "onBrandClick: ${smartCollection.id}")
+        var intent = Intent(requireContext(), ProductBrandActivity::class.java)
+        intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
+        startActivity(intent)
     }
 
 

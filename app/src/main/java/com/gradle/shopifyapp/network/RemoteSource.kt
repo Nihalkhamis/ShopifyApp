@@ -7,4 +7,5 @@ import retrofit2.Response
 interface RemoteSource {
     suspend fun getAllProducts() : Response<ProductModel>
     suspend fun getAllVendors():  Response<VendorsModel>
+    suspend fun getProductsByBrand(id : String):  Response<ProductModel>
 }

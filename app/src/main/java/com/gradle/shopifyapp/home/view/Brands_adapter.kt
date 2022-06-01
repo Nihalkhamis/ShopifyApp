@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.SmartCollection
 
-class Brands_adapter(var context: Context): RecyclerView.Adapter<Brands_adapter.ViewHolder>() {
+class Brands_adapter(var context: Context,var onBrandClickListener : OnBrandClickListener): RecyclerView.Adapter<Brands_adapter.ViewHolder>() {
 
    // var brands = intArrayOf(R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4)
 
@@ -36,6 +36,9 @@ class Brands_adapter(var context: Context): RecyclerView.Adapter<Brands_adapter.
         Glide.with(context).load(brands[position].image.src).apply(
             RequestOptions().override(200, 200).placeholder(R.drawable.ic_launcher_background)
         ).into(holder.img)
+        holder.img.setOnClickListener {
+            onBrandClickListener.onClick((brands[position]))
+        }
         Log.i("TAG","BRAND IMAGE: "+brands[position].image.src)
     }
 
