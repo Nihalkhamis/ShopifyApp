@@ -16,6 +16,7 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
+import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 
@@ -25,6 +26,11 @@ class HomeFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    companion object{
+        var myProducts:List<Product>? = null
+
+    }
+
     private val binding get() = _binding!!
     var slideAdapter:SlideAdapter? = null
     var viewPager: ViewPager? = null
@@ -88,6 +94,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner){
             Log.d("TAG", "onCreateView: ${it.products}")
+            myProducts =it.products
         }
 
 

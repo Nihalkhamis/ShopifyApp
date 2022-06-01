@@ -22,6 +22,27 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.1" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable-v24/radius_view.xml" value="0.167" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/back_button_icon.xml" value="0.121" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/button_shape.xml" value="0.167" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/email_icon.xml" value="0.121" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/favorite_icon.xml" value="0.167" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/filled_heat_icon.xml" value="0.167" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/password_icon.xml" value="0.121" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/person_icon.xml" value="0.121" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/phone_icon.xml" value="0.167" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.1" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_starting.xml" value="0.2" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.11684782608695653" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.1287037037037037" />
+>>>>>>> Stashed changes
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_icon.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/edittext.xml" value="0.113" />

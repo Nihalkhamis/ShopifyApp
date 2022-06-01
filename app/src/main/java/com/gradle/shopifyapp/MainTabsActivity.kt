@@ -7,9 +7,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gradle.shopifyapp.databinding.ActivityMainTabsBinding
+import com.gradle.shopifyapp.search.views.SearchActivity
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 
 class MainTabsActivity : AppCompatActivity() {
@@ -35,7 +35,9 @@ class MainTabsActivity : AppCompatActivity() {
 
 
         binding.topBar.setNavigationOnClickListener {
-            Toast.makeText(this,"Search Tap",Toast.LENGTH_LONG).show()
+             val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+          //  Toast.makeText(this,"Search Tap",Toast.LENGTH_LONG).show()
         }
         binding.topBar.setOnMenuItemClickListener { menuItem ->
 

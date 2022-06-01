@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopifyApp">
         <activity
+            android:name=".search.views.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".shoppingCart.View.ShoppingCartActivity"
             android:exported="false" />
 
@@ -33,6 +36,7 @@
             android:name=".MainActivity"
             android:exported="true">
 
+<<<<<<< Updated upstream
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +44,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
+=======
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+>>>>>>> Stashed changes
         </activity>
     </application>
 
