@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
 import kotlinx.coroutines.*
@@ -15,6 +16,15 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     val productList = MutableLiveData<ProductModel>()
     val liveDataProductList : LiveData<ProductModel> = productList
 
+<<<<<<< Updated upstream
+=======
+    val vendorList = MutableLiveData<VendorsModel>()
+    val liveVendorList : LiveData<VendorsModel> = vendorList
+
+    val discountList = MutableLiveData<DiscountCodeModel>()
+    val liveDiscountList : LiveData<DiscountCodeModel> = discountList
+
+>>>>>>> Stashed changes
     fun getAllProducts(context: Context) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllProducts()
@@ -23,6 +33,15 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
             productList.postValue(response.body())
         }
 
+    }
+
+    fun getAllDiscountCodes(context: Context) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getAllDiscountCodes()
+            Log.d("TAG", "getAllDiscountCodes: ${response.raw().request().url()}")
+            Log.d("TAG", "getAllDiscountCodes: ${response.body()}")
+            discountList.postValue(response.body())
+        }
     }
 
 //    private fun onError(message: String) {

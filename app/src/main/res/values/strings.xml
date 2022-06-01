@@ -22,5 +22,14 @@
     <string name="coin">EGP</string>
     <string name="signup_btn">Sign Up</string>
     <string name="Brands">Brands</string>
+<<<<<<< Updated upstream
+=======
+    <string name="price_EGP">0.0EGP</string>
+    <string name="shopping_bag">Shopping Bag</string>
+    <string name="discount_code">Title</string>
+
+
+
+>>>>>>> Stashed changes
 
 </resources>

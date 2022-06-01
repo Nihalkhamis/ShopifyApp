@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.network
 
+import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -34,5 +35,18 @@ class ApiClient private constructor() : RemoteSource {
         return productsService.getAllProducts()
     }
 
+<<<<<<< Updated upstream
+=======
+    override suspend fun getAllVendors(): Response<VendorsModel> {
+        val vendorService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return vendorService.getAllVendors()
+    }
+
+    override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> {
+        val discountCodeService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return discountCodeService.getAllDiscountCodes()
+    }
+
+>>>>>>> Stashed changes
 
 }

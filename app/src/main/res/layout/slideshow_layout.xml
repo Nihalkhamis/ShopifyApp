@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:id="@+id/imgView"
-        android:src="@drawable/pic1"
+        android:src="@drawable/nike"
         android:scaleType="fitXY" />
 
 </LinearLayout>
