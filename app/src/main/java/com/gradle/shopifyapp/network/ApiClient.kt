@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.network
 
+import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.VendorsModel
 import retrofit2.Response
@@ -44,7 +45,10 @@ class ApiClient private constructor() : RemoteSource {
         return brandsProductsService.getProductsByBrand(id)
     }
 
-
+    override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> {
+        val discountCodeService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return discountCodeService.getAllDiscountCodes()
+    }
 
 
 }

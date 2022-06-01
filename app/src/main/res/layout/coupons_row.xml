@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/_185sdp"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp"
-    app:cardCornerRadius="@dimen/_10sdp"
     android:id="@+id/day_cardView"
-    app:cardBackgroundColor="@android:color/transparent"
+    android:layout_width="@dimen/_185sdp"
+    android:layout_height="@dimen/_50sdp"
+    android:layout_margin="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_30sdp"
+    android:backgroundTint="@color/orange"
     app:cardElevation="@dimen/_5sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,16 +14,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/coupon_img"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitXY"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/coupons"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/coupon_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/discount_code"
+            app:layout_constraintStart_toEndOf="@+id/coupon_img"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/_20sdp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

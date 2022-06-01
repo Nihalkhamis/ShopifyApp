@@ -18,10 +18,7 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
-import com.gradle.shopifyapp.model.Product
-import com.gradle.shopifyapp.model.Repository
-import com.gradle.shopifyapp.model.SmartCollection
-import com.gradle.shopifyapp.model.VendorsModel
+import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 import com.kotlin.weatherforecast.utils.Constants
@@ -40,17 +37,15 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     private val binding get() = _binding!!
     var slideAdapter: SlideAdapter? = null
     var viewPager: ViewPager? = null
-    var clothes = intArrayOf(R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4)
-    var ads = intArrayOf(R.drawable.ad2, R.drawable.ad3, R.drawable.ad4)
+    var ads = intArrayOf(R.drawable.nike, R.drawable.adidas, R.drawable.converse)
     var currentPosition: Int = 0
 
-    var couponsAdapter: Coupons_adapter? = null
-    var coupons_rv: RecyclerView? = null
+    lateinit var couponsAdapter: Coupons_adapter
+    lateinit var coupons_rv: RecyclerView
     lateinit var gridLayoutManager: GridLayoutManager
 
     lateinit var brandsAdapter: Brands_adapter
     lateinit var brands_rv: RecyclerView
-    lateinit var gridLayoutManager2: GridLayoutManager
 
     //viewModel
     lateinit var vmFactory: HomeViewModelFactory
@@ -71,13 +66,6 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         viewPager!!.adapter = slideAdapter
         createSlideshow()
 
-        //coupons
-        coupons_rv = binding.couponsRowRv
-        gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
-        coupons_rv!!.layoutManager = gridLayoutManager
-        couponsAdapter = Coupons_adapter(requireContext(), ads)
-        couponsAdapter!!.notifyDataSetChanged()
-        coupons_rv!!.adapter = couponsAdapter
 
         vmFactory = HomeViewModelFactory(
             Repository.getRepoInstance(
@@ -88,18 +76,23 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
-        homeViewModel.getAllProducts(requireContext())
 
+        homeViewModel.getAllProducts(requireContext())
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: ${it.products}")
             myProducts =it.products
         }
 
         homeViewModel.getAllVendors(requireContext())
-
         homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: ${it.smart_collections}")
             bindBrands(it)
+        }
+
+        homeViewModel.getAllDiscountCodes(requireContext())
+        homeViewModel.liveDiscountList.observe(viewLifecycleOwner){
+            Log.d("TAG", "onCreateView: ${it}")
+            bindCoupons(it)
         }
 
         return root
@@ -111,9 +104,14 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         //Brands
         brands_rv = binding.brandRowRv
         brandsAdapter = Brands_adapter(requireContext(),this)
-//        brandsAdapter!!.notifyDataSetChanged()
         brands_rv.adapter = brandsAdapter
 
+        //coupons
+        coupons_rv = binding.couponsRowRv
+        gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
+        coupons_rv!!.layoutManager = gridLayoutManager
+        couponsAdapter = Coupons_adapter(requireContext())
+        coupons_rv!!.adapter = couponsAdapter
     }
 
     override fun onDestroyView() {
@@ -125,7 +123,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         var handler: Handler = Handler()
         var runnable: Runnable = Runnable {
             kotlin.run {
-                if (currentPosition == clothes.size)
+                if (currentPosition == ads.size)
                     currentPosition = 0
                 viewPager!!.setCurrentItem(currentPosition++, true)
 
@@ -152,6 +150,10 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         var intent = Intent(requireContext(), ProductBrandActivity::class.java)
         intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
         startActivity(intent)
+    }
+
+    private fun bindCoupons(coupons: DiscountCodeModel){
+        couponsAdapter.setCoupons(coupons.discount_codes)
     }
 
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
 import com.gradle.shopifyapp.model.VendorsModel
@@ -18,6 +19,9 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
 
     val vendorList = MutableLiveData<VendorsModel>()
     val liveVendorList : LiveData<VendorsModel> = vendorList
+
+    val discountList = MutableLiveData<DiscountCodeModel>()
+    val liveDiscountList : LiveData<DiscountCodeModel> = discountList
 
     fun getAllProducts(context: Context) {
         viewModelScope.launch(Dispatchers.IO ) {
@@ -34,6 +38,16 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
             Log.d("TAG", "getAllVendors: ${response.raw().request().url()}")
             Log.d("TAG", "getAllVendors: ${response.body()}")
             vendorList.postValue(response.body())
+        }
+    }
+
+
+    fun getAllDiscountCodes(context: Context) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getAllDiscountCodes()
+            Log.d("TAG", "getAllDiscountCodes: ${response.raw().request().url()}")
+            Log.d("TAG", "getAllDiscountCodes: ${response.body()}")
+            discountList.postValue(response.body())
         }
     }
 

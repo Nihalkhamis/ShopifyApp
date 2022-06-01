@@ -34,7 +34,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/light_pink"
+            android:textColor="@color/dark_color"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:backgroundTint="@color/light_pink"
+            android:backgroundTint="@color/orange"
             android:text="@string/checkout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -90,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:text="@string/price_EGP"
+            android:textColor="@color/dark_color"
             app:layout_constraintBottom_toBottomOf="@+id/checkout_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/checkout_btn" />

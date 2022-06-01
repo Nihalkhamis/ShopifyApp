@@ -31,6 +31,8 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/title_item"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/shoppingCartImg"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,6 +80,7 @@
 
         <TextView
             android:id="@+id/itemPrice"
+            android:textColor="@color/dark_color"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"

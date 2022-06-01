@@ -19,4 +19,5 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun getAllProducts(): Response<ProductModel> = remoteSource.getAllProducts()
     override suspend fun getAllVendors():  Response<VendorsModel> = remoteSource.getAllVendors()
     override suspend fun getAllProductsByBrand(id: String): Response<ProductModel> = remoteSource.getProductsByBrand(id)
+    override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> = remoteSource.getAllDiscountCodes()
 }

@@ -1,9 +1,6 @@
 package com.gradle.shopifyapp.network
 
-import com.gradle.shopifyapp.model.Customer
-import com.gradle.shopifyapp.model.CustomerModel
-import com.gradle.shopifyapp.model.ProductModel
-import com.gradle.shopifyapp.model.VendorsModel
+import com.gradle.shopifyapp.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -43,6 +40,12 @@ interface ApiInterface {
         @Path(value = "id", encoded = false) key: String,
     ): Response<ProductModel>
 
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("2022-01/price_rules/1089622311051/discount_codes.json")
+    suspend fun getAllDiscountCodes(): Response<DiscountCodeModel>
 
 
 }
