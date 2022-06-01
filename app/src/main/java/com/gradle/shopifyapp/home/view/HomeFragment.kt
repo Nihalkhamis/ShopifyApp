@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
@@ -39,6 +40,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     var viewPager: ViewPager? = null
     var ads = intArrayOf(R.drawable.nike, R.drawable.adidas, R.drawable.converse)
     var currentPosition: Int = 0
+    lateinit var dots: DotsIndicator
 
     lateinit var couponsAdapter: Coupons_adapter
     lateinit var coupons_rv: RecyclerView
@@ -64,6 +66,8 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         viewPager = binding.pageView
         slideAdapter = SlideAdapter(requireContext(), ads)
         viewPager!!.adapter = slideAdapter
+        dots = binding.dots
+        dots.attachViewPager(viewPager)
         createSlideshow()
 
 
