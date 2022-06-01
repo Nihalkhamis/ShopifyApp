@@ -19,7 +19,7 @@ class ProductRecyclerViewAdapter(var products : List<Product>) : RecyclerView.Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.wish_list_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item,parent,false)
         return ProductRecyclerViewAdapter.Holder(view)
     }
 

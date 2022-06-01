@@ -57,6 +57,9 @@ dependencies {
 
     //sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    //viewpager indicator
+    implementation 'com.afollestad:viewpagerdots:1.0.0'
+
 
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"

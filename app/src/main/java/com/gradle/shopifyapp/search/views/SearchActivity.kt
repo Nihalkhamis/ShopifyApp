@@ -1,23 +1,25 @@
 package com.gradle.shopifyapp.search.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.databinding.ActivitySearchBinding
 import com.gradle.shopifyapp.home.view.HomeFragment
-import com.gradle.shopifyapp.me.view.OrderListViewAdapter
 import com.gradle.shopifyapp.model.Product
-import com.gradle.shopifyapp.model.ProductModel
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 
-class SearchActivity : AppCompatActivity(),OnItemClickListener {
-    lateinit var binding :ActivitySearchBinding
-     lateinit var searchTxt :EditText
-     lateinit var searchRecycleView:RecyclerView
+class SearchActivity : AppCompatActivity(), OnItemClickListener {
+    lateinit var binding: ActivitySearchBinding
+    lateinit var searchTxt: EditText
+    lateinit var searchRecycleView: RecyclerView
     lateinit var searchRecyclerAdapter: ProductBrandAdapter
-    var products =HomeFragment.myProducts
+    lateinit var cancelBtn:Button
+    var products = HomeFragment.myProducts
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,26 +27,30 @@ class SearchActivity : AppCompatActivity(),OnItemClickListener {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         searchRecycleView = binding.searchList
-        searchTxt =binding.searchEditText
-        searchRecyclerAdapter = ProductBrandAdapter(this, ArrayList(),this)
-       // products?.let { searchRecyclerAdapter.setProductsBrand(it) }
+        searchTxt = binding.searchEditText
+        cancelBtn=binding.cancel
+
+        cancelBtn.setOnClickListener {
+            finish()
+        }
+
+        searchRecyclerAdapter = ProductBrandAdapter(this, ArrayList(), this)
         searchRecycleView.adapter = searchRecyclerAdapter
-        searchTxt.doOnTextChanged{ text, start, count, after ->
-        Log.i("searchData",text.toString())
-          searchRecyclerAdapter.setProductsBrand(ArrayList())
-           var f =  products?.filter { it.title.contains(text.toString(),ignoreCase = true)}
+        searchTxt.doOnTextChanged { text, start, count, after ->
+            Log.i("searchData", text.toString())
+            searchRecyclerAdapter.setProductsBrand(ArrayList())
+            var f = products?.filter { it.title.contains(text.toString(), ignoreCase = true) }
             f?.let { searchRecyclerAdapter.setProductsBrand(it) }
             searchRecyclerAdapter.notifyDataSetChanged()
         }
 
 
+
     }
 
 
-
     override fun onClick(productModel: Product) {
-        TODO("Not yet implemented")
-        Log.i("taged","Clicked")
-
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -13,20 +13,23 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
         android:weightSum="3"
+        android:padding="@dimen/_8sdp"
         android:id="@+id/search_layout"
         >
         <EditText
             android:layout_width="0dp"
             android:id="@+id/search_edit_text"
             android:layout_height="wrap_content"
-            android:layout_weight="2.5"
+            android:layout_weight="2.75"
             android:drawableStart="@drawable/search_icon"
             android:hint="@string/looking_for"/>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:background="@color/white"
             android:text="@string/cancel"
-            android:layout_weight=".5"
+            android:layout_weight=".25"
             android:layout_height="wrap_content"/>
 
 

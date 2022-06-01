@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gradle.shopifyapp.R
@@ -30,7 +31,7 @@ class ProductBrandAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdcutBrandHolder {
         val view =
-            LayoutInflater.from(context).inflate(R.layout.wish_list_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.product_item, parent, false)
         return ProdcutBrandHolder(view)
     }
 
@@ -52,6 +53,6 @@ class ProductBrandAdapter(
         val product_img: ImageView = itemView.findViewById(R.id.product_img)
         val product_description_wish_list: TextView = itemView.findViewById(R.id.product_description_wish_list)
         val price_Text_wish_list : TextView = itemView.findViewById(R.id.price_Text_wish_list)
-        val productCard : LinearLayout = itemView.findViewById(R.id.productCard)
+        val productCard : CardView = itemView.findViewById(R.id.productCard)
     }
 }
