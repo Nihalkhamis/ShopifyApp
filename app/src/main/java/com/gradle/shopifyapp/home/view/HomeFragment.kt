@@ -153,6 +153,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         Log.d("TAG", "onBrandClick: ${smartCollection.id}")
         var intent = Intent(requireContext(), ProductBrandActivity::class.java)
         intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
+        intent.putExtra(Constants.BRANDNAME,smartCollection.title)
         startActivity(intent)
     }
 

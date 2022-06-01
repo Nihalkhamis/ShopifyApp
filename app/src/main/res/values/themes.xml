@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.ShopifyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_brown</item>
-        <item name="colorPrimaryVariant">@color/dark_brown</item>
-        <item name="colorOnPrimary">@color/off_white</item>
+        <item name="colorPrimary">@color/off_white</item>
+        <item name="colorPrimaryVariant">@color/dark_color</item>
+        <item name="colorOnPrimary">@color/dark_color</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/light_pink</item>
         <item name="colorSecondaryVariant">@color/light_brown</item>

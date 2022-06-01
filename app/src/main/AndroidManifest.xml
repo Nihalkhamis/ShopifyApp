@@ -24,6 +24,13 @@
             android:exported="false" />
         <activity
             android:name=".search.views.SearchActivity"
+            android:name=".wishlist.WishlistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".productBrand.view.ProductBrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".search.views.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".shoppingCart.View.ShoppingCartActivity"

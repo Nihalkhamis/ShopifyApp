@@ -1,16 +1,23 @@
 package com.gradle.shopifyapp.category.view
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.gradle.shopifyapp.R
+import com.gradle.shopifyapp.category.viewmodel.CategoryViewModel
+import com.gradle.shopifyapp.category.viewmodel.CategoryViewModelFactory
 import com.gradle.shopifyapp.databinding.FragmentCategoryBinding
-import com.gradle.shopifyapp.model.SubCategoryModel
-import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
+import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.productBrand.view.OnItemClickListener
+import com.gradle.shopifyapp.productBrand.view.ProductBrandAdapter
+
 
 class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener {
 
@@ -18,28 +25,20 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
     private val binding get() = _binding!!
 
-
-    lateinit var subCategoryAdapter: SubCategoryAdapter
-    lateinit var subCategoriesList : ArrayList<SubCategoryModel>
-
+    lateinit var productBrandAdapter: ProductBrandAdapter
+    lateinit var vmFactory: CategoryViewModelFactory
+    lateinit var categoryViewModel: CategoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val dashboardViewModel =
-//            ViewModelProvider(this).get(CategoryViewModel::class.java)
-
 
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root
-
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
 
     }
 
@@ -52,63 +51,49 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
         binding.categoryTabLayout.addOnTabSelectedListener(this)
 
-       setAdapter()
+        vmFactory = CategoryViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                requireContext()
+            ), requireContext()
+        )
+
+        // 273053745291 -> kid
+        // 273053679755 -> men
+        // 273053712523 -> women
+
+        categoryViewModel = ViewModelProvider(this, vmFactory).get(CategoryViewModel::class.java)
+        setAdapter()
 
     }
 
-    fun setAdapter(){
-        subCategoriesList = ArrayList<SubCategoryModel>()
+    private fun setAdapter(){
 
-
-        subCategoryAdapter = SubCategoryAdapter(requireContext(), ArrayList(),this)
-        binding.subCategoryRV.adapter = subCategoryAdapter
+        productBrandAdapter = ProductBrandAdapter(requireContext(), ArrayList(), this)
+        binding.subCategoryRV.adapter = productBrandAdapter
 
         setWomenCategory()
+
+        categoryViewModel.liveDataCategoriesProductList.observe(viewLifecycleOwner) {
+            Log.d("TAG", "onCreateView: $it")
+            productBrandAdapter.setProductsBrand(it.products)
+        }
+
     }
 
     private fun setWomenCategory() {
-        subCategoriesList.clear()
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Dresses", R.drawable.dress))
-        subCategoryAdapter.setSubCategories(subCategoriesList)
-
+        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053712523")
     }
 
 
     private fun setMenCategory() {
-        subCategoriesList.clear()
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Pants", R.drawable.dress))
-        subCategoryAdapter.setSubCategories(subCategoriesList)
+        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053679755")
 
     }
 
 
     private fun setKidsCategory() {
-        subCategoriesList.clear()
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoriesList.add(SubCategoryModel("Shorts", R.drawable.dress))
-        subCategoryAdapter.setSubCategories(subCategoriesList)
-
+        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053745291")
     }
 
     override fun onDestroyView() {
@@ -130,8 +115,9 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 
-    override fun onClick(subCategoryModel: SubCategoryModel) {
-//        var intent = Intent(requireContext(),ProductBrandActivity::class.java)
-//        startActivity(intent)
+    override fun onClick(productModel: Product) {
+
     }
+
+
 }

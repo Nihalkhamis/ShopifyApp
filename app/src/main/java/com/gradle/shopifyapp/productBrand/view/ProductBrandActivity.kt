@@ -3,6 +3,7 @@ package com.gradle.shopifyapp.productBrand.view
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -25,43 +26,57 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
 
     lateinit var productBrandAdapter: ProductBrandAdapter
-    lateinit var productBrandsList : ArrayList<ProductModel>
-
 
     lateinit var vmFactory: ProductBrandViewModelFactory
     lateinit var homeViewModel: ProductBrandViewModel
 
-    lateinit var brandID : String
+    lateinit var brandID: String
+    var searchIconClicked : Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_product_brand)
+        // setContentView(R.layout.activity_product_brand)
 
         binding = ActivityProductBrandBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
         brandID = intent.getStringExtra(Constants.BRANDID).toString()
         Log.d("TAG", "ID od Brand Inside activity: $brandID")
+        binding!!.subcategoryNameTxt.text = intent.getStringExtra(Constants.BRANDNAME).toString()
+
+        binding!!.searchBtn.setOnClickListener {
+            if (searchIconClicked){
+                searchIconClicked = false
+                binding!!.searchEt.visibility = View.VISIBLE
+                binding!!.subcategoryNameTxt.visibility = View.GONE
+            }
+          else{
+                searchIconClicked = true
+                binding!!.searchEt.visibility = View.GONE
+                binding!!.subcategoryNameTxt.visibility = View.VISIBLE
+
+            }
+        }
 
         binding!!.backBtn.setOnClickListener {
-          finish()
+            finish()
         }
 
         vmFactory = ProductBrandViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 this
-            ),this
+            ), this
         )
 
-        homeViewModel = ViewModelProvider(this,vmFactory).get(ProductBrandViewModel::class.java)
+        homeViewModel = ViewModelProvider(this, vmFactory).get(ProductBrandViewModel::class.java)
         homeViewModel.getAllBrandsProducts(this, brandID!!)
 
-         setAdapter()
+        setAdapter()
 
         homeViewModel.liveDataBrandsProductList.observe(this) {
-            Log.d("TAG", "onCreateView: ${it}")
+            Log.d("TAG", "onCreateView: $it")
             productBrandAdapter.setProductsBrand(it.products)
         }
 
