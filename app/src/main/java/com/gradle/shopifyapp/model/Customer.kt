@@ -1,0 +1,33 @@
+package com.gradle.shopifyapp.model
+
+data class Customer(
+    var accepts_marketing: Boolean?=false,
+    var accepts_marketing_updated_at: String?="",
+    var addresses: List<Addresse>?= listOf(),
+    var admin_graphql_api_id: String?="",
+    var created_at: String?="",
+    var currency: String?="",
+    var default_address: DefaultAddress = DefaultAddress(),
+    var email: String?="",
+    var first_name: String?="",
+    var id: Int?=0,
+    var last_name: String?="",
+    var last_order_id:Long=0,
+    var last_order_name:String ="",
+    var marketing_opt_in_level:String="",
+    var multipass_identifier:String ="",
+    var note: String ="",
+    var orders_count: Int=0,
+//    var password : String?="",
+//    var password_confirmation : String?="",
+    var phone: String?="",
+    var sms_marketing_consent: SmsMarketingConsent =SmsMarketingConsent() ,
+    var state: String?="",
+    var tags: String?="",
+    var tax_exempt: Boolean?=false,
+    var tax_exemptions: List<String>?= listOf(),
+    var total_spent: String?="",
+    var updated_at: String?="",
+    var verified_email: Boolean = true,
+//    var send_email_welcome:Boolean = false
+)

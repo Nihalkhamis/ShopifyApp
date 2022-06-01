@@ -9,6 +9,7 @@
     android:layout_margin="@dimen/_5sdp">
 
    <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/subCategory_layout"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
