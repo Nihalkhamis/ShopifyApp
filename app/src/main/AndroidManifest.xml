@@ -10,13 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopifyApp">
         <activity
-            android:name=".search.views.SearchActivity"
+            android:name=".wishlist.WishlistActivity"
+            android:exported="false" />
+        <activity
             android:name=".productBrand.view.ProductBrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".search.views.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".shoppingCart.View.ShoppingCartActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainTabsActivity"
             android:exported="true"
@@ -27,13 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".authentication.MainActivity"
-            android:exported="true">
+            android:exported="true"></activity>
 
-
-        </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />

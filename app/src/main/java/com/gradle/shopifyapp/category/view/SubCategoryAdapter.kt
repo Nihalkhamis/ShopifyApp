@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
@@ -29,14 +30,16 @@ class SubCategoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubCategoryHolder {
         val view =
-            LayoutInflater.from(context).inflate(R.layout.sub_category_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.product_item, parent, false)
         return SubCategoryHolder(view)
     }
 
     override fun onBindViewHolder(holder: SubCategoryHolder, position: Int) {
-        holder.categoryTxt.text = subCategories[position].subcategoryName
-        holder.categoryImg.setImageResource(R.drawable.dress)
-        holder.subCategory_layout.setOnClickListener {
+        holder.product_description_wish_list.text = subCategories[position].subcategoryName
+        holder.price_Text_wish_list.text = subCategories[position].price.toString()
+        holder.product_img.setImageResource(R.drawable.dress)
+
+        holder.productCard.setOnClickListener {
             onItemClickListener.onClick(subCategories[position])
         }
     }
@@ -47,8 +50,9 @@ class SubCategoryAdapter(
 
 
     class SubCategoryHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val categoryImg: ImageView = itemView.findViewById(R.id.categoryImg)
-        val categoryTxt: TextView = itemView.findViewById(R.id.categoryTxt)
-        val subCategory_layout: ConstraintLayout = itemView.findViewById(R.id.subCategory_layout)
+        val product_img: ImageView = itemView.findViewById(R.id.product_img)
+        val product_description_wish_list: TextView = itemView.findViewById(R.id.product_description_wish_list)
+        val price_Text_wish_list : TextView = itemView.findViewById(R.id.price_Text_wish_list)
+        val productCard : CardView = itemView.findViewById(R.id.productCard)
     }
 }
