@@ -28,9 +28,10 @@
     <string name="price_EGP">0.0EGP</string>
     <string name="shopping_bag">Shopping Bag</string>
     <string name="discount_code">Discount codes</string>
+    <string name="order_confirmation">Order Confirmation</string>
 
-
-
+    <string name="name">Name</string>
+    <string name="address">Alexandria,Egypt</string>
 
 
     <string name="skip">Skip</string>
@@ -42,7 +43,9 @@
     <string name="first_name">First Name</string>
     <string name="second_name">Second Name</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="phone">0123</string>
+    <string name="phone">+201235678</string>
+    <string name="shipping_method">Shipping Method</string>
+    <string name="shipping">Shipping:</string>
 
     <string name="cancel">Cancel</string>
     <string name="looking_for">What are you lookin for?</string>
