@@ -30,9 +30,6 @@
     <string name="discount_code">Discount codes</string>
 
 
-
-
-
     <string name="skip">Skip</string>
     <string name="have_account">Have Account</string>
     <string name="login">Login</string>
@@ -46,6 +43,10 @@
 
     <string name="cancel">Cancel</string>
     <string name="looking_for">What are you lookin for?</string>
+    <string name="rate">Rating</string>
+    <string name="addToCart">Add To Cart</string>
+    <string name="description">Description</string>
+    <string name="size">Size</string>
 
 
 </resources>
