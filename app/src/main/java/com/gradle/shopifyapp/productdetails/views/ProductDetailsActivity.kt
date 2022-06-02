@@ -1,35 +1,91 @@
 package com.gradle.shopifyapp.productdetails.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewParent
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
+import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.model.ReviewModel
+import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 
 
-class ProductDetailsActivity : AppCompatActivity() {
-    lateinit var viewPager:ViewPager
-    lateinit var  dots: DotsIndicator
+class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
+    lateinit var viewPager: ViewPager
+    lateinit var dots: DotsIndicator
     lateinit var productSliderAdapter: ProductViewPagerAdapter
+
+    lateinit var sizeAdapter: SizeRecyclerAdapter
+    lateinit var sizeRecyclerView: RecyclerView
+
+
+    lateinit var reviewAdapter: ReviewRecyclerAdapter
+    lateinit var reviewRecyclerView: RecyclerView
+    lateinit var reviews: List<ReviewModel>
+
+
+    lateinit var product: Product
     lateinit var binding: ActivityProductDetailesBinding
-    lateinit var images: List<String>
+    lateinit var selectedSize: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        images = listOf("https://cdn.shopify.com/s/files/1/0589/7509/2875/products/85cc58608bf138a50036bcfe86a3a362.jpg?v=1653403067"
-            ,"https://cdn.shopify.com/s/files/1/0589/7509/2875/products/8a029d2035bfb80e473361dfc08449be.jpg?v=1653403067"
-            ,"https://cdn.shopify.com/s/files/1/0589/7509/2875/products/ad50775123e20f3d1af2bd07046b777d.jpg?v=1653403067"
-            ,"https://cdn.shopify.com/s/files/1/0589/7509/2875/products/85cc58608bf138a50036bcfe86a3a362.jpg?v=1653403067")
-        viewPager =binding.productViewPager
+
+        product = intent.getSerializableExtra("product") as Product
+
+
+        viewPager = binding.productViewPager
         dots = binding.dots
-        productSliderAdapter = ProductViewPagerAdapter(this,images)
+        productSliderAdapter = ProductViewPagerAdapter(this, product.images)
         viewPager.adapter = productSliderAdapter
         dots.attachViewPager(viewPager)
-        binding.descriptionText.text = "The Stan Smith owned the tennis court in the '70s. Today it runs the streets with the same clean, classic style. These kids' shoes preserve the iconic look of the original, made in leather with punched 3-Stripes, heel and tongue logos and lightweight step-in cushioning."
 
+        sizeAdapter = SizeRecyclerAdapter(this, product.options[0].values, this)
+        selectedSize = product.options[0].values[0]
+        sizeRecyclerView = binding.sizeRecyclerView
+        sizeRecyclerView.adapter = sizeAdapter
+
+
+        reviews = listOf(
+            ReviewModel(userName = "Ahmed", userReview = "Very good Product"),
+            ReviewModel(userName = "Moamen", userReview = "I like it"),
+            ReviewModel(
+                userName = "Rania",
+                userReview = "i do not like the material but it is a good price"
+            ),
+            ReviewModel(userName = "Azza", userReview = "good price")
+        )
+        reviewAdapter = ReviewRecyclerAdapter(reviews)
+        reviewRecyclerView = binding.reviewRecyclerView
+        reviewRecyclerView.adapter = reviewAdapter
+
+        binding.descriptionText.text = product.body_html
+        binding.productType.text = product.product_type
+        binding.productName.text = product.title
+        binding.productPrice.text = product.variants[0].price
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+        binding.cartIcon.setOnClickListener {
+            val intent = Intent(this, ShoppingCartActivity::class.java).apply {
+            }
+            startActivity(intent)
+        }
 
     }
+
+    override fun onClick(size: String) {
+        selectedSize = size
+        Log.i("size", size)
+        sizeAdapter.notifyDataSetChanged()
+    }
+
+
 }

@@ -3,9 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.264" />
-        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.1" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/back_button_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/filled_heat_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.162" />
@@ -30,6 +27,10 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.1" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_product_detailes.xml" value="0.23402985074626867" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/review_row.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/size_row.xml" value="0.18115942028985507" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_icon.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/close_icon.xml" value="0.1" />

@@ -1,10 +1,12 @@
 package com.gradle.shopifyapp.productBrand.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +20,7 @@ import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.kotlin.weatherforecast.utils.Constants
 
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
@@ -29,9 +32,9 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
     lateinit var vmFactory: ProductBrandViewModelFactory
     lateinit var homeViewModel: ProductBrandViewModel
-
+    var myProducts: List<Product>? = null
     lateinit var brandID: String
-    var searchIconClicked : Boolean = true
+    var searchIconClicked: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +49,28 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         binding!!.subcategoryNameTxt.text = intent.getStringExtra(Constants.BRANDNAME).toString()
 
         binding!!.searchBtn.setOnClickListener {
-            if (searchIconClicked){
+            if (searchIconClicked) {
                 searchIconClicked = false
                 binding!!.searchEt.visibility = View.VISIBLE
                 binding!!.subcategoryNameTxt.visibility = View.GONE
-            }
-          else{
+
+                binding!!.searchEt.doOnTextChanged { text, start, count, after ->
+                    Log.i("searchData", text.toString())
+                    var f =
+                        myProducts?.filter { it.title.contains(text.toString(), ignoreCase = true) }
+                    f?.let { productBrandAdapter.setProductsBrand(it) }
+                    productBrandAdapter.notifyDataSetChanged()
+                }
+
+
+            } else {
                 searchIconClicked = true
                 binding!!.searchEt.visibility = View.GONE
                 binding!!.subcategoryNameTxt.visibility = View.VISIBLE
+                myProducts?.let { productBrandAdapter.setProductsBrand(it) }
+                productBrandAdapter.notifyDataSetChanged()
+                binding!!.searchEt.setText("")
+
 
             }
         }
@@ -77,6 +93,7 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
         homeViewModel.liveDataBrandsProductList.observe(this) {
             Log.d("TAG", "onCreateView: $it")
+            myProducts = it.products
             productBrandAdapter.setProductsBrand(it.products)
         }
 
@@ -89,6 +106,9 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onClick(productModel: Product) {
-
+        Log.i("djnsk",productModel.toString())
+//        val intent = Intent(this, ProductDetailsActivity::class.java)
+//        intent.putExtra("product",productModel)
+//        startActivity(intent)
     }
 }

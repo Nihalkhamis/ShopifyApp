@@ -10,10 +10,11 @@ import android.widget.Toast
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.gradle.shopifyapp.R
+import com.gradle.shopifyapp.model.Image
 import com.gradle.shopifyapp.model.Product
 
 
-class ProductViewPagerAdapter(var context: Context, var images:List<String>): PagerAdapter() {
+    class ProductViewPagerAdapter(var context: Context, var images:List<Product.Image>): PagerAdapter() {
      var layoutInflater: LayoutInflater
 
     init {
@@ -31,8 +32,8 @@ class ProductViewPagerAdapter(var context: Context, var images:List<String>): Pa
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var view: View = layoutInflater.inflate(R.layout.slideshow_layout,container,false)
         var img: ImageView = view.findViewById(R.id.imgView)
-        //Glide.with(context).load(images[position].src).into(img)
-        Glide.with(context).load(images[position]).into(img)
+        Glide.with(context).load(images[position].src).into(img)
+        //Glide.with(context).load(images[position]).into(img)
         container.addView(view)
         img.setOnClickListener{
             Toast.makeText(context,"Images"+(position+1), Toast.LENGTH_LONG).show()

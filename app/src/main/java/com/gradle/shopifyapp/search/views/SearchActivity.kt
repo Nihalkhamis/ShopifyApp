@@ -37,7 +37,6 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
         searchRecyclerAdapter = ProductBrandAdapter(this, ArrayList(), this)
         searchRecycleView.adapter = searchRecyclerAdapter
         searchTxt.doOnTextChanged { text, start, count, after ->
-            Log.i("searchData", text.toString())
             searchRecyclerAdapter.setProductsBrand(ArrayList())
             var f = products?.filter { it.title.contains(text.toString(), ignoreCase = true) }
             f?.let { searchRecyclerAdapter.setProductsBrand(it) }
@@ -51,6 +50,7 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onClick(productModel: Product) {
         val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra("product",productModel)
         startActivity(intent)
     }
 }

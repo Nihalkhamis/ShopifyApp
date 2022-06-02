@@ -1,5 +1,7 @@
 package com.gradle.shopifyapp.model
 
+import java.io.Serializable
+
 data class ProductModel(
      val products: List<Product>
 )
@@ -23,7 +25,7 @@ data class ProductModel(
         val updated_at: String,
         val variants: List<Variant>,
         val vendor: String
-    )
+    ):Serializable
    {
 
        data class Image(
@@ -38,7 +40,7 @@ data class ProductModel(
            val updated_at: String,
            val variant_ids: List<Any>,
            val width: Int
-       )
+       ):Serializable
 
        data class Option(
            val id: Long,
@@ -46,7 +48,7 @@ data class ProductModel(
            val position: Int,
            val product_id: Long,
            val values: List<String>
-       )
+       ):Serializable
 
 data class Variant(
     val admin_graphql_api_id: String,
@@ -75,5 +77,5 @@ data class Variant(
     val updated_at: String,
     val weight: Double,
     val weight_unit: String
-)
+):Serializable
     }
