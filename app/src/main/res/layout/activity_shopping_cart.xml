@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/off_white"
     tools:context=".shoppingCart.View.ShoppingCartActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,6 +82,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:backgroundTint="@color/orange"
             android:text="@string/checkout"
+            android:textColor="@color/off_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -22,6 +22,16 @@
     <string name="created_at">Created at</string>
     <string name="coin">EGP</string>
     <string name="signup_btn">Sign Up</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="credit">Credit/Debit Card</string>
+    <string name="cash">Cash on Delivery</string>
+    <string name="coupon">Apply Coupon</string>
+    <string name="place_order">Place Order</string>
+    <string name="total_price">Total:</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="city">Alexandria</string>
+    <string name="address_title">Address</string>
+
 
     <string name="Brands">Brands</string>
 
@@ -34,6 +44,7 @@
     <string name="name">Name</string>
     <string name="address">Alexandria,Egypt</string>
 
+    <string name="add_address">Add Address</string>
 
     <string name="skip">Skip</string>
     <string name="have_account">Have Account</string>
