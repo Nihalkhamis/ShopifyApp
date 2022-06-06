@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/address_fragment"
     android:id="@+id/payment_navigation">
+
+    <fragment
+        android:id="@+id/order_confirmation_fragment"
+        android:name="com.gradle.shopifyapp.payment.OrderConfirmationFragment"
+        tools:layout="@layout/fragment_order_confirmation">
+    </fragment>
+
+    <fragment
+        android:id="@+id/address_fragment"
+        android:name="com.gradle.shopifyapp.address.view.AddressFragment"
+        tools:layout="@layout/fragment_address">
+        <action
+            android:id="@+id/addresstopayment"
+            app:destination="@id/order_confirmation_fragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_down"/>
+    </fragment>
+
+
 
 </navigation>

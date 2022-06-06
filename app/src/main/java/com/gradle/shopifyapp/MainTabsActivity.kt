@@ -52,7 +52,6 @@ class MainTabsActivity : AppCompatActivity() {
                     val intent = Intent(this, ShoppingCartActivity::class.java).apply {
                     }
                     startActivity(intent)
-                    Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
                      true
                 }
                 else ->

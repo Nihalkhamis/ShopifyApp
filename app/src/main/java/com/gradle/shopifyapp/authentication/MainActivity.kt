@@ -1,6 +1,5 @@
 package com.gradle.shopifyapp.authentication
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gradle.shopifyapp.R

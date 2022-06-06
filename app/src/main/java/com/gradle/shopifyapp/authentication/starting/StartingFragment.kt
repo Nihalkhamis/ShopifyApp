@@ -16,10 +16,10 @@ import com.gradle.shopifyapp.databinding.FragmentStartingBinding
 
 class StartingFragment : Fragment() {
 
-lateinit var signUpButton :Button
-lateinit var loginText: TextView
-lateinit var skipText:TextView
-    private var _binding : FragmentStartingBinding? = null
+    lateinit var signUpButton: Button
+    lateinit var loginText: TextView
+    lateinit var skipText: TextView
+    private var _binding: FragmentStartingBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,7 @@ lateinit var skipText:TextView
         val root: View = binding.root
         return root
     }
+
     fun findNavController(fragment: Fragment): NavController? {
         val view = fragment.view
         return Navigation.findNavController(view!!)
