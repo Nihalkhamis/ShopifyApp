@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/sign_up_fragment"
-        android:name="com.gradle.shopifyapp.authentication.sign_up.SignUpFragment"
+        android:name="com.gradle.shopifyapp.authentication.sign_up.view.SignUpFragment"
         tools:layout="@layout/fragment_sign_up"
         >
         <action
