@@ -14,9 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_bar"
@@ -29,8 +27,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             app:titleTextColor="@color/dark_color"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            />
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
 
     </com.google.android.material.appbar.AppBarLayout>

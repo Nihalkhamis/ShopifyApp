@@ -31,6 +31,11 @@ class ProductBrandAdapter(
         }
     }
 
+    fun deleteProductBrand(){
+        this.productsBrand.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdcutBrandHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.product_item, parent, false)

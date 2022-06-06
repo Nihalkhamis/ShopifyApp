@@ -7,10 +7,10 @@ import android.util.Log
 import android.view.ViewParent
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
+import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
-import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
 import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
@@ -40,9 +40,19 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var reviews: List<ReviewModel>
 
 
+    lateinit var colorAdapter: ColorRecyclerAdapter
+    lateinit var colorRecyclerView: RecyclerView
+
     lateinit var product: Product
     lateinit var binding: ActivityProductDetailesBinding
     lateinit var selectedSize: String
+    lateinit var selectedColor: String
+
+
+     lateinit var quantityOfTheProduct:String
+    lateinit var quantityEditText: EditText
+
+
 
     //viewModel
     lateinit var vmFactory: ProductDetailsViewModelFactory
@@ -66,17 +76,29 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         product = intent.getSerializableExtra("product") as Product
 
-
+        // product Images
         viewPager = binding.productViewPager
         dots = binding.dots
         productSliderAdapter = ProductViewPagerAdapter(this, product.images)
         viewPager.adapter = productSliderAdapter
         dots.attachViewPager(viewPager)
 
+        //Quantity
+        quantityEditText = binding.countEditText
+        quantityOfTheProduct = "1"
+
+        //size
         sizeAdapter = SizeRecyclerAdapter(this, product.options[0].values, this)
         selectedSize = product.options[0].values[0]
         sizeRecyclerView = binding.sizeRecyclerView
         sizeRecyclerView.adapter = sizeAdapter
+
+
+        //color
+        colorAdapter = ColorRecyclerAdapter(this, product.options[1].values, this)
+        selectedColor = product.options[1].values[0]
+        colorRecyclerView = binding.colorRecyclerView
+        colorRecyclerView.adapter = colorAdapter
 
 
         reviews = listOf(
@@ -96,9 +118,13 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         binding.productType.text = product.product_type
         binding.productName.text = product.title
         binding.productPrice.text = product.variants[0].price
+
+        //back btn
         binding.backBtn.setOnClickListener {
             finish()
         }
+
+        //cart btn
         binding.cartIcon.setOnClickListener {
             val intent = Intent(this, ShoppingCartActivity::class.java).apply {
             }
@@ -129,9 +155,15 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
     }
 
-    override fun onClick(size: String) {
+    override fun onClickForSelectedColor(color: String) {
+        selectedColor = color
+        Log.i("color",selectedColor)
+        colorAdapter.notifyDataSetChanged()
+
+    }
+
+    override fun onClickForSelectedSize(size: String) {
         selectedSize = size
-        Log.i("size", size)
         sizeAdapter.notifyDataSetChanged()
     }
 

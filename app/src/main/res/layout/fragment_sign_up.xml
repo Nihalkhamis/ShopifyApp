@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:background="@color/dark_color"
 android:layout_height="match_parent"
-tools:context=".authentication.sign_up.SignUpFragment">
+tools:context=".authentication.sign_up.view.SignUpFragment">
 
 
 

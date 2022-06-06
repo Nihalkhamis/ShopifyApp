@@ -1,21 +1,21 @@
 package com.gradle.shopifyapp.model
 
 data class DefaultAddress(
-    var address1: String = "",
-    var address2: String = "",
-    var city: String="",
-    var company: String ="",
-    var country: String="",
-    var country_code: String="",
-    var country_name: String="",
-    var customer_id: Int =0,
-    var default: Boolean =false,
-    var first_name: String="",
-    var id: Int=0,
-    var last_name: String ="",
-    var name: String="",
-    var phone: String="",
-    var province: String = "ON",
-    var province_code: String="",
-    var zip: String = "11693"
+    val address1: String? = null,
+    val address2: String? = null,
+    val city: String? = null,
+    val company: String? = null,
+    val country: String? = null,
+    val country_code: String? = null,
+    val country_name: String? = null,
+    val customer_id: Long? = null,
+    val default: Boolean? = null,
+    val first_name: String? = null,
+    val id: Long? = null,
+    val last_name: String? = null,
+    val name: String? = null,
+    val phone: String? = null,
+    val province: String? = null,
+    val province_code: String? = null,
+    val zip: String? = null
 )

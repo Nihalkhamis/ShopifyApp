@@ -11,5 +11,6 @@ suspend fun getAllDiscountCodes() : Response<DiscountCodeModel>
 suspend fun postDraftOrders(order: Draft_order):  Response<Draft_order>
 
 
+suspend fun registerNewUser( user:CustomerModel) : Response<CustomerModel>
 
 }
