@@ -14,12 +14,18 @@ interface ApiInterface {
 
 
 
-//    @Headers(
-//        "Accept: application/json",
-//        "X-Shopify-Access-Token: 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",
-//    )
-    @POST("2022-04/customers.json")
-    suspend fun registerUser(customer: Customer):CustomerModel
+    @Headers(
+        "X-Shopify-Shop-Api-Call-Limit: 40/40",
+        "Retry-After: 2.0",
+        "X-Shopify-Access-Token: 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"
+    )
+    @POST("admin/customers.json")
+    suspend fun registerUser(
+        @Body customer: CustomerModel
+    ): Response<CustomerModel>
+
+
+
 
 
     @Headers(
@@ -28,6 +34,8 @@ interface ApiInterface {
     )
     @GET("2022-04/smart_collections.json")
     suspend fun getAllVendors(): Response<VendorsModel>
+
+
 
 
     //Products by brand
@@ -39,6 +47,9 @@ interface ApiInterface {
     suspend fun getProductsByBrand(
         @Path(value = "id", encoded = false) key: String,
     ): Response<ProductModel>
+
+
+
 
     @Headers(
         "Accept: application/json",

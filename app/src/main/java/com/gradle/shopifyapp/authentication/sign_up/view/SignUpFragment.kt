@@ -1,7 +1,6 @@
-package com.gradle.shopifyapp.authentication.sign_up
+package com.gradle.shopifyapp.authentication.sign_up.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +9,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.databinding.FragmentSignUpBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
-import com.gradle.shopifyapp.network.ApiClient
-import com.gradle.shopifyapp.network.ApiInterface
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class SignUpFragment : Fragment() {
@@ -62,8 +55,8 @@ class SignUpFragment : Fragment() {
         c.last_name =lastName.text.toString().trim()
         c.email = emailTxt.text.toString().trim()
         c.phone=  phoneTxt.text.toString().trim()
-       // c.password =passwordTxt.text.toString().trim()
-       // c.password_confirmation =confirmPasswordTxt.text.toString().trim()
+        c.password =passwordTxt.text.toString().trim()
+        c.password_confirmation =confirmPasswordTxt.text.toString().trim()
 
         c.verified_email = true
         c.addresses = listOf(Addresse(address1 ="123 Oak St",city =  "Ottawa",province = "ON",zip = "123 ABC",last_name ="Lastnameson",first_name = "Mother",company = "CA" ))
