@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.model
 
 import android.content.Context
+import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.network.RemoteSource
 import retrofit2.Response
 
@@ -20,4 +21,5 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun getAllVendors():  Response<VendorsModel> = remoteSource.getAllVendors()
     override suspend fun getAllProductsByBrand(id: String): Response<ProductModel> = remoteSource.getProductsByBrand(id)
     override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> = remoteSource.getAllDiscountCodes()
+    override suspend fun postDraftOrders(order: Draft_order): Response<Draft_order> = remoteSource.postDraftOrders(order)
 }

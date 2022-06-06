@@ -5,13 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewParent
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
+import com.gradle.shopifyapp.draft_model.DraftOrder
+import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.NoteAttribute
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.model.ReviewModel
+import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModel
+import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 
 
@@ -33,10 +44,25 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var binding: ActivityProductDetailesBinding
     lateinit var selectedSize: String
 
+    //viewModel
+    lateinit var vmFactory: ProductDetailsViewModelFactory
+    lateinit var productDetailsVm: ProductDetailsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        vmFactory = ProductDetailsViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                this
+            ), this
+        )
+
+
+        productDetailsVm = ViewModelProvider(this, vmFactory).get(ProductDetailsViewModel::class.java)
+
 
         product = intent.getSerializableExtra("product") as Product
 
@@ -77,6 +103,28 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
             val intent = Intent(this, ShoppingCartActivity::class.java).apply {
             }
             startActivity(intent)
+        }
+
+        binding.addToCartBtn.setOnClickListener{
+            productDetailsVm.liveDraftOrderList.observe(this) {
+                Log.d("TAG", "onCreateView: ${it}")
+                var order = DraftOrder()
+                order.email = "shimaa22@gmail.com"
+                order.note = "cart"
+                var note_attribute = NoteAttribute()
+                note_attribute.name = "image"
+                note_attribute.value = product.images[0].src
+                order.note_attributes = listOf(note_attribute)
+                order.line_items?.get(0)?.quantity = 1
+                for(i in 0..product.variants.size-1){
+                 /*   if(product.variants[0].option1 == selectedSize &&
+                        product.variants[0].option2 ==   ){
+
+                    }*/
+                }
+
+
+            }
         }
 
     }

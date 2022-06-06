@@ -1,5 +1,7 @@
 package com.gradle.shopifyapp.network
 
+import com.gradle.shopifyapp.draft_model.DraftOrder
+import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.VendorsModel
@@ -48,6 +50,11 @@ class ApiClient private constructor() : RemoteSource {
     override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> {
         val discountCodeService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return discountCodeService.getAllDiscountCodes()
+    }
+
+    override suspend fun postDraftOrders(order: Draft_order): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.postDraftOrders(order)
     }
 
 
