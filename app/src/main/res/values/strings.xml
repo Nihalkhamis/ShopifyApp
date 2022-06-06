@@ -65,6 +65,8 @@
     <string name="addToCart">Add To Cart</string>
     <string name="description">Description</string>
     <string name="size">Size</string>
+    <string name="color">Color</string>
+    <string name="quantity">Quantity</string>
 
 
 </resources>

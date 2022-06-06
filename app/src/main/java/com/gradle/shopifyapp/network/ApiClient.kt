@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.network
 
+import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.VendorsModel
@@ -49,6 +50,10 @@ class ApiClient private constructor() : RemoteSource {
         val discountCodeService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return discountCodeService.getAllDiscountCodes()
     }
+
+    override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel> {
+        val registerUserService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return registerUserService.registerUser(user)  }
 
 
 }
