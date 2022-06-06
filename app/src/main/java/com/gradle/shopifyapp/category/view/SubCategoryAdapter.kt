@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.SubCategoryModel
@@ -16,7 +15,6 @@ import java.util.ArrayList
 class SubCategoryAdapter(
     val context: Context,
     private var subCategories: ArrayList<SubCategoryModel>,
-    val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<SubCategoryAdapter.SubCategoryHolder>() {
 
     fun setSubCategories(subCategoriesList: List<SubCategoryModel>) {
@@ -40,7 +38,7 @@ class SubCategoryAdapter(
         holder.product_img.setImageResource(R.drawable.dress)
 
         holder.productCard.setOnClickListener {
-            onItemClickListener.onClick(subCategories[position])
+           // onItemClickListener.onClick(subCategories[position])
         }
     }
 

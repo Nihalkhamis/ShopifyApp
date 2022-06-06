@@ -19,7 +19,7 @@ import com.gradle.shopifyapp.productBrand.view.OnItemClickListener
 import com.gradle.shopifyapp.productBrand.view.ProductBrandAdapter
 
 
-class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener {
+class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener, OnProductTypeItemListener {
 
     private var _binding: FragmentCategoryBinding? = null
 
@@ -29,6 +29,10 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     lateinit var vmFactory: CategoryViewModelFactory
     lateinit var categoryViewModel: CategoryViewModel
 
+    lateinit var productTypeAdapter: ProductTypeAdapter
+
+    lateinit var productTypeList : MutableSet<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,9 +40,8 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     ): View {
 
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
 
     }
 
@@ -72,27 +75,45 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         productBrandAdapter = ProductBrandAdapter(requireContext(), ArrayList(), this)
         binding.subCategoryRV.adapter = productBrandAdapter
 
+        productTypeAdapter = ProductTypeAdapter(requireContext(), ArrayList(), this)
+        binding.productTypeRV.adapter = productTypeAdapter
+
+        productTypeList = mutableSetOf()
+
         setWomenCategory()
 
         categoryViewModel.liveDataCategoriesProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: $it")
+
             productBrandAdapter.setProductsBrand(it.products)
+            productTypeList.clear()
+            for (productType in it.products){
+                 productTypeList.add(productType.product_type)
+            }
+            productTypeAdapter.setProductTypes(productTypeList.toList())
         }
 
     }
 
     private fun setWomenCategory() {
+        // delete old products to fetch new ones
+        productBrandAdapter.deleteProductBrand()
+        productTypeAdapter.deleteProductTypes()
         categoryViewModel.getAllCategoriesProducts(requireContext(),"273053712523")
     }
 
 
     private fun setMenCategory() {
+        productBrandAdapter.deleteProductBrand()
+        productTypeAdapter.deleteProductTypes()
         categoryViewModel.getAllCategoriesProducts(requireContext(),"273053679755")
 
     }
 
 
     private fun setKidsCategory() {
+        productBrandAdapter.deleteProductBrand()
+        productTypeAdapter.deleteProductTypes()
         categoryViewModel.getAllCategoriesProducts(requireContext(),"273053745291")
     }
 
@@ -117,6 +138,10 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
     override fun onClick(productModel: Product) {
 
+    }
+
+    override fun onClick(productTypeName: String, isFiltered: Boolean) {
+         //if isFiltered == true so there is a filtration, if false there is not
     }
 
 

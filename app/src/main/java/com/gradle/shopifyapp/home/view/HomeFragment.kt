@@ -84,7 +84,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         homeViewModel.getAllProducts(requireContext())
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: ${it.products}")
-            myProducts =it.products
+            myProducts = it.products
         }
 
         homeViewModel.getAllVendors(requireContext())

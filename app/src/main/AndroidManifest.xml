@@ -26,7 +26,7 @@
             android:name=".wishlist.WishlistActivity"
             android:exported="false" />
 
-        <activity
+         <activity
             android:name=".search.views.SearchActivity"
             android:exported="false" />
 
