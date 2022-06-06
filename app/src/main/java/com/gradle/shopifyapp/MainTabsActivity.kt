@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.gradle.shopifyapp.databinding.ActivityMainTabsBinding
 import com.gradle.shopifyapp.search.views.SearchActivity
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
+import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 
 class MainTabsActivity : AppCompatActivity() {
 
@@ -43,7 +44,10 @@ class MainTabsActivity : AppCompatActivity() {
 
             when(menuItem.itemId){
                 R.id.favorite ->{
-                    Toast.makeText(this,"Favorite Tap",Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, WishlistActivity::class.java).apply {
+                    }
+                    startActivity(intent)
+                   // Toast.makeText(this,"Favorite Tap",Toast.LENGTH_LONG).show()
                      true
 
                 }
@@ -52,7 +56,7 @@ class MainTabsActivity : AppCompatActivity() {
                     val intent = Intent(this, ShoppingCartActivity::class.java).apply {
                     }
                     startActivity(intent)
-                    Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
+                   // Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
                      true
                 }
                 else ->
