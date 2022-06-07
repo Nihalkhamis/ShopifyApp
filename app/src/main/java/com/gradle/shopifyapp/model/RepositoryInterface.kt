@@ -8,5 +8,7 @@ suspend fun getAllVendors() : Response<VendorsModel>
 suspend fun getAllProductsByBrand(id : String) : Response<ProductModel>
 suspend fun getAllDiscountCodes() : Response<DiscountCodeModel>
 suspend fun registerNewUser( user:CustomerModel) : Response<CustomerModel>
+suspend fun getAllUsers( ) : Response<CustomersModel>
+
 
 }
