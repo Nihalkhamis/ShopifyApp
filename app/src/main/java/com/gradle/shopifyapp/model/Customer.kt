@@ -28,8 +28,5 @@ data class Customer(
     var verified_email: Boolean? = null,
     var password:String?=null,
     var password_confirmation:String?=null
-//    var send_email_welcome:Boolean = false
 
-//    var password : String?="",
-//    var password_confirmation : String?="",
 )

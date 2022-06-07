@@ -33,6 +33,8 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
     lateinit var productTypeList : MutableSet<String>
 
+    lateinit var categoryId : String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +68,9 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         // 273053712523 -> women
 
         categoryViewModel = ViewModelProvider(this, vmFactory).get(CategoryViewModel::class.java)
+
+        categoryId = "273053712523"
+
         setAdapter()
 
     }
@@ -86,7 +91,6 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
             Log.d("TAG", "onCreateView: $it")
 
             productBrandAdapter.setProductsBrand(it.products)
-            productTypeList.clear()
             for (productType in it.products){
                  productTypeList.add(productType.product_type)
             }
@@ -96,25 +100,30 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     }
 
     private fun setWomenCategory() {
+        categoryId = "273053712523"
         // delete old products to fetch new ones
         productBrandAdapter.deleteProductBrand()
         productTypeAdapter.deleteProductTypes()
-        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053712523")
+        productTypeList.clear()
+        categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"","")
     }
 
 
     private fun setMenCategory() {
+        categoryId = "273053679755"
         productBrandAdapter.deleteProductBrand()
         productTypeAdapter.deleteProductTypes()
-        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053679755")
-
+        productTypeList.clear()
+        categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"", "")
     }
 
 
     private fun setKidsCategory() {
+        categoryId = "273053745291"
         productBrandAdapter.deleteProductBrand()
         productTypeAdapter.deleteProductTypes()
-        categoryViewModel.getAllCategoriesProducts(requireContext(),"273053745291")
+        productTypeList.clear()
+        categoryViewModel.getAllCategoriesProducts(requireContext(),categoryId,"","")
     }
 
     override fun onDestroyView() {
@@ -142,6 +151,14 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
     override fun onClick(productTypeName: String, isFiltered: Boolean) {
          //if isFiltered == true so there is a filtration, if false there is not
+        if (isFiltered){
+            categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId, productTypeName,"")
+        }
+        else{
+            categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId, "","")
+        }
+
+
     }
 
 

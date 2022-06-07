@@ -12,16 +12,21 @@ interface ApiInterface {
         "X-Shopify-Access-Token: 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",
     )
     @GET("2022-04/products.json")
-    suspend fun getAllProducts(): Response<ProductModel>
+    suspend fun getAllProducts(
+        @Query("collection_id") collection_id : String,
+        @Query("product_type") product_type : String,
+        @Query("vendor") vendor : String,
+    ): Response<ProductModel>
 
 
 
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
+        "Accept: application/json",
         "X-Shopify-Access-Token: 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"
     )
-    @POST("admin/customers.json")
+    @POST("2022-04/customers.json")
     suspend fun registerUser(
         @Body customer: CustomerModel
     ): Response<CustomerModel>

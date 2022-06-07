@@ -10,6 +10,7 @@ import com.gradle.shopifyapp.model.VendorsModel
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.Struct
 
 
 class ApiClient private constructor() : RemoteSource {
@@ -22,7 +23,8 @@ class ApiClient private constructor() : RemoteSource {
     }
 
     object RetrofitHelper {
-        val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
+        //val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
+        val baseUrl ="https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
 
 
         fun getInstance(): Retrofit {
@@ -34,9 +36,9 @@ class ApiClient private constructor() : RemoteSource {
         }
     }
 
-    override suspend fun getAllProducts(): Response<ProductModel> {
+    override suspend fun getAllProducts(collection_id : String, product_type : String, vendor : String): Response<ProductModel> {
         val productsService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
-        return productsService.getAllProducts()
+        return productsService.getAllProducts(collection_id, product_type, vendor)
     }
 
     override suspend fun getAllVendors(): Response<VendorsModel> {

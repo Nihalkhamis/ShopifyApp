@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.me.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gradle.shopifyapp.databinding.FragmentMeBinding
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
+import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
+import com.gradle.shopifyapp.settings.view.SettingsActivity
 
 class MeFragment : Fragment() {
 
@@ -64,6 +67,11 @@ class MeFragment : Fragment() {
         productLayoutManager.orientation =RecyclerView.VERTICAL
         productRecyclerView.layoutManager = productLayoutManager
         productRecyclerView.adapter = productRecyclerAdapter
+
+        binding.settingsImg.setOnClickListener {
+            var intent = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
 
 

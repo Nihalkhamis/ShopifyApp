@@ -33,7 +33,8 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
     lateinit var vmFactory: ProductBrandViewModelFactory
     lateinit var homeViewModel: ProductBrandViewModel
     var myProducts: List<Product>? = null
-    lateinit var brandID: String
+    private lateinit var brandID: String
+    private lateinit var brandName: String
     var searchIconClicked: Boolean = true
 
 
@@ -45,8 +46,10 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         setContentView(binding!!.root)
 
         brandID = intent.getStringExtra(Constants.BRANDID).toString()
+        brandName = intent.getStringExtra(Constants.BRANDNAME).toString()
+
         Log.d("TAG", "ID od Brand Inside activity: $brandID")
-        binding!!.subcategoryNameTxt.text = intent.getStringExtra(Constants.BRANDNAME).toString()
+        binding!!.subcategoryNameTxt.text = brandName
 
         binding!!.searchBtn.setOnClickListener {
             if (searchIconClicked) {
@@ -87,7 +90,7 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         )
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(ProductBrandViewModel::class.java)
-        homeViewModel.getAllBrandsProducts(this, brandID!!)
+        homeViewModel.getAllBrandsProducts(this,"", "", brandName)
 
         setAdapter()
 
