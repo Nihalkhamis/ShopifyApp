@@ -10,7 +10,11 @@ interface ApiInterface {
         "X-Shopify-Access-Token: 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",
     )
     @GET("2022-04/products.json")
-    suspend fun getAllProducts(): Response<ProductModel>
+    suspend fun getAllProducts(
+        @Query("collection_id") collection_id : String,
+        @Query("product_type") product_type : String,
+        @Query("vendor") vendor : String,
+    ): Response<ProductModel>
 
 
 

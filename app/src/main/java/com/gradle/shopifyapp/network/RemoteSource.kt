@@ -7,7 +7,7 @@ import com.gradle.shopifyapp.model.VendorsModel
 import retrofit2.Response
 
 interface RemoteSource {
-    suspend fun getAllProducts() : Response<ProductModel>
+    suspend fun getAllProducts(collection_id : String, product_type : String, vendor : String) : Response<ProductModel>
     suspend fun getAllVendors():  Response<VendorsModel>
     suspend fun getProductsByBrand(id : String):  Response<ProductModel>
     suspend fun getAllDiscountCodes():  Response<DiscountCodeModel>

@@ -44,7 +44,7 @@ class ProductBrandAdapter(
 
     override fun onBindViewHolder(holder: ProdcutBrandHolder, position: Int) {
         holder.product_description_wish_list.text = productsBrand[position].title
-        holder.price_Text_wish_list.text = productsBrand[position].product_type
+        holder.price_Text_wish_list.text = productsBrand[position].variants[0].price
         Glide.with(context).load(productsBrand[position].image.src).into(holder.product_img)
         holder.productCard.setOnClickListener {
             onItemClickListener.onClick(productsBrand[position])
