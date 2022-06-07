@@ -14,6 +14,7 @@ import com.gradle.shopifyapp.databinding.FragmentMeBinding
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 import com.gradle.shopifyapp.settings.view.SettingsActivity
+import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 
 class MeFragment : Fragment() {
 
@@ -72,7 +73,9 @@ class MeFragment : Fragment() {
             var intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
         }
-
+        binding.moreForWishList.setOnClickListener {
+            startActivity(Intent(requireContext(),WishlistActivity::class.java))
+        }
 
 
         val root: View = binding.root

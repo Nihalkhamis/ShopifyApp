@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.gradle.shopifyapp.authentication.login.LoginFragment"
+        android:name="com.gradle.shopifyapp.authentication.login.view.LoginFragment"
         tools:layout="@layout/fragment_login"
         >
     </fragment>

@@ -6,6 +6,7 @@ import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.VendorsModel
+import com.gradle.shopifyapp.model.*
 import retrofit2.Response
 
 interface RemoteSource {
@@ -16,7 +17,6 @@ interface RemoteSource {
     suspend fun postDraftOrders(order: Draft_order):  Response<Draft_order>
     suspend fun registerNewUser( user: CustomerModel) : Response<CustomerModel>
     suspend fun getDraftOrders(): Response<Draft_orders_list>
-
-
+    suspend fun getAllCustomers( ) : Response<CustomersModel>
 
 }

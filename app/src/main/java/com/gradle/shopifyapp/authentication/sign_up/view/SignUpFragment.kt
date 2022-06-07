@@ -90,6 +90,7 @@ class SignUpFragment : Fragment() {
             c.email = emailTxt.text.toString().trim()
             c.phone = phoneTxt.text.toString().trim()
             c.password = passwordTxt.text.toString().trim()
+            c.tags=passwordTxt.text.toString().trim()
             c.password_confirmation = confirmPasswordTxt.text.toString().trim()
             c.verified_email = true
             myCustomer.customer = c
@@ -98,14 +99,16 @@ class SignUpFragment : Fragment() {
 
             signUpViewModel.userResponseLiveData.observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
-                    startActivity(Intent(requireContext(), MainTabsActivity::class.java))
                     preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
-
+                    preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
+                    preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
                     binding.progressbar.visibility = View.GONE
+                    startActivity(Intent(requireContext(), MainTabsActivity::class.java))
+
                 } else {
                     binding.progressbar.visibility = View.GONE
                     Log.i("error", it.code().toString())
-                    Toast.makeText(requireContext(), it.message(), Toast.LENGTH_LONG).show()
+                    //Toast.makeText(requireContext(), it.message(), Toast.LENGTH_LONG).show()
 
                 }
 
