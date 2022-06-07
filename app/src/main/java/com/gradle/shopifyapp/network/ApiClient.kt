@@ -2,6 +2,7 @@ package com.gradle.shopifyapp.network
 
 import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.Draft_orders_list
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
@@ -59,7 +60,13 @@ class ApiClient private constructor() : RemoteSource {
     }
     override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel> {
         val registerUserService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
-        return registerUserService.registerUser(user)  }
+        return registerUserService.registerUser(user)
+    }
+
+    override suspend fun getDraftOrders(): Response<Draft_orders_list> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.getDraftOrders()
+    }
 
 
 }

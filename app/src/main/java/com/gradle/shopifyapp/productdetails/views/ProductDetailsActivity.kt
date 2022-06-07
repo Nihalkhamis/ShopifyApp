@@ -14,6 +14,7 @@ import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
 import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.NoteAttribute
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
@@ -52,9 +53,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
      lateinit var quantityOfTheProduct:String
     lateinit var quantityEditText: EditText
 
-
-
-    //viewModel
+   //viewModel
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel
 
@@ -69,11 +68,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                 this
             ), this
         )
-
-
         productDetailsVm = ViewModelProvider(this, vmFactory).get(ProductDetailsViewModel::class.java)
-
-
         product = intent.getSerializableExtra("product") as Product
 
         // product Images
@@ -132,23 +127,37 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         }
 
         binding.addToCartBtn.setOnClickListener{
-            productDetailsVm.liveDraftOrderList.observe(this) {
-                Log.d("TAG", "onCreateView: ${it}")
                 var order = DraftOrder()
-                order.email = "shimaa22@gmail.com"
+                order.email = "shimaa226@gmail.com"
                 order.note = "cart"
-                var note_attribute = NoteAttribute()
-                note_attribute.name = "image"
-                note_attribute.value = product.images[0].src
-                order.note_attributes = listOf(note_attribute)
-                order.line_items?.get(0)?.quantity = 1
                 for(i in 0..product.variants.size-1){
-                 /*   if(product.variants[0].option1 == selectedSize &&
-                        product.variants[0].option2 ==   ){
-
-                    }*/
+                    Log.i("TAG","ADD TO CART before")
+                    if(product.variants[i].option1 == selectedSize &&
+                        product.variants[i].option2 ==  selectedColor ){
+                            var lineItems = LineItem()
+                        lineItems.quantity = 1
+                        lineItems.variant_id = product.variants[i].id
+                        order.line_items = listOf(lineItems)
+                        var note_attribute = NoteAttribute()
+                        note_attribute.name = "image"
+                        note_attribute.value = product.images[0].src
+                        order.note_attributes = listOf(note_attribute)
+                        Log.i("TAG","ADD TO CART")
+                        break
+                    }
                 }
+            var draft_orders: Draft_order = Draft_order(order)
+            productDetailsVm.postDraftOrder(draft_orders)
 
+            productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
+                if(dOrder.isSuccessful){
+                    Log.d("TAG", "successful")
+
+                }
+                else{
+                    Log.d("TAG", "failed: ${dOrder.code()}")
+
+                }
 
             }
         }

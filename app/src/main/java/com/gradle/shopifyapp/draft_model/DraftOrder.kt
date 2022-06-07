@@ -12,7 +12,7 @@ data class DraftOrder(
     val id: Long?=null,
     val invoice_sent_at: Any?=null,
     val invoice_url: String?=null,
-    val line_items: List<LineItem>?=null,
+    var line_items: List<LineItem>?=null,
     val name: String?=null,
     var note: String?=null,
     var note_attributes: List<NoteAttribute>?=null,

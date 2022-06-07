@@ -18,10 +18,10 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     val liveDraftOrderList : LiveData<Response<Draft_order>> = postDraftOrderList
 
     fun postDraftOrder(order: Draft_order) {
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch {
             val response = repo.postDraftOrders(order)
-            Log.d("TAG", "postDraftOrder: ${response.raw().request().url()}")
-            Log.d("TAG", "postDraftOrder: ${response.body()}")
+            //Log.d("TAG", "postDraftOrder: ${response.raw().request().url()}")
+          //  Log.d("TAG", "postDraftOrder: ${response.body()}")
             postDraftOrderList.value = response
         }
     }

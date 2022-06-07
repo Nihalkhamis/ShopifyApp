@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.network
 
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.Draft_orders_list
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.DiscountCodeModel
 import com.gradle.shopifyapp.model.ProductModel
@@ -14,6 +15,8 @@ interface RemoteSource {
     suspend fun getAllDiscountCodes():  Response<DiscountCodeModel>
     suspend fun postDraftOrders(order: Draft_order):  Response<Draft_order>
     suspend fun registerNewUser( user: CustomerModel) : Response<CustomerModel>
+    suspend fun getDraftOrders(): Response<Draft_orders_list>
+
 
 
 }
