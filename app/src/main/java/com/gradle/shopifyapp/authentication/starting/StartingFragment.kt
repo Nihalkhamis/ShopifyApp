@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.authentication.starting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +10,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.databinding.FragmentStartingBinding
 
 
@@ -42,6 +43,10 @@ class StartingFragment : Fragment() {
 
         }
         skipText = binding.skipTxt
+
+        binding.skipTxt.setOnClickListener {
+            startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+        }
 
         val root: View = binding.root
         return root

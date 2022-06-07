@@ -37,11 +37,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var selectedColor: String
 
 
-     lateinit var quantityOfTheProduct:String
-    lateinit var quantityEditText: EditText
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailesBinding.inflate(layoutInflater)
@@ -55,10 +50,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         productSliderAdapter = ProductViewPagerAdapter(this, product.images)
         viewPager.adapter = productSliderAdapter
         dots.attachViewPager(viewPager)
-
-        //Quantity
-        quantityEditText = binding.countEditText
-        quantityOfTheProduct = "1"
 
         //size
         sizeAdapter = SizeRecyclerAdapter(this, product.options[0].values, this)

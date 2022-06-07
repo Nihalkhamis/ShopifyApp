@@ -19,7 +19,7 @@
             android:id="@+id/close_icon"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/close_icon"
+            android:src="@drawable/back_button_icon"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/shopping_cart_title"

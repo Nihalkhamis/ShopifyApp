@@ -71,6 +71,7 @@
     <string name="currency">Currency</string>
     <string name="contactUs">Contact us</string>
     <string name="aboutUs">About us</string>
+    <string name="logout">Logout</string>
 
 
 </resources>
