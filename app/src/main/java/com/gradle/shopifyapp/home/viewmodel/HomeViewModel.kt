@@ -23,9 +23,9 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     val discountList = MutableLiveData<DiscountCodeModel>()
     val liveDiscountList : LiveData<DiscountCodeModel> = discountList
 
-    fun getAllProducts(context: Context) {
+    fun getAllProducts(context: Context, collection_id : String, product_type : String, vendor : String) {
         viewModelScope.launch(Dispatchers.IO ) {
-            val response = repo.getAllProducts()
+            val response = repo.getAllProducts(collection_id, product_type, vendor)
             Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
             Log.d("TAG", "getAllProducts: ${response}")
             productList.postValue(response.body())

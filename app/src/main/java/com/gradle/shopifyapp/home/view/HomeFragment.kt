@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
 
-        homeViewModel.getAllProducts(requireContext())
+        homeViewModel.getAllProducts(requireContext(),"", "", "")
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: ${it.products}")
             myProducts = it.products
