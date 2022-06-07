@@ -48,14 +48,11 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var binding: ActivityProductDetailesBinding
     lateinit var selectedSize: String
     lateinit var selectedColor: String
-
-
-     lateinit var quantityOfTheProduct:String
-    lateinit var quantityEditText: EditText
-
+    
    //viewModel
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,10 +74,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         productSliderAdapter = ProductViewPagerAdapter(this, product.images)
         viewPager.adapter = productSliderAdapter
         dots.attachViewPager(viewPager)
-
-        //Quantity
-        quantityEditText = binding.countEditText
-        quantityOfTheProduct = "1"
 
         //size
         sizeAdapter = SizeRecyclerAdapter(this, product.options[0].values, this)

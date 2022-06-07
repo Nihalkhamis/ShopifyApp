@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.category.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.view.OnItemClickListener
 import com.gradle.shopifyapp.productBrand.view.ProductBrandAdapter
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 
 
 class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener, OnProductTypeItemListener {
@@ -146,7 +148,9 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     }
 
     override fun onClick(productModel: Product) {
-
+        val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
+        intent.putExtra("product",productModel)
+        startActivity(intent)
     }
 
     override fun onClick(productTypeName: String, isFiltered: Boolean) {

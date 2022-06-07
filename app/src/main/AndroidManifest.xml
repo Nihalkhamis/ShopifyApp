@@ -22,7 +22,7 @@
             android:name=".productBrand.view.ProductBrandActivity"
             android:exported="false" />
         <activity
-            android:name=".wishlist.WishlistActivity"
+            android:name=".wishlist.view.WishlistActivity"
             android:exported="false" />
         <activity
             android:name=".search.views.SearchActivity"
