@@ -15,6 +15,8 @@ import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 import com.gradle.shopifyapp.settings.view.SettingsActivity
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
+import com.kotlin.weatherforecast.utils.Constants
+import com.kotlin.weatherforecast.utils.MyPreference
 
 class MeFragment : Fragment() {
 
@@ -24,6 +26,9 @@ class MeFragment : Fragment() {
     lateinit var orderRecyclerAdapter:OrderListViewAdapter
     lateinit var orderLayoutManager: LinearLayoutManager
     lateinit var orderList:List<OrderModel>
+
+
+    lateinit var preference: MyPreference
 
 
     lateinit var productRecyclerView : RecyclerView
@@ -45,24 +50,25 @@ class MeFragment : Fragment() {
             ViewModelProvider(this).get(MeViewModel::class.java)
 
         _binding = FragmentMeBinding.inflate(inflater, container, false)
+
+        preference = MyPreference.getInstance(requireContext())!!
+
+        // orders
         orderRecyclerView = binding.ordersList
         orderList =  listOf(OrderModel(date = "12/5/2022",price = 20.0f),
-        OrderModel(date = "20/3/2019",price = 290.0f)
-         )
-
+        OrderModel(date = "20/3/2019",price = 290.0f))
         orderLayoutManager = LinearLayoutManager(context)
         orderRecyclerAdapter = OrderListViewAdapter(orderList)
         orderLayoutManager.orientation =RecyclerView.VERTICAL
         orderRecyclerView.layoutManager = orderLayoutManager
         orderRecyclerView.adapter = orderRecyclerAdapter
 
+        //product
         productRecyclerView = binding.listForWishList
         productList = listOf(Product(price = 130.0f,description = "Description for product "),
             Product(price = 60.0f,description = "Description for product oki "),
             Product(price = 87.0f,description = "Description for product "),
                     Product(price = 166.30f,description = "Description for product oki"))
-
-
         productLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         productRecyclerAdapter = ProductRecyclerViewAdapter(productList)
         productLayoutManager.orientation =RecyclerView.VERTICAL
@@ -75,6 +81,11 @@ class MeFragment : Fragment() {
         }
         binding.moreForWishList.setOnClickListener {
             startActivity(Intent(requireContext(),WishlistActivity::class.java))
+        }
+
+       val userName = preference.getData(Constants.USERFIRSTNAME)
+        if (!userName.isNullOrEmpty()){
+            binding.welcome.text = "Welcome $userName"
         }
 
 
