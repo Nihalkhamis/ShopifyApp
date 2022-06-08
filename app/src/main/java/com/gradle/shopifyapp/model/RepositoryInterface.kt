@@ -13,5 +13,8 @@ suspend fun postDraftOrders(order: Draft_order):  Response<Draft_order>
 suspend fun registerNewUser( user:CustomerModel) : Response<CustomerModel>
 suspend fun getDraftOrders():  Response<Draft_orders_list>
 suspend fun getAllUsers( ) : Response<CustomersModel>
+suspend fun updateDraftOrders(id: String,order: Draft_order):  Response<Draft_order>
+suspend fun deleteProductFromDraftOrder(id: String):  Response<Draft_order>
+
 
 }

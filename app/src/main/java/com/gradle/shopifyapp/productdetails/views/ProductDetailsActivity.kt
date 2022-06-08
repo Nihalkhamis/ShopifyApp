@@ -48,7 +48,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var binding: ActivityProductDetailesBinding
     lateinit var selectedSize: String
     lateinit var selectedColor: String
-    
+
    //viewModel
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel

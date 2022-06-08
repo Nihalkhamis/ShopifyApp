@@ -1,34 +1,45 @@
 package com.gradle.shopifyapp.shoppingCart.View
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
-import com.gradle.shopifyapp.draft_model.Draft_orders_list
-import com.gradle.shopifyapp.draft_model.NoteAttribute
-import com.gradle.shopifyapp.model.SmartCollection
 
-class ShoppingCartAdapter(var context: Context): RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>() {
+class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnClickListener): RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>() {
 
-    private var shoppingCartItems = emptyList<DraftOrder>()
+    private var shoppingCartItems = ArrayList<Draft_order>()
+    var count = 0
 
-    fun setShoppingCart(shoppingCartItems:List<DraftOrder>) {
+    fun setShoppingCart(shoppingCartItems:ArrayList<Draft_order>) {
+        Log.i("TAG", "setShoppingCart: ${shoppingCartItems.size}")
         this.shoppingCartItems = shoppingCartItems
         notifyDataSetChanged()
     }
+
+    fun getProductId(position: Int): Draft_order? {
+        return shoppingCartItems.get(position)
+    }
+
 
     inner class ViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView) {
         val img: ImageView = itemView.findViewById(R.id.shoppingCartImg)
         val title: TextView = itemView.findViewById(R.id.itemTitle)
         val price: TextView = itemView.findViewById(R.id.itemPrice)
+        val quantity: TextView = itemView.findViewById(R.id.count_editText)
+        val add: Button = itemView.findViewById(R.id.add_btn)
+        val remove: Button = itemView.findViewById(R.id.remove_btn)
+        val favorite: ImageView = itemView.findViewById(R.id.favorite_img)
+        val item: CardView = itemView.findViewById(R.id.shopping_cart_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,11 +48,33 @@ class ShoppingCartAdapter(var context: Context): RecyclerView.Adapter<ShoppingCa
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(shoppingCartItems[position].note_attributes!![0].value).apply(
+        Glide.with(context).load(shoppingCartItems[position].draft_order!!.note_attributes!![0].value).apply(
             RequestOptions().override(200, 200).placeholder(R.drawable.ic_launcher_background)
         ).into(holder.img)
-        holder.title.text = shoppingCartItems[position].line_items!![0].title
-        holder.price.text = shoppingCartItems[position].line_items!![0].price + " " + shoppingCartItems[position].currency
+        holder.title.text = shoppingCartItems[position].draft_order?.line_items!![0].title
+        holder.price.text = shoppingCartItems[position].draft_order?.line_items!![0].price + " " + (shoppingCartItems[position].draft_order?.currency)
+        holder.quantity.text = shoppingCartItems[position].draft_order!!.line_items!![0].quantity.toString()
+        holder.add.setOnClickListener{
+            count = shoppingCartItems[position].draft_order!!.line_items!![0].quantity!!
+            holder.quantity.text = (count!!+1).toString()
+            cartOnClickListener.onAddProduct(shoppingCartItems[position])
+        }
+        holder.remove.setOnClickListener{
+            count = shoppingCartItems[position].draft_order!!.line_items!![0].quantity!!
+            count = count-1
+            if(count<1){
+                cartOnClickListener.onRemoveProduct(shoppingCartItems[position])
+                shoppingCartItems.removeAt(position)
+                notifyDataSetChanged()
+            }else{
+                holder.quantity.text = (count).toString()
+                cartOnClickListener.onRemoveProduct(shoppingCartItems[position])
+            }
+        }
+
+        holder.favorite.setOnClickListener{
+            cartOnClickListener.onDeleteProduct(shoppingCartItems[position].draft_order!!.id.toString())
+        }
     }
 
     override fun getItemCount(): Int {

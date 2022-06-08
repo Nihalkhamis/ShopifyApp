@@ -74,5 +74,15 @@ class ApiClient private constructor() : RemoteSource {
         return getAllUsersService.getCustomers()
     }
 
+    override suspend fun updateDraftOrders(id: String,order: Draft_order): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.updateDraftOrder(id,order)
+    }
+
+    override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.deleteProductFromDraftOrder(id)
+    }
+
 
 }

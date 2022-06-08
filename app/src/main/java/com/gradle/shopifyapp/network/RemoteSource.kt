@@ -18,5 +18,9 @@ interface RemoteSource {
     suspend fun registerNewUser( user: CustomerModel) : Response<CustomerModel>
     suspend fun getDraftOrders(): Response<Draft_orders_list>
     suspend fun getAllCustomers( ) : Response<CustomersModel>
+    suspend fun updateDraftOrders(id: String, order: Draft_order):  Response<Draft_order>
+    suspend fun deleteProductFromDraftOrder(id: String):  Response<Draft_order>
+
+
 
 }

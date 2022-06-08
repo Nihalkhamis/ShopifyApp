@@ -26,4 +26,6 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel>  =remoteSource.registerNewUser(user)
     override suspend fun getDraftOrders(): Response<Draft_orders_list> = remoteSource.getDraftOrders()
     override suspend fun getAllUsers(): Response<CustomersModel> =remoteSource.getAllCustomers()
+    override suspend fun updateDraftOrders(id:String,order: Draft_order): Response<Draft_order> = remoteSource.updateDraftOrders(id,order)
+    override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> = remoteSource.deleteProductFromDraftOrder(id)
 }

@@ -11,10 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
 
-
-
-
-
 class ColorRecyclerAdapter(var context: Context, var colors: List<String>, var clickInterface: OnclickInterface) :
     RecyclerView.Adapter<ColorRecyclerAdapter.Holder>() {
     private var checkedPosition = -1

@@ -90,4 +90,17 @@ interface ApiInterface {
     suspend fun getDraftOrders(): Response<Draft_orders_list>
 
 
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @PUT("2022-01/draft_orders/{id}.json")
+    suspend fun updateDraftOrder(@Path("id")id: String,@Body order:Draft_order): Response<Draft_order>
+
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @DELETE("2022-01/draft_orders/{id}.json")
+    suspend fun deleteProductFromDraftOrder(@Path("id") id: String?): Response<Draft_order>
 }
