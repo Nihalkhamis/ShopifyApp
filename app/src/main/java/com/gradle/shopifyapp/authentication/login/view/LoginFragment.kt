@@ -69,31 +69,41 @@ class LoginFragment : Fragment() {
 
         binding.loginBtn.setOnClickListener {
             if (emailEditText.text.toString()!=""&&passwordEditText.text.toString()!=""){
-                loginViewModel.getAllUsers()
                 binding.progressbar.visibility = View.VISIBLE
+                loginViewModel.getAllUsers()
                 loginViewModel.customersResponseLiveData.observe(viewLifecycleOwner){
+                    Log.i("login","${it.body()?.customers?.size}")
+
                     if(it.isSuccessful){
                         var check =false
                         for (user in it.body()?.customers!!){
-                            check = true
-                            if (user.email==emailEditText.text.toString().trim()&&user.tags==passwordEditText.text.toString()){
+                            Log.i("login","check users")
+                            if (emailEditText.text.toString().trim().equals(user.email,ignoreCase = true)&&user.tags==passwordEditText.text.toString()){
+                                check = true
+                                Log.i("login","user exist")
                                 preference.saveData(Constants.USERID, user.id.toString())
                                 preference.saveData(Constants.USEREMAIL, user.email.toString())
                                 preference.saveData(Constants.USERFIRSTNAME, user.first_name.toString())
                                 binding.progressbar.visibility = View.GONE
                                 startActivity(Intent(requireContext(), MainTabsActivity::class.java))
-                                break
+                                activity?.finish()
+
                             }
 
                         }
                         if (!check){
+                            Log.i("login","user not exist")
                             Toast.makeText(requireContext(), "No user exist with that data", Toast.LENGTH_LONG).show()
+                            binding.progressbar.visibility = View.GONE
+
                         }
-                        binding.progressbar.visibility = View.GONE
 
                     }
                     else{
+                        Log.i("login","error connection")
+
                         Toast.makeText(requireContext(), "Error Connection", Toast.LENGTH_LONG).show()
+                        binding.progressbar.visibility = View.GONE
 
                     }
 

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gradle.shopifyapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopifyApp">
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="com.gradle.shopifyapp.orders.orders_list.view.OrdersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.view.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".payment.PaymentActivity"
@@ -33,12 +39,14 @@
         <activity
             android:name=".MainTabsActivity"
             android:exported="true"
-            android:label="@string/title_activity_main_tabs" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:label="@string/title_activity_main_tabs">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".authentication.MainActivity"
@@ -48,15 +56,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

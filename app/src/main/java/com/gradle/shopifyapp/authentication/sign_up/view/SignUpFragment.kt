@@ -90,7 +90,7 @@ class SignUpFragment : Fragment() {
             c.email = emailTxt.text.toString().trim()
             c.phone = phoneTxt.text.toString().trim()
             c.password = passwordTxt.text.toString().trim()
-            c.tags=passwordTxt.text.toString().trim()
+            c.tags="${passwordTxt.text.toString().trim()}"
             c.password_confirmation = confirmPasswordTxt.text.toString().trim()
             c.verified_email = true
             myCustomer.customer = c
@@ -99,25 +99,23 @@ class SignUpFragment : Fragment() {
 
             signUpViewModel.userResponseLiveData.observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
+                    Toast.makeText(requireContext(),"Successfully Register", Toast.LENGTH_LONG).show()
                     preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
                     preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
                     preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
                     binding.progressbar.visibility = View.GONE
                     startActivity(Intent(requireContext(), MainTabsActivity::class.java))
+                    activity?.finish()
 
-                } else {
+                } else  {
                     binding.progressbar.visibility = View.GONE
                     Log.i("error", it.code().toString())
-                    //Toast.makeText(requireContext(), it.message(), Toast.LENGTH_LONG).show()
+                    Log.i("error", it.errorBody().toString())
+                    Toast.makeText(requireContext(), "Error while registering check this data is not exist before", Toast.LENGTH_LONG).show()
 
                 }
 
             }
-//
-//            //https://9d169ad72dd7620e70f56b28ae6146d9:shpat_e9319cd850d37f28a5cf73b6d1
-//            //3bd985@madalex20220.myshopify.com/admin/api/2022-01/collects.json
-//
-//
 
 
         }
