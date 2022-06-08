@@ -83,6 +83,7 @@ class LoginFragment : Fragment() {
                                 Log.i("login","user exist")
                                 preference.saveData(Constants.USERID, user.id.toString())
                                 preference.saveData(Constants.USEREMAIL, user.email.toString())
+                                Log.i("HALA_LOGIN", preference.getData(Constants.USEREMAIL).toString())
                                 preference.saveData(Constants.USERFIRSTNAME, user.first_name.toString())
                                 binding.progressbar.visibility = View.GONE
                                 startActivity(Intent(requireContext(), MainTabsActivity::class.java))

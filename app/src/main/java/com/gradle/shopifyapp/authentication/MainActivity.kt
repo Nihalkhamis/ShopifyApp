@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.SyncStateContract
+import android.util.Log
 import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
 import com.kotlin.weatherforecast.utils.Constants
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         sharedPreference = MyPreference.getInstance(this)!!
         val check = sharedPreference.getData(Constants.USERID)
+        Log.i("HALA_LOGIN", sharedPreference.getData(Constants.USEREMAIL).toString())
+
         if(!check.isNullOrEmpty()){
             startActivity(Intent(this,MainTabsActivity::class.java))
         }

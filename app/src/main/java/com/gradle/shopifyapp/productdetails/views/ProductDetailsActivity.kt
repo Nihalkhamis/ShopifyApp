@@ -25,6 +25,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModel
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
+import com.kotlin.weatherforecast.utils.Constants
+import com.kotlin.weatherforecast.utils.MyPreference
 
 
 class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
@@ -39,6 +41,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var reviewAdapter: ReviewRecyclerAdapter
     lateinit var reviewRecyclerView: RecyclerView
     lateinit var reviews: List<ReviewModel>
+
+    lateinit var preference: MyPreference
 
 
     lateinit var colorAdapter: ColorRecyclerAdapter
@@ -58,6 +62,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        preference = MyPreference.getInstance(this)!!
 
         vmFactory = ProductDetailsViewModelFactory(
             Repository.getRepoInstance(
@@ -121,7 +127,9 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         binding.addToCartBtn.setOnClickListener{
                 var order = DraftOrder()
-                order.email = "shimaa226@gmail.com"
+            order.email = preference.getData(Constants.USEREMAIL)
+            Log.i("HALA", preference.getData(Constants.USERFIRSTNAME).toString())
+               // order.email = "shimaa226@gmail.com"
                 order.note = "cart"
                 for(i in 0..product.variants.size-1){
                     Log.i("TAG","ADD TO CART before")

@@ -16,6 +16,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.PaymentActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.kotlin.weatherforecast.utils.Constants
+import com.kotlin.weatherforecast.utils.MyPreference
 
 
 class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
@@ -25,6 +27,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     lateinit var shoppingCartAdapter: ShoppingCartAdapter
     lateinit var shoppingCart_rv: RecyclerView
     lateinit var gridLayoutManager: GridLayoutManager
+
+    lateinit var preference: MyPreference
 
     //viewModel
     lateinit var vmFactory: ShoppingCartViewModelFactory
@@ -36,6 +40,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         //setContentView(R.layout.activity_shopping_cart)
         binding = ActivityShoppingCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        preference = MyPreference.getInstance(this)!!
 
         vmFactory = ShoppingCartViewModelFactory(
             Repository.getRepoInstance(
@@ -71,7 +76,9 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         shoppingCartVm.getDraftOrder(this)
         shoppingCartVm.liveDraftOrderList.observe(this) {
             for(i in 0..it.size-1){
-                if(it.get(i).email == "shimaa226@gmail.com" && it.get(i).note == "cart")
+                var email = preference.getData(Constants.USEREMAIL)
+
+                if(it.get(i).email == email && it.get(i).note == "cart")
                 {
                     var df: Draft_order = Draft_order()
                     df.draft_order = it.get(i)
@@ -159,7 +166,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     shoppingCartVm.liveDeleteDraftOrderList.observe(this@ShoppingCartActivity){ dOrder->
                         if(dOrder.isSuccessful){
                             Log.d("TAG", "successful")
-                            //error in calculations 
+                            //error in calculations
                             calculateTotalPrice(products)
                         }
                         else{
