@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopifyApp">
         <activity
-            android:name=".settings.view.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".payment.PaymentActivity"
