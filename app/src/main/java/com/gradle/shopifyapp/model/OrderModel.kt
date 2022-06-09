@@ -1,7 +1,7 @@
 package com.gradle.shopifyapp.model
 
 data class OrderModel(
-    val app_id: Int?,
+    val app_id: Long?,
     val billing_address: BillingAddress?,
     val browser_ip: String?,
     val buyer_accepts_marketing: Boolean?,

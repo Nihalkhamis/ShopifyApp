@@ -7,21 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.MainTabsActivity
-import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.login.viewmodel.LoginViewModel
 import com.gradle.shopifyapp.authentication.login.viewmodel.LoginViewModelFactory
-import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModel
-import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModelFactory
 import com.gradle.shopifyapp.databinding.FragmentLoginBinding
-import com.gradle.shopifyapp.databinding.FragmentSignUpBinding
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.kotlin.weatherforecast.utils.Constants
@@ -56,7 +50,7 @@ class LoginFragment : Fragment() {
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 requireContext()
-            ), requireContext()
+            )
         )
         loginViewModel = ViewModelProvider(this, vmFactory).get(LoginViewModel::class.java)
 
@@ -77,14 +71,12 @@ class LoginFragment : Fragment() {
                     if(it.isSuccessful){
                         var check =false
                         for (user in it.body()?.customers!!){
-                            Log.i("login","check users")
                             if (emailEditText.text.toString().trim().equals(user.email,ignoreCase = true)&&user.tags==passwordEditText.text.toString()){
                                 check = true
-                                Log.i("login","user exist")
                                 preference.saveData(Constants.USERID, user.id.toString())
                                 preference.saveData(Constants.USEREMAIL, user.email.toString())
-                                Log.i("HALA_LOGIN", preference.getData(Constants.USEREMAIL).toString())
                                 preference.saveData(Constants.USERFIRSTNAME, user.first_name.toString())
+                                preference.saveData(Constants.USERMOBILEPHONE, user.phone.toString())
                                 binding.progressbar.visibility = View.GONE
                                 startActivity(Intent(requireContext(), MainTabsActivity::class.java))
                                 activity?.finish()
@@ -93,7 +85,6 @@ class LoginFragment : Fragment() {
 
                         }
                         if (!check){
-                            Log.i("login","user not exist")
                             Toast.makeText(requireContext(), "No user exist with that data", Toast.LENGTH_LONG).show()
                             binding.progressbar.visibility = View.GONE
 
@@ -101,8 +92,6 @@ class LoginFragment : Fragment() {
 
                     }
                     else{
-                        Log.i("login","error connection")
-
                         Toast.makeText(requireContext(), "Error Connection", Toast.LENGTH_LONG).show()
                         binding.progressbar.visibility = View.GONE
 

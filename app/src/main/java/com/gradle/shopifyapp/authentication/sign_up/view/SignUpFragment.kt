@@ -41,7 +41,7 @@ class SignUpFragment : Fragment() {
 
     lateinit var preference: MyPreference
 
-
+    //viewModel
     lateinit var vmFactory: SignUpViewModelFactory
     lateinit var signUpViewModel: SignUpViewModel
 
@@ -60,12 +60,12 @@ class SignUpFragment : Fragment() {
 
 
 
-
+        //viewModel
         vmFactory = SignUpViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 requireContext()
-            ), requireContext()
+            )
         )
         signUpViewModel = ViewModelProvider(this, vmFactory).get(SignUpViewModel::class.java)
 
@@ -77,8 +77,6 @@ class SignUpFragment : Fragment() {
         lastName = binding.secondNameEdt
         phoneTxt = binding.phoneEdt
         var c = Customer()
-
-
 
 
 
@@ -103,6 +101,8 @@ class SignUpFragment : Fragment() {
                     preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
                     preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
                     preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
+                    preference.saveData(Constants.USERMOBILEPHONE, it.body()?.customer?.phone.toString())
+
                     binding.progressbar.visibility = View.GONE
                     startActivity(Intent(requireContext(), MainTabsActivity::class.java))
                     activity?.finish()

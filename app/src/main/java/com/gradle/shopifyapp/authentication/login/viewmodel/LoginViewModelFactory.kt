@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gradle.shopifyapp.model.RepositoryInterface
 
-class LoginViewModelFactory (private val repository: RepositoryInterface, private val context: Context) : ViewModelProvider.Factory{
+class LoginViewModelFactory (private val repository: RepositoryInterface) : ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            LoginViewModel(repository,context) as T
+            LoginViewModel(repository) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }    }

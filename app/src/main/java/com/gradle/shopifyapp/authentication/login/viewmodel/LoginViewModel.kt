@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class LoginViewModel(private val repo: RepositoryInterface, private var context: Context) :
+class LoginViewModel(private val repo: RepositoryInterface) :
     ViewModel() {
     private val customersResponse = MutableLiveData<Response<CustomersModel>>()
     val customersResponseLiveData: LiveData<Response<CustomersModel>> = customersResponse
