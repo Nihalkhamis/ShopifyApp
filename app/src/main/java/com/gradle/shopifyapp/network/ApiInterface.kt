@@ -87,8 +87,7 @@ interface ApiInterface {
     suspend fun getOrders(
         @Path(value = "customer_id", encoded = false) key: String,
     ): Response<OrdersModel>
-
-
+    @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )

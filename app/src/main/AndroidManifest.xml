@@ -16,7 +16,7 @@
             android:name="com.gradle.shopifyapp.orders.orders_list.view.OrdersListActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.view.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".payment.PaymentActivity"

@@ -101,6 +101,8 @@ class SignUpFragment : Fragment() {
                     preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
                     preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
                     preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
+                    preference.saveData(Constants.USERMOBILEPHONE, it.body()?.customer?.phone.toString())
+
                     binding.progressbar.visibility = View.GONE
                     startActivity(Intent(requireContext(), MainTabsActivity::class.java))
                     activity?.finish()

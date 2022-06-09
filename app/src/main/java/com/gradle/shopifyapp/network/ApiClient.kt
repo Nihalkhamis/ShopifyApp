@@ -23,7 +23,8 @@ class ApiClient private constructor() : RemoteSource {
 
     object RetrofitHelper {
         //val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
-        val baseUrl ="https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
+        val baseUrl =
+            "https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
 
 
         fun getInstance(): Retrofit {
@@ -35,7 +36,11 @@ class ApiClient private constructor() : RemoteSource {
         }
     }
 
-    override suspend fun getAllProducts(collection_id : String, product_type : String, vendor : String): Response<ProductModel> {
+    override suspend fun getAllProducts(
+        collection_id: String,
+        product_type: String,
+        vendor: String
+    ): Response<ProductModel> {
         val productsService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return productsService.getAllProducts(collection_id, product_type, vendor)
     }
@@ -45,7 +50,7 @@ class ApiClient private constructor() : RemoteSource {
         return vendorService.getAllVendors()
     }
 
-    override suspend fun getProductsByBrand(id : String): Response<ProductModel> {
+    override suspend fun getProductsByBrand(id: String): Response<ProductModel> {
         val brandsProductsService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return brandsProductsService.getProductsByBrand(id)
     }
@@ -59,6 +64,7 @@ class ApiClient private constructor() : RemoteSource {
         val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return draftOrderService.postDraftOrders(order)
     }
+
     override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel> {
         val registerUserService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return registerUserService.registerUser(user)
@@ -75,20 +81,20 @@ class ApiClient private constructor() : RemoteSource {
     }
 
 
-    override suspend fun getAllOrders( id: String): Response<OrdersModel> {
+    override suspend fun getAllOrders(id: String): Response<OrdersModel> {
         val getAllOrdersService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return getAllOrdersService.getOrders(id)
 
-        override suspend fun updateDraftOrders(id: String,order: Draft_order): Response<Draft_order> {
-        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
-        return draftOrderService.updateDraftOrder(id,order)
     }
 
-        override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> {
+    override suspend fun updateDraftOrders(id: String, order: Draft_order): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.updateDraftOrder(id, order)
+    }
+
+    override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> {
         val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return draftOrderService.deleteProductFromDraftOrder(id)
 
     }
-
-
 }
