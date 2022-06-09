@@ -60,6 +60,10 @@
     <string name="phone">+201235678</string>
     <string name="shipping_method">Shipping Method</string>
     <string name="shipping">Shipping:</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="shipping_fee">Shipping fee:</string>
+    <string name="discount">Discount:</string>
+
 
     <string name="cancel">Cancel</string>
     <string name="looking_for">What are you lookin for?</string>
