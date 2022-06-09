@@ -3,11 +3,10 @@ package com.gradle.shopifyapp.authentication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract
 import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 class MainActivity : AppCompatActivity() {
     lateinit var sharedPreference: MyPreference

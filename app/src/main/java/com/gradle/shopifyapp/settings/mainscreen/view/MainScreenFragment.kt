@@ -1,10 +1,12 @@
 package com.gradle.shopifyapp.settings.mainscreen.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.R
@@ -31,7 +33,7 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.backBtn.setOnClickListener {
-
+            activity?.finish()
         }
 
         binding.currencyTxt.setOnClickListener {

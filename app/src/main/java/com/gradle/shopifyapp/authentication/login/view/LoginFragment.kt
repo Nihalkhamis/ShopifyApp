@@ -2,30 +2,23 @@ package com.gradle.shopifyapp.authentication.login.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.MainTabsActivity
-import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.login.viewmodel.LoginViewModel
 import com.gradle.shopifyapp.authentication.login.viewmodel.LoginViewModelFactory
-import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModel
-import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModelFactory
 import com.gradle.shopifyapp.databinding.FragmentLoginBinding
-import com.gradle.shopifyapp.databinding.FragmentSignUpBinding
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class LoginFragment : Fragment() {

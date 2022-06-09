@@ -10,6 +10,8 @@ interface RemoteSource {
     suspend fun getAllDiscountCodes():  Response<DiscountCodeModel>
     suspend fun registerNewUser( user: CustomerModel) : Response<CustomerModel>
     suspend fun getAllCustomers( ) : Response<CustomersModel>
+    suspend fun getAllCurrencies( ) : Response<CurrencyModel>
+    suspend fun getConvertedCurrency(amount : String, from : String, to : String): Response<CurrencyConverterModel>
 
 
 }

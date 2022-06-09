@@ -22,4 +22,6 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> = remoteSource.getAllDiscountCodes()
     override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel>  =remoteSource.registerNewUser(user)
     override suspend fun getAllUsers(): Response<CustomersModel> =remoteSource.getAllCustomers()
+    override suspend fun getAllCurrencies(): Response<CurrencyModel> = remoteSource.getAllCurrencies()
+    override suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String): Response<CurrencyConverterModel> = remoteSource.getConvertedCurrency(amount, from, to)
 }

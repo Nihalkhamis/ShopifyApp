@@ -9,6 +9,8 @@ suspend fun getAllProductsByBrand(id : String) : Response<ProductModel>
 suspend fun getAllDiscountCodes() : Response<DiscountCodeModel>
 suspend fun registerNewUser( user:CustomerModel) : Response<CustomerModel>
 suspend fun getAllUsers( ) : Response<CustomersModel>
+suspend fun getAllCurrencies( ) : Response<CurrencyModel>
+suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String) : Response<CurrencyConverterModel>
 
 
 }

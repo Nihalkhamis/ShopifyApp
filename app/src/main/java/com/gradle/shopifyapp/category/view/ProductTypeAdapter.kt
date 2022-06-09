@@ -77,6 +77,5 @@ class ProductTypeAdapter(
         val cancel_btn: ImageView = itemView.findViewById(R.id.cancel_btn)
         val productTypeName_txt: TextView = itemView.findViewById(R.id.productTypeName_txt)
         val productType_layout: ConstraintLayout = itemView.findViewById(R.id.productType_layout)
-
     }
 }

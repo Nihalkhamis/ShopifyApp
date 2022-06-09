@@ -1,8 +1,9 @@
 package com.gradle.shopifyapp.network
 
-import com.gradle.shopifyapp.model.*
+import  com.gradle.shopifyapp.model.*
 import retrofit2.Response
 import retrofit2.http.*
+import retrofit2.http.Query
 
 interface ApiInterface {
     @Headers(
@@ -28,10 +29,6 @@ interface ApiInterface {
     suspend fun registerUser(
         @Body customer: CustomerModel
     ): Response<CustomerModel>
-
-
-
-
 
     @Headers(
         "Accept: application/json",
@@ -72,5 +69,23 @@ interface ApiInterface {
 
     @GET("2022-04/customers.json")
     suspend fun getCustomers(): Response<CustomersModel>
+
+
+    // get all currencies
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("2022-04/currencies.json")
+    suspend fun getAllCurrencies(): Response<CurrencyModel>
+
+
+    // currency converter
+    @GET("convert?apikey=xhRKCA6ZS9CBhQ7BTEsSXDaJMo6Z9X5N")
+    suspend fun getConvertedCurrency(
+        @Query("amount") amount: String,
+        @Query("from") from: String,
+        @Query("to") to: String
+    ): Response<CurrencyConverterModel>
 
 }

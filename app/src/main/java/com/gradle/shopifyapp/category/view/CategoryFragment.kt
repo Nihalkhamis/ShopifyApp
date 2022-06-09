@@ -19,6 +19,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.view.OnItemClickListener
 import com.gradle.shopifyapp.productBrand.view.ProductBrandAdapter
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClickListener, OnProductTypeItemListener {
@@ -36,6 +38,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     lateinit var productTypeList : MutableSet<String>
 
     lateinit var categoryId : String
+
+    lateinit var preference : MyPreference
+
+    lateinit var currencyConvertedList : ArrayList<Product>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +64,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
        binding.categoryTabLayout.addTab( binding.categoryTabLayout.newTab().setText(R.string.kids))
 
         binding.categoryTabLayout.addOnTabSelectedListener(this)
+
+        preference = MyPreference.getInstance(requireContext())!!
+
+        currencyConvertedList = ArrayList<Product>()
+
 
         vmFactory = CategoryViewModelFactory(
             Repository.getRepoInstance(
@@ -91,6 +103,23 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
         categoryViewModel.liveDataCategoriesProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: $it")
+
+
+          //  if (!(preference.getData(Constants.TOCURRENCY)).isNullOrEmpty()){
+
+                // iterate on all products to convert price depends on currency
+               // for (i in it.products){
+
+//                        categoryViewModel.getAllConvertedCurrency(requireContext(), "1",
+//                           "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
+//                        )
+//            categoryViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner){
+//
+//            }
+
+             //   }
+
+            //}
 
             productBrandAdapter.setProductsBrand(it.products)
             for (productType in it.products){

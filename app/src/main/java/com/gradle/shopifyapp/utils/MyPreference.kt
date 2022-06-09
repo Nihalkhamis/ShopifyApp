@@ -1,8 +1,7 @@
-package com.kotlin.weatherforecast.utils
+package com.gradle.shopifyapp.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.util.*
 
 class MyPreference(var context: Context) {
 
@@ -15,7 +14,7 @@ class MyPreference(var context: Context) {
     companion object {
         private var instance: MyPreference? = null
         fun getInstance(context: Context): MyPreference? {
-            return instance?: MyPreference(context)
+            return instance ?: MyPreference(context)
         }
     }
 
@@ -31,5 +30,12 @@ class MyPreference(var context: Context) {
             sharedPreferences.getString(key, "")
         } else ""
     }
+
+    fun getDataWithCustomDefaultValue(key: String?, defaultValue : String?): String? {
+        return if (sharedPreferences != null) {
+            sharedPreferences.getString(key, defaultValue)
+        } else defaultValue
+    }
+
 
 }
