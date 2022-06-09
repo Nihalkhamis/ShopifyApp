@@ -4,14 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewParent
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
+import com.gradle.shopifyapp.draft_model.DraftOrder
+import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.LineItem
+import com.gradle.shopifyapp.draft_model.NoteAttribute
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.model.ReviewModel
+import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModel
+import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
+import com.kotlin.weatherforecast.utils.Constants
+import com.kotlin.weatherforecast.utils.MyPreference
 
 
 class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
@@ -27,6 +42,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var reviewRecyclerView: RecyclerView
     lateinit var reviews: List<ReviewModel>
 
+    lateinit var preference: MyPreference
+
 
     lateinit var colorAdapter: ColorRecyclerAdapter
     lateinit var colorRecyclerView: RecyclerView
@@ -36,12 +53,25 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var selectedSize: String
     lateinit var selectedColor: String
 
+   //viewModel
+    lateinit var vmFactory: ProductDetailsViewModelFactory
+    lateinit var productDetailsVm: ProductDetailsViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        preference = MyPreference.getInstance(this)!!
+
+        vmFactory = ProductDetailsViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                this
+            ), this
+        )
+        productDetailsVm = ViewModelProvider(this, vmFactory).get(ProductDetailsViewModel::class.java)
         product = intent.getSerializableExtra("product") as Product
 
         // product Images
@@ -93,6 +123,44 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
             val intent = Intent(this, ShoppingCartActivity::class.java).apply {
             }
             startActivity(intent)
+        }
+
+        binding.addToCartBtn.setOnClickListener{
+                var order = DraftOrder()
+            order.email = preference.getData(Constants.USEREMAIL)
+            Log.i("HALA", preference.getData(Constants.USERFIRSTNAME).toString())
+               // order.email = "shimaa226@gmail.com"
+                order.note = "cart"
+                for(i in 0..product.variants.size-1){
+                    Log.i("TAG","ADD TO CART before")
+                    if(product.variants[i].option1 == selectedSize &&
+                        product.variants[i].option2 ==  selectedColor ){
+                            var lineItems = LineItem()
+                        lineItems.quantity = 1
+                        lineItems.variant_id = product.variants[i].id
+                        order.line_items = listOf(lineItems)
+                        var note_attribute = NoteAttribute()
+                        note_attribute.name = "image"
+                        note_attribute.value = product.images[0].src
+                        order.note_attributes = listOf(note_attribute)
+                        Log.i("TAG","ADD TO CART")
+                        break
+                    }
+                }
+            var draft_orders: Draft_order = Draft_order(order)
+            productDetailsVm.postDraftOrder(draft_orders)
+
+            productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
+                if(dOrder.isSuccessful){
+                    Log.d("TAG", "successful")
+
+                }
+                else{
+                    Log.d("TAG", "failed: ${dOrder.code()}")
+
+                }
+
+            }
         }
 
     }

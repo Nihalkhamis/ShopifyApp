@@ -14,8 +14,6 @@ import com.gradle.shopifyapp.model.SmartCollection
 
 class Brands_adapter(var context: Context,var onBrandClickListener : OnBrandClickListener): RecyclerView.Adapter<Brands_adapter.ViewHolder>() {
 
-   // var brands = intArrayOf(R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4)
-
     private var brands = emptyList<SmartCollection>()
 
     fun setBrands(brands: List<SmartCollection>) {

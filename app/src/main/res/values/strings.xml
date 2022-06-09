@@ -47,8 +47,10 @@
     <string name="add_address">Add Address</string>
 
     <string name="skip">Skip</string>
-    <string name="have_account">Have Account</string>
+    <string name="have_account">Already have an account? Login</string>
     <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="forgotPass">Forget Password</string>

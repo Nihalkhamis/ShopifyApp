@@ -1,10 +1,15 @@
 package com.gradle.shopifyapp.network
 
+import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.Draft_orders_list
+import com.gradle.shopifyapp.model.CustomerModel
+import com.gradle.shopifyapp.model.DiscountCodeModel
+import com.gradle.shopifyapp.model.ProductModel
+import com.gradle.shopifyapp.model.VendorsModel
 import com.gradle.shopifyapp.model.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.sql.Struct
 
 
 class ApiClient private constructor() : RemoteSource {
@@ -50,9 +55,18 @@ class ApiClient private constructor() : RemoteSource {
         return discountCodeService.getAllDiscountCodes()
     }
 
+    override suspend fun postDraftOrders(order: Draft_order): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.postDraftOrders(order)
+    }
     override suspend fun registerNewUser(user: CustomerModel): Response<CustomerModel> {
         val registerUserService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return registerUserService.registerUser(user)
+    }
+
+    override suspend fun getDraftOrders(): Response<Draft_orders_list> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.getDraftOrders()
     }
 
     override suspend fun getAllCustomers(): Response<CustomersModel> {
@@ -60,9 +74,20 @@ class ApiClient private constructor() : RemoteSource {
         return getAllUsersService.getCustomers()
     }
 
+
     override suspend fun getAllOrders( id: String): Response<OrdersModel> {
         val getAllOrdersService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return getAllOrdersService.getOrders(id)
+
+        override suspend fun updateDraftOrders(id: String,order: Draft_order): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.updateDraftOrder(id,order)
+    }
+
+        override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> {
+        val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return draftOrderService.deleteProductFromDraftOrder(id)
+
     }
 
 
