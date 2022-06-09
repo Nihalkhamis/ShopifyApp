@@ -20,7 +20,7 @@ class OrderListViewModel(private val repo: RepositoryInterface) : ViewModel() {
     val ordersResponseLiveData : LiveData<Response<OrdersModel>> = ordersResponse
 
     fun getOrders( id: String){
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch{
             ordersResponse.postValue( repo.getAllOrders(id))
 
         }

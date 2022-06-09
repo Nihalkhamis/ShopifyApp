@@ -2,6 +2,7 @@ package com.gradle.shopifyapp.orders.orders_list.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.gradle.shopifyapp.databinding.ActivityOrdersListBinding
@@ -40,9 +41,10 @@ class OrdersListActivity : AppCompatActivity() {
 
         orderListViewModel.ordersResponseLiveData.observe(this){
             if (it.isSuccessful) {
-
+                    Log.i("order Result", it.body()?.orders?.get(0).toString())
             }else{
-
+                Log.i("order Result", it.code().toString())
+                Log.i("order Result", "Error")
             }
         }
 }
