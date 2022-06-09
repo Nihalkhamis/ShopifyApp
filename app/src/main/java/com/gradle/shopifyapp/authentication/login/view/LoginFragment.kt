@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 requireContext()
-            ), requireContext()
+            )
         )
         loginViewModel = ViewModelProvider(this, vmFactory).get(LoginViewModel::class.java)
 

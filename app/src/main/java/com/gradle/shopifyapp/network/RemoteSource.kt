@@ -10,6 +10,7 @@ interface RemoteSource {
     suspend fun getAllDiscountCodes():  Response<DiscountCodeModel>
     suspend fun registerNewUser( user: CustomerModel) : Response<CustomerModel>
     suspend fun getAllCustomers( ) : Response<CustomersModel>
+    suspend fun getAllOrders(  id: String) : Response<OrdersModel>
 
 
 }

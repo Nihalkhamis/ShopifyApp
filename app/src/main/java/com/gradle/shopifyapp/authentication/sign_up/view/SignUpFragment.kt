@@ -41,7 +41,7 @@ class SignUpFragment : Fragment() {
 
     lateinit var preference: MyPreference
 
-
+    //viewModel
     lateinit var vmFactory: SignUpViewModelFactory
     lateinit var signUpViewModel: SignUpViewModel
 
@@ -60,12 +60,12 @@ class SignUpFragment : Fragment() {
 
 
 
-
+        //viewModel
         vmFactory = SignUpViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
                 requireContext()
-            ), requireContext()
+            )
         )
         signUpViewModel = ViewModelProvider(this, vmFactory).get(SignUpViewModel::class.java)
 
@@ -77,8 +77,6 @@ class SignUpFragment : Fragment() {
         lastName = binding.secondNameEdt
         phoneTxt = binding.phoneEdt
         var c = Customer()
-
-
 
 
 

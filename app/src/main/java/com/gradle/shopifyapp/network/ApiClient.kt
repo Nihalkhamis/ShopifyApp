@@ -60,5 +60,10 @@ class ApiClient private constructor() : RemoteSource {
         return getAllUsersService.getCustomers()
     }
 
+    override suspend fun getAllOrders( id: String): Response<OrdersModel> {
+        val getAllOrdersService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return getAllOrdersService.getOrders(id)
+    }
+
 
 }
