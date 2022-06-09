@@ -25,10 +25,21 @@ class ApiClient private constructor() : RemoteSource {
         //val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
         val baseUrl =
             "https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
+        val baseUrl ="https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
+        val currencyBaseUrl ="https://api.apilayer.com/exchangerates_data/"
 
 
         fun getInstance(): Retrofit {
             return Retrofit.Builder().baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                // we need to add converter factory to
+                // convert JSON object to Java object
+                .build()
+        }
+
+        //for currency converter
+        fun getCurrencyConverterInstance(): Retrofit {
+            return Retrofit.Builder().baseUrl(currencyBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 // we need to add converter factory to
                 // convert JSON object to Java object
@@ -78,6 +89,20 @@ class ApiClient private constructor() : RemoteSource {
     override suspend fun getAllCustomers(): Response<CustomersModel> {
         val getAllUsersService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return getAllUsersService.getCustomers()
+    }
+
+    override suspend fun getAllCurrencies(): Response<CurrencyModel> {
+        val getAllCurrenciesService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return getAllCurrenciesService.getAllCurrencies()
+    }
+
+    override suspend fun getConvertedCurrency(
+        amount: String,
+        from: String,
+        to: String
+    ): Response<CurrencyConverterModel> {
+        val getAllConvertedCurrencyService = RetrofitHelper.getCurrencyConverterInstance().create(ApiInterface::class.java)
+        return getAllConvertedCurrencyService.getConvertedCurrency(amount, from, to)
     }
 
 

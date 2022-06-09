@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.R
@@ -35,7 +36,7 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preference = MyPreference.getInstance(requireContext())!!
         binding.backBtn.setOnClickListener {
-
+            activity?.finish()
         }
 
         binding.currencyTxt.setOnClickListener {

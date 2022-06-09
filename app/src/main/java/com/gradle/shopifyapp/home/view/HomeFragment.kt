@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.provider.SyncStateContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +15,21 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
+import com.gradle.shopifyapp.category.viewmodel.CategoryViewModel
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
-import com.kotlin.weatherforecast.utils.Constants
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 class HomeFragment : Fragment(), OnBrandClickListener {
 
     private var _binding: FragmentHomeBinding? = null
+
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,15 +46,18 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     lateinit var dots: DotsIndicator
 
     lateinit var couponsAdapter: Coupons_adapter
-    lateinit var coupons_rv: RecyclerView
+    private lateinit var coupons_rv: RecyclerView
     lateinit var gridLayoutManager: GridLayoutManager
 
     lateinit var brandsAdapter: Brands_adapter
-    lateinit var brands_rv: RecyclerView
+    private lateinit var brands_rv: RecyclerView
 
     //viewModel
     lateinit var vmFactory: HomeViewModelFactory
-    lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
+
+    lateinit var preference : MyPreference
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +84,8 @@ class HomeFragment : Fragment(), OnBrandClickListener {
             ), requireContext()
         )
 
+        preference = MyPreference.getInstance(requireContext())!!
+
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
 
@@ -95,8 +103,18 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         homeViewModel.getAllDiscountCodes(requireContext())
         homeViewModel.liveDiscountList.observe(viewLifecycleOwner){
-            Log.d("TAG", "onCreateView: ${it}")
+            Log.d("TAG", "onCreateView: $it")
             bindCoupons(it)
+        }
+
+        // currency converter
+        homeViewModel.getAllConvertedCurrency(requireContext(), "1",
+            "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
+        )
+        homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner){
+            Log.d("TAG", "onCreateView: IT-> $it")
+            preference.saveData(Constants.CURRENCYRESULT,it.toString())
+            Log.d("TAG", "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}")
         }
 
         return root
@@ -123,7 +141,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         _binding = null
     }
 
-    fun createSlideshow() {
+    private fun createSlideshow() {
         var handler: Handler = Handler()
         var runnable: Runnable = Runnable {
             kotlin.run {

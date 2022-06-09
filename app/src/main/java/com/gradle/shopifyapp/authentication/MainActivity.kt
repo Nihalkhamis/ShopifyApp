@@ -7,8 +7,8 @@ import android.provider.SyncStateContract
 import android.util.Log
 import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 class MainActivity : AppCompatActivity() {
     lateinit var sharedPreference: MyPreference

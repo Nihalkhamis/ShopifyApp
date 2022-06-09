@@ -29,4 +29,6 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun getAllOrders(id: String): Response<OrdersModel> = remoteSource.getAllOrders(id)
     override suspend fun updateDraftOrders(id:String,order: Draft_order): Response<Draft_order> = remoteSource.updateDraftOrders(id,order)
     override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> = remoteSource.deleteProductFromDraftOrder(id)
+    override suspend fun getAllCurrencies(): Response<CurrencyModel> = remoteSource.getAllCurrencies()
+    override suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String): Response<CurrencyConverterModel> = remoteSource.getConvertedCurrency(amount, from, to)
 }

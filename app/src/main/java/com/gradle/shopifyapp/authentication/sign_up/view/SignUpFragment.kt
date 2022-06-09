@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -21,8 +20,8 @@ import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class SignUpFragment : Fragment() {

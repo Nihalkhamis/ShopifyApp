@@ -16,6 +16,8 @@ suspend fun getAllUsers( ) : Response<CustomersModel>
 suspend fun getAllOrders(id: String ) : Response<OrdersModel>
 suspend fun updateDraftOrders(id: String,order: Draft_order):  Response<Draft_order>
 suspend fun deleteProductFromDraftOrder(id: String):  Response<Draft_order>
+suspend fun getAllCurrencies( ) : Response<CurrencyModel>
+suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String) : Response<CurrencyConverterModel>
 
 
 }

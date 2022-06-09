@@ -15,6 +15,8 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.SubCategoryModel
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 import java.util.ArrayList
 
 class ProductBrandAdapter(
@@ -22,6 +24,8 @@ class ProductBrandAdapter(
     private var productsBrand: ArrayList<Product>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<ProductBrandAdapter.ProdcutBrandHolder>() {
+
+    lateinit var preference: MyPreference
 
     fun setProductsBrand(productsBrandList: List<Product>) {
         this.productsBrand.apply {
@@ -43,8 +47,11 @@ class ProductBrandAdapter(
     }
 
     override fun onBindViewHolder(holder: ProdcutBrandHolder, position: Int) {
+        preference = MyPreference.getInstance(context)!!
         holder.product_description_wish_list.text = productsBrand[position].title
-        holder.price_Text_wish_list.text = productsBrand[position].variants[0].price
+        holder.price_Text_wish_list.text = (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
+            ?.toDouble() ?: 1.0)).toString()
+        holder.currencyType_txt.text = preference.getData(Constants.TOCURRENCY)
         Glide.with(context).load(productsBrand[position].image.src).into(holder.product_img)
         holder.productCard.setOnClickListener {
             onItemClickListener.onClick(productsBrand[position])
@@ -60,6 +67,7 @@ class ProductBrandAdapter(
         val product_img: ImageView = itemView.findViewById(R.id.product_img)
         val product_description_wish_list: TextView = itemView.findViewById(R.id.product_description_wish_list)
         val price_Text_wish_list : TextView = itemView.findViewById(R.id.price_Text_wish_list)
+        val currencyType_txt : TextView = itemView.findViewById(R.id.currencyType_txt)
         val productCard : CardView = itemView.findViewById(R.id.productCard)
     }
 }

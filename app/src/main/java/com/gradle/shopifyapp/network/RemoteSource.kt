@@ -23,6 +23,8 @@ interface RemoteSource {
     suspend fun deleteProductFromDraftOrder(id: String):  Response<Draft_order>
 
 
+    suspend fun getAllCurrencies( ) : Response<CurrencyModel>
+    suspend fun getConvertedCurrency(amount : String, from : String, to : String): Response<CurrencyConverterModel>
 
 
 }

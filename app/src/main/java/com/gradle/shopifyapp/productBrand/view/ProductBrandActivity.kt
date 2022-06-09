@@ -2,26 +2,19 @@ package com.gradle.shopifyapp.productBrand.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityProductBrandBinding
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Product
-import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
-import com.kotlin.weatherforecast.utils.Constants
+import com.gradle.shopifyapp.utils.Constants
 
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 

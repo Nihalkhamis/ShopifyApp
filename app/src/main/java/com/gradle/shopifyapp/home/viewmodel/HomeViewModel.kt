@@ -14,20 +14,24 @@ import kotlinx.coroutines.*
 
 class HomeViewModel(private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
-    val productList = MutableLiveData<ProductModel>()
+    private val productList = MutableLiveData<ProductModel>()
     val liveDataProductList : LiveData<ProductModel> = productList
 
-    val vendorList = MutableLiveData<VendorsModel>()
+    private val vendorList = MutableLiveData<VendorsModel>()
     val liveVendorList : LiveData<VendorsModel> = vendorList
 
-    val discountList = MutableLiveData<DiscountCodeModel>()
+    private val discountList = MutableLiveData<DiscountCodeModel>()
     val liveDiscountList : LiveData<DiscountCodeModel> = discountList
+
+    // currency converter
+    private val convertedCurrencyList = MutableLiveData<Double>()
+    val liveDataConvertCurrencyList : LiveData<Double> = convertedCurrencyList
 
     fun getAllProducts(context: Context, collection_id : String, product_type : String, vendor : String) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllProducts(collection_id, product_type, vendor)
             Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllProducts: ${response}")
+            Log.d("TAG", "getAllProducts: $response")
             productList.postValue(response.body())
         }
     }
@@ -48,6 +52,15 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
             Log.d("TAG", "getAllDiscountCodes: ${response.raw().request().url()}")
             Log.d("TAG", "getAllDiscountCodes: ${response.body()}")
             discountList.postValue(response.body())
+        }
+    }
+
+    fun getAllConvertedCurrency(context: Context, amount : String, from : String, to : String) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getAllConvertedCurrencies(amount,from,to)
+            Log.d("TAG", "get currency converter url: ${response.raw().request().url()}")
+            Log.d("TAG", "getAllCurrencyResult: ${response.body()?.result}")
+            convertedCurrencyList.postValue(response.body()?.result)
         }
     }
 

@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/cancel_btn"
-        android:layout_width="@dimen/_7sdp"
-        android:layout_height="@dimen/_7sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:src="@drawable/close_icon"

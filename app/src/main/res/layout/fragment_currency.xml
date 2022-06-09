@@ -18,13 +18,29 @@
         app:tint="@color/dark_color" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/currency_txt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Currency fragment"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/currency"
+        android:textColor="@color/dark_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/back_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back_btn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/currencyRV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="4"
+        tools:listitem="@layout/currency_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
