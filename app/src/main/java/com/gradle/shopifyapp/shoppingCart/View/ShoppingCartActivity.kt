@@ -113,7 +113,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         shoppingCartVm.liveUpdateDraftOrderList.observe(this) {
             calculateTotalPrice(products)
         }
-
     }
 
     override fun onRemoveProduct(draftOrder:Draft_order) {
