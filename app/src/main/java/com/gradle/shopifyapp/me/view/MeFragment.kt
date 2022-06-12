@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gradle.shopifyapp.databinding.FragmentMeBinding
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
-import com.gradle.shopifyapp.orders.orders_list.view.OrdersListActivity
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.orders.OrdersActivity
