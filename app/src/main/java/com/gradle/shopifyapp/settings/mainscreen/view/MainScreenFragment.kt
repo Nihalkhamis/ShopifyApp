@@ -6,22 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.MainActivity
-import com.gradle.shopifyapp.databinding.FragmentCategoryBinding
 import com.gradle.shopifyapp.databinding.FragmentMainScreenBinding
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
+
 
 class MainScreenFragment : Fragment() {
 
     private var _binding: FragmentMainScreenBinding? = null
 
     private val binding get() = _binding!!
-    lateinit var preference :MyPreference
+    lateinit var preference : MyPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

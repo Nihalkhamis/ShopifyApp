@@ -10,8 +10,9 @@ import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModel
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModelFactory
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
+
 
 class OrdersListActivity : AppCompatActivity() {
     lateinit var binding: ActivityOrdersListBinding

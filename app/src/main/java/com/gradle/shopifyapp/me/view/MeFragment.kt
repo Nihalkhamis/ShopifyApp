@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gradle.shopifyapp.databinding.FragmentMeBinding
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.orders.orders_list.view.OrdersListActivity
-import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 import com.gradle.shopifyapp.settings.SettingsActivity
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+
 
 class MeFragment : Fragment() {
 

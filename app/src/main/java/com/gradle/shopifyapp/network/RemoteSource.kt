@@ -25,6 +25,8 @@ interface RemoteSource {
 
     suspend fun getAllCurrencies( ) : Response<CurrencyModel>
     suspend fun getConvertedCurrency(amount : String, from : String, to : String): Response<CurrencyConverterModel>
-
+    suspend fun addCustomerAddress(id: String, customer: CustomerModel):  Response<CustomerModel>
+    suspend fun getCustomerById(id: String) : Response<CustomerModel>
+    suspend fun deleteAddressFromCustomer(customerId : String, addressId : String) : Response<CustomerModel>
 
 }

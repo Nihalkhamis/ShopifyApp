@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gradle.shopifyapp.databinding.ActivityProductBrandBinding
 import com.gradle.shopifyapp.model.Product
@@ -92,6 +93,14 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
             myProducts = it.products
             productBrandAdapter.setProductsBrand(it.products)
         }
+
+        homeViewModel.loading.observe(this, Observer {
+            if (it) {
+                binding!!.progressbar.visibility = View.VISIBLE
+            } else {
+                binding!!.progressbar.visibility = View.GONE
+            }
+        })
 
     }
 

@@ -196,6 +196,7 @@ tools:context=".authentication.sign_up.view.SignUpFragment">
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:visibility="gone"
+            android:indeterminateTint="@color/orange"
             app:layout_constraintEnd_toEndOf="@+id/signup_btn"
             app:layout_constraintStart_toStartOf="@+id/signup_btn"
             app:layout_constraintTop_toBottomOf="@+id/signup_btn" />

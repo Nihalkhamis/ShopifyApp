@@ -2,6 +2,7 @@
     <string name="app_name">ShopifyApp</string>
     <string name="title_activity_main_tabs">MainTabsActivity</string>
     <string name="title_home">Home</string>
+    <string name="address_home">street 21, building 4, floor 4</string>
     <string name="title_item">Item name</string>
     <string name="checkout">Checkout</string>
     <string name="price_item">Item price</string>
@@ -78,6 +79,15 @@
     <string name="contactUs">Contact us</string>
     <string name="aboutUs">About us</string>
     <string name="logout">Logout</string>
+    <string name="addressText">Address</string>
+    <string name="country">egypt</string>
+    <string name="zipCode">Zip code: 21234</string>
+    <string name="address_hint">address</string>
+    <string name="zipCode_hint">zip code</string>
+    <string name="phone_hint">phone number</string>
+    <string name="city_hint">city</string>
+    <string name="country_hint">country</string>
+    <string name="save">Save</string>
 
 
 </resources>

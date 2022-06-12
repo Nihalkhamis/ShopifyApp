@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -71,9 +72,17 @@ class CurrencyFragment : Fragment(), OnCurrencyItemClickListener {
         binding.currencyRV.adapter = currencyAdapter
 
         currencyViewModel.liveDataCurrenciesList.observe(viewLifecycleOwner){
-            Log.d("TAG", "onCreateView: $it")
+            Log.d("TAG", "onCreateView: ${it.currencies}")
             currencyAdapter.setCurrencies(it.currencies)
         }
+
+        currencyViewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.progressbar.visibility = View.VISIBLE
+            } else {
+                binding.progressbar.visibility = View.GONE
+            }
+        })
     }
 
     private fun findNavController(fragment: Fragment): NavController? {
@@ -93,22 +102,6 @@ class CurrencyFragment : Fragment(), OnCurrencyItemClickListener {
     }
 
     private fun restartApp() {
-//        val intent = Intent(
-//            ApplicationProvider.getApplicationContext<Context>(),
-//            MainTabsActivity::class.java
-//        )
-//        val mPendingIntentId: Int = Constants.FINISH
-//        val mPendingIntent = PendingIntent.getActivity(
-//            ApplicationProvider.getApplicationContext<Context>(),
-//            mPendingIntentId,
-//            intent,
-//            PendingIntent.FLAG_CANCEL_CURRENT
-//        )
-//        val mgr = ApplicationProvider.getApplicationContext<Context>()
-//            .getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        mgr[AlarmManager.RTC, System.currentTimeMillis() + 100] = mPendingIntent
-//        exitProcess(0)
-
         val intent = Intent(requireContext(), MainTabsActivity::class.java)
         this.startActivity(intent)
         activity?.finishAffinity()

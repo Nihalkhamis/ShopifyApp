@@ -21,7 +21,6 @@ class ProductTypeAdapter(
 
     fun setProductTypes(productTypesList: List<String>) {
         this.productTypes.apply {
-            //weathers = weatherList
             clear()
             addAll(productTypesList)
             notifyDataSetChanged()
@@ -65,7 +64,6 @@ class ProductTypeAdapter(
 
             }
             notifyDataSetChanged()
-
         }
     }
 
