@@ -93,6 +93,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:text="@string/price_EGP"
             android:textColor="@color/dark_color"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/checkout_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/checkout_btn" />

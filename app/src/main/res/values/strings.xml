@@ -23,7 +23,7 @@
     <string name="coin">EGP</string>
     <string name="signup_btn">Sign Up</string>
     <string name="payment_method">Payment Method</string>
-    <string name="credit">Credit/Debit Card</string>
+    <string name="paypal">PayPal</string>
     <string name="cash">Cash on Delivery</string>
     <string name="coupon">Apply Coupon</string>
     <string name="place_order">Place Order</string>
@@ -63,6 +63,7 @@
     <string name="subtotal">Subtotal:</string>
     <string name="shipping_fee">Shipping fee:</string>
     <string name="discount">Discount:</string>
+    <string name="tax">Tax:</string>
 
 
     <string name="cancel">Cancel</string>

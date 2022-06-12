@@ -8,6 +8,7 @@ import android.view.ViewParent
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
@@ -127,15 +128,16 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         binding.addToCartBtn.setOnClickListener{
                 var order = DraftOrder()
+            var draft_orders = Draft_order()
             order.email = preference.getData(Constants.USEREMAIL)
-            Log.i("HALA", preference.getData(Constants.USERFIRSTNAME).toString())
-               // order.email = "shimaa226@gmail.com"
                 order.note = "cart"
                 for(i in 0..product.variants.size-1){
-                    Log.i("TAG","ADD TO CART before")
                     if(product.variants[i].option1 == selectedSize &&
                         product.variants[i].option2 ==  selectedColor ){
-                            var lineItems = LineItem()
+                            Log.i("option",selectedSize)
+                        Log.i("option",selectedColor)
+
+                        var lineItems = LineItem()
                         lineItems.quantity = 1
                         lineItems.variant_id = product.variants[i].id
                         order.line_items = listOf(lineItems)
@@ -143,31 +145,38 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                         note_attribute.name = "image"
                         note_attribute.value = product.images[0].src
                         order.note_attributes = listOf(note_attribute)
-                        Log.i("TAG","ADD TO CART")
+                        draft_orders = Draft_order(order)
+                        productDetailsVm.postDraftOrder(draft_orders)
+                        productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
+                            if(dOrder.isSuccessful){
+                                Toast.makeText(this,"Added to cart",Toast.LENGTH_LONG).show()
+                            }
+                            else{
+                                Log.d("TAG", "failed: ${dOrder.code()}")
+                            }
+                        }
                         break
                     }
                 }
-            var draft_orders: Draft_order = Draft_order(order)
-            productDetailsVm.postDraftOrder(draft_orders)
-
-            productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
-                if(dOrder.isSuccessful){
-                    Log.d("TAG", "successful")
-
-                }
-                else{
-                    Log.d("TAG", "failed: ${dOrder.code()}")
-
-                }
-
-            }
+//            draft_orders = Draft_order(order)
+//            productDetailsVm.postDraftOrder(draft_orders)
+//            productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
+//                if(dOrder.isSuccessful){
+//                    Log.d("TAG", "successful")
+//                    Toast.makeText(this,"Added to cart",Toast.LENGTH_LONG).show()
+//                }
+//                else{
+//                    Log.d("TAG", "failed: ${dOrder.code()}")
+//                    Toast.makeText(this,"Choose a size and color",Toast.LENGTH_LONG).show()
+//                }
+//
+//            }
         }
 
     }
 
     override fun onClickForSelectedColor(color: String) {
         selectedColor = color
-        Log.i("color",selectedColor)
         colorAdapter.notifyDataSetChanged()
 
     }

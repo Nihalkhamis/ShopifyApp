@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.provider.SyncStateContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,19 +81,16 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         homeViewModel.getAllProducts(requireContext(),"", "", "")
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: ${it.products}")
             myProducts = it.products
         }
 
         homeViewModel.getAllVendors(requireContext())
         homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: ${it.smart_collections}")
             bindBrands(it)
         }
 
         homeViewModel.getAllDiscountCodes(requireContext())
         homeViewModel.liveDiscountList.observe(viewLifecycleOwner){
-            Log.d("TAG", "onCreateView: ${it}")
             bindCoupons(it)
         }
 
@@ -150,7 +145,6 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     }
 
     override fun onClick(smartCollection: SmartCollection) {
-        Log.d("TAG", "onBrandClick: ${smartCollection.id}")
         var intent = Intent(requireContext(), ProductBrandActivity::class.java)
         intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
         intent.putExtra(Constants.BRANDNAME,smartCollection.title)

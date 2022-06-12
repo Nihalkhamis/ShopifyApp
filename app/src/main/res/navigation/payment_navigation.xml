@@ -7,8 +7,15 @@
 
     <fragment
         android:id="@+id/order_confirmation_fragment"
-        android:name="com.gradle.shopifyapp.payment.OrderConfirmationFragment"
+        android:name="com.gradle.shopifyapp.payment.view.OrderConfirmationFragment"
         tools:layout="@layout/fragment_order_confirmation">
+        <action
+            android:id="@+id/paymenttoaddress"
+            app:destination="@id/address_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -18,10 +25,10 @@
         <action
             android:id="@+id/addresstopayment"
             app:destination="@id/order_confirmation_fragment"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_down"/>
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 

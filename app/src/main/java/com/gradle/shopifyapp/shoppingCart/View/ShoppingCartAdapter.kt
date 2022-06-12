@@ -40,6 +40,7 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
         val remove: Button = itemView.findViewById(R.id.remove_btn)
         val favorite: ImageView = itemView.findViewById(R.id.favorite_img)
         val item: CardView = itemView.findViewById(R.id.shopping_cart_item)
+        val size: TextView = itemView.findViewById(R.id.size_title)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,6 +55,7 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
         holder.title.text = shoppingCartItems[position].draft_order?.line_items!![0].title
         holder.price.text = shoppingCartItems[position].draft_order?.line_items!![0].price + " " + (shoppingCartItems[position].draft_order?.currency)
         holder.quantity.text = shoppingCartItems[position].draft_order!!.line_items!![0].quantity.toString()
+        holder.size.text = shoppingCartItems[position].draft_order!!.line_items!![0].variant_title!!.substringBefore("/")
         holder.add.setOnClickListener{
             count = shoppingCartItems[position].draft_order!!.line_items!![0].quantity!!
             holder.quantity.text = (count!!+1).toString()
