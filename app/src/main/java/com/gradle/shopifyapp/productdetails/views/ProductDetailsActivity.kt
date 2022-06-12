@@ -113,6 +113,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         binding.productType.text = product.product_type
         binding.productName.text = product.title
         binding.productPrice.text = product.variants[0].price
+        binding.ratingBar.rating = (product.variants[0].inventory_quantity/3).toFloat()
 
         //back btn
         binding.backBtn.setOnClickListener {

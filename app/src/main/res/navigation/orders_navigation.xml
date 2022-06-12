@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/order_list_fragment"
+    android:id="@+id/orders_navigation">
+
+
+    <fragment
+        android:id="@+id/order_list_fragment"
+        android:name="com.gradle.shopifyapp.orders.orders_list.view.OrderListFragment"
+        tools:layout="@layout/fragment_order_list"
+        >
+    <action
+        android:id="@+id/fragmentToOrderDetails"
+        app:destination="@id/order_details_fragment"
+        app:enterAnim="@anim/slide_up"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_down"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/order_details_fragment"
+        android:name="com.gradle.shopifyapp.orders.order_details.view.OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details"
+        >
+<!--        <argument-->
+<!--            android:name="order_position"-->
+<!--            android:defaultValue="0"-->
+<!--            app:argType="int"/>-->
+    </fragment>
+
+</navigation>

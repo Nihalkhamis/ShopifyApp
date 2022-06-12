@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/off_white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".orders.orders_list.view.OrdersListActivity">
+    tools:context=".orders.orders_list.view.OrderListFragment">
 
     <ImageView
         android:id="@+id/backBtn"
@@ -32,15 +33,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/ordersRecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/order_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/_16sdp"
         android:padding="@dimen/_8sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/order_list_item"
         />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

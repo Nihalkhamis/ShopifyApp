@@ -28,7 +28,7 @@
     <string name="cash">Cash on Delivery</string>
     <string name="coupon">Apply Coupon</string>
     <string name="place_order">Place Order</string>
-    <string name="total_price">Total:</string>
+    <string name="total_price">Total</string>
     <string name="shipping_address">Shipping Address</string>
     <string name="city">Alexandria</string>
     <string name="address_title">Address</string>
@@ -62,8 +62,6 @@
     <string name="shipping_method">Shipping Method</string>
     <string name="shipping">Shipping:</string>
     <string name="subtotal">Subtotal:</string>
-    <string name="shipping_fee">Shipping fee:</string>
-    <string name="discount">Discount:</string>
     <string name="tax">Tax:</string>
 
 
@@ -80,6 +78,7 @@
     <string name="contactUs">Contact us</string>
     <string name="aboutUs">About us</string>
     <string name="logout">Logout</string>
+
     <string name="addressText">Address</string>
     <string name="country">egypt</string>
     <string name="zipCode">Zip code: 21234</string>
@@ -89,6 +88,15 @@
     <string name="city_hint">city</string>
     <string name="country_hint">country</string>
     <string name="save">Save</string>
+
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="placed_on">Placed on</string>
+    <string name="order_summary">ORDER SUMMARY</string>
+    <string name="sub_total">Subtotal</string>
+    <string name="shipping_fee">Shipping Fee</string>
+    <string name="discount">Discount</string>
+    <string name="reviews">Reviews</string>
+
 
 
 </resources>

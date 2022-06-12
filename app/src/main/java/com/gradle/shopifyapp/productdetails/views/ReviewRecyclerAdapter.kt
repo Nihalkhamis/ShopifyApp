@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.me.view.OrderModel
 import com.gradle.shopifyapp.model.ReviewModel
 
 class ReviewRecyclerAdapter(var reviews: List<ReviewModel>) :
