@@ -23,9 +23,8 @@ class ApiClient private constructor() : RemoteSource {
 
     object RetrofitHelper {
         //val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
-        val baseUrl =
-            "https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
-        val currencyBaseUrl ="https://api.apilayer.com/exchangerates_data/"
+        const val baseUrl ="https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
+        const val currencyBaseUrl ="https://api.apilayer.com/exchangerates_data/"
 
 
         fun getInstance(): Retrofit {
@@ -102,6 +101,27 @@ class ApiClient private constructor() : RemoteSource {
     ): Response<CurrencyConverterModel> {
         val getAllConvertedCurrencyService = RetrofitHelper.getCurrencyConverterInstance().create(ApiInterface::class.java)
         return getAllConvertedCurrencyService.getConvertedCurrency(amount, from, to)
+    }
+
+    override suspend fun addCustomerAddress(
+        id: String,
+        customer: CustomerModel
+    ): Response<CustomerModel> {
+        val addCustomerAddressService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return addCustomerAddressService.addCustomerAddress(id,customer)
+    }
+
+    override suspend fun getCustomerById(id: String): Response<CustomerModel> {
+        val getCustomerByIdService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return getCustomerByIdService.getCustomerById(id)
+    }
+
+    override suspend fun deleteAddressFromCustomer(
+        customerId: String,
+        addressId: String
+    ): Response<CustomerModel> {
+        val deleteAddressFromCustomerService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return deleteAddressFromCustomerService.deleteAddressFromCustomer(customerId, addressId)
     }
 
 

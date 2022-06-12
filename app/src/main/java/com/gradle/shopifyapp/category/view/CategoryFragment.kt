@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.gradle.shopifyapp.R
@@ -104,29 +105,20 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         categoryViewModel.liveDataCategoriesProductList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: $it")
 
-
-          //  if (!(preference.getData(Constants.TOCURRENCY)).isNullOrEmpty()){
-
-                // iterate on all products to convert price depends on currency
-               // for (i in it.products){
-
-//                        categoryViewModel.getAllConvertedCurrency(requireContext(), "1",
-//                           "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
-//                        )
-//            categoryViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner){
-//
-//            }
-
-             //   }
-
-            //}
-
             productBrandAdapter.setProductsBrand(it.products)
             for (productType in it.products){
                  productTypeList.add(productType.product_type)
             }
             productTypeAdapter.setProductTypes(productTypeList.toList())
         }
+
+        categoryViewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.progressbar.visibility = View.VISIBLE
+            } else {
+                binding.progressbar.visibility = View.GONE
+            }
+        })
 
     }
 

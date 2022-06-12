@@ -112,11 +112,8 @@ class SignUpFragment : Fragment() {
                     Log.i("error", it.code().toString())
                     Log.i("error", it.errorBody().toString())
                     Toast.makeText(requireContext(), "Error while registering check this data is not exist before", Toast.LENGTH_LONG).show()
-
                 }
-
             }
-
 
         }
         val root: View = binding.root

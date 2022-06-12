@@ -51,7 +51,7 @@ class ProductBrandAdapter(
         holder.product_description_wish_list.text = productsBrand[position].title
         holder.price_Text_wish_list.text = (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
             ?.toDouble() ?: 1.0)).toString()
-        holder.currencyType_txt.text = preference.getData(Constants.TOCURRENCY)
+        holder.currencyType_txt.text = preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
         Glide.with(context).load(productsBrand[position].image.src).into(holder.product_img)
         holder.productCard.setOnClickListener {
             onItemClickListener.onClick(productsBrand[position])

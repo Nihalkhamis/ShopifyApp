@@ -18,6 +18,9 @@ suspend fun updateDraftOrders(id: String,order: Draft_order):  Response<Draft_or
 suspend fun deleteProductFromDraftOrder(id: String):  Response<Draft_order>
 suspend fun getAllCurrencies( ) : Response<CurrencyModel>
 suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String) : Response<CurrencyConverterModel>
+suspend fun addCustomerAddress(id: String, customer: CustomerModel) : Response<CustomerModel>
+suspend fun getCustomerById(id: String) : Response<CustomerModel>
+suspend fun deleteAddressFromCustomer(customerId : String, addressId : String) : Response<CustomerModel>
 
 
 }

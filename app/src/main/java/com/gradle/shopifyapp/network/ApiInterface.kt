@@ -21,7 +21,6 @@ interface ApiInterface {
     ): Response<ProductModel>
 
 
-
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
@@ -33,14 +32,13 @@ interface ApiInterface {
         @Body customer: CustomerModel
     ): Response<CustomerModel>
 
+
     @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )
     @GET("2022-04/smart_collections.json")
     suspend fun getAllVendors(): Response<VendorsModel>
-
-
 
 
     //Products by brand
@@ -54,8 +52,6 @@ interface ApiInterface {
     ): Response<ProductModel>
 
 
-
-
     @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
@@ -63,36 +59,48 @@ interface ApiInterface {
     @GET("2022-01/price_rules/1089622311051/discount_codes.json")
     suspend fun getAllDiscountCodes(): Response<DiscountCodeModel>
 
+
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
         "Accept: application/json",
         "X-Shopify-Access-Token: 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"
     )
-
     @GET("2022-04/customers.json")
     suspend fun getCustomers(): Response<CustomersModel>
 
+    //get customer by id
     @Headers(
-
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
         "Accept: application/json",
         "X-Shopify-Access-Token: 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"
     )
+    @GET("2022-04/customers/{customer_id}.json")
+    suspend fun getCustomerById(
+        @Path(value = "customer_id", encoded = false) key: String,
+    ): Response<CustomerModel>
 
+
+    @Headers(
+        "X-Shopify-Shop-Api-Call-Limit: 40/40",
+        "Retry-After: 2.0",
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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"
+    )
     @GET("2022-04/customers/{customer_id}/orders.json")
     suspend fun getOrders(
         @Path(value = "customer_id", encoded = false) key: String,
     ): Response<OrdersModel>
 
-    // get all currencies
+
     @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )
     @POST("2022-01/draft_orders.json")
     suspend fun postDraftOrders(@Body order:Draft_order): Response<Draft_order>
+
 
     @Headers(
         "Accept: application/json",
@@ -109,12 +117,29 @@ interface ApiInterface {
     @PUT("2022-01/draft_orders/{id}.json")
     suspend fun updateDraftOrder(@Path("id")id: String,@Body order:Draft_order): Response<Draft_order>
 
+
     @Headers(
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )
     @DELETE("2022-01/draft_orders/{id}.json")
     suspend fun deleteProductFromDraftOrder(@Path("id") id: String?): Response<Draft_order>
+
+
+    //delete address from user
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @DELETE("2022-04/customers/{customer_id}/addresses/{address_id}.json")
+    suspend fun deleteAddressFromCustomer(@Path("customer_id") customerId: String?,@Path("address_id") addressId : String?): Response<CustomerModel>
+
+
+    // get all currencies
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
     @GET("2022-04/currencies.json")
     suspend fun getAllCurrencies(): Response<CurrencyModel>
 
@@ -126,5 +151,14 @@ interface ApiInterface {
         @Query("from") from: String,
         @Query("to") to: String
     ): Response<CurrencyConverterModel>
+
+
+    //put address to user
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @PUT("2022-04/customers/"+"{id}"+".json")
+    suspend fun addCustomerAddress(@Path("id") id: String? , @Body customer: CustomerModel): Response<CustomerModel>
 
 }

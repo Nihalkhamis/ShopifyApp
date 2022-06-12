@@ -31,4 +31,11 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
     override suspend fun deleteProductFromDraftOrder(id: String): Response<Draft_order> = remoteSource.deleteProductFromDraftOrder(id)
     override suspend fun getAllCurrencies(): Response<CurrencyModel> = remoteSource.getAllCurrencies()
     override suspend fun getAllConvertedCurrencies(amount : String, from : String, to : String): Response<CurrencyConverterModel> = remoteSource.getConvertedCurrency(amount, from, to)
+    override suspend fun addCustomerAddress(id: String, customer: CustomerModel): Response<CustomerModel> = remoteSource.addCustomerAddress(id,customer)
+    override suspend fun getCustomerById(id: String): Response<CustomerModel> = remoteSource.getCustomerById(id)
+    override suspend fun deleteAddressFromCustomer(
+        customerId: String,
+        addressId: String
+    ): Response<CustomerModel> = remoteSource.deleteAddressFromCustomer(customerId, addressId)
+
 }
