@@ -17,8 +17,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
@@ -78,7 +78,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         }
 
     }
-
 
     private fun getDraftOrders(){
         shoppingCartVm.getDraftOrder(this)

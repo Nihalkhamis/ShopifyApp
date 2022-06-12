@@ -21,8 +21,8 @@ import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 import com.paypal.android.sdk.payments.*
 import com.paypal.android.sdk.payments.PaymentActivity
 import org.json.JSONException
@@ -59,7 +59,6 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.backBtn.setOnClickListener {
             //findNavController(this)?.navigate(R.id.paymenttoaddress)
         }
-
 
         _binding!!.nameTextView.text = preference.getData(Constants.USERFIRSTNAME)
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)

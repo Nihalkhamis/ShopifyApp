@@ -25,7 +25,6 @@ class ApiClient private constructor() : RemoteSource {
         //val baseUrl = "https://madalex20220.myshopify.com/admin/api/"
         val baseUrl =
             "https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
-        val baseUrl ="https://9d169ad72dd7620e70f56b28ae6146d9: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@madalex20220.myshopify.com/admin/api/"
         val currencyBaseUrl ="https://api.apilayer.com/exchangerates_data/"
 
 

@@ -26,8 +26,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModel
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
-import com.kotlin.weatherforecast.utils.Constants
-import com.kotlin.weatherforecast.utils.MyPreference
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {

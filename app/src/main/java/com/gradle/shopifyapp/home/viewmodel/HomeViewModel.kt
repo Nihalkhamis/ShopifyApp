@@ -52,8 +52,6 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     fun getAllConvertedCurrency(context: Context, amount : String, from : String, to : String) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllConvertedCurrencies(amount,from,to)
-            Log.d("TAG", "get currency converter url: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllCurrencyResult: ${response.body()?.result}")
             convertedCurrencyList.postValue(response.body()?.result)
         }
     }
