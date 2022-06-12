@@ -19,7 +19,7 @@
             android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".payment.PaymentActivity"
+            android:name=".payment.view.PaymentActivity"
             android:exported="false" />
         <activity
             android:name=".productdetails.views.ProductDetailsActivity"

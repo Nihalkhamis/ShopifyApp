@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+
 android {
     compileSdk 32
 
@@ -61,7 +62,6 @@ dependencies {
     //viewpager indicator
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
-
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
@@ -80,5 +80,10 @@ dependencies {
 
     //viewpager indicator
     implementation 'com.afollestad:viewpagerdots:1.0.0'
+
+    //paypal
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+
+
 
 }

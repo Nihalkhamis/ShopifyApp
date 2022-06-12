@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/off_white"
-    tools:context=".payment.OrderConfirmationFragment">
+    tools:context=".payment.view.OrderConfirmationFragment">
 
 
     <View
@@ -210,7 +210,7 @@
                 android:id="@+id/credit_radioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/credit"
+                android:text="@string/paypal"
                 android:textColor="@color/dark_color"
                 android:textSize="12sp" />
 
@@ -220,7 +220,7 @@
             android:id="@+id/third_line"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/browser_actions_bg_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -243,15 +243,25 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
             android:background="@drawable/rounded_border_edittext"
             android:hint="Add Coupon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/coupon_textview">
-
-            <requestFocus />
         </EditText>
+
+        <ImageView
+            android:id="@+id/verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/verify_icon"
+            app:layout_constraintStart_toEndOf="@id/coupon_editText"
+            app:layout_constraintTop_toTopOf="@id/coupon_editText"
+            app:layout_constraintBottom_toBottomOf="@id/coupon_editText"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            />
 
         <View
             android:id="@+id/fourth_line"
@@ -290,7 +300,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shipping_fee"
+            android:text="@string/tax"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/subtotal_tv" />

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.category.viewmodel.CategoryViewModel
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
@@ -91,19 +90,16 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         homeViewModel.getAllProducts(requireContext(),"", "", "")
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: ${it.products}")
             myProducts = it.products
         }
 
         homeViewModel.getAllVendors(requireContext())
         homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: ${it.smart_collections}")
             bindBrands(it)
         }
 
         homeViewModel.getAllDiscountCodes(requireContext())
         homeViewModel.liveDiscountList.observe(viewLifecycleOwner){
-            Log.d("TAG", "onCreateView: $it")
             bindCoupons(it)
         }
 
@@ -168,7 +164,6 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     }
 
     override fun onClick(smartCollection: SmartCollection) {
-        Log.d("TAG", "onBrandClick: ${smartCollection.id}")
         var intent = Intent(requireContext(), ProductBrandActivity::class.java)
         intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
         intent.putExtra(Constants.BRANDNAME,smartCollection.title)

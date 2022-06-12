@@ -3,7 +3,6 @@ package com.gradle.shopifyapp.shoppingCart.View;
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,9 +10,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.databinding.ActivityShoppingCartBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.LineItem
+import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
-import com.gradle.shopifyapp.payment.PaymentActivity
+import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.kotlin.weatherforecast.utils.Constants
@@ -34,6 +35,10 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     lateinit var vmFactory: ShoppingCartViewModelFactory
     lateinit var shoppingCartVm: ShoppingCartViewModel
     var products: ArrayList<Draft_order> = ArrayList<Draft_order>()
+    var total_price = 0.0
+
+    var lineItems = ArrayList< LineItem>()
+    var totalPrice = ArrayList< Total_price>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +68,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
 
         binding.checkoutBtn.setOnClickListener{
             val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra("line_items",lineItems)
+            intent.putExtra("total_prices",totalPrice)
             startActivity(intent)
         }
 
@@ -71,6 +78,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         }
 
     }
+
 
     private fun getDraftOrders(){
         shoppingCartVm.getDraftOrder(this)
@@ -83,6 +91,12 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     var df: Draft_order = Draft_order()
                     df.draft_order = it.get(i)
                     products.add(df)
+                    lineItems.add(df.draft_order!!.line_items!![0])
+                    var totalPriceItem = Total_price()
+                    totalPriceItem.subtotal = df.draft_order!!.subtotal_price
+                    totalPriceItem.tax = df.draft_order!!.total_tax
+                    totalPriceItem.total = df.draft_order!!.total_price
+                    totalPrice.add(totalPriceItem)
                 }
             }
 
@@ -92,14 +106,13 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     }
 
     private fun calculateTotalPrice(draftOrder: List<Draft_order>){
-        var total_price = 0.0
+        total_price = 0.0
         for(i in 0..draftOrder.size-1){
             total_price = total_price + (draftOrder.get(i).draft_order!!.line_items!![0].price!!.toDouble() * draftOrder.get(i).draft_order!!.line_items!![0].quantity!!)
             Log.i("ADD", total_price.toString())
         }
         binding.priceText.text = total_price.toString()
     }
-
 
 
     private fun bindShoppingCart(orders: ArrayList<Draft_order>){
@@ -123,6 +136,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
                 if(dOrder.isSuccessful){
                     Log.d("TAG", "successful")
+                    products.remove(draftOrder)
+                    calculateTotalPrice(products)
                 }
                 else{
                     Log.d("TAG", "failed: ${dOrder.code()}")
@@ -134,7 +149,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                 calculateTotalPrice(products)
             }
         }
-
     }
 
     override fun onDeleteProduct(id: String) {
@@ -142,7 +156,9 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
             if(dOrder.isSuccessful){
                 Log.d("TAG", "successful")
-            }
+                //not working right
+                products.remove(dOrder.body())
+                calculateTotalPrice(products)            }
             else{
                 Log.d("TAG", "failed: ${dOrder.code()}")
             }

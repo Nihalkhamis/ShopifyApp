@@ -30,8 +30,6 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     fun getAllProducts(context: Context, collection_id : String, product_type : String, vendor : String) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllProducts(collection_id, product_type, vendor)
-            Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllProducts: $response")
             productList.postValue(response.body())
         }
     }
@@ -39,8 +37,6 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     fun getAllVendors(context: Context) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllVendors()
-            Log.d("TAG", "getAllVendors: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllVendors: ${response.body()}")
             vendorList.postValue(response.body())
         }
     }
@@ -49,8 +45,6 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     fun getAllDiscountCodes(context: Context) {
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllDiscountCodes()
-            Log.d("TAG", "getAllDiscountCodes: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllDiscountCodes: ${response.body()}")
             discountList.postValue(response.body())
         }
     }
