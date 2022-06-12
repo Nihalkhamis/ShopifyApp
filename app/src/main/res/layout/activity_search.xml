@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/off_white"
     tools:context=".search.views.SearchActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,12 +23,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="2.75"
             android:drawableStart="@drawable/search_icon"
+            android:drawableTint="@color/orange"
             android:hint="@string/looking_for"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
-            android:background="@color/white"
+            android:background="@color/off_white"
             android:text="@string/cancel"
             android:layout_weight=".25"
             android:layout_height="wrap_content"/>

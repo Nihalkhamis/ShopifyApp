@@ -38,13 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="@string/Brands"
             app:layout_constraintTop_toBottomOf="@+id/coupons_row_rv"
             android:id="@+id/brands_txt"
-            android:textStyle="bold"/>
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/brand_row_rv"

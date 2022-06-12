@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/off_white"
+    tools:context=".orders.order_details.view.OrderDetailsFragment">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/back_button_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/order_id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:textColor="@color/dark_color"
+        android:textSize="@dimen/_12sdp"
+        android:background="@color/off_white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="@dimen/_100sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintTop_toBottomOf="@+id/order_id_text">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/phone_icon"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/phone_icon"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:tint="@color/orange"
+        android:layout_marginTop="@dimen/_24sdp"/>
+    <TextView
+        android:id="@+id/mobile_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/mobile_number"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_color"
+        app:layout_constraintStart_toEndOf="@+id/phone_icon"
+        app:layout_constraintTop_toTopOf="@+id/phone_icon"
+         />
+
+    <TextView
+        android:id="@+id/mobile_number_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="@+id/mobile_number"
+        app:layout_constraintTop_toBottomOf="@+id/mobile_number" />
+
+    <View
+        android:id="@+id/line_for_phone"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobile_number_text" />
+
+
+    <ImageView
+        android:id="@+id/date_icon"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_for_phone"
+        android:src="@drawable/date_icon"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:tint="@color/orange"
+        android:layout_marginTop="@dimen/_8sdp"/>
+
+    <TextView
+        android:id="@+id/order_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_color"
+        android:text="@string/placed_on"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toEndOf="@+id/date_icon"
+        app:layout_constraintTop_toTopOf="@+id/date_icon"
+        android:layout_marginBottom="@dimen/_16sdp"/>
+    <TextView
+        android:id="@+id/order_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="@+id/order_date"
+        app:layout_constraintTop_toBottomOf="@+id/order_date" />
+
+    <View
+        android:id="@+id/line_for_date"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_date_text" />
+
+    <ImageView
+        android:id="@+id/address_icon"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_for_date"
+        android:src="@drawable/address_icon"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:tint="@color/orange"
+        android:layout_marginTop="@dimen/_8sdp"/>
+
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/shipping_address"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_color"
+        app:layout_constraintStart_toEndOf="@+id/address_icon"
+        app:layout_constraintTop_toTopOf="@+id/address_icon"
+        />
+
+
+    <TextView
+        android:id="@+id/address_text_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="@+id/address_text"
+        app:layout_constraintTop_toBottomOf="@+id/address_text" />
+
+    <View
+        android:id="@+id/line_for_address"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address_text_input" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/product_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_for_address"
+        tools:listitem="@layout/product_in_order_row" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/off_white"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/line_for_product_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="#c0c0c0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/order_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/order_summary"
+            app:layout_constraintTop_toBottomOf="@+id/line_for_product_recycle_view"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/dark_color"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_16sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sub_total"
+            app:layout_constraintStart_toStartOf="@+id/order_summary"
+            app:layout_constraintTop_toBottomOf="@+id/order_summary"
+            android:text="@string/sub_total"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sub_total_text"
+            app:layout_constraintTop_toBottomOf="@+id/order_summary"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/sub_total"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shipping_fee"
+            android:text="@string/shipping_fee"
+            app:layout_constraintStart_toStartOf="@id/sub_total"
+            app:layout_constraintTop_toBottomOf="@+id/sub_total"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shipping_fee_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/sub_total"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discount"
+            android:text="@string/discount"
+            app:layout_constraintStart_toStartOf="@id/shipping_fee"
+            app:layout_constraintTop_toBottomOf="@+id/shipping_fee"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discount_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/shipping_fee"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/total_price"
+            android:text="@string/total_price"
+            app:layout_constraintStart_toStartOf="@id/discount"
+            app:layout_constraintTop_toBottomOf="@+id/discount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_16sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/total_price_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/discount"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

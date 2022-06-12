@@ -46,6 +46,7 @@ class StartingFragment : Fragment() {
 
         binding.skipTxt.setOnClickListener {
             startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+            activity?.finish()
         }
 
         val root: View = binding.root

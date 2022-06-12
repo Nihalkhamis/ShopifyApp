@@ -24,7 +24,7 @@ data class OrderModel(
     val current_total_tax_set: CurrentTotalTaxSet?,
     val customer: Customer?,
     val customer_locale: String?,
-    val discount_applications: DiscountApplications?,
+    val discount_applications: List<DiscountApplication>?,
     val discount_codes: List<DiscountCode?>?,
     val email: String?,
     val estimated_taxes: Boolean?,
@@ -32,7 +32,7 @@ data class OrderModel(
     val fulfillment_status: String?,
     val fulfillments: List<Fulfillment?>?,
     val gateway: String?,
-    val id: Int?,
+    val id: Long?,
     val landing_site: String?,
     val line_items: List<LineItem?>?,
     val location_id: Int?,
@@ -41,7 +41,7 @@ data class OrderModel(
     val note_attributes: List<NoteAttribute?>?,
     val number: Int?,
     val order_number: Int?,
-    val order_status_url: OrderStatusUrl?,
+    val order_status_url: String?,
     val original_total_duties_set: OriginalTotalDutiesSet?,
     val payment_details: PaymentDetails?,
     val payment_gateway_names: List<String?>?,
@@ -210,7 +210,7 @@ data class OrderModel(
         val default_address: DefaultAddress?,
         val email: String?,
         val first_name: String?,
-        val id: Int?,
+        val id: Long?,
         val last_name: String?,
         val multipass_identifier: Any?,
         val note: Any?,
@@ -218,7 +218,7 @@ data class OrderModel(
         val state: String?,
         val tags: String?,
         val tax_exempt: Boolean?,
-        val tax_exemptions: TaxExemptions?,
+        val tax_exemptions: List<TaxExemptions>?= null,
         val updated_at: String?,
         val verified_email: Boolean?
     ) {
@@ -229,9 +229,7 @@ data class OrderModel(
         class TaxExemptions
     }
 
-    data class DiscountApplications(
-        val discount_applications: List<DiscountApplication?>?
-    ) {
+
         data class DiscountApplication(
             val allocation_method: String?,
             val code: String?,
@@ -243,7 +241,7 @@ data class OrderModel(
             val value: String?,
             val value_type: String?
         )
-    }
+
 
     data class DiscountCode(
         val amount: String?,
@@ -269,12 +267,12 @@ data class OrderModel(
         val fulfillment_status: String?,
         val gift_card: Boolean?,
         val grams: Int?,
-        val id: Int?,
+        val id: Long?,
         val name: String?,
         val origin_location: OriginLocation?,
         val price: String?,
         val price_set: PriceSet?,
-        val product_id: Int?,
+        val product_id: Long?,
         val properties: List<Property?>?,
         val quantity: Int?,
         val requires_shipping: Boolean?,
@@ -284,7 +282,7 @@ data class OrderModel(
         val title: String?,
         val total_discount: String?,
         val total_discount_set: TotalDiscountSet?,
-        val variant_id: Int?,
+        val variant_id: Long?,
         val variant_title: String?,
         val vendor: String?
     ) {
@@ -427,9 +425,7 @@ data class OrderModel(
         val value: String?
     )
 
-    data class OrderStatusUrl(
-        val order_status_url: String?
-    )
+
 
     data class OriginalTotalDutiesSet(
         val original_total_duties_set: OriginalTotalDutiesSet?
