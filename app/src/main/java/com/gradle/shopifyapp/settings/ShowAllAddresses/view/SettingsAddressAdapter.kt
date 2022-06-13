@@ -36,12 +36,17 @@ class SettingsAddressAdapter(
         }
     }
 
-    fun deleteAddresses(){
+    fun deleteAddresses() {
         this.addresses.clear()
         notifyDataSetChanged()
     }
 
-    fun getAddressId(position: Int) = addresses.get(position)
+    fun deleteAddressByPosition(position: Int) {
+        addresses.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun getAddressPosition(position: Int) = addresses.get(position)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsAddressHolder {
         val view =
@@ -50,11 +55,11 @@ class SettingsAddressAdapter(
     }
 
     override fun onBindViewHolder(holder: SettingsAddressHolder, position: Int) {
-       holder.address_txt.text = addresses[position].address1
-       holder.zipCode_txt.text = "zip code: ${addresses[position].zip}"
-       holder.phone_txt.text = addresses[position].phone
-       holder.city_txt.text = addresses[position].city
-       holder.country_txt.text = addresses[position].country
+        holder.address_txt.text = addresses[position].address1
+        holder.zipCode_txt.text = "zip code: ${addresses[position].zip}"
+        holder.phone_txt.text = addresses[position].phone
+        holder.city_txt.text = addresses[position].city
+        holder.country_txt.text = addresses[position].country
 
     }
 
@@ -65,10 +70,10 @@ class SettingsAddressAdapter(
 
     class SettingsAddressHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         val address_txt: TextView = itemView.findViewById(R.id.address_txt)
-        val zipCode_txt : TextView = itemView.findViewById(R.id.zipCode_txt)
-        val phone_txt : TextView = itemView.findViewById(R.id.phone_txt)
-        val city_txt : TextView = itemView.findViewById(R.id.city_txt)
-        val country_txt : TextView = itemView.findViewById(R.id.country_txt)
-        val addressCard : CardView = itemView.findViewById(R.id.addressCard)
+        val zipCode_txt: TextView = itemView.findViewById(R.id.zipCode_txt)
+        val phone_txt: TextView = itemView.findViewById(R.id.phone_txt)
+        val city_txt: TextView = itemView.findViewById(R.id.city_txt)
+        val country_txt: TextView = itemView.findViewById(R.id.country_txt)
+        val addressCard: CardView = itemView.findViewById(R.id.addressCard)
     }
 }

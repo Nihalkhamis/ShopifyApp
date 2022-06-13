@@ -29,6 +29,7 @@ class ProductTypeAdapter(
 
     fun deleteProductTypes() {
         this.productTypes.clear()
+        selected = -1
         notifyDataSetChanged()
     }
 
