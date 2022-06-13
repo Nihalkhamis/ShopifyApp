@@ -115,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@id/bottom_view">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/order_btn"
+            android:id="@+id/add_address_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/add_ic"

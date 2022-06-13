@@ -90,7 +90,7 @@ class MeFragment : Fragment(),OrderOnClickListener {
 
         orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
             if (it.isSuccessful) {
-                Log.i("order Result", it.body()?.orders?.get(0).toString())
+              //  Log.i("order Result", it.body()?.orders?.get(0).toString())
                 ordersList= it.body()?.orders!!
                 if (ordersList.size<=2)
                 {

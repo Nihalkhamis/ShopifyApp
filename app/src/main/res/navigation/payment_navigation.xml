@@ -29,6 +29,21 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/fragmentToAddAddress"
+            app:destination="@id/addAddressSettingsFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_down"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addAddressSettingsFragment"
+        android:name="com.gradle.shopifyapp.settings.addAddress.view.AddAddressSettingsFragment"
+        android:label="AddAddressSettingsFragment" >
+
     </fragment>
 
 

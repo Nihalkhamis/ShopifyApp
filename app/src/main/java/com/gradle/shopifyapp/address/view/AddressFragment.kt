@@ -83,11 +83,11 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
         //(requireActivity() as PaymentActivity).
 
         binding.backBtn.setOnClickListener {
-           // findNavController(this)?.navigate(R.id.fragmentToMain)
+           requireActivity().finish()
         }
 
-        binding.orderBtn.setOnClickListener {
-            ///findNavController(this)?.navigate(R.id.fragmentToAddAddress)
+        binding.addAddressBtn.setOnClickListener {
+            findNavController(this)?.navigate(R.id.fragmentToAddAddress)
         }
 
         binding!!.paymentBtn.setOnClickListener {
@@ -130,7 +130,7 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
                     val swipedProductPosition =
                         viewHolder.adapterPosition //position of swiped item in recyclerView
                     val swipedProduct: Addresse =
-                        settingsAddressAdapter.getAddressId(swipedProductPosition)!!
+                        settingsAddressAdapter.getAddressPosition(swipedProductPosition)!!
                     settingsAddressViewModel.deleteAddress(
                         requireContext(),
                         preference.getData(Constants.USERID)!!,
