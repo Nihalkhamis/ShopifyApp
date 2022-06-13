@@ -78,6 +78,9 @@ class WishlistActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onClick(productModel: Product,price:String) {
-
+//        val intent = Intent(this, ProductDetailsActivity::class.java)
+//        intent.putExtra("product",productModel)
+//        intent.putExtra("price",price)
+//        startActivity(intent)
     }
 }

@@ -22,8 +22,12 @@ import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
-import com.paypal.android.sdk.payments.*
-import com.paypal.android.sdk.payments.PaymentActivity
+import com.paypal.android.sdk.payments.PayPalConfiguration
+import com.paypal.android.sdk.payments.PayPalFuturePaymentActivity.RESULT_EXTRAS_INVALID
+import com.paypal.android.sdk.payments.PayPalPayment
+import com.paypal.android.sdk.payments.PayPalService
+import com.paypal.android.sdk.payments.PaymentActivity.*
+import com.paypal.android.sdk.payments.PaymentConfirmation
 import org.json.JSONException
 import org.json.JSONObject
 import java.math.BigDecimal
