@@ -131,6 +131,11 @@ class ApiClient private constructor() : RemoteSource {
 
     }
 
+    override suspend fun postOrder(order: Order_Model): Response<Order_Model> {
+        val postOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return postOrderService.postOrders(order)
+    }
+
     override suspend fun updateDraftOrders(id: String, order: Draft_order): Response<Draft_order> {
         val draftOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return draftOrderService.updateDraftOrder(id, order)

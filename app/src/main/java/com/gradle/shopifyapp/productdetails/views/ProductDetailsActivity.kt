@@ -35,6 +35,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var dots: DotsIndicator
     lateinit var productSliderAdapter: ProductViewPagerAdapter
 
+
     lateinit var sizeAdapter: SizeRecyclerAdapter
     lateinit var sizeRecyclerView: RecyclerView
 
@@ -50,6 +51,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var colorRecyclerView: RecyclerView
 
     lateinit var product: Product
+    lateinit var price: String
     lateinit var binding: ActivityProductDetailesBinding
     lateinit var selectedSize: String
     lateinit var selectedColor: String
@@ -74,7 +76,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         )
         productDetailsVm = ViewModelProvider(this, vmFactory).get(ProductDetailsViewModel::class.java)
         product = intent.getSerializableExtra("product") as Product
-
+        price = intent.getStringExtra("price")?:"0"
         // product Images
         viewPager = binding.productViewPager
         dots = binding.dots
@@ -108,11 +110,11 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         reviewAdapter = ReviewRecyclerAdapter(reviews)
         reviewRecyclerView = binding.reviewRecyclerView
         reviewRecyclerView.adapter = reviewAdapter
-
+        binding.productPrice.text = "$price ${preference.getData(Constants.TOCURRENCY)}"
         binding.descriptionText.text = product.body_html
         binding.productType.text = product.product_type
         binding.productName.text = product.title
-        binding.productPrice.text = product.variants[0].price
+      //  binding.productPrice.text = product.variants[0].price
         binding.ratingBar.rating = (product.variants[0].inventory_quantity/3).toFloat()
 
         //back btn

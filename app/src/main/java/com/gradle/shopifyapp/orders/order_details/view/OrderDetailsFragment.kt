@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.orders.order_details.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,10 @@ import com.gradle.shopifyapp.databinding.FragmentOrderDetailsBinding
 import com.gradle.shopifyapp.home.view.HomeFragment
 import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 
 
-class OrderDetailsFragment : Fragment() {
+class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
 
     private var _binding: FragmentOrderDetailsBinding? = null
@@ -34,7 +36,7 @@ class OrderDetailsFragment : Fragment() {
         position = arguments?.getInt("order_position") ?: 0
 
         productRecyclerView = binding.productRecyclerView
-        productRecyclerViewAdapter =ProductInOrderAdapter(arrayListOf(),requireContext())
+        productRecyclerViewAdapter =ProductInOrderAdapter(arrayListOf(),requireContext(),this)
         productRecyclerView.adapter=productRecyclerViewAdapter
 
 
@@ -70,6 +72,12 @@ class OrderDetailsFragment : Fragment() {
 
         val root: View = binding.root
         return root
+    }
+
+    override fun orderOnClickListener(product: Product) {
+        val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
+        intent.putExtra("product",product)
+        startActivity(intent)
     }
 
 }

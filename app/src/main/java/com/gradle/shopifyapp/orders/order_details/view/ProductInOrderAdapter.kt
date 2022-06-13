@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.Product
 
-class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context): RecyclerView.Adapter<ProductInOrderAdapter.Holder>()
+class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context,var productOnclickInterface:ProductOnclickListener): RecyclerView.Adapter<ProductInOrderAdapter.Holder>()
 {
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var view: View =itemView
@@ -36,6 +36,9 @@ class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context): 
         holder.productNameText.text=myProducts[position].title
         holder.productTypeText.text = myProducts[position].product_type
         Glide.with(context).load(myProducts[position].image.src).into(holder.productimage)
+        holder.orderListItem.setOnClickListener {
+            productOnclickInterface.orderOnClickListener(myProducts[position])
+        }
 
     }
 

@@ -77,7 +77,7 @@ class WishlistActivity : AppCompatActivity(), OnItemClickListener {
         binding!!.wishlistProductRV.adapter = wishlistAdapter
     }
 
-    override fun onClick(productModel: Product) {
+    override fun onClick(productModel: Product,price:String) {
 
     }
 }
