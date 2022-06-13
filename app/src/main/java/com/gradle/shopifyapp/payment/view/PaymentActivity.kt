@@ -16,17 +16,6 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment)
         lineItems = intent.getSerializableExtra("line_items") as ArrayList<LineItem>
         totalPrice = intent.getSerializableExtra("total_prices") as ArrayList<Total_price>
-
-        val mFragmentManager = supportFragmentManager
-        val mFragmentTransaction = mFragmentManager.beginTransaction()
-        var bundle = Bundle()
-        bundle.putSerializable("line_items",lineItems)
-        bundle.putSerializable("total_prices",totalPrice)
-        val mFragment = AddressFragment()
-        mFragment.arguments = bundle
-        mFragmentTransaction.replace(R.id.payment_nav,mFragment).commit()
-    //        mFragmentTransaction.add(R.id.payment_nav, mFragment).commit()
-
     }
 
 
