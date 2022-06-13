@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -15,8 +16,6 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentOrderConfirmationBinding
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
@@ -57,27 +56,32 @@ class OrderConfirmationFragment : Fragment() {
 
 
         _binding!!.backBtn.setOnClickListener {
-            //findNavController(this)?.navigate(R.id.paymenttoaddress)
+            findNavController(this)?.navigate(R.id.paymenttoaddress)
         }
 
         _binding!!.nameTextView.text = preference.getData(Constants.USERFIRSTNAME)
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)
         _binding!!.phoneTextView.text = preference.getData(Constants.USERMOBILEPHONE)
 
-        total_prices = requireArguments().getSerializable("total_prices") as ArrayList<Total_price>
+
+        line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
+        total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
+
         for(i in 0..total_prices.size-1){
             subtotal += total_prices[i].subtotal!!.toDouble()
             totalPrice += total_prices[i].total!!.toDouble()
             tax += total_prices[i].tax!!.toDouble()
         }
         amount = totalPrice.toString()
-//        _binding!!.totalPriceTextview.text = amount +"EGP"
+        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
         _binding!!.shipping.text = tax.toString() + "EGP"
         _binding!!.subtotal.text = subtotal.toString() +"EGP"
 
         _binding!!.orderBtn.setOnClickListener {
             if(_binding!!.creditRadioBtn.isChecked )
                 getPayment()
+            if(!_binding!!.creditRadioBtn.isChecked && !_binding!!.cashRadioBtn.isChecked)
+                Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
         }
         orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
             Repository.getRepoInstance(
@@ -94,18 +98,19 @@ class OrderConfirmationFragment : Fragment() {
                     if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
                         discount = subtotal*0.1
                         _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + "EGP"
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
                         _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
                         break
                     }else{
                         discount = 0.0
                         _binding!!.discount.text = discount.toString()
                         _binding!!.verify.setImageResource(R.drawable.verify_icon)
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
                     }
                 }
             }
         }
 
-        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
         val root: View = binding.root
         return root
     }
