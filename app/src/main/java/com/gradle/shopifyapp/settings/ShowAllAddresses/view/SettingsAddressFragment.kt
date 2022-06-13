@@ -62,11 +62,13 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
         setAdapter()
         setUpSwipe()
 
-
         settingsAddressViewModel.liveDataAddressesList.observe(viewLifecycleOwner){
             Log.d("TAG", "setAdapter: returned addresses: ${it.customer!!.addresses}")
+            Log.d("TAG", "setAdapter: returned addresses: $3")
+
             settingsAddressAdapter.setAddresses(it.customer!!.addresses!!)
         }
+
 
         settingsAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -83,15 +85,17 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
         binding.addAddressFloatBtn.setOnClickListener {
             findNavController(this)?.navigate(R.id.fragmentToAddAddress)
         }
-
     }
+
 
     private fun setAdapter(){
 
         settingsAddressAdapter = SettingsAddressAdapter(requireContext(), ArrayList(), this)
         binding.addressesRV.adapter = settingsAddressAdapter
+        Log.d("TAG", "setAdapter: returned addresses: $1")
 
         settingsAddressViewModel.getAllAddresses(requireContext(), preference.getData(Constants.USERID)!!)
+        Log.d("TAG", "setAdapter: returned addresses: $2")
 
     }
 
@@ -115,8 +119,9 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val swipedProductPosition =
                         viewHolder.adapterPosition //position of swiped item in recyclerView
-                    val swipedProduct: Addresse = settingsAddressAdapter.getAddressId(swipedProductPosition)!!
+                    val swipedProduct: Addresse = settingsAddressAdapter.getAddressPosition(swipedProductPosition)!!
                     settingsAddressViewModel.deleteAddress(requireContext(), preference.getData(Constants.USERID)!!, swipedProduct.id.toString())
+                    settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
 
                 }
             }

@@ -93,11 +93,9 @@ class AddAddressSettingsFragment : Fragment() {
                     binding.progressbar.visibility = View.VISIBLE
                 } else {
                      binding.progressbar.visibility = View.GONE
+                    findNavController(this)?.navigate(R.id.fragmentToAddresses)
                 }
             })
-
-
-                findNavController(this)?.navigate(R.id.fragmentToAddresses)
             }
             else{
                 Toast.makeText(requireContext(),"Please fill all fields !", Toast.LENGTH_SHORT).show()
