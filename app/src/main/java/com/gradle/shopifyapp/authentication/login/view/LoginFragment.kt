@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.authentication.login.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -62,6 +64,8 @@ class LoginFragment : Fragment() {
         }
 
         binding.loginBtn.setOnClickListener {
+            val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
             if (emailEditText.text.toString()!=""&&passwordEditText.text.toString()!=""){
                 binding.progressbar.visibility = View.VISIBLE
                 loginViewModel.getAllUsers()

@@ -74,10 +74,12 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         return root
     }
 
-    override fun orderOnClickListener(product: Product) {
+    override fun orderOnClickListener(product: Product,price:String) {
         val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
         intent.putExtra("product",product)
+        intent.putExtra("price",price)
         startActivity(intent)
+
     }
 
 }

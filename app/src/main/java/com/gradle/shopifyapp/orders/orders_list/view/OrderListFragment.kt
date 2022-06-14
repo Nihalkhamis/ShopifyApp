@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,10 @@ import com.gradle.shopifyapp.me.view.OrderListViewAdapter
 
 
 class OrderListFragment : Fragment(),OrderOnClickListener {
+
+    private lateinit var constraintLayout: ConstraintLayout
+
+
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
     //orders
@@ -28,11 +34,19 @@ class OrderListFragment : Fragment(),OrderOnClickListener {
     ): View? {
         _binding = FragmentOrderListBinding.inflate(inflater, container, false)
 
+
         //orders
         ordersRecyclerView = binding.ordersRecyclerView
-        orderRecyclerAdapter = OrderListViewAdapter(MeFragment.ordersList,this)
-        Log.i("products",MeFragment.ordersList.toString())
-        ordersRecyclerView.adapter=orderRecyclerAdapter
+
+        if(MeFragment.ordersList.isNullOrEmpty()){
+
+             binding.orderListFragment.setBackgroundResource(R.drawable.orders)
+        }else{
+            orderRecyclerAdapter = OrderListViewAdapter(MeFragment.ordersList,this,requireContext())
+            Log.i("products",MeFragment.ordersList.toString())
+            ordersRecyclerView.adapter=orderRecyclerAdapter
+        }
+
 
 
         binding.backBtn.setOnClickListener {

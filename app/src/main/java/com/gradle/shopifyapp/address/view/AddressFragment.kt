@@ -17,6 +17,7 @@ import com.gradle.shopifyapp.databinding.FragmentAddressBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.payment.PaymentCommunicator
 import com.gradle.shopifyapp.payment.view.OrderConfirmationFragment
 import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.settings.ShowAllAddresses.view.SettingsAddressAdapter
@@ -33,6 +34,7 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
     lateinit var settingsAddressAdapter: SettingsAddressAdapter
     lateinit var vmFactory: SettingsAddressViewModelFactory
     lateinit var settingsAddressViewModel: SettingsAddressViewModel
+    lateinit var paymentCommunicator: PaymentCommunicator
 
     lateinit var preference: MyPreference
 
@@ -46,13 +48,14 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentAddressBinding.inflate(inflater, container, false)
+        paymentCommunicator = activity as PaymentCommunicator
+
         val root: View = binding.root
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         vmFactory = SettingsAddressViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
@@ -111,7 +114,11 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
     }
 
     override fun onClick(address: Addresse) {
-
+        Log.i("onclick inside first fragment",address.toString())
+//        var bundel = Bundle()
+//        bundel.putSerializable("myAddress",address)
+        paymentCommunicator.orderOnClickListener(address)
+        findNavController(this)?.navigate(R.id.addresstopayment)
     }
 
     private fun setUpSwipe() {
