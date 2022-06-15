@@ -75,8 +75,8 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)
         _binding!!.phoneTextView.text = preference.getData(Constants.USERMOBILEPHONE)
 
-    //    line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
-    //    total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
+        line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
+        total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
 
 
 

@@ -93,8 +93,8 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
         }
 
         binding!!.paymentBtn.setOnClickListener {
-        //    val line_items = (requireActivity() as PaymentActivity).lineItems
-        //    val total_prices = (requireActivity() as PaymentActivity).totalPrice
+            val line_items = (requireActivity() as PaymentActivity).lineItems
+            val total_prices = (requireActivity() as PaymentActivity).totalPrice
             findNavController(this)?.navigate(R.id.addresstopayment)
 
         }
