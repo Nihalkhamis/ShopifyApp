@@ -12,6 +12,7 @@ import com.gradle.shopifyapp.databinding.ActivityWishlistBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.home.view.HomeFragment
+import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
@@ -85,7 +86,6 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 //            ))
     }
 
-    override fun onClick(productModel: Product,price:String) {
     private fun getFavProducts(){
         viewModel.getDraftOrder(this)
         viewModel.liveDraftOrderList.observe(this) {
