@@ -54,6 +54,7 @@ class MainScreenFragment : Fragment() {
             preference.saveData(Constants.USERMOBILEPHONE,"")
             preference.saveData(Constants.CURRENCYRESULT,"")
             startActivity(Intent(requireContext(),MainActivity::class.java))
+            activity?.finish()
         }
     }
 

@@ -122,10 +122,11 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         binding!!.productBrandRV.adapter = productBrandAdapter
     }
 
-    override fun onClick(productModel: Product) {
+    override fun onClick(productModel: Product,price:String) {
         Log.i("djnsk",productModel.toString())
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra("product",productModel)
+        intent.putExtra("price",price)
         startActivity(intent)
     }
 }

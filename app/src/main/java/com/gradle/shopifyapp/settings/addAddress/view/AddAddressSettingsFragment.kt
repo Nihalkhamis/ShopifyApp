@@ -103,7 +103,13 @@ class AddAddressSettingsFragment : Fragment() {
         }
 
         binding.cancelBtn.setOnClickListener {
-            findNavController(this)?.navigate(R.id.fragmentToAddresses)
+            when(Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id){
+                R.id.settingsAddressFragment ->{
+                    findNavController(this)?.navigate(R.id.fragmentToAddresses)
+                }else->{
+                    requireActivity().finish()
+                }
+            }
 
         }
 

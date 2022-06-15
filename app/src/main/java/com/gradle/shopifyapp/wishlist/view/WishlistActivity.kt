@@ -125,6 +125,10 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 
     override fun onAddProduct(draftOrder: Draft_order) {
 
+//        val intent = Intent(this, ProductDetailsActivity::class.java)
+//        intent.putExtra("product",productModel)
+//        intent.putExtra("price",price)
+//        startActivity(intent)
     }
 
     override fun onRemoveProduct(draftOrder: Draft_order) {

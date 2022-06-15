@@ -80,7 +80,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         // orders
         orderRecyclerView = binding.ordersList
         orderLayoutManager = LinearLayoutManager(context)
-        orderRecyclerAdapter = OrderListViewAdapter(ArrayList(),this)
+        orderRecyclerAdapter = OrderListViewAdapter(ArrayList(),this,requireContext())
         orderLayoutManager.orientation =RecyclerView.VERTICAL
         orderRecyclerView.layoutManager = orderLayoutManager
         orderRecyclerView.adapter = orderRecyclerAdapter

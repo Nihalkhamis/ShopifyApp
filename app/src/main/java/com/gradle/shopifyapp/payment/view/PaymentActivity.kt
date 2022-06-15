@@ -2,31 +2,34 @@ package com.gradle.shopifyapp.payment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.address.view.AddressFragment
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
+import com.gradle.shopifyapp.model.Addresse
 
-class PaymentActivity : AppCompatActivity() {
+class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
+    lateinit var orderConfirmationFragment:OrderConfirmationFragment
     var lineItems = ArrayList<LineItem>()
     var totalPrice = ArrayList<Total_price>()
+    var myAddress:Addresse= Addresse()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         lineItems = intent.getSerializableExtra("line_items") as ArrayList<LineItem>
         totalPrice = intent.getSerializableExtra("total_prices") as ArrayList<Total_price>
+        orderConfirmationFragment = OrderConfirmationFragment()
+    }
 
-        val mFragmentManager = supportFragmentManager
-        val mFragmentTransaction = mFragmentManager.beginTransaction()
-        var bundle = Bundle()
-        bundle.putSerializable("line_items",lineItems)
-        bundle.putSerializable("total_prices",totalPrice)
-        val mFragment = AddressFragment()
-        mFragment.arguments = bundle
-        mFragmentTransaction.replace(R.id.payment_nav,mFragment).commit()
-    //        mFragmentTransaction.add(R.id.payment_nav, mFragment).commit()
+    override fun orderOnClickListener(address: Addresse) {
+        myAddress= address
 
+//        val bundle = Bundle()
+//        bundle.putSerializable("myAddress",address)
+//        orderConfirmationFragment.arguments=bundle
+
+
+
+       // orderConfirmationFragment.addAddress(address)
     }
 
 
