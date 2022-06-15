@@ -59,7 +59,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var selectedSize: String
     lateinit var selectedColor: String
 
-   //viewModel
+    //viewModel
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel
 
@@ -105,7 +105,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         Log.d("TAG", "onCreate: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID, 1000)}")
 
 
-         //comes from wishlist
+        //comes from wishlist
         if (isFromWishlist == "true"){
             Log.d("TAG", "onCreate: FROM WISHLIST")
             var selectedProductId = intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)
@@ -124,8 +124,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         }
 
         // comes from any product
-         else{
-        product = intent.getSerializableExtra("product") as Product
+        else{
+            product = intent.getSerializableExtra("product") as Product
             initUIComponent()
 
         }
@@ -168,7 +168,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
             if (hearted){
                 //remove product from wishlist
-                    removeProductFromWishlist(draftOrderId)
+                removeProductFromWishlist(draftOrderId)
                 hearted = false
                 binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
             }
@@ -181,45 +181,45 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         }
 
-            //cart btn
-            binding.cartIcon.setOnClickListener {
-                val intent = Intent(this, ShoppingCartActivity::class.java).apply {
-                }
-                startActivity(intent)
+        //cart btn
+        binding.cartIcon.setOnClickListener {
+            val intent = Intent(this, ShoppingCartActivity::class.java).apply {
             }
+            startActivity(intent)
+        }
 
-            binding.addToCartBtn.setOnClickListener {
-                var order = DraftOrder()
-                var draft_orders = Draft_order()
-                order.email = preference.getData(Constants.USEREMAIL)
-                order.note = "cart"
-                for (i in 0..product.variants!!.size - 1) {
-                    if (product.variants!![i].option1 == selectedSize &&
-                        product.variants!![i].option2 == selectedColor
-                    ) {
-                        Log.i("option", selectedSize)
-                        Log.i("option", selectedColor)
+        binding.addToCartBtn.setOnClickListener {
+            var order = DraftOrder()
+            var draft_orders = Draft_order()
+            order.email = preference.getData(Constants.USEREMAIL)
+            order.note = "cart"
+            for (i in 0..product.variants!!.size - 1) {
+                if (product.variants!![i].option1 == selectedSize &&
+                    product.variants!![i].option2 == selectedColor
+                ) {
+                    Log.i("option", selectedSize)
+                    Log.i("option", selectedColor)
 
-                        var lineItems = LineItem()
-                        lineItems.quantity = 1
-                        lineItems.variant_id = product.variants!![i].id
-                        order.line_items = listOf(lineItems)
-                        var note_attribute = NoteAttribute()
-                        note_attribute.name = "image"
-                        note_attribute.value = product.images!![0].src
-                        order.note_attributes = listOf(note_attribute)
-                        draft_orders = Draft_order(order)
-                        productDetailsVm.postDraftOrder(draft_orders)
-                        productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
-                            if (dOrder.isSuccessful) {
-                                Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
-                            } else {
-                                Log.d("TAG", "failed: ${dOrder.code()}")
-                            }
+                    var lineItems = LineItem()
+                    lineItems.quantity = 1
+                    lineItems.variant_id = product.variants!![i].id
+                    order.line_items = listOf(lineItems)
+                    var note_attribute = NoteAttribute()
+                    note_attribute.name = "image"
+                    note_attribute.value = product.images!![0].src
+                    order.note_attributes = listOf(note_attribute)
+                    draft_orders = Draft_order(order)
+                    productDetailsVm.postDraftOrder(draft_orders)
+                    productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
+                        if (dOrder.isSuccessful) {
+                            Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                        } else {
+                            Log.d("TAG", "failed: ${dOrder.code()}")
                         }
-                        break
                     }
+                    break
                 }
+            }
 //            draft_orders = Draft_order(order)
 //            productDetailsVm.postDraftOrder(draft_orders)
 //            productDetailsVm.liveDraftOrderList.observe(this) { dOrder->
@@ -233,7 +233,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 //                }
 //
 //            }
-            }
+        }
 
 
     }
@@ -276,21 +276,23 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         binding.descriptionText.text = product.body_html
         binding.productType.text = product.product_type
         binding.productName.text = product.title
-        binding.productPrice.text = product.variants!![0].price
+        binding.productPrice.text = "${ (product.variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
+            ?.toDouble() ?: 1.0))} ${preference.getData(Constants.TOCURRENCY)}"
+
         binding.ratingBar.rating = (product.variants!![0].inventory_quantity / 3).toFloat()
     }
 
     private fun removeProductFromWishlist(id : Long?) {
-         Log.d("TAG", "removeProductFromWishlist: $id")
-         wishlistViewModel.deleteProductFromDraftOrder(id.toString())
-         wishlistViewModel.liveDeleteDraftOrderList.observe(this, Observer{
-             if (it.isSuccessful) {
-                 Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_LONG).show()
-             } else {
-                 Log.d("TAG", "failed: ${it.code()}")
-                 Log.d("TAG", "onCreate: ${it.errorBody()}")
-             }
-         })
+        Log.d("TAG", "removeProductFromWishlist: $id")
+        wishlistViewModel.deleteProductFromDraftOrder(id.toString())
+        wishlistViewModel.liveDeleteDraftOrderList.observe(this, Observer{
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_LONG).show()
+            } else {
+                Log.d("TAG", "failed: ${it.code()}")
+                Log.d("TAG", "onCreate: ${it.errorBody()}")
+            }
+        })
     }
 
     private fun addProductToWishlist() {

@@ -35,7 +35,10 @@ class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context): 
         holder.productPriceText.text= myProducts[position].variants!![0].price
         holder.productNameText.text=myProducts[position].title
         holder.productTypeText.text = myProducts[position].product_type
-        Glide.with(context).load(myProducts[position].image!!.src).into(holder.productimage)
+        Glide.with(context).load(myProducts[position].image?.src).into(holder.productimage)
+        holder.orderListItem.setOnClickListener {
+            productOnclickInterface.orderOnClickListener(myProducts[position])
+        }
 
     }
 
