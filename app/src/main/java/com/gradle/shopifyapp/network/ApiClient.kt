@@ -124,11 +124,21 @@ class ApiClient private constructor() : RemoteSource {
         return deleteAddressFromCustomerService.deleteAddressFromCustomer(customerId, addressId)
     }
 
+    override suspend fun getProductById(id: String): Response<ProductItem> {
+        val getProductByIdService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return getProductByIdService.getProductById(id)
+    }
+
 
     override suspend fun getAllOrders(id: String): Response<OrdersModel> {
         val getAllOrdersService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
         return getAllOrdersService.getOrders(id)
 
+    }
+
+    override suspend fun postOrder(order: Order_Model): Response<Order_Model> {
+        val postOrderService = RetrofitHelper.getInstance().create(ApiInterface::class.java)
+        return postOrderService.postOrders(order)
     }
 
     override suspend fun updateDraftOrders(id: String, order: Draft_order): Response<Draft_order> {

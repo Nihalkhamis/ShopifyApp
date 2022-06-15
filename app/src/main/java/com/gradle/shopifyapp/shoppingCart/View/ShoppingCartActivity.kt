@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,10 +18,12 @@ import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.view.PaymentActivity
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
+import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 
 
 class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
@@ -82,10 +85,21 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             intent.putExtra("total_prices",totalPrice)
             startActivity(intent)
         }
+        binding.favoriteImg.setOnClickListener {
+            startActivity(Intent(this,WishlistActivity::class.java))
 
+        }
         binding.closeIcon.setOnClickListener{
             finish()
         }
+
+        shoppingCartVm.loading.observe(this, Observer {
+            if (it) {
+                binding!!.progressbar.visibility = View.VISIBLE
+            } else {
+                binding!!.progressbar.visibility = View.GONE
+            }
+        })
 
     }
 
@@ -173,6 +187,18 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                 Log.d("TAG", "failed: ${dOrder.code()}")
             }
         }
+    }
+
+    override fun onClickProduct(draftOrder: Draft_order) {
+        Log.d("TAG", "onClickProduct: ${draftOrder.draft_order?.line_items?.get(0)?.product_id}")
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
+        intent.putExtra(Constants.FROMWISHLIST,"true")
+
+        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)}")
+        Log.d("TAG", "onClickProduct: ${intent.getStringExtra(Constants.FROMWISHLIST)}")
+
+        startActivity(intent)
     }
 
     private fun setUpSwipe() {

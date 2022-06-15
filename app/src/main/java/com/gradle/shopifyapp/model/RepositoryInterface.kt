@@ -12,6 +12,7 @@ suspend fun getAllDiscountCodes() : Response<DiscountCodeModel>
 suspend fun postDraftOrders(order: Draft_order):  Response<Draft_order>
 suspend fun registerNewUser( user:CustomerModel) : Response<CustomerModel>
 suspend fun getDraftOrders():  Response<Draft_orders_list>
+suspend fun postOrder(order:Order_Model):  Response<Order_Model>
 suspend fun getAllUsers( ) : Response<CustomersModel>
 suspend fun getAllOrders(id: String ) : Response<OrdersModel>
 suspend fun updateDraftOrders(id: String,order: Draft_order):  Response<Draft_order>
@@ -21,6 +22,5 @@ suspend fun getAllConvertedCurrencies(amount : String, from : String, to : Strin
 suspend fun addCustomerAddress(id: String, customer: CustomerModel) : Response<CustomerModel>
 suspend fun getCustomerById(id: String) : Response<CustomerModel>
 suspend fun deleteAddressFromCustomer(customerId : String, addressId : String) : Response<CustomerModel>
-
-
+suspend fun getProductById(productId : String) : Response<ProductItem>
 }

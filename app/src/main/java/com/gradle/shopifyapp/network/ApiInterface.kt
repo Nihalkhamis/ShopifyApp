@@ -21,6 +21,17 @@ interface ApiInterface {
     ): Response<ProductModel>
 
 
+    //get product by id
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("2022-01/products/{id}.json")
+    suspend fun getProductById(
+        @Path(value = "id", encoded = false) id: String,
+    ): Response<ProductItem>
+
+
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
@@ -161,4 +172,13 @@ interface ApiInterface {
     @PUT("2022-04/customers/"+"{id}"+".json")
     suspend fun addCustomerAddress(@Path("id") id: String? , @Body customer: CustomerModel): Response<CustomerModel>
 
+
+
+
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @POST("2022-01/orders.json")
+    suspend fun postOrders(@Body order:Order_Model): Response<Order_Model>
 }

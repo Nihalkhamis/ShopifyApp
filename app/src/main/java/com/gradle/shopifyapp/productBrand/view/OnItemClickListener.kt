@@ -5,5 +5,5 @@ import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.SubCategoryModel
 
 interface OnItemClickListener {
-    fun onClick(productModel: Product)
+    fun onClick(productModel: Product , price:String)
 }

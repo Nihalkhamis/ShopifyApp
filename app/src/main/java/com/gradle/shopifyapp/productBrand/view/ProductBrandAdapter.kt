@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.productBrand.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,13 +49,14 @@ class ProductBrandAdapter(
 
     override fun onBindViewHolder(holder: ProdcutBrandHolder, position: Int) {
         preference = MyPreference.getInstance(context)!!
+        var price = ((productsBrand[position].variants?.get(0)?.price?.toDouble() ?: 1.0) * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toString()
+         holder.price_Text_wish_list.text = price
+        //holder.price_Text_wish_list.text = productsBrand[position].variants[0].price
         holder.product_description_wish_list.text = productsBrand[position].title
-        holder.price_Text_wish_list.text = (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
-            ?.toDouble() ?: 1.0)).toString()
         holder.currencyType_txt.text = preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
-        Glide.with(context).load(productsBrand[position].image.src).into(holder.product_img)
+        Glide.with(context).load(productsBrand[position].image!!.src).into(holder.product_img)
         holder.productCard.setOnClickListener {
-            onItemClickListener.onClick(productsBrand[position])
+            onItemClickListener.onClick(productsBrand[position],price)
         }
     }
 

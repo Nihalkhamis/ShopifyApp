@@ -41,7 +41,7 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
         val quantity: TextView = itemView.findViewById(R.id.count_editText)
         val add: Button = itemView.findViewById(R.id.add_btn)
         val remove: Button = itemView.findViewById(R.id.remove_btn)
-        val favorite: ImageView = itemView.findViewById(R.id.favorite_img)
+//        val favorite: ImageView = itemView.findViewById(R.id.favorite_img)
         val item: CardView = itemView.findViewById(R.id.shopping_cart_item)
         val size: TextView = itemView.findViewById(R.id.size_title)
     }
@@ -79,9 +79,12 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
             }
         }
 
-        holder.favorite.setOnClickListener{
-            cartOnClickListener.onDeleteProduct(shoppingCartItems[position].draft_order!!.id.toString())
+        holder.item.setOnClickListener {
+            cartOnClickListener.onClickProduct(shoppingCartItems[position])
         }
+//        holder.favorite.setOnClickListener{
+//            cartOnClickListener.onDeleteProduct(shoppingCartItems[position].draft_order!!.id.toString())
+//        }
     }
 
     override fun getItemCount(): Int {

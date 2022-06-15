@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
-class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context): RecyclerView.Adapter<ProductInOrderAdapter.Holder>()
+class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context,var productOnclickInterface:ProductOnclickListener): RecyclerView.Adapter<ProductInOrderAdapter.Holder>()
 {
+    lateinit var preference: MyPreference
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var view: View =itemView
 
@@ -32,10 +35,17 @@ class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context): 
         return ProductInOrderAdapter.Holder(view)    }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.productPriceText.text=myProducts[position].variants[0].price
+        preference = MyPreference.getInstance(context)!!
+        var price = ((myProducts[position].variants?.get(0)?.price?.toDouble() ?: 1.0) * (preference.getData(
+            Constants.CURRENCYRESULT)
+            ?.toDouble() ?: 1.0)).toString()
+        holder.productPriceText.text="$price ${preference.getData(Constants.TOCURRENCY)}"
         holder.productNameText.text=myProducts[position].title
         holder.productTypeText.text = myProducts[position].product_type
-        Glide.with(context).load(myProducts[position].image.src).into(holder.productimage)
+        Glide.with(context).load(myProducts[position].image?.src).into(holder.productimage)
+        holder.orderListItem.setOnClickListener {
+            productOnclickInterface.orderOnClickListener(myProducts[position],price)
+        }
 
     }
 

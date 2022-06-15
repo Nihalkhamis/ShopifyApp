@@ -107,7 +107,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
             productBrandAdapter.setProductsBrand(it.products)
             for (productType in it.products){
-                 productTypeList.add(productType.product_type)
+                 productTypeList.add(productType.product_type!!)
             }
             productTypeAdapter.setProductTypes(productTypeList.toList())
         }
@@ -168,9 +168,10 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 
-    override fun onClick(productModel: Product) {
+    override fun onClick(productModel: Product,price:String) {
         val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
         intent.putExtra("product",productModel)
+        intent.putExtra("price",price)
         startActivity(intent)
     }
 

@@ -60,6 +60,10 @@ class SettingsAddressAdapter(
         holder.phone_txt.text = addresses[position].phone
         holder.city_txt.text = addresses[position].city
         holder.country_txt.text = addresses[position].country
+        holder.addressCard.setOnClickListener {
+
+            onAddressItemClickListener.onClick(addresses[position])
+        }
 
     }
 
