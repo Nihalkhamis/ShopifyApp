@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.productBrand.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,9 @@ class ProductBrandAdapter(
 
     override fun onBindViewHolder(holder: ProdcutBrandHolder, position: Int) {
         preference = MyPreference.getInstance(context)!!
+        var price = (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toString()
+         holder.price_Text_wish_list.text = price
+        //holder.price_Text_wish_list.text = productsBrand[position].variants[0].price
         holder.product_description_wish_list.text = productsBrand[position].title
         var price = (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
         holder.price_Text_wish_list.text = (productsBrand[position].variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)

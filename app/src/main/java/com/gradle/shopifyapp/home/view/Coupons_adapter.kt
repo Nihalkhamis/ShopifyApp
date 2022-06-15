@@ -41,7 +41,7 @@ class Coupons_adapter(var context: Context): RecyclerView.Adapter<Coupons_adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.coupon_title.text = coupons[position].code
         holder.coupon_cv.setOnClickListener{
-            setClipboard(context,coupons[position].code)
+            coupons[position].code?.let { it1 -> setClipboard(context, it1) }
         }
     }
 

@@ -12,18 +12,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentOrderConfirmationBinding
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
-import com.gradle.shopifyapp.model.Repository
+import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
+import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.*
+import com.paypal.android.sdk.payments.PayPalService
 import com.paypal.android.sdk.payments.PaymentActivity
+import com.paypal.android.sdk.payments.PaymentConfirmation
 import org.json.JSONException
 import org.json.JSONObject
 import java.math.BigDecimal
@@ -41,6 +45,12 @@ class OrderConfirmationFragment : Fragment() {
     var totalPrice = 0.0
     var subtotal = 0.0
     var discount = 0.0
+    var discountCode = DiscountCode()
+    var myLineItems = mutableListOf<OrderModel.LineItem>()
+
+
+
+     var myAddress :Addresse = Addresse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +63,7 @@ class OrderConfirmationFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentOrderConfirmationBinding.inflate(inflater, container, false)
         preference = MyPreference.getInstance(requireContext())!!
+        myAddress = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).myAddress
 
 
         _binding!!.backBtn.setOnClickListener {
@@ -63,9 +74,10 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)
         _binding!!.phoneTextView.text = preference.getData(Constants.USERMOBILEPHONE)
 
-
         line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
         total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
+
+
 
         for(i in 0..total_prices.size-1){
             subtotal += total_prices[i].subtotal!!.toDouble()
@@ -78,10 +90,30 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.subtotal.text = subtotal.toString() +"EGP"
 
         _binding!!.orderBtn.setOnClickListener {
+
+            //line items email discount code shipping address method for payment
+          var result_order_Model = makeOrderModel()
+
+
             if(_binding!!.creditRadioBtn.isChecked )
                 getPayment()
             if(!_binding!!.creditRadioBtn.isChecked && !_binding!!.cashRadioBtn.isChecked)
                 Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
+            if(_binding!!.cashRadioBtn.isChecked)
+            {
+                orderConfirmationVm.postOrder(result_order_Model)
+                orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
+                    if (it.isSuccessful){
+                        Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
+                        startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+                        activity?.finish()
+                    }
+                    else{
+                        Log.i("order",it.errorBody().toString())
+                    }
+                }
+
+            }
         }
         orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
             Repository.getRepoInstance(
@@ -100,6 +132,8 @@ class OrderConfirmationFragment : Fragment() {
                         _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + "EGP"
                         _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
                         _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
+                        discountCode = discountCodes.discount_codes[i]
+                        ////////
                         break
                     }else{
                         discount = 0.0
@@ -113,6 +147,23 @@ class OrderConfirmationFragment : Fragment() {
 
         val root: View = binding.root
         return root
+    }
+
+    private fun makeOrderModel():Order_Model {
+        var orderModel =OrderModel()
+        orderModel.email = preference.getData(Constants.USEREMAIL)
+        orderModel.shipping_address?.address1 ="${myAddress.address1 } ${myAddress.country} ${myAddress.city} ${myAddress.zip}"
+        orderModel.discount_codes?.get(0)?.code =discountCode.code
+
+        for (lineItem in line_items){
+            var li = OrderModel.LineItem()
+            li.quantity=lineItem.quantity
+            li.variant_id =lineItem.variant_id
+            myLineItems.add(li)
+        }
+        orderModel.line_items=myLineItems
+        var order_Model = Order_Model(orderModel)
+        return order_Model
     }
 
     fun findNavController(fragment: Fragment): NavController? {
@@ -192,4 +243,14 @@ class OrderConfirmationFragment : Fragment() {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // on below line we are passing a client id.
             .clientId(clientKey)
     }
+
+
+
+//    fun addAddress(address: Addresse){
+//        myAddress = address
+//        Log.i("inside communicator method",myAddress.toString())
+//
+//    }
+
+
 }

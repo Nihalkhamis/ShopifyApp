@@ -2,6 +2,7 @@ package com.gradle.shopifyapp.orders.order_details.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import com.gradle.shopifyapp.home.view.HomeFragment
 import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 
 class OrderDetailsFragment : Fragment(),ProductOnclickListener {
@@ -23,6 +26,8 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
     lateinit var productRecyclerView:RecyclerView
     lateinit var productRecyclerViewAdapter: ProductInOrderAdapter
+    lateinit var preference: MyPreference
+
 
     var position:Int =0
 
@@ -34,6 +39,8 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         _binding = FragmentOrderDetailsBinding.inflate(inflater, container, false)
         productsOfTheOrder = arrayListOf()
         position = arguments?.getInt("order_position") ?: 0
+        preference = MyPreference.getInstance(requireContext())!!
+
 
         productRecyclerView = binding.productRecyclerView
         productRecyclerViewAdapter =ProductInOrderAdapter(arrayListOf(),requireContext(),this)
@@ -41,14 +48,22 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
 
         var order = MeFragment.ordersList[position]
+        Log.i("order",order.toString())
+        Log.i("order",order.id.toString())
         binding.orderIdText.text= "ORDER ID - ${order.id.toString()}"
         binding.orderDateText.text = order.created_at
         binding.mobileNumberText.text = order.customer?.phone
-        binding.addressTextInput.text = order.billing_address?.address1 ?: "No address for that address "
-        binding.subTotalText.text="${order.currency} ${order.subtotal_price}"
-        binding.discountText.text= "-${order.currency} ${order.total_discounts}"
-        binding.totalPriceText.text = "${order.currency} ${order.total_price}"
-        binding.shippingFeeText.text = "${order.currency} ${(order.total_shipping_price_set?.presentment_money?.amount?.toDouble() ?: 0.0) + (order.total_shipping_price_set?.shop_money?.amount?.toDouble() ?: 0.0)}"
+        //binding.addressTextInput.text = order.shipping_address?.address1 ?: "No address for that address "
+        var address =order.customer?.default_address
+        binding.addressTextInput.text = address?.address1+" "+address?.city+" "+address?.country+" "+address?.zip
+        var constantForPrice = preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0
+        var constantForCurrency =preference.getData(Constants.TOCURRENCY)
+       // (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toString()
+
+        binding.subTotalText.text="$constantForCurrency ${order.subtotal_price?.toDouble()?.times(constantForPrice)}"
+        binding.discountText.text= "-$constantForCurrency ${order.total_discounts?.toDouble()?.times(constantForPrice)}"
+        binding.totalPriceText.text = "$constantForCurrency ${order.total_price?.toDouble()?.times(constantForPrice)}"
+        binding.shippingFeeText.text = "$constantForCurrency ${(order.total_shipping_price_set?.presentment_money?.amount?.toDouble() ?: 0.0) + (order.total_shipping_price_set?.shop_money?.amount?.toDouble() ?: 0.0)}"
 
 
 
@@ -74,10 +89,12 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         return root
     }
 
-    override fun orderOnClickListener(product: Product) {
+    override fun orderOnClickListener(product: Product,price:String) {
         val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
         intent.putExtra("product",product)
+        intent.putExtra("price",price)
         startActivity(intent)
+
     }
 
 }

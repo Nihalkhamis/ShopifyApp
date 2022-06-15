@@ -80,8 +80,6 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_down"/>
 
-
-
     </fragment>
 
 </navigation>
