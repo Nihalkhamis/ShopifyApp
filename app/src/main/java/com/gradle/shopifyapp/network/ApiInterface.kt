@@ -21,6 +21,17 @@ interface ApiInterface {
     ): Response<ProductModel>
 
 
+    //get product by id
+    @Headers(
+        "Accept: application/json",
+        "X-Shopify-Access-Token: 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",
+    )
+    @GET("2022-01/products/{id}.json")
+    suspend fun getProductById(
+        @Path(value = "id", encoded = false) id: String,
+    ): Response<ProductItem>
+
+
     @Headers(
         "X-Shopify-Shop-Api-Call-Limit: 40/40",
         "Retry-After: 2.0",
@@ -145,7 +156,7 @@ interface ApiInterface {
 
 
     // currency converter
-    @GET("convert?apikey=xhRKCA6ZS9CBhQ7BTEsSXDaJMo6Z9X5N")
+    @GET("convert?apikey=XWRehOU0cFS4NJMHnsqC4gk4WngnTAHF")
     suspend fun getConvertedCurrency(
         @Query("amount") amount: String,
         @Query("from") from: String,

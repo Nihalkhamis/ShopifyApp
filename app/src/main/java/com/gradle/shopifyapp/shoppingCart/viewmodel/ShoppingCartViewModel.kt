@@ -25,10 +25,21 @@ class ShoppingCartViewModel (private val repo : RepositoryInterface, private var
     val deleteDraftOrderList = MutableLiveData<Response<Draft_order>>()
     val liveDeleteDraftOrderList : LiveData<Response<Draft_order>> = deleteDraftOrderList
 
+    val loading = MutableLiveData<Boolean>()
+
+
     fun getDraftOrder(context: Context) {
+        loading.value = true
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getDraftOrders()
             getDraftOrderList.postValue(response.body()?.draft_orders)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    loading.value = false
+                } else {
+                    loading.value = false
+                }
+            }
         }
     }
 

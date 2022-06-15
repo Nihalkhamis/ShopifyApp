@@ -15,8 +15,6 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentOrderConfirmationBinding
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel

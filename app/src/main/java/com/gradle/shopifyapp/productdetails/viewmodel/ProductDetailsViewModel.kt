@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.model.ProductItem
+import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +19,9 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     val postDraftOrderList = MutableLiveData<Response<Draft_order>>()
     val liveDraftOrderList : LiveData<Response<Draft_order>> = postDraftOrderList
 
+    private val productList = MutableLiveData<Response<ProductItem>>()
+    val liveDataProductList : LiveData<Response<ProductItem>> = productList
+
 
 
     fun postDraftOrder(order: Draft_order) {
@@ -25,6 +30,15 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
             postDraftOrderList.value = response
         }
     }
+
+    fun getProductById(productId : String){
+        viewModelScope.launch {
+            val response = repo.getProductById(productId)
+            productList.value = response
+        }
+    }
+
+
 
 
 

@@ -28,5 +28,6 @@ interface RemoteSource {
     suspend fun addCustomerAddress(id: String, customer: CustomerModel):  Response<CustomerModel>
     suspend fun getCustomerById(id: String) : Response<CustomerModel>
     suspend fun deleteAddressFromCustomer(customerId : String, addressId : String) : Response<CustomerModel>
+    suspend fun getProductById(id : String):  Response<ProductItem>
 
 }

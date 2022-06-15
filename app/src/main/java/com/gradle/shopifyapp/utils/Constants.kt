@@ -2,6 +2,8 @@ package com.gradle.shopifyapp.utils
 
 class Constants {
 companion object{
+    const val FROMWISHLIST = "FROM_WISHLIST"
+    const val SELECTEDPRODUCTID = "SELECTED_PRODUCT_ID"
     const val FINISH = 10
     const val CURRENCYRESULT = "CURRENCY_RESULT"
     const val TOCURRENCY = "TO_CURRENCY"

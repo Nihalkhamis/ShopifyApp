@@ -27,6 +27,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             app:titleTextColor="@color/dark_color"
+            android:background="@color/off_white"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
 

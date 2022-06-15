@@ -38,7 +38,7 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
         searchRecycleView.adapter = searchRecyclerAdapter
         searchTxt.doOnTextChanged { text, start, count, after ->
             searchRecyclerAdapter.setProductsBrand(ArrayList())
-            var f = products?.filter { it.title.contains(text.toString(), ignoreCase = true) }
+            var f = products?.filter { it.title!!.contains(text.toString(), ignoreCase = true) }
             f?.let { searchRecyclerAdapter.setProductsBrand(it) }
             searchRecyclerAdapter.notifyDataSetChanged()
         }
