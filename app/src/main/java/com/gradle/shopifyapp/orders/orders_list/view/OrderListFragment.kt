@@ -6,15 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
-import com.gradle.shopifyapp.databinding.FragmentOrderListBinding
 import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.me.view.OrderListViewAdapter
+import com.gradle.shopifyapp.databinding.FragmentOrderListBinding
 
 
 class OrderListFragment : Fragment(),OrderOnClickListener {
@@ -39,8 +38,9 @@ class OrderListFragment : Fragment(),OrderOnClickListener {
         ordersRecyclerView = binding.ordersRecyclerView
 
         if(MeFragment.ordersList.isNullOrEmpty()){
+            binding.background.setImageResource(R.drawable.orders)
 
-             binding.orderListFragment.setBackgroundResource(R.drawable.orders)
+             //binding.orderListFragment.setBackgroundResource(R.drawable.orders)
         }else{
             orderRecyclerAdapter = OrderListViewAdapter(MeFragment.ordersList,this,requireContext())
             Log.i("products",MeFragment.ordersList.toString())

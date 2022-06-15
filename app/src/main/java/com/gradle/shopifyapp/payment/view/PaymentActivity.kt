@@ -6,10 +6,8 @@ import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.Addresse
-import com.gradle.shopifyapp.payment.PaymentCommunicator
-import kotlinx.coroutines.internal.AddLastDesc
 
-class PaymentActivity : AppCompatActivity() , PaymentCommunicator{
+class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
     lateinit var orderConfirmationFragment:OrderConfirmationFragment
     var lineItems = ArrayList<LineItem>()
     var totalPrice = ArrayList<Total_price>()

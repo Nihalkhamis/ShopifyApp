@@ -224,10 +224,11 @@ data class OrderModel(
     ) {
         class Addresses
 
-        class DefaultAddress
+
 
         class TaxExemptions
     }
+
 
 
         data class DiscountApplication(

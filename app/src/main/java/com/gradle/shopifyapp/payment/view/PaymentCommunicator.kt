@@ -1,4 +1,4 @@
-package com.gradle.shopifyapp.payment
+package com.gradle.shopifyapp.payment.view
 
 import com.gradle.shopifyapp.model.Addresse
 

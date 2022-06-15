@@ -51,6 +51,7 @@ class MainScreenFragment : Fragment() {
             preference.saveData(Constants.USERID,"")
             preference.saveData(Constants.USERFIRSTNAME,"")
             startActivity(Intent(requireContext(),MainActivity::class.java))
+            activity?.finish()
         }
     }
 

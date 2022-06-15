@@ -101,7 +101,6 @@ class OrderConfirmationFragment : Fragment() {
                 Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
             if(_binding!!.cashRadioBtn.isChecked)
             {
-                Log.i("inside my button",myAddress.toString())
                 orderConfirmationVm.postOrder(result_order_Model)
                 orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
                     if (it.isSuccessful){
@@ -110,7 +109,7 @@ class OrderConfirmationFragment : Fragment() {
                         activity?.finish()
                     }
                     else{
-                        print(it.errorBody())
+                        Log.i("order",it.errorBody().toString())
                     }
                 }
 
