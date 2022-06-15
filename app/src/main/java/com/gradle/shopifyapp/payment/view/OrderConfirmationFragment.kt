@@ -2,6 +2,7 @@ package com.gradle.shopifyapp.payment.view
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,7 +42,7 @@ class OrderConfirmationFragment : Fragment() {
     var totalPrice = 0.0
     var subtotal = 0.0
     var discount = 0.0
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -68,14 +69,14 @@ class OrderConfirmationFragment : Fragment() {
         total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
 
         for(i in 0..total_prices.size-1){
-            subtotal += total_prices[i].subtotal!!.toDouble()
-            totalPrice += total_prices[i].total!!.toDouble()
-            tax += total_prices[i].tax!!.toDouble()
+            subtotal += (total_prices[i].subtotal!!.toDouble()* (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
+            totalPrice += (total_prices[i].total!!.toDouble() * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
+            tax += (total_prices[i].tax!!.toDouble() *(preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
         }
         amount = totalPrice.toString()
-        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
-        _binding!!.shipping.text = tax.toString() + "EGP"
-        _binding!!.subtotal.text = subtotal.toString() +"EGP"
+        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
+        _binding!!.shipping.text = (String.format("%.2f",tax)) + preference.getData(Constants.TOCURRENCY)
+        _binding!!.subtotal.text = (String.format("%.2f",subtotal)) + preference.getData(Constants.TOCURRENCY)
 
         _binding!!.orderBtn.setOnClickListener {
             if(_binding!!.creditRadioBtn.isChecked )
@@ -97,15 +98,15 @@ class OrderConfirmationFragment : Fragment() {
                 for(i in 0..discountCodes.discount_codes.size-1){
                     if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
                         discount = subtotal*0.1
-                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + "EGP"
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
+                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
                         _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
                         break
                     }else{
                         discount = 0.0
-                        _binding!!.discount.text = discount.toString()
+                        _binding!!.discount.text = discount.toString() + preference.getData(Constants.TOCURRENCY)
                         _binding!!.verify.setImageResource(R.drawable.verify_icon)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) +"EGP"
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
                     }
                 }
             }
@@ -124,7 +125,7 @@ class OrderConfirmationFragment : Fragment() {
 
         // Creating a paypal payment on below line.
         val payment = PayPalPayment(
-            BigDecimal(amount), "USD", "Course Fees",
+            BigDecimal(amount), "EUR", "Order Fees",
             PayPalPayment.PAYMENT_INTENT_SALE
         )
 
@@ -143,7 +144,9 @@ class OrderConfirmationFragment : Fragment() {
     }
 
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
         super.onActivityResult(requestCode, resultCode, data)
         // If the result is from paypal
         if (requestCode == PAYPAL_REQUEST_CODE) {
@@ -164,9 +167,12 @@ class OrderConfirmationFragment : Fragment() {
                         var payObj: JSONObject = JSONObject(paymentDetails);
                         var payID: String = payObj.getJSONObject("response").getString("id");
                         var state: String = payObj.getJSONObject("response").getString("state");
+                        Log.i("PAYMENT","Payment " + state + "\n with payment id is " + payID)
                     } catch (e: JSONException) {
                         // handling json exception on below line
                         Log.e("Error", "an extremely unlikely failure occurred: ", e);
+                        Log.i("PAYMENT","Payment error")
+
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -179,11 +185,13 @@ class OrderConfirmationFragment : Fragment() {
                     "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
                 );
             }
+        }else{
+            Log.i("PAYMENT","Payment else")
         }
     }
 
     companion object {
-        const val clientKey = "AbJLgQxnyBIHMlucwslWaotVaVgjSgqqFUfoNQwuUskwrL37WX68VZpHAZEcuRjq2LHT0oMcJcmKecvJ"
+        const val clientKey = "AVMXmO57ZhbNwUrxPpAEi7gBR6ftmNGCvDyzEXyICdGk0FPQrN9UbBuDZN--NLj78v6oBmQOAgHZ461K"
         const val PAYPAL_REQUEST_CODE = 123
 
         private val config = PayPalConfiguration() // Start with mock environment.  When ready,

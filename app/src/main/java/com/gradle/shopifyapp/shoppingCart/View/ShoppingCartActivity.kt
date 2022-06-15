@@ -3,8 +3,10 @@ package com.gradle.shopifyapp.shoppingCart.View;
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -66,6 +68,14 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         getDraftOrders()
         setUpSwipe()
 
+        shoppingCartVm.loading.observe(this, Observer {
+            if (it) {
+                binding.progressbar.visibility = View.VISIBLE
+            } else {
+                binding.progressbar.visibility = View.GONE
+            }
+        })
+
         binding.checkoutBtn.setOnClickListener{
             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra("line_items",lineItems)
@@ -108,9 +118,10 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         total_price = 0.0
         for(i in 0..draftOrder.size-1){
             total_price = total_price + (draftOrder.get(i).draft_order!!.line_items!![0].price!!.toDouble() * draftOrder.get(i).draft_order!!.line_items!![0].quantity!!)
+            total_price = total_price  * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)
             Log.i("ADD", total_price.toString())
         }
-        binding.priceText.text = total_price.toString()
+        binding.priceText.text = total_price.toString() + (preference.getData(Constants.TOCURRENCY))
     }
 
 

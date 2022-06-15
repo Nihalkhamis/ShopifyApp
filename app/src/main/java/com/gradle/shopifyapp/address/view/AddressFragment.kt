@@ -17,7 +17,6 @@ import com.gradle.shopifyapp.databinding.FragmentAddressBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
-import com.gradle.shopifyapp.payment.view.OrderConfirmationFragment
 import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.settings.ShowAllAddresses.view.SettingsAddressAdapter
 import com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel.SettingsAddressViewModel

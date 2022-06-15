@@ -14,8 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.utils.MyPreference
 
 class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnClickListener): RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>() {
+    lateinit var preference: MyPreference
 
     private var shoppingCartItems = ArrayList<Draft_order>()
     var count = 0
@@ -49,11 +52,13 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        preference = MyPreference.getInstance(context)!!
         Glide.with(context).load(shoppingCartItems[position].draft_order!!.note_attributes!![0].value).apply(
             RequestOptions().override(200, 200).placeholder(R.drawable.ic_launcher_background)
         ).into(holder.img)
         holder.title.text = shoppingCartItems[position].draft_order?.line_items!![0].title
-        holder.price.text = shoppingCartItems[position].draft_order?.line_items!![0].price + " " + (shoppingCartItems[position].draft_order?.currency)
+        holder.price.text = (String.format("%.2f",shoppingCartItems[position].draft_order?.line_items!![0].price!!.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
+            ?.toDouble() ?: 1.0))) + (preference.getData(Constants.TOCURRENCY))
         holder.quantity.text = shoppingCartItems[position].draft_order!!.line_items!![0].quantity.toString()
         holder.size.text = shoppingCartItems[position].draft_order!!.line_items!![0].variant_title!!.substringBefore("/")
         holder.add.setOnClickListener{

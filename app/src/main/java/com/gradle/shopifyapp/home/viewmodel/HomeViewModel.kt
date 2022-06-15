@@ -23,6 +23,9 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     private val discountList = MutableLiveData<DiscountCodeModel>()
     val liveDiscountList : LiveData<DiscountCodeModel> = discountList
 
+    val loading = MutableLiveData<Boolean>()
+
+
     // currency converter
     private val convertedCurrencyList = MutableLiveData<Double>()
     val liveDataConvertCurrencyList : LiveData<Double> = convertedCurrencyList
@@ -38,6 +41,13 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getAllVendors()
             vendorList.postValue(response.body())
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    loading.value = false
+                } else {
+                    loading.value = false
+                }
+            }
         }
     }
 

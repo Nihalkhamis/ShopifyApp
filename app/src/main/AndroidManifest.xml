@@ -3,7 +3,6 @@
     package="com.gradle.shopifyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,12 +13,6 @@
         android:theme="@style/Theme.ShopifyApp">
         <activity
             android:name=".orders.OrdersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".orders.order_details.view.OrderDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".orders.orders_list.view.OrdersListActivity"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsActivity"

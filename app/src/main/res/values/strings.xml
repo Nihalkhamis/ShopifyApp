@@ -36,7 +36,7 @@
 
     <string name="Brands">Brands</string>
 
-    <string name="price_EGP">0.0EGP</string>
+    <string name="price_EGP">0.0</string>
     <string name="shopping_bag">Shopping Bag</string>
     <string name="discount_code">Discount codes</string>
     <string name="order_confirmation">Order Confirmation</string>
