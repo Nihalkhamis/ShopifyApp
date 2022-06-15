@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.ShopifyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/off_white</item>
+        <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryVariant">@color/dark_color</item>
         <item name="colorOnPrimary">@color/dark_color</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_pink</item>
-        <item name="colorSecondaryVariant">@color/light_brown</item>
-        <item name="colorOnSecondary">@color/beige</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
+        <item name="colorOnSecondary">@color/orange</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

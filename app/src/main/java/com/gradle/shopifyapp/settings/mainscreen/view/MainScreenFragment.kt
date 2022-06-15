@@ -50,6 +50,9 @@ class MainScreenFragment : Fragment() {
             preference.saveData(Constants.USEREMAIL,"")
             preference.saveData(Constants.USERID,"")
             preference.saveData(Constants.USERFIRSTNAME,"")
+            preference.saveData(Constants.TOCURRENCY,"")
+            preference.saveData(Constants.USERMOBILEPHONE,"")
+            preference.saveData(Constants.CURRENCYRESULT,"")
             startActivity(Intent(requireContext(),MainActivity::class.java))
         }
     }

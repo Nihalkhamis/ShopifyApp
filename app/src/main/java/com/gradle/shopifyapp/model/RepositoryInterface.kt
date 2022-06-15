@@ -22,6 +22,5 @@ suspend fun getAllConvertedCurrencies(amount : String, from : String, to : Strin
 suspend fun addCustomerAddress(id: String, customer: CustomerModel) : Response<CustomerModel>
 suspend fun getCustomerById(id: String) : Response<CustomerModel>
 suspend fun deleteAddressFromCustomer(customerId : String, addressId : String) : Response<CustomerModel>
-
-
+suspend fun getProductById(productId : String) : Response<ProductItem>
 }

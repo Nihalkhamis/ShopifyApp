@@ -32,7 +32,7 @@ class ProductInOrderAdapter(var myProducts:List<Product>, var context:Context,va
         return ProductInOrderAdapter.Holder(view)    }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.productPriceText.text=myProducts[position].variants[0].price
+        holder.productPriceText.text= myProducts[position].variants!![0].price
         holder.productNameText.text=myProducts[position].title
         holder.productTypeText.text = myProducts[position].product_type
         Glide.with(context).load(myProducts[position].image.src).into(holder.productimage)

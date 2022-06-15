@@ -56,7 +56,7 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         //to get all the products that are exist in that order
         for(lineItem in MeFragment.ordersList[position].line_items!!){
           var product = HomeFragment.myProducts?.filter {
-              it.id.equals(lineItem?.product_id)
+              it.id!!.equals(lineItem?.product_id)
           }
             productsOfTheOrder.add(product!![0])
         }

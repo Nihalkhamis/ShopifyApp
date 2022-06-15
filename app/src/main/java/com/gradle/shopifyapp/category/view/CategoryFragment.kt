@@ -107,7 +107,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
             productBrandAdapter.setProductsBrand(it.products)
             for (productType in it.products){
-                 productTypeList.add(productType.product_type)
+                 productTypeList.add(productType.product_type!!)
             }
             productTypeAdapter.setProductTypes(productTypeList.toList())
         }

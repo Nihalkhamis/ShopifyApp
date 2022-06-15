@@ -10,6 +10,7 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.1695" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/back_button_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/currency_icon.xml" value="0.134" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/fav_heart_icon.xml" value="0.173" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/filled_heat_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/home_icon.xml" value="0.134" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.162" />
@@ -47,41 +48,15 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_women.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/product_item.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/product_type_item.xml" value="0.72" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/shopping_cart_item.xml" value="0.13240740740740742" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/slideshow_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/sub_category_item.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_product_detailes.xml" value="0.23402985074626867" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable-v24/radius_view.xml" value="0.1355" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/button_shape.xml" value="0.113" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/recycler_view_shape.xml" value="0.113" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/shape.xml" value="0.1355" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_order_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_orders.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_orders_list.xml" value="0.16757246376811594" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_product_detailes.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_search.xml" value="0.25" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_wishlist.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/coupons_row.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_home.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.18115942028985507" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.25" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_order_details.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_order_list.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.12" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/review_row.xml" value="0.1693840579710145" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_starting.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/order_list_item.xml" value="0.25" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/product_in_order_raw.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/product_in_order_row.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/product_type_item.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/review_row.xml" value="0.1693840579710145" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/shopping_cart_item.xml" value="0.1" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/size_color_row.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/size_row.xml" value="0.18115942028985507" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/add_icon.xml" value="0.113" />
@@ -89,7 +64,6 @@
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/close_icon.xml" value="0.1" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/edit_icon.xml" value="0.1375" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/edittext.xml" value="0.113" />
-        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/email_icon.xml" value="0.171" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/favorite_icon.xml" value="0.1" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/home_orange.xml" value="0.1375" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.139" />
@@ -100,7 +74,6 @@
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/remove_icon.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/rounded_border_edittext.xml" value="0.113" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/search_icon.xml" value="0.139" />
-        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/drawable/verify_checked_icon.xml" value="0.171" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.11778115501519756" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.1" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_payment.xml" value="0.11778115501519756" />

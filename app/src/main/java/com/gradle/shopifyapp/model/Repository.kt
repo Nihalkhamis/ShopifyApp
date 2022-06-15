@@ -39,4 +39,6 @@ class Repository(var remoteSource: RemoteSource, var context: Context) : Reposit
         addressId: String
     ): Response<CustomerModel> = remoteSource.deleteAddressFromCustomer(customerId, addressId)
 
+    override suspend fun getProductById(productId: String): Response<ProductItem> = remoteSource.getProductById(productId)
+
 }

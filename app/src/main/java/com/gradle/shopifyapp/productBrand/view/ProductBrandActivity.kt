@@ -15,7 +15,9 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
+import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 import com.gradle.shopifyapp.utils.Constants
+import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
@@ -44,6 +46,10 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
         Log.d("TAG", "ID od Brand Inside activity: $brandID")
         binding!!.subcategoryNameTxt.text = brandName
+        binding!!.cartImg.setOnClickListener {
+            startActivity(Intent(this,ShoppingCartActivity::class.java))
+
+        }
 
         binding!!.searchBtn.setOnClickListener {
             if (searchIconClicked) {
@@ -54,7 +60,7 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
                 binding!!.searchEt.doOnTextChanged { text, start, count, after ->
                     Log.i("searchData", text.toString())
                     var f =
-                        myProducts?.filter { it.title.contains(text.toString(), ignoreCase = true) }
+                        myProducts?.filter { it.title!!.contains(text.toString(), ignoreCase = true) }
                     f?.let { productBrandAdapter.setProductsBrand(it) }
                     productBrandAdapter.notifyDataSetChanged()
                 }
@@ -74,6 +80,12 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
         binding!!.backBtn.setOnClickListener {
             finish()
+        }
+
+        binding!!.favImg.setOnClickListener {
+            val intent = Intent(this, WishlistActivity::class.java).apply {
+            }
+            startActivity(intent)
         }
 
         vmFactory = ProductBrandViewModelFactory(

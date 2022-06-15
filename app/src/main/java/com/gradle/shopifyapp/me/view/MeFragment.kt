@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gradle.shopifyapp.databinding.FragmentMeBinding
+import com.gradle.shopifyapp.draft_model.Draft_order
+import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
@@ -20,13 +23,17 @@ import com.gradle.shopifyapp.orders.OrdersActivity
 import com.gradle.shopifyapp.orders.orders_list.view.OrderOnClickListener
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModel
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModelFactory
+import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.settings.SettingsActivity
+import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
+import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
+import com.gradle.shopifyapp.wishlist.view.WishlistAdapter
 
 
-class MeFragment : Fragment(),OrderOnClickListener {
+class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
     private var _binding: FragmentMeBinding? = null
 
@@ -37,6 +44,12 @@ class MeFragment : Fragment(),OrderOnClickListener {
     lateinit var orderRecyclerView : RecyclerView
     lateinit var orderRecyclerAdapter:OrderListViewAdapter
     lateinit var orderLayoutManager: LinearLayoutManager
+    //for wishList
+    private lateinit var wishListVmFactory: ShoppingCartViewModelFactory
+    lateinit var wishListviewModel: ShoppingCartViewModel
+    var favProducts: ArrayList<Draft_order> = ArrayList<Draft_order>()
+    var lineItems = ArrayList<LineItem>()
+
 
     companion object{
         lateinit var ordersList:List<com.gradle.shopifyapp.model.OrderModel>
@@ -49,7 +62,6 @@ class MeFragment : Fragment(),OrderOnClickListener {
     lateinit var productRecyclerView : RecyclerView
     lateinit var productRecyclerAdapter:ProductRecyclerViewAdapter
     lateinit var productLayoutManager: StaggeredGridLayoutManager
-    lateinit var productList:List<Product>
 
 
     // This property is only valid between onCreateView and
@@ -61,11 +73,8 @@ class MeFragment : Fragment(),OrderOnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(MeViewModel::class.java)
 
         _binding = FragmentMeBinding.inflate(inflater, container, false)
-
         preference = MyPreference.getInstance(requireContext())!!
 
         // orders
@@ -85,12 +94,22 @@ class MeFragment : Fragment(),OrderOnClickListener {
             )
         )
         orderListViewModel = ViewModelProvider(this, vmFactory).get(OrderListViewModel::class.java)
+
+        //wishList Product
+        wishListVmFactory = ShoppingCartViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                requireContext()
+            ), requireContext()
+        )
+        wishListviewModel = ViewModelProvider(this, wishListVmFactory).get(ShoppingCartViewModel::class.java)
+
         val userId =preference.getData(Constants.USERID)
         orderListViewModel.getOrders(userId!!)
 
         orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
             if (it.isSuccessful) {
-              //  Log.i("order Result", it.body()?.orders?.get(0).toString())
+//                Log.i("order Result", it.body()?.orders?.get(0).toString())
                 ordersList= it.body()?.orders!!
                 if (ordersList.size<=2)
                 {
@@ -107,17 +126,15 @@ class MeFragment : Fragment(),OrderOnClickListener {
         }
 
 
-        //product
-        productRecyclerView = binding.listForWishList
-        productList = listOf(Product(price = 130.0f,description = "Description for product "),
-            Product(price = 60.0f,description = "Description for product oki "),
-            Product(price = 87.0f,description = "Description for product "),
-                    Product(price = 166.30f,description = "Description for product oki"))
-        productLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-        productRecyclerAdapter = ProductRecyclerViewAdapter(productList)
-        productLayoutManager.orientation =RecyclerView.VERTICAL
-        productRecyclerView.layoutManager = productLayoutManager
-        productRecyclerView.adapter = productRecyclerAdapter
+
+
+        getFavProducts()
+
+
+
+
+
+
 
         binding.settingsImg.setOnClickListener {
             var intent = Intent(requireContext(), SettingsActivity::class.java)
@@ -127,10 +144,13 @@ class MeFragment : Fragment(),OrderOnClickListener {
         binding.moreForWishList.setOnClickListener {
             startActivity(Intent(requireContext(),WishlistActivity::class.java))
         }
+
+
+
+
         binding.moreForOrders.text = Html.fromHtml("<u>more</u>")
         binding.moreForOrders.setOnClickListener {
             startActivity(Intent(requireContext(),OrdersActivity::class.java))
-//            startActivity(Intent(requireContext(),OrdersListActivity::class.java))
         }
 
        val userName = preference.getData(Constants.USERFIRSTNAME)
@@ -149,5 +169,62 @@ class MeFragment : Fragment(),OrderOnClickListener {
     }
 
     override fun orderOnClickListener(index:Int) {
+    }
+
+
+    private fun getFavProducts(){
+        productRecyclerAdapter = ProductRecyclerViewAdapter(arrayListOf(),requireContext(),this)
+
+        wishListviewModel.getDraftOrder(requireContext())
+        wishListviewModel.liveDraftOrderList.observe(this) {
+            Log.d("TAG", "getFavProducts: ${it.size}")
+            for(i in 0..it.size-1){
+                var email = preference.getData(Constants.USEREMAIL)
+
+                var df = Draft_order()
+                if(it.get(i).email == email && it.get(i).note == "favourite")
+                {
+                    df.draft_order = it.get(i)
+                    favProducts.add(df)
+                    lineItems.add(df.draft_order!!.line_items!![0])
+                }
+            }
+            productRecyclerView = binding.listForWishList
+            productLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            if (favProducts.size<=2)
+            {
+                orderRecyclerAdapter.orders= ordersList
+                productRecyclerAdapter.favProducts=favProducts
+
+            }else{
+                productRecyclerAdapter.favProducts=favProducts.subList(0,4)
+            }
+            productLayoutManager.orientation =RecyclerView.VERTICAL
+            productRecyclerView.layoutManager = productLayoutManager
+            productRecyclerView.adapter = productRecyclerAdapter
+
+            //  wishlistAdapter.setFavProducts(favProducts)
+        }
+
+
+        wishListviewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding!!.progressbar.visibility = View.VISIBLE
+            } else {
+                binding!!.progressbar.visibility = View.GONE
+            }
+        })
+    }
+
+    override fun onClick(draftOrder: Draft_order) {
+        Log.d("TAG", "onClickProduct: ${draftOrder.draft_order?.line_items?.get(0)?.product_id}")
+        val intent = Intent(requireContext(), ProductDetailsActivity::class.java)
+        intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
+        intent.putExtra(Constants.FROMWISHLIST,"true")
+
+        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)}")
+        Log.d("TAG", "onClickProduct: ${intent.getStringExtra(Constants.FROMWISHLIST)}")
+
+        startActivity(intent)
     }
 }

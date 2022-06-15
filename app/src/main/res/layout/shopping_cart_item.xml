@@ -34,12 +34,11 @@
             android:text="@string/title_item"
             android:textColor="@color/orange"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/favorite_img"
             android:layout_marginEnd="@dimen/_5sdp"
             app:layout_constraintStart_toEndOf="@+id/shoppingCartImg"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+     <!--   <ImageView
             android:id="@+id/favorite_img"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
@@ -47,7 +46,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:src="@drawable/favorite_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" /> -->
 
         <TextView
             android:id="@+id/size_title"
