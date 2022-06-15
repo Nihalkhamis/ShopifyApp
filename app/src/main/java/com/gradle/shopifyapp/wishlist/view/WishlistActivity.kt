@@ -86,6 +86,7 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 //            ))
     }
 
+
     private fun getFavProducts(){
         viewModel.getDraftOrder(this)
         viewModel.liveDraftOrderList.observe(this) {
@@ -150,3 +151,4 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 
 
 }
+
