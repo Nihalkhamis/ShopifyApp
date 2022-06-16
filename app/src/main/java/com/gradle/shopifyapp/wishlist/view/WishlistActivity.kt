@@ -103,14 +103,12 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
                 }
             }
 
-//            for(lineItem in favProducts!!){
-//                var product = HomeFragment.myProducts?.filter {
-//                    it.id == lineItem.draft_order!!.line_items!![0].product_id
-//                }
-//                Log.d("TAG", "getFavProducts: $product")
-//                //favProductsList.add(product)
-//            }
-          wishlistAdapter.setFavProducts(favProducts)
+            if(favProducts.isNullOrEmpty()){
+                binding!!.background.setImageResource(R.drawable.orders)
+            }else{
+                wishlistAdapter.setFavProducts(favProducts)
+
+            }
         }
 
 

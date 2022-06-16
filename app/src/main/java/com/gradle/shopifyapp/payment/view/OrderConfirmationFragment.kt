@@ -181,7 +181,7 @@ class OrderConfirmationFragment : Fragment() {
         )
 
         // Creating Paypal Payment activity intent
-        val intent: Intent = Intent(activity, PaymentActivity::class.java)
+        val intent = Intent(activity, PaymentActivity::class.java)
 
         //putting the paypal configuration to the intent
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
@@ -197,7 +197,7 @@ class OrderConfirmationFragment : Fragment() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
+    Log.i("ACTIVITYRESSULT:","")
         super.onActivityResult(requestCode, resultCode, data)
         // If the result is from paypal
         if (requestCode == PAYPAL_REQUEST_CODE) {
@@ -236,8 +236,6 @@ class OrderConfirmationFragment : Fragment() {
                     "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
                 );
             }
-        }else{
-            Log.i("PAYMENT","Payment else")
         }
     }
 

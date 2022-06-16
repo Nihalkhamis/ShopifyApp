@@ -1,9 +1,7 @@
 package com.gradle.shopifyapp.payment.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
@@ -24,16 +22,6 @@ class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
 
     override fun orderOnClickListener(address: Addresse) {
         myAddress= address
-
-//        val bundle = Bundle()
-//        bundle.putSerializable("myAddress",address)
-//        orderConfirmationFragment.arguments=bundle
-
-
-
-       // orderConfirmationFragment.addAddress(address)
     }
-
-
 
 }

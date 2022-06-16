@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/off_white"
     tools:context=".shoppingCart.View.ShoppingCartActivity">
-
+<ImageView
+    android:id="@+id/background_img"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:scaleType="fitCenter"
+    app:layout_constraintBottom_toBottomOf="parent"
+    />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbarLayout"
         android:layout_width="0dp"

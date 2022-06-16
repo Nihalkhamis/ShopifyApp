@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.shoppingCart.View;
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityShoppingCartBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.LineItem
@@ -23,6 +25,7 @@ import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
+import java.text.DecimalFormat
 
 
 class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
@@ -105,6 +108,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     private fun getDraftOrders(){
         shoppingCartVm.getDraftOrder(this)
         shoppingCartVm.liveDraftOrderList.observe(this) {
+
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
 
@@ -121,9 +125,14 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     totalPrice.add(totalPriceItem)
                 }
             }
+            if(products.isNullOrEmpty()){
+                binding.backgroundImg.setImageResource(R.drawable.orders)
+                binding.checkoutLayout.visibility= View.GONE
+            }else{
+                bindShoppingCart(products)
+                calculateTotalPrice(products)
+            }
 
-            bindShoppingCart(products)
-            calculateTotalPrice(products)
         }
     }
 
@@ -134,7 +143,9 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             total_price = total_price  * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)
             Log.i("ADD", total_price.toString())
         }
-        binding.priceText.text = total_price.toString() + (preference.getData(Constants.TOCURRENCY))
+        val decim = DecimalFormat("0.00")
+        val price2 = decim.format(total_price).toDouble()
+        binding.priceText.text = price2.toString() + (preference.getData(Constants.TOCURRENCY))
     }
 
 

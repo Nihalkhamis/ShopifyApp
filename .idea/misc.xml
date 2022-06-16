@@ -54,9 +54,6 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/wish_list_item.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_product_detailes.xml" value="0.23402985074626867" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.18115942028985507" />
-        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/review_row.xml" value="0.1693840579710145" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable-v24/radius_view.xml" value="0.1355" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/button_shape.xml" value="0.113" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/recycler_view_shape.xml" value="0.113" />
@@ -107,7 +104,8 @@
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.1" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_payment.xml" value="0.11778115501519756" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_product_brand.xml" value="0.11778115501519756" />
-        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_shopping_cart.xml" value="0.437403400309119" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_shopping_cart.xml" value="0.264" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/activity_wishlist.xml" value="0.22010869565217392" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/address_item.xml" value="0.22010869565217392" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/address_row.xml" value="0.2421875" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/brands_row.xml" value="0.11778115501519756" />
@@ -118,6 +116,7 @@
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.16032608695652173" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_order_confirmation.xml" value="0.264" />
+        <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_order_list.xml" value="0.22010869565217392" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_paypal.xml" value="0.22010869565217392" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_settings_address.xml" value="0.22010869565217392" />
         <entry key="..\:/iti-9 months/Graduation_Project/ShopifyApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />

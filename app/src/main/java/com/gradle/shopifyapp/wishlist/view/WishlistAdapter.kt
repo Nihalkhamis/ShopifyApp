@@ -15,6 +15,7 @@ import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.shoppingCart.View.CartOnClickListener
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
+import java.text.DecimalFormat
 
 class WishlistAdapter(var context: Context, var onItemClickListener: CartOnClickListener): RecyclerView.Adapter<WishlistAdapter.ViewHolder>() {
 
@@ -45,17 +46,14 @@ class WishlistAdapter(var context: Context, var onItemClickListener: CartOnClick
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         preference = MyPreference.getInstance(context)!!
-
         holder.product_description_wish_list.text = favProducts[position].draft_order?.line_items!![0].title
-
-        holder.price_Text_wish_list.text = (favProducts[position].draft_order?.line_items!![0].price!!.toDouble() * (preference.getData(
+        val decim = DecimalFormat("0.00")
+        val price2 = decim.format(favProducts[position].draft_order?.line_items!![0].price!!.toDouble() * (preference.getData(
             Constants.CURRENCYRESULT)
-            ?.toDouble() ?: 1.0)).toString()
-
+            ?.toDouble() ?: 1.0)).toDouble()
+        holder.price_Text_wish_list.text = (price2).toString()
         holder.currencyType_txt.text = preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
-
         Glide.with(context).load(favProducts[position].draft_order!!.note_attributes!![0].value).into(holder.product_img)
-
         holder.productCard.setOnClickListener {
             onItemClickListener.onClickProduct(favProducts[position])
         }

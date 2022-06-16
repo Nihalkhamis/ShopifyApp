@@ -270,8 +270,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         binding.descriptionText.text = product.body_html
         binding.productType.text = product.product_type
         binding.productName.text = product.title
-        binding.productPrice.text = "${ (product.variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
-            ?.toDouble() ?: 1.0))} ${preference.getData(Constants.TOCURRENCY)}"
+        binding.productPrice.text = String.format("%.2f",(product.variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
+            ?.toDouble() ?: 1.0))) + "${preference.getData(Constants.TOCURRENCY)}"
 
         binding.ratingBar.rating = (product.variants!![0].inventory_quantity / 3).toFloat()
     }

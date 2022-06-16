@@ -18,6 +18,7 @@ import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.SubCategoryModel
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
+import java.text.DecimalFormat
 import java.util.ArrayList
 
 class ProductBrandAdapter(
@@ -49,11 +50,11 @@ class ProductBrandAdapter(
 
     override fun onBindViewHolder(holder: ProdcutBrandHolder, position: Int) {
         preference = MyPreference.getInstance(context)!!
-        var price = ((productsBrand[position].variants?.get(0)?.price?.toDouble() ?: 1.0) * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toString()
+        val decim = DecimalFormat("0.00")
+        val price2 = decim.format((productsBrand[position].variants?.get(0)?.price?.toDouble() ?: 1.0) * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toDouble()
+        var price = (price2).toString()
          holder.price_Text_wish_list.text = price
         holder.product_description_wish_list.text = productsBrand[position].title
-
-
         holder.currencyType_txt.text = preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
         Glide.with(context).load(productsBrand[position].image!!.src).into(holder.product_img)
         holder.productCard.setOnClickListener {
