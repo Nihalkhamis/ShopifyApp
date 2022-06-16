@@ -9,6 +9,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -189,47 +190,64 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         }
 
         binding.addToCartBtn.setOnClickListener {
-            if (selectedSize != " " && selectedColor != " ") {
-                var order = DraftOrder()
-                var draft_orders = Draft_order()
-                order.email = preference.getData(Constants.USEREMAIL)
-                order.note = "cart"
-                for (i in 0..product.variants!!.size - 1) {
-                    if (product.variants!![i].option1 == selectedSize &&
-                        product.variants!![i].option2 == selectedColor
-                    ) {
-                        Log.i("option", selectedSize)
-                        Log.i("option", selectedColor)
-
-                        var lineItems = LineItem()
-                        lineItems.quantity = 1
-                        lineItems.variant_id = product.variants!![i].id
-                        order.line_items = listOf(lineItems)
-                        var note_attribute = NoteAttribute()
-                        note_attribute.name = "image"
-                        note_attribute.value = product.images!![0].src
-                        order.note_attributes = listOf(note_attribute)
-                        draft_orders = Draft_order(order)
-                        productDetailsVm.postDraftOrder(draft_orders)
-                        productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
-                            if (dOrder.isSuccessful) {
-                                Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
-                            } else {
-                                Log.d("TAG", "failed: ${dOrder.code()}")
+            if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+//                Toast.makeText(this, "You have To login at first", Toast.LENGTH_LONG).show()
+                makeAlert()
+            }else{
+                if (selectedSize != " " && selectedColor != " ") {
+                    var order = DraftOrder()
+                    var draft_orders = Draft_order()
+                    order.email = preference.getData(Constants.USEREMAIL)
+                    order.note = "cart"
+                    for (i in 0..product.variants!!.size - 1) {
+                        if (product.variants!![i].option1 == selectedSize &&
+                            product.variants!![i].option2 == selectedColor
+                        ) {
+                            var lineItems = LineItem()
+                            lineItems.quantity = 1
+                            lineItems.variant_id = product.variants!![i].id
+                            order.line_items = listOf(lineItems)
+                            var note_attribute = NoteAttribute()
+                            note_attribute.name = "image"
+                            note_attribute.value = product.images!![0].src
+                            order.note_attributes = listOf(note_attribute)
+                            draft_orders = Draft_order(order)
+                            productDetailsVm.postDraftOrder(draft_orders)
+                            productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
+                                if (dOrder.isSuccessful) {
+                                    Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                                } else {
+                                    Log.d("TAG", "failed: ${dOrder.code()}")
+                                }
                             }
+                            break
                         }
-                        break
                     }
                 }
+                else{
+                    Toast.makeText(this, "You must select size and color first", Toast.LENGTH_LONG).show()
+                }
             }
-            else{
-                Toast.makeText(this, "You must select size and color first", Toast.LENGTH_LONG).show()
-            }
+
         }
 
 
     }
+private fun makeAlert(){
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle("Androidly Alert")
+    builder.setMessage("We have a message")
 
+    builder.setPositiveButton("Login"){dialogInterface, which ->
+        Toast.makeText(applicationContext,"Login",Toast.LENGTH_LONG).show()
+    }
+
+    builder.setNeutralButton("Cancel") { dialog, which ->
+        Toast.makeText(applicationContext,
+            "Cancel", Toast.LENGTH_SHORT).show()
+    }
+    builder.show()
+}
     private fun initUIComponent() {
         // product Images
         viewPager = binding.productViewPager
