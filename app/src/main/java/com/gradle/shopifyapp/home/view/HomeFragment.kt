@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.home.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentHomeBinding
 import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
@@ -25,16 +29,16 @@ import com.gradle.shopifyapp.productBrand.view.ProductBrandActivity
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
+
 class HomeFragment : Fragment(), OnBrandClickListener {
 
     private var _binding: FragmentHomeBinding? = null
 
 
-
     // This property is only valid between onCreateView and
     // onDestroyView.
-    companion object{
-        var myProducts:List<Product>? = null
+    companion object {
+        var myProducts: List<Product>? = null
 
     }
 
@@ -56,7 +60,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     lateinit var vmFactory: HomeViewModelFactory
     private lateinit var homeViewModel: HomeViewModel
 
-    lateinit var preference : MyPreference
+    lateinit var preference: MyPreference
 
 
     override fun onCreateView(
@@ -89,7 +93,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
 
-        homeViewModel.getAllProducts(requireContext(),"", "", "")
+        homeViewModel.getAllProducts(requireContext(), "", "", "")
         homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
             myProducts = it.products
         }
@@ -100,18 +104,22 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         }
 
         homeViewModel.getAllDiscountCodes(requireContext())
-        homeViewModel.liveDiscountList.observe(viewLifecycleOwner){
+        homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
             bindCoupons(it)
         }
 
         // currency converter
-        homeViewModel.getAllConvertedCurrency(requireContext(), "1",
+        homeViewModel.getAllConvertedCurrency(
+            requireContext(), "1",
             "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
         )
-        homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner){
+        homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
             Log.d("TAG", "onCreateView: IT-> $it")
-            preference.saveData(Constants.CURRENCYRESULT,it.toString())
-            Log.d("TAG", "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}")
+            preference.saveData(Constants.CURRENCYRESULT, it.toString())
+            Log.d(
+                "TAG",
+                "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}"
+            )
         }
 
         return root
@@ -131,7 +139,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         //Brands
         brands_rv = binding.brandRowRv
-        brandsAdapter = Brands_adapter(requireContext(),this)
+        brandsAdapter = Brands_adapter(requireContext(), this)
         brands_rv.adapter = brandsAdapter
 
         //coupons
@@ -169,18 +177,18 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         }.start()
     }
 
-    private fun bindBrands(vendors: VendorsModel){
+    private fun bindBrands(vendors: VendorsModel) {
         brandsAdapter.setBrands(vendors.smart_collections)
     }
 
     override fun onClick(smartCollection: SmartCollection) {
         var intent = Intent(requireContext(), ProductBrandActivity::class.java)
-        intent.putExtra(Constants.BRANDID,smartCollection.id.toString())
-        intent.putExtra(Constants.BRANDNAME,smartCollection.title)
+        intent.putExtra(Constants.BRANDID, smartCollection.id.toString())
+        intent.putExtra(Constants.BRANDNAME, smartCollection.title)
         startActivity(intent)
     }
 
-    private fun bindCoupons(coupons: DiscountCodeModel){
+    private fun bindCoupons(coupons: DiscountCodeModel) {
         couponsAdapter.setCoupons(coupons.discount_codes)
     }
 

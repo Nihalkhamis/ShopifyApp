@@ -3,11 +3,13 @@ package com.gradle.shopifyapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.ActivityMainTabsBinding
 import com.gradle.shopifyapp.search.views.SearchActivity
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
@@ -69,5 +71,21 @@ class MainTabsActivity : AppCompatActivity() {
 
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+
+    private fun makeAlert(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Warning")
+        builder.setMessage("Sorry but you have to login at first")
+        builder.setNeutralButton("Cancel") { dialog, which -> }
+        builder.setPositiveButton("Login"){dialogInterface, which ->
+            var intent =Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+        }
+
+        builder.show()
     }
 }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.gradle.shopifyapp.R
+import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
 import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
@@ -166,18 +167,21 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         //wishlist
         binding.favoriteBtn.setOnClickListener {
             Log.d("TAG", "onCreate: Fav button clicked !")
-
-            if (hearted){
-                //remove product from wishlist
-                removeProductFromWishlist(draftOrderId)
-                hearted = false
-                binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
-            }
-            else{
-                //add product to wishlist
-                addProductToWishlist()
-                hearted = true
-                binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
+            if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+                makeAlert()
+            }else{
+                if (hearted){
+                    //remove product from wishlist
+                    removeProductFromWishlist(draftOrderId)
+                    hearted = false
+                    binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
+                }
+                else{
+                    //add product to wishlist
+                    addProductToWishlist()
+                    hearted = true
+                    binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
+                }
             }
 
         }
@@ -191,7 +195,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         binding.addToCartBtn.setOnClickListener {
             if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
-//                Toast.makeText(this, "You have To login at first", Toast.LENGTH_LONG).show()
                 makeAlert()
             }else{
                 if (selectedSize != " " && selectedColor != " ") {
@@ -235,17 +238,16 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     }
 private fun makeAlert(){
     val builder = AlertDialog.Builder(this)
-    builder.setTitle("Androidly Alert")
-    builder.setMessage("We have a message")
-
+    builder.setTitle("Warning")
+    builder.setMessage("Sorry but you have to login at first")
+    builder.setNeutralButton("Cancel") { dialog, which -> }
     builder.setPositiveButton("Login"){dialogInterface, which ->
-        Toast.makeText(applicationContext,"Login",Toast.LENGTH_LONG).show()
+        var intent =Intent(this,MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+
     }
 
-    builder.setNeutralButton("Cancel") { dialog, which ->
-        Toast.makeText(applicationContext,
-            "Cancel", Toast.LENGTH_SHORT).show()
-    }
     builder.show()
 }
     private fun initUIComponent() {

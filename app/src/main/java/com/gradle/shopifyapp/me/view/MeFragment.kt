@@ -105,7 +105,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         wishListviewModel = ViewModelProvider(this, wishListVmFactory).get(ShoppingCartViewModel::class.java)
 
         val userId =preference.getData(Constants.USERID)
-        orderListViewModel.getOrders(userId!!)
 
         orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
             if (it.isSuccessful) {
@@ -126,9 +125,19 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         }
 
 
+        if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+            binding.moreForOrders.visibility=View.GONE
+            binding.moreForWishList.visibility=View.GONE
+            binding.welcome.visibility =View.GONE
+            binding.ordersText.visibility = View.GONE
+            binding.wishListText.visibility = View.GONE
+            binding.noUser.text = "You have to login at first"
+            binding.settingsImg.visibility = View.GONE
+        }else{
+            orderListViewModel.getOrders(userId!!)
+            getFavProducts()
+        }
 
-
-        getFavProducts()
 
 
 
@@ -176,7 +185,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         productRecyclerAdapter = ProductRecyclerViewAdapter(arrayListOf(),requireContext(),this)
 
         wishListviewModel.getDraftOrder(requireContext())
-        wishListviewModel.liveDraftOrderList.observe(this) {
+        wishListviewModel.liveDraftOrderList.observe(viewLifecycleOwner) {
 //            Log.d("TAG", "getFavProducts: ${it.size}")
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
