@@ -146,7 +146,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         coupons_rv = binding.couponsRowRv
         gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
         coupons_rv!!.layoutManager = gridLayoutManager
-        couponsAdapter = Coupons_adapter(requireContext())
+        couponsAdapter = Coupons_adapter(requireContext(),this)
         coupons_rv!!.adapter = couponsAdapter
     }
 
@@ -186,6 +186,10 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         intent.putExtra(Constants.BRANDID, smartCollection.id.toString())
         intent.putExtra(Constants.BRANDNAME, smartCollection.title)
         startActivity(intent)
+    }
+
+    override fun onCouponClickListener(text: String) {
+        Snackbar.make(requireView(),text,Snackbar.LENGTH_SHORT).show()
     }
 
     private fun bindCoupons(coupons: DiscountCodeModel) {

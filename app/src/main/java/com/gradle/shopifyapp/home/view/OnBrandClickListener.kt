@@ -6,4 +6,5 @@ import com.gradle.shopifyapp.model.SubCategoryModel
 
 interface OnBrandClickListener {
     fun onClick(smartCollection: SmartCollection)
+    fun onCouponClickListener(text: String)
 }
