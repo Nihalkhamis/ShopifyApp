@@ -90,11 +90,42 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.shipping.text = (String.format("%.2f",tax)) + preference.getData(Constants.TOCURRENCY)
         _binding!!.subtotal.text = (String.format("%.2f",subtotal)) + preference.getData(Constants.TOCURRENCY)
 
+
+        orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                requireContext()
+            ), requireContext()
+        )
+        orderConfirmationVm = ViewModelProvider(this, orderConfirmationVmFactory).get(OrderConfirmationViewModel::class.java)
+
+
+        _binding!!.verify.setOnClickListener{
+            orderConfirmationVm.getAllDiscountCodes(requireContext())
+            orderConfirmationVm.liveDiscountList.observe(viewLifecycleOwner){discountCodes ->
+                for(i in 0..discountCodes.discount_codes.size-1){
+                    if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
+                        discount = subtotal*0.1
+                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
+                        discountCode = discountCodes.discount_codes[i]
+                        ////////
+                        break
+                    }else{
+                        discount = 0.0
+                        _binding!!.discount.text = discount.toString() + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.verify.setImageResource(R.drawable.verify_icon)
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
+                    }
+                }
+            }
+        }
+
         _binding!!.orderBtn.setOnClickListener {
 
             //line items email discount code shipping address method for payment
-          var result_order_Model = makeOrderModel()
-
+            var result_order_Model = makeOrderModel()
 
             if(_binding!!.creditRadioBtn.isChecked )
                 getPayment()
@@ -114,35 +145,6 @@ class OrderConfirmationFragment : Fragment() {
                     }
                 }
 
-            }
-        }
-        orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
-            Repository.getRepoInstance(
-                ApiClient.getClientInstance()!!,
-                requireContext()
-            ), requireContext()
-        )
-
-        _binding!!.verify.setOnClickListener{
-            orderConfirmationVm = ViewModelProvider(this, orderConfirmationVmFactory).get(OrderConfirmationViewModel::class.java)
-            orderConfirmationVm.getAllDiscountCodes(requireContext())
-            orderConfirmationVm.liveDiscountList.observe(viewLifecycleOwner){discountCodes ->
-                for(i in 0..discountCodes.discount_codes.size-1){
-                    if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
-                        discount = subtotal*0.1
-                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getData(Constants.TOCURRENCY)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
-                        _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
-                        discountCode = discountCodes.discount_codes[i]
-                        ////////
-                        break
-                    }else{
-                        discount = 0.0
-                        _binding!!.discount.text = discount.toString() + preference.getData(Constants.TOCURRENCY)
-                        _binding!!.verify.setImageResource(R.drawable.verify_icon)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
-                    }
-                }
             }
         }
 

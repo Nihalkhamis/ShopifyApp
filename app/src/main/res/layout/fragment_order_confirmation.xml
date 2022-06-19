@@ -240,7 +240,7 @@
         <EditText
             android:id="@+id/coupon_editText"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="48dp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_30sdp"
@@ -248,8 +248,7 @@
             android:hint="Add Coupon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coupon_textview">
-        </EditText>
+            app:layout_constraintTop_toBottomOf="@id/coupon_textview"/>
 
         <ImageView
             android:id="@+id/verify"
