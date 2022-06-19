@@ -46,6 +46,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
 
     var lineItems = ArrayList< LineItem>()
     var totalPrice = ArrayList< Total_price>()
+    var draftOrderId = ArrayList<Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +86,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra("line_items",lineItems)
             intent.putExtra("total_prices",totalPrice)
+            intent.putExtra("draft_order_id",draftOrderId)
             startActivity(intent)
         }
         binding.favoriteImg.setOnClickListener {
@@ -123,6 +125,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     totalPriceItem.tax = df.draft_order!!.total_tax
                     totalPriceItem.total = df.draft_order!!.total_price
                     totalPrice.add(totalPriceItem)
+                    draftOrderId.add(df.draft_order!!.id!!)
                 }
             }
             if(products.isNullOrEmpty()){
