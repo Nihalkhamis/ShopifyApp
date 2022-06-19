@@ -17,6 +17,7 @@ import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.settings.addAddress.viewmodel.AddAddressSettingsViewModel
 import com.gradle.shopifyapp.settings.addAddress.viewmodel.AddAddressSettingsViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
@@ -33,7 +34,7 @@ class AddAddressSettingsFragment : Fragment() {
     lateinit var vmFactory: AddAddressSettingsViewModelFactory
     lateinit var addAddressViewModel: AddAddressSettingsViewModel
 
-    lateinit var preference : MyPreference
+    lateinit var preference: MyPreference
 
 
     override fun onCreateView(
@@ -57,14 +58,26 @@ class AddAddressSettingsFragment : Fragment() {
 
         preference = MyPreference.getInstance(requireContext())!!
 
-        addAddressViewModel = ViewModelProvider(this, vmFactory).get(AddAddressSettingsViewModel::class.java)
+        addAddressViewModel =
+            ViewModelProvider(this, vmFactory).get(AddAddressSettingsViewModel::class.java)
 
+        if ((requireActivity() as SettingsActivity).address.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).city.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).country.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).zipCode.isNotEmpty()
+        ) {
+            binding.addressEdt.setText((requireActivity() as SettingsActivity).address)
+            binding.zipcodeEdt.setText((requireActivity() as SettingsActivity).zipCode)
+            binding.cityEdt.setText((requireActivity() as SettingsActivity).city)
+            binding.countryEdt.setText((requireActivity() as SettingsActivity).country)
+        }
 
         val customer = Customer()
 
         binding.saveBtn.setOnClickListener {
             if (binding.addressEdt.text!!.isNotEmpty() && binding.zipcodeEdt.text!!.isNotEmpty() && binding.phoneEdt.text!!.isNotEmpty() &&
-                binding.cityEdt.text!!.isNotEmpty() && binding.countryEdt.text!!.isNotEmpty()) {
+                binding.cityEdt.text!!.isNotEmpty() && binding.countryEdt.text!!.isNotEmpty()
+            ) {
                 customer.addresses = listOf(
                     Addresse(
                         address1 = binding.addressEdt.text.toString(),
@@ -88,25 +101,26 @@ class AddAddressSettingsFragment : Fragment() {
 //                Log.d("TAG", "ERROR while adding address: $it")
 //            }
 
-            addAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
-                if (it) {
-                    binding.progressbar.visibility = View.VISIBLE
-                } else {
-                     binding.progressbar.visibility = View.GONE
-                    findNavController(this)?.navigate(R.id.fragmentToAddresses)
-                }
-            })
-            }
-            else{
-                Toast.makeText(requireContext(),"Please fill all fields !", Toast.LENGTH_SHORT).show()
+                addAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
+                    if (it) {
+                        binding.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressbar.visibility = View.GONE
+                        findNavController(this)?.navigate(R.id.fragmentToAddresses)
+                    }
+                })
+            } else {
+                Toast.makeText(requireContext(), "Please fill all fields !", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
         binding.cancelBtn.setOnClickListener {
-            when(Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id){
-                R.id.settingsAddressFragment ->{
+            when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
+                R.id.settingsAddressFragment -> {
                     findNavController(this)?.navigate(R.id.fragmentToAddresses)
-                }else->{
+                }
+                else -> {
                     requireActivity().finish()
                 }
             }

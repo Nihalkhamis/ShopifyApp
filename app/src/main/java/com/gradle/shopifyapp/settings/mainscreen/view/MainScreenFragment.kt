@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.FragmentMainScreenBinding
+import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -33,6 +34,11 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if ((requireActivity() as SettingsActivity).address.isNotEmpty()){
+            findNavController(this)?.navigate(R.id.fragmentToAddAddress)
+        }
+
         preference = MyPreference.getInstance(requireContext())!!
         binding.backBtn.setOnClickListener {
             activity?.finish()

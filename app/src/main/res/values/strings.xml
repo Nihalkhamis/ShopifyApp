@@ -96,7 +96,8 @@
     <string name="shipping_fee">Shipping Fee</string>
     <string name="discount">Discount</string>
     <string name="reviews">Reviews</string>
-
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="location">Location</string>
 
 
 </resources>

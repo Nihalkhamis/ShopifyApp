@@ -1,5 +1,6 @@
-package com.gradle.shopifyapp.settings.ShowAllAddresses.view
+package com.gradle.shopifyapp.settings.showAllAddresses.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,13 +13,14 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.gradle.shopifyapp.MapsActivity
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentSettingsAddressBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
-import com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel.SettingsAddressViewModel
-import com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel.SettingsAddressViewModelFactory
+import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModel
+import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModelFactory
 import com.gradle.shopifyapp.settings.addAddress.view.OnAddressItemClickListener
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
@@ -83,7 +85,8 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
         }
 
         binding.addAddressFloatBtn.setOnClickListener {
-            findNavController(this)?.navigate(R.id.fragmentToAddAddress)
+           // findNavController(this)?.navigate(R.id.fragmentToAddAddress)
+            startActivity(Intent(requireContext(),MapsActivity::class.java))
         }
     }
 

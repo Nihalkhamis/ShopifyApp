@@ -246,7 +246,7 @@ class OrderConfirmationFragment : Fragment() {
         private val config = PayPalConfiguration() // Start with mock environment.  When ready,
             // switch to sandbox (ENVIRONMENT_SANDBOX)
             // or live (ENVIRONMENT_PRODUCTION)
-            .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK) // on below line we are passing a client id.
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // on below line we are passing a client id.
             .clientId(clientKey)
     }
 
