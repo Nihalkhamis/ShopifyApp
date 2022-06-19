@@ -185,29 +185,24 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         }
     }
 
-    override fun onDeleteProduct(id: String) {
-        shoppingCartVm.deleteProductFromDraftOrder(id)
-        shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
-            if(dOrder.isSuccessful){
-                Log.d("TAG", "successful")
-                //not working right
-                products.remove(dOrder.body())
-                calculateTotalPrice(products)            }
-            else{
-                Log.d("TAG", "failed: ${dOrder.code()}")
-            }
-        }
-    }
+//    override fun onDeleteProduct(id: String) {
+//        shoppingCartVm.deleteProductFromDraftOrder(id)
+//        shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
+//            if(dOrder.isSuccessful){
+//                Log.d("TAG", "successful")
+//                products.remove(dOrder.body())
+//                calculateTotalPrice(products)
+//            }
+//            else{
+//                Log.d("TAG", "failed: ${dOrder.code()}")
+//            }
+//        }
+//    }
 
     override fun onClickProduct(draftOrder: Draft_order) {
-        Log.d("TAG", "onClickProduct: ${draftOrder.draft_order?.line_items?.get(0)?.product_id}")
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
         intent.putExtra(Constants.FROMWISHLIST,"true")
-
-        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)}")
-        Log.d("TAG", "onClickProduct: ${intent.getStringExtra(Constants.FROMWISHLIST)}")
-
         startActivity(intent)
     }
 
@@ -228,6 +223,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         if(dOrder.isSuccessful){
                             Log.d("TAG", "successful")
                             //error in calculations
+                            products.remove(swipedProduct)
+                            shoppingCartAdapter.notifyDataSetChanged()
                             calculateTotalPrice(products)
                         }
                         else{

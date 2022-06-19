@@ -132,8 +132,8 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
     override fun onRemoveProduct(draftOrder: Draft_order) {
     }
 
-    override fun onDeleteProduct(id: String) {
-    }
+//    override fun onDeleteProduct(id: String) {
+//    }
 
     override fun onClickProduct(draftOrder: Draft_order) {
         Log.d("TAG", "onClickProduct: ${draftOrder.draft_order?.line_items?.get(0)?.product_id}")
