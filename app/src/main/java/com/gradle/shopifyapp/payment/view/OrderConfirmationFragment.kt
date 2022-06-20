@@ -24,6 +24,8 @@ import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
+import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
+import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.paypal.android.sdk.payments.PayPalConfiguration
@@ -39,9 +41,15 @@ class OrderConfirmationFragment : Fragment() {
     private var _binding: FragmentOrderConfirmationBinding? = null
     private val binding get() = _binding!!
     lateinit var preference: MyPreference
+
     var amount:String?=null
     lateinit var orderConfirmationVmFactory: OrderConfirmationViewModelFactory
     lateinit var orderConfirmationVm: OrderConfirmationViewModel
+
+
+    lateinit var vmFactory: ShoppingCartViewModelFactory
+    lateinit var shoppingCartVm: ShoppingCartViewModel
+
     var line_items = ArrayList<LineItem>()
     var total_prices = ArrayList<Total_price>()
     var tax =0.0
@@ -50,10 +58,12 @@ class OrderConfirmationFragment : Fragment() {
     var discount = 0.0
     var discountCode = DiscountCode()
     var myLineItems = mutableListOf<OrderModel.LineItem>()
+    var draftOrderIds = ArrayList<Long>()
 
 
 
-     var myAddress :Addresse = Addresse()
+
+    var myAddress :Addresse = Addresse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,8 +76,13 @@ class OrderConfirmationFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentOrderConfirmationBinding.inflate(inflater, container, false)
         preference = MyPreference.getInstance(requireContext())!!
-    //    myAddress = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).myAddress
-
+        vmFactory = ShoppingCartViewModelFactory(
+            Repository.getRepoInstance(
+                ApiClient.getClientInstance()!!,
+                requireContext()
+            ), requireContext()
+        )
+        shoppingCartVm = ViewModelProvider(this, vmFactory).get(ShoppingCartViewModel::class.java)
 
         _binding!!.backBtn.setOnClickListener {
             findNavController(this)?.navigate(R.id.paymenttoaddress)
@@ -79,6 +94,7 @@ class OrderConfirmationFragment : Fragment() {
 
         line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
         total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
+        draftOrderIds = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).draftOrderId
 
 
 
@@ -137,8 +153,13 @@ class OrderConfirmationFragment : Fragment() {
             {
                 if(InternetConnection.isInternetAvailable(requireContext())){
                     orderConfirmationVm.postOrder(result_order_Model)
+                    binding.progressbar.visibility = View.VISIBLE
                     orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
                         if (it.isSuccessful){
+                            for (id in draftOrderIds){
+                                shoppingCartVm.deleteProductFromDraftOrder(id.toString())
+                            }
+                            binding.progressbar.visibility = View.GONE
                             Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
                             startActivity(Intent(requireContext(),MainTabsActivity::class.java))
                             activity?.finish()
