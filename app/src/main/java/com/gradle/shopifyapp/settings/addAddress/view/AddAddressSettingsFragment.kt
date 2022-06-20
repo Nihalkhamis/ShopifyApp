@@ -88,10 +88,6 @@ class AddAddressSettingsFragment : Fragment() {
                     preference.getData(Constants.USERID).toString(), customerModel
                 )
 
-//            addAddressViewModel.errorMessage.observe(viewLifecycleOwner) {
-//                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-//                Log.d("TAG", "ERROR while adding address: $it")
-//            }
 
                 addAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
                     if (it) {
@@ -105,15 +101,6 @@ class AddAddressSettingsFragment : Fragment() {
                         else{
                             requireActivity().finish()
                         }
-
-//                        when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
-//                            R.id.settingsAddressFragment -> {
-//                                findNavController(this)?.navigate(R.id.fragmentToAddresses)
-//                            }
-//                            else -> {
-//                                requireActivity().finish()
-//                            }
-//                        }
                     }
                 })
             } else {
@@ -123,16 +110,25 @@ class AddAddressSettingsFragment : Fragment() {
         }
 
         binding.cancelBtn.setOnClickListener {
-            when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
-                R.id.settingsAddressFragment -> {
-                    findNavController(this)?.navigate(R.id.fragmentToAddresses)
-                }
-                else -> {
-                    requireActivity().finish()
-                }
+
+            if ((requireActivity() as SettingsActivity).resultFromMaps.isNotEmpty()){
+                // comes from maps so return to addresses fragment
+                findNavController(this)?.navigate(R.id.fragmentToAddresses)
+            }
+            else{
+                requireActivity().finish()
             }
         }
-    }
+
+//            when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
+//                R.id.settingsAddressFragment -> {
+//                    findNavController(this)?.navigate(R.id.fragmentToAddresses)
+//                }
+//                else -> {
+//                    requireActivity().finish()
+//                }
+//            }
+        }
 
     private fun findNavController(fragment: Fragment): NavController? {
         val view = fragment.view
