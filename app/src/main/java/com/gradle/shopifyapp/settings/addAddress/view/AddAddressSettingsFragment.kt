@@ -98,15 +98,22 @@ class AddAddressSettingsFragment : Fragment() {
                         binding.progressbar.visibility = View.VISIBLE
                     } else {
                         binding.progressbar.visibility = View.GONE
-                        when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
-                            R.id.settingsAddressFragment -> {
-                                findNavController(this)?.navigate(R.id.fragmentToAddresses)
-                            }
-                            else -> {
-                                requireActivity().finish()
-                            }
+                        if ((requireActivity() as SettingsActivity).resultFromMaps.isNotEmpty()){
+                            // comes from maps so return to addresses fragment
+                            findNavController(this)?.navigate(R.id.fragmentToAddresses)
                         }
-                        findNavController(this)?.navigate(R.id.fragmentToAddresses)
+                        else{
+                            requireActivity().finish()
+                        }
+
+//                        when (Navigation.findNavController(requireView()).previousBackStackEntry?.destination?.id) {
+//                            R.id.settingsAddressFragment -> {
+//                                findNavController(this)?.navigate(R.id.fragmentToAddresses)
+//                            }
+//                            else -> {
+//                                requireActivity().finish()
+//                            }
+//                        }
                     }
                 })
             } else {

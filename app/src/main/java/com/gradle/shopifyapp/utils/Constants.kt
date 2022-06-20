@@ -2,6 +2,8 @@ package com.gradle.shopifyapp.utils
 
 class Constants {
     companion object {
+        const val FROMMAPSTO = "FROM_MAPS_TO"
+        const val FROMSETTINGSFRAGMENT = "FROM_SETTINGS_FRAGMENT"
         const val ADDRESS = "ADDRESS"
         const val CITY = "CITY"
         const val COUNTRY = "COUNTRY"

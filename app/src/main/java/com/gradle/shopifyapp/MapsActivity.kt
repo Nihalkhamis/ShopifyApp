@@ -216,11 +216,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
 
             //finish()
 
+            var resultIntent = intent.getStringExtra(Constants.FROMSETTINGSFRAGMENT)
+            Log.d("TAG", "getAddressFromLocation: FROM----> $resultIntent")
+
             val intent = Intent(this,SettingsActivity::class.java)
             intent.putExtra(Constants.ADDRESS, address)
             intent.putExtra(Constants.CITY, cityName)
             intent.putExtra(Constants.COUNTRY, countryName)
             intent.putExtra(Constants.ZIPCODE, zipCode)
+            intent.putExtra(Constants.FROMMAPSTO, resultIntent)
             startActivity(intent)
 
 

@@ -19,6 +19,7 @@ import com.gradle.shopifyapp.databinding.FragmentSettingsAddressBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModel
 import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModelFactory
 import com.gradle.shopifyapp.settings.addAddress.view.OnAddressItemClickListener
@@ -81,12 +82,15 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
         })
 
         binding.backBtn.setOnClickListener {
-            findNavController(this)?.navigate(R.id.fragmentToMain)
+            (requireActivity() as SettingsActivity).address = ""
+            findNavController(this)?.navigate(R.id.fragmentBack)
         }
 
         binding.addAddressFloatBtn.setOnClickListener {
            // findNavController(this)?.navigate(R.id.fragmentToAddAddress)
-            startActivity(Intent(requireContext(),MapsActivity::class.java))
+            var intent = Intent(requireContext(),MapsActivity::class.java)
+            intent.putExtra(Constants.FROMSETTINGSFRAGMENT,"from settings")
+            startActivity(intent)
         }
     }
 

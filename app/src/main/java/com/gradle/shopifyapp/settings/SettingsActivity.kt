@@ -18,6 +18,7 @@ class SettingsActivity : AppCompatActivity() {
     var city = ""
     var country = ""
     var zipCode = ""
+    var resultFromMaps = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class SettingsActivity : AppCompatActivity() {
                city = intent.getStringExtra(Constants.CITY)!!
                country = intent.getStringExtra(Constants.COUNTRY)!!
                zipCode = intent.getStringExtra(Constants.ZIPCODE)!!
+               resultFromMaps = intent.getStringExtra(Constants.FROMMAPSTO)!!
 
        }
 

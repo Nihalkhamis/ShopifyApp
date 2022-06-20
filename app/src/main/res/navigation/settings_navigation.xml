@@ -58,20 +58,20 @@
         tools:layout="@layout/fragment_settings_address">
 
         <action
-            android:id="@+id/fragmentToMain"
+            android:id="@+id/fragmentBack"
             app:destination="@id/mainScreenFragment"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_down" />
 
-        <action
+     <!--   <action
             android:id="@+id/fragmentToAddAddress"
             app:destination="@id/addAddressSettingsFragment"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_down" />
+            app:popExitAnim="@anim/slide_down" /> -->
 
     </fragment>
     <fragment
