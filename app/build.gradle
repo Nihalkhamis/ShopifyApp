@@ -78,10 +78,6 @@ dependencies {
     //viewpager indicator
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
-    //paypal
-    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
-
-
     //maps
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
@@ -91,11 +87,6 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
 }
-
-
-    // Stripe
-  //  implementation 'com.stripe:stripe-android:17.2.0'
-//    implementation 'com.android.volley:volley:1.1.0'
 
 
 
