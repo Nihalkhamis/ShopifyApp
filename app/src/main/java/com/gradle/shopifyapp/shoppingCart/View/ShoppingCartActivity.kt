@@ -89,16 +89,17 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                 val intent = Intent(this, PaymentActivity::class.java)
                 intent.putExtra("line_items",lineItems)
                 intent.putExtra("total_prices",totalPrice)
+                intent.putExtra("draft_order_id",draftOrderId)
                 startActivity(intent)
             }else{
                 showSnackBar()
             }
 
-            val intent = Intent(this, PaymentActivity::class.java)
-            intent.putExtra("line_items",lineItems)
-            intent.putExtra("total_prices",totalPrice)
-            intent.putExtra("draft_order_id",draftOrderId)
-            startActivity(intent)
+//            val intent = Intent(this, PaymentActivity::class.java)
+//            intent.putExtra("line_items",lineItems)
+//            intent.putExtra("total_prices",totalPrice)
+//            intent.putExtra("draft_order_id",draftOrderId)
+//            startActivity(intent)
         }
         binding.favoriteImg.setOnClickListener {
             startActivity(Intent(this,WishlistActivity::class.java))
