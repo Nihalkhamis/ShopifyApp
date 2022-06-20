@@ -34,11 +34,6 @@ import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
-import com.paypal.android.sdk.payments.PayPalConfiguration
-import com.paypal.android.sdk.payments.*
-import com.paypal.android.sdk.payments.PayPalService
-import com.paypal.android.sdk.payments.PaymentActivity
-import com.paypal.android.sdk.payments.PaymentConfirmation
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
