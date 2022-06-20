@@ -12,6 +12,7 @@ class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
     var lineItems = ArrayList<LineItem>()
     var totalPrice = ArrayList<Total_price>()
     var myAddress:Addresse= Addresse()
+    lateinit var draftId :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)

@@ -119,7 +119,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
                     }
                 }
                 else{
-                    binding.noFavorite.visibility=View.VISIBLE
+                    binding.noOrders.visibility=View.VISIBLE
                 }
 
 //                orderRecyclerAdapter.orders= ordersList
