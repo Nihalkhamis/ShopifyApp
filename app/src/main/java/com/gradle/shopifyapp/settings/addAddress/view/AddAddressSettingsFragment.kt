@@ -17,6 +17,7 @@ import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.settings.addAddress.viewmodel.AddAddressSettingsViewModel
 import com.gradle.shopifyapp.settings.addAddress.viewmodel.AddAddressSettingsViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
@@ -54,6 +55,17 @@ class AddAddressSettingsFragment : Fragment() {
 
         addAddressViewModel =
             ViewModelProvider(this, vmFactory).get(AddAddressSettingsViewModel::class.java)
+
+        if ((requireActivity() as SettingsActivity).address.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).city.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).country.isNotEmpty() &&
+            (requireActivity() as SettingsActivity).zipCode.isNotEmpty()
+        ) {
+            binding.addressEdt.setText((requireActivity() as SettingsActivity).address)
+            binding.zipcodeEdt.setText((requireActivity() as SettingsActivity).zipCode)
+            binding.cityEdt.setText((requireActivity() as SettingsActivity).city)
+            binding.countryEdt.setText((requireActivity() as SettingsActivity).country)
+        }
 
         val customer = Customer()
 
@@ -94,6 +106,7 @@ class AddAddressSettingsFragment : Fragment() {
                                 requireActivity().finish()
                             }
                         }
+                        findNavController(this)?.navigate(R.id.fragmentToAddresses)
                     }
                 })
             } else {

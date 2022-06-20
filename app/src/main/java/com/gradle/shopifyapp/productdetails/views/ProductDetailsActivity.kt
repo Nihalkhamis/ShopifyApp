@@ -65,6 +65,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel
 
+
     var hearted : Boolean = false
 
     var draftOrderId : Long = 1000
@@ -173,14 +174,14 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                 if (hearted){
                     //remove product from wishlist
                     removeProductFromWishlist(draftOrderId)
-                    hearted = false
-                    binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
+//                    hearted = false
+//                    binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
                 }
                 else{
                     //add product to wishlist
                     addProductToWishlist()
-                    hearted = true
-                    binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
+//                    hearted = true
+//                    binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
                 }
             }
 
@@ -301,6 +302,8 @@ private fun makeAlert(){
         wishlistViewModel.deleteProductFromDraftOrder(id.toString())
         wishlistViewModel.liveDeleteDraftOrderList.observe(this, Observer{
             if (it.isSuccessful) {
+                hearted = false
+                binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
                 Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_LONG).show()
             } else {
                 Log.d("TAG", "failed: ${it.code()}")
@@ -331,14 +334,16 @@ private fun makeAlert(){
 
         productDetailsVm.postDraftOrder(draft_orders)
 
-        productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
-            if (dOrder.isSuccessful) {
+        productDetailsVm.liveDraftOrderList.observe(this, Observer {
+            if (it.isSuccessful) {
+                hearted = true
+                binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
                 Toast.makeText(this, "Added to wishlist", Toast.LENGTH_LONG).show()
             } else {
-                Log.d("TAG", "failed: ${dOrder.code()}")
-                Log.d("TAG", "onCreate: ${dOrder.errorBody()}")
+                Log.d("TAG", "failed: ${it.code()}")
+                Log.d("TAG", "onCreate: ${it.errorBody()}")
             }
-        }
+        })
     }
 
     override fun onClickForSelectedColor(color: String) {

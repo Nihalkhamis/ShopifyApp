@@ -19,9 +19,9 @@ import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.payment.view.PaymentCommunicator
 import com.gradle.shopifyapp.payment.view.PaymentActivity
-import com.gradle.shopifyapp.settings.ShowAllAddresses.view.SettingsAddressAdapter
-import com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel.SettingsAddressViewModel
-import com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel.SettingsAddressViewModelFactory
+import com.gradle.shopifyapp.settings.showAllAddresses.view.SettingsAddressAdapter
+import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModel
+import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModelFactory
 import com.gradle.shopifyapp.settings.addAddress.view.OnAddressItemClickListener
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference

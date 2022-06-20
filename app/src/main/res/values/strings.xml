@@ -98,6 +98,8 @@
     <string name="reviews">Reviews</string>
     <string name="no_orders">You did not make any order</string>
     <string name="no_fav">There is nothing in the wishlist</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="location">Location</string>
 
 
 </resources>

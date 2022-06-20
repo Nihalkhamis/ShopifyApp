@@ -55,7 +55,7 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
             finish()
         }
         binding!!.cartImg.setOnClickListener {
-            startActivity(Intent(this,ShoppingCartActivity::class.java))
+            startActivity(Intent(this, ShoppingCartActivity::class.java))
         }
 
         vmFactory = ShoppingCartViewModelFactory(
@@ -67,50 +67,33 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 
         viewModel = ViewModelProvider(this, vmFactory).get(ShoppingCartViewModel::class.java)
 
-
         setAdapter()
-        getFavProducts()
 
-    }
-
-    private fun setAdapter() {
-
-        wishlistAdapter = WishlistAdapter(this, this)
-        binding!!.wishlistProductRV.adapter = wishlistAdapter
-//        wishlistAdapter.setSubCategories(arrayListOf(SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            SubCategoryModel("Soiree red dress",R.drawable.dress,2000),
-//            ))
-    }
-
-
-    private fun getFavProducts(){
-        viewModel.getDraftOrder(this)
         viewModel.liveDraftOrderList.observe(this) {
-            Log.d("TAG", "getFavProducts: ${it.size}")
-            for(i in 0..it.size-1){
+            Log.d("TGGGGAG", "getFavProducts: ${it.size}")
+            favProducts.clear()
+            for (i in 0..it.size - 1) {
                 var email = preference.getData(Constants.USEREMAIL)
 
                 var df = Draft_order()
-                if(it.get(i).email == email && it.get(i).note == "favourite")
-                {
-                    df.draft_order = it.get(i)
+                if (it[i].email == email && it[i].note == "favourite") {
+                    df.draft_order = it[i]
                     favProducts.add(df)
                     lineItems.add(df.draft_order!!.line_items!![0])
+
                 }
             }
 
-            if(favProducts.isNullOrEmpty()){
+            if (favProducts.isNullOrEmpty()) {
                 binding!!.background.setImageResource(R.drawable.orders)
-            }else{
+                wishlistAdapter.deleteFavProducts()
+            } else {
+
+//                wishlistAdapter.deleteFavProducts()
                 wishlistAdapter.setFavProducts(favProducts)
 
             }
         }
-
 
         viewModel.loading.observe(this, Observer {
             if (it) {
@@ -119,14 +102,26 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
                 binding!!.progressbar.visibility = View.GONE
             }
         })
+
+    }
+
+
+    private fun setAdapter() {
+        wishlistAdapter = WishlistAdapter(this, this)
+        binding!!.wishlistProductRV.adapter = wishlistAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getFavProducts()
+    }
+
+    private fun getFavProducts() {
+        viewModel.getDraftOrder(this)
     }
 
     override fun onAddProduct(draftOrder: Draft_order) {
 
-//        val intent = Intent(this, ProductDetailsActivity::class.java)
-//        intent.putExtra("product",productModel)
-//        intent.putExtra("price",price)
-//        startActivity(intent)
     }
 
     override fun onRemoveProduct(draftOrder: Draft_order) {
@@ -138,10 +133,13 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
     override fun onClickProduct(draftOrder: Draft_order) {
         Log.d("TAG", "onClickProduct: ${draftOrder.draft_order?.line_items?.get(0)?.product_id}")
         val intent = Intent(this, ProductDetailsActivity::class.java)
-            intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
-            intent.putExtra(Constants.FROMWISHLIST,"true")
+        intent.putExtra(
+            Constants.SELECTEDPRODUCTID,
+            draftOrder.draft_order?.line_items?.get(0)?.product_id
+        )
+        intent.putExtra(Constants.FROMWISHLIST, "true")
 
-        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)}")
+        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID, 1000)}")
         Log.d("TAG", "onClickProduct: ${intent.getStringExtra(Constants.FROMWISHLIST)}")
 
         startActivity(intent)

@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class ProductDetailsViewModel (private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
-    val postDraftOrderList = MutableLiveData<Response<Draft_order>>()
+    private val postDraftOrderList = MutableLiveData<Response<Draft_order>>()
     val liveDraftOrderList : LiveData<Response<Draft_order>> = postDraftOrderList
 
     private val productList = MutableLiveData<Response<ProductItem>>()
@@ -27,14 +27,18 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     fun postDraftOrder(order: Draft_order) {
         viewModelScope.launch {
             val response = repo.postDraftOrders(order)
+            if (response.isSuccessful){
             postDraftOrderList.value = response
+        }
         }
     }
 
     fun getProductById(productId : String){
         viewModelScope.launch {
             val response = repo.getProductById(productId)
-            productList.value = response
+            if (response.isSuccessful) {
+                productList.value = response
+            }
         }
     }
 

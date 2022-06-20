@@ -1,4 +1,4 @@
-package com.gradle.shopifyapp.settings.ShowAllAddresses.viewmodel
+package com.gradle.shopifyapp.settings.showAllAddresses.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

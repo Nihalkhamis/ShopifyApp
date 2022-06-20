@@ -16,13 +16,13 @@ import retrofit2.Response
 
 class ShoppingCartViewModel (private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
 
-    val getDraftOrderList = MutableLiveData<List<DraftOrder>>()
+    private val getDraftOrderList = MutableLiveData<List<DraftOrder>>()
     val liveDraftOrderList : LiveData<List<DraftOrder>> = getDraftOrderList
 
-    val updateDraftOrderList = MutableLiveData<Response<Draft_order>>()
+    private val updateDraftOrderList = MutableLiveData<Response<Draft_order>>()
     val liveUpdateDraftOrderList : LiveData<Response<Draft_order>> = updateDraftOrderList
 
-    val deleteDraftOrderList = MutableLiveData<Response<Draft_order>>()
+    private val deleteDraftOrderList = MutableLiveData<Response<Draft_order>>()
     val liveDeleteDraftOrderList : LiveData<Response<Draft_order>> = deleteDraftOrderList
 
     val loading = MutableLiveData<Boolean>()
@@ -32,7 +32,6 @@ class ShoppingCartViewModel (private val repo : RepositoryInterface, private var
         loading.value = true
         viewModelScope.launch(Dispatchers.IO ) {
             val response = repo.getDraftOrders()
-            getDraftOrderList.postValue(response.body()?.draft_orders)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     loading.value = false
@@ -40,6 +39,8 @@ class ShoppingCartViewModel (private val repo : RepositoryInterface, private var
                     loading.value = false
                 }
             }
+            getDraftOrderList.postValue(response.body()?.draft_orders)
+
         }
     }
 
@@ -62,7 +63,9 @@ class ShoppingCartViewModel (private val repo : RepositoryInterface, private var
         viewModelScope.launch {
             val response = repo.deleteProductFromDraftOrder(id)
             withContext(Dispatchers.Main){
+                if (response.isSuccessful){
                 deleteDraftOrderList.value = response
+            }
             }
         }
     }
