@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.ActivityShoppingCartBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
@@ -18,6 +19,7 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
@@ -82,10 +84,15 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         })
 
         binding.checkoutBtn.setOnClickListener{
-            val intent = Intent(this, PaymentActivity::class.java)
-            intent.putExtra("line_items",lineItems)
-            intent.putExtra("total_prices",totalPrice)
-            startActivity(intent)
+            if(InternetConnection.isInternetAvailable(this)){
+                val intent = Intent(this, PaymentActivity::class.java)
+                intent.putExtra("line_items",lineItems)
+                intent.putExtra("total_prices",totalPrice)
+                startActivity(intent)
+            }else{
+                showSnackBar()
+            }
+
         }
         binding.favoriteImg.setOnClickListener {
             startActivity(Intent(this,WishlistActivity::class.java))
@@ -238,6 +245,12 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(shoppingCart_rv)
+    }
+    private fun showSnackBar(){
+        val snackBar = Snackbar.make(this.findViewById(android.R.id.content),
+            "You can't check out check your connection ", Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
     }
 
 }

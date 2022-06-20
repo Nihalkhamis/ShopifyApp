@@ -56,6 +56,7 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable-v24/radius_view.xml" value="0.1355" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/button_shape.xml" value="0.113" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/login_icon.xml" value="0.101" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/recycler_view_shape.xml" value="0.113" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/drawable/shape.xml" value="0.1355" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -71,6 +72,7 @@
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_category.xml" value="0.1" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_home.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_login.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_main_screen.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.25" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_order_details.xml" value="0.22" />
         <entry key="..\:/Users/2y/Documents/GitHub/ShopifyApp/app/src/main/res/layout/fragment_order_list.xml" value="0.17074275362318841" />

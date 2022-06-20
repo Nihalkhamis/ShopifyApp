@@ -96,7 +96,8 @@
     <string name="shipping_fee">Shipping Fee</string>
     <string name="discount">Discount</string>
     <string name="reviews">Reviews</string>
-
+    <string name="no_orders">You did not make any order</string>
+    <string name="no_fav">There is nothing in the wishlist</string>
 
 
 </resources>

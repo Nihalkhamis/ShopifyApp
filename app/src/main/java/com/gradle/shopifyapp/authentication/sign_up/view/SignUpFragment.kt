@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.authentication.sign_up.view
 
+import android.R
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModel
 import com.gradle.shopifyapp.authentication.sign_up.viewmodel.SignUpViewModelFactory
@@ -25,6 +27,7 @@ import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -87,42 +90,50 @@ class SignUpFragment : Fragment() {
 
         binding.signupBtn.setOnClickListener {
 
-            val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+
             if(firstName.text.toString()!=""&&lastName.text.toString()!=""&&emailTxt.text.toString()!=""&&phoneTxt.text.toString()!=""&&passwordTxt.text.toString()!=""&& confirmPasswordTxt.text.toString()!=""){
                 if(passwordTxt.text.toString() == confirmPasswordTxt.text.toString()){
+                    if(InternetConnection.isInternetAvailable(requireContext())){
+                        c.first_name = firstName.text.toString().trim()
+                        c.last_name = lastName.text.toString().trim()
+                        c.email = emailTxt.text.toString().trim()
+                        c.phone = phoneTxt.text.toString().trim()
+                        c.password = passwordTxt.text.toString().trim()
+                        c.tags="${passwordTxt.text.toString().trim()}"
+                        c.password_confirmation = confirmPasswordTxt.text.toString().trim()
+                        c.verified_email = true
+                        myCustomer.customer = c
+                        signUpViewModel.registerUser(myCustomer)
+                        binding.progressbar.visibility = View.VISIBLE
 
-                    c.first_name = firstName.text.toString().trim()
-                    c.last_name = lastName.text.toString().trim()
-                    c.email = emailTxt.text.toString().trim()
-                    c.phone = phoneTxt.text.toString().trim()
-                    c.password = passwordTxt.text.toString().trim()
-                    c.tags="${passwordTxt.text.toString().trim()}"
-                    c.password_confirmation = confirmPasswordTxt.text.toString().trim()
-                    c.verified_email = true
-                    myCustomer.customer = c
-                    signUpViewModel.registerUser(myCustomer)
-                    binding.progressbar.visibility = View.VISIBLE
+                        signUpViewModel.userResponseLiveData.observe(viewLifecycleOwner) {
+                            if (it.isSuccessful) {
+                                Toast.makeText(requireContext(),"Successfully Register", Toast.LENGTH_LONG).show()
+                                //save user is data
+                                preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
+                                preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
+                                preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
+                                preference.saveData(Constants.USERMOBILEPHONE, it.body()?.customer?.phone.toString())
+                                preference.saveData(Constants.TOCURRENCY,"EGP")
+                                preference.saveData(Constants.CURRENCYRESULT,"1.0")
 
-                    signUpViewModel.userResponseLiveData.observe(viewLifecycleOwner) {
-                        if (it.isSuccessful) {
-                            Toast.makeText(requireContext(),"Successfully Register", Toast.LENGTH_LONG).show()
-                            preference.saveData(Constants.USERID, it.body()?.customer?.id.toString())
-                            preference.saveData(Constants.USEREMAIL, it.body()?.customer?.email.toString())
-                            preference.saveData(Constants.USERFIRSTNAME, it.body()?.customer?.first_name.toString())
-                            preference.saveData(Constants.USERMOBILEPHONE, it.body()?.customer?.phone.toString())
+                                binding.progressbar.visibility = View.GONE
+                                startActivity(Intent(requireContext(), MainTabsActivity::class.java))
+                                activity?.finish()
 
-                            binding.progressbar.visibility = View.GONE
-                            startActivity(Intent(requireContext(), MainTabsActivity::class.java))
-                            activity?.finish()
-
-                        } else  {
-                            binding.progressbar.visibility = View.GONE
-                            Log.i("error", it.code().toString())
-                            Log.i("error", it.errorBody().toString())
-                            Toast.makeText(requireContext(), "Error while registering check this data is not exist before", Toast.LENGTH_LONG).show()
+                            } else  {
+                                binding.progressbar.visibility = View.GONE
+                                Log.i("error", it.code().toString())
+                                Log.i("error", it.errorBody().toString())
+                                Toast.makeText(requireContext(), "Error while registering check this data is not exist before", Toast.LENGTH_LONG).show()
+                            }
                         }
+                    }else{
+                        showSnackBar()
                     }
+
                 }else{
                     confirmPasswordTxt.requestFocus()
                     Toast.makeText(requireContext(), "Please Confirm Your Password", Toast.LENGTH_LONG).show()
@@ -141,6 +152,11 @@ class SignUpFragment : Fragment() {
         val view = fragment.view
         return Navigation.findNavController(view!!)
     }
-
+    private fun showSnackBar(){
+        val snackBar = Snackbar.make(requireActivity().findViewById(R.id.content),
+            "Please check your internet connection ", Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
+    }
 
 }

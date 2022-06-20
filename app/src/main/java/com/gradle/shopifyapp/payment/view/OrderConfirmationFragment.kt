@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.MainTabsActivity
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.databinding.FragmentOrderConfirmationBinding
@@ -20,6 +21,7 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
 import com.gradle.shopifyapp.utils.Constants
@@ -102,16 +104,21 @@ class OrderConfirmationFragment : Fragment() {
                 Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
             if(_binding!!.cashRadioBtn.isChecked)
             {
-                orderConfirmationVm.postOrder(result_order_Model)
-                orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
-                    if (it.isSuccessful){
-                        Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
-                        startActivity(Intent(requireContext(),MainTabsActivity::class.java))
-                        activity?.finish()
-                    }
-                    else{
-                        Log.i("order",it.errorBody().toString())
-                    }
+                if(InternetConnection.isInternetAvailable(requireContext())){
+                    orderConfirmationVm.postOrder(result_order_Model)
+                    orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
+                        if (it.isSuccessful){
+                            Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
+                            startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+                            activity?.finish()
+                        }
+                        else{
+                            Log.i("order",it.errorBody().toString())
+                        }
+                }
+
+                }else{
+                    showSnackBar("We can't place your order check your connection")
                 }
 
             }
@@ -251,6 +258,12 @@ class OrderConfirmationFragment : Fragment() {
     }
 
 
+    private fun showSnackBar(msg:String){
+        val snackBar = Snackbar.make(requireActivity().findViewById(android.R.id.content),
+            msg, Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
+    }
 
 //    fun addAddress(address: Addresse){
 //        myAddress = address

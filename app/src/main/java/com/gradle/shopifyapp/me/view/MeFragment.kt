@@ -110,12 +110,18 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             if (it.isSuccessful) {
 //                Log.i("order Result", it.body()?.orders?.get(0).toString())
                 ordersList= it.body()?.orders!!
-                if (ordersList.size<=2)
-                {
-                    orderRecyclerAdapter.orders= ordersList
-                }else{
-                    orderRecyclerAdapter.orders= ordersList.subList(0,2)
+                if (!ordersList.isNullOrEmpty()){
+                    if (ordersList.size<=2)
+                    {
+                        orderRecyclerAdapter.orders= ordersList
+                    }else{
+                        orderRecyclerAdapter.orders= ordersList.subList(0,2)
+                    }
                 }
+                else{
+                    binding.noFavorite.visibility=View.VISIBLE
+                }
+
 //                orderRecyclerAdapter.orders= ordersList
                 orderRecyclerAdapter.notifyDataSetChanged()
             }else{
@@ -132,7 +138,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             binding.ordersText.visibility = View.GONE
             binding.wishListText.visibility = View.GONE
             binding.noUser.text = "You have to login at first"
-            binding.settingsImg.visibility = View.GONE
+            //binding.settingsImg.visibility = View.GONE
         }else{
             orderListViewModel.getOrders(userId!!)
             getFavProducts()
@@ -200,14 +206,21 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             }
             productRecyclerView = binding.listForWishList
             productLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-            if (favProducts.size<=2)
-            {
-                orderRecyclerAdapter.orders= ordersList
-                productRecyclerAdapter.favProducts=favProducts
 
-            }else{
-                productRecyclerAdapter.favProducts=favProducts.subList(0,4)
-            }
+           if (!favProducts.isNullOrEmpty()){
+               if (favProducts.size<=2)
+               {
+                   orderRecyclerAdapter.orders= ordersList
+                   productRecyclerAdapter.favProducts=favProducts
+
+
+               }else{
+                   productRecyclerAdapter.favProducts=favProducts.subList(0,4)
+               }
+           }else{
+               binding.noFavorite.visibility=View.VISIBLE
+           }
+
             productLayoutManager.orientation =RecyclerView.VERTICAL
             productRecyclerView.layoutManager = productLayoutManager
             productRecyclerView.adapter = productRecyclerAdapter
