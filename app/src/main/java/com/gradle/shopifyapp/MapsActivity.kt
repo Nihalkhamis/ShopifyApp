@@ -8,16 +8,14 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -53,23 +51,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
         preference = MyPreference.getInstance(this)!!
         mapDialog = MapDialog(this)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
         fetchLocation()
+
     }
 
     @SuppressLint("MissingPermission")
     private fun fetchLocation() {
         if (checkPermissions()) {
             Log.d("TAG", "fetchLocation: 97 ${locationEnabled()}")
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
             if (locationEnabled()) {
                 Log.d("TAG", "fetchLocation: 99")
                 fusedLocationProviderClient?.lastLocation?.addOnCompleteListener { location ->
@@ -122,7 +116,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fetchLocation()
             } else {
+//                finish()
                 requestLocationPermission()
+//                Toast.makeText(this,"You need to enable the location permission first",  Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -216,6 +212,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
             Log.d("TAG", "getAddressFromLocation: FROM----> $resultIntent")
 
             val intent = Intent(this,SettingsActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra(Constants.ADDRESS, address)
             intent.putExtra(Constants.CITY, cityName)
             intent.putExtra(Constants.COUNTRY, countryName)
