@@ -7,7 +7,6 @@ plugins {
 
 android {
     compileSdk 32
-
     defaultConfig {
         applicationId "com.gradle.shopifyapp"
         minSdk 24
@@ -64,7 +63,6 @@ dependencies {
 
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
-   // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation 'com.google.code.gson:gson:2.9.0'
 
     //viewModel
@@ -83,12 +81,21 @@ dependencies {
     //paypal
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 
+
     //maps
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
-// Stripe
+    // Stripe
     implementation 'com.stripe:stripe-android:17.2.0'
     implementation 'com.android.volley:volley:1.2.1'
 
 }
+
+
+    // Stripe
+  //  implementation 'com.stripe:stripe-android:17.2.0'
+//    implementation 'com.android.volley:volley:1.1.0'
+
+
+
