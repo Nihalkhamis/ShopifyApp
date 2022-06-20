@@ -211,10 +211,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
             Log.d("TAG", "address: $address")
 
 
-           // viewModel.insertLocation(FavLocationsModel(id = lat+long,lat = lat.toDouble(),lon = long.toDouble(), location = countryName))
-            //Toast.makeText(this,"Location added", Toast.LENGTH_SHORT).show()
-
-            //finish()
 
             var resultIntent = intent.getStringExtra(Constants.FROMSETTINGSFRAGMENT)
             Log.d("TAG", "getAddressFromLocation: FROM----> $resultIntent")
@@ -226,6 +222,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
             intent.putExtra(Constants.ZIPCODE, zipCode)
             intent.putExtra(Constants.FROMMAPSTO, resultIntent)
             startActivity(intent)
+
+            finish()
 
 
         } catch (e: IOException) {

@@ -25,11 +25,13 @@
 
         <TextView
             android:id="@+id/address_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="@string/title_home"
             android:textColor="@color/dark_color"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/place_img"
             app:layout_constraintStart_toEndOf="@id/place_img"
             app:layout_constraintTop_toTopOf="@+id/place_img" />
