@@ -88,7 +88,7 @@ class OrderConfirmationFragment : Fragment() {
                 try{
                     val jsonObject = JSONObject(response)
                     customerId = jsonObject.getString("id")
-                    Toast.makeText(requireContext(),"Customer Id: "+customerId,Toast.LENGTH_SHORT).show()
+                //    Toast.makeText(requireContext(),"Customer Id: "+customerId,Toast.LENGTH_SHORT).show()
                     getEphericalKey(customerId)
                 }catch (e : JSONException){
                     e.printStackTrace()
@@ -269,7 +269,7 @@ class OrderConfirmationFragment : Fragment() {
                 try{
                     val jsonObject = JSONObject(response)
                     ephericalKey = jsonObject.getString("id")
-                    Toast.makeText(requireContext(),"Epherical Key: "+ephericalKey,Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(),"Epherical Key: "+ephericalKey,Toast.LENGTH_SHORT).show()
                     getClientSecret(customerId,ephericalKey)
                 }catch (e : JSONException){
                     e.printStackTrace()
@@ -303,7 +303,7 @@ class OrderConfirmationFragment : Fragment() {
                 try{
                     val jsonObject = JSONObject(response)
                     clientSecret = jsonObject.getString("client_secret")
-                    Toast.makeText(requireContext(),"Client Secret: "+ clientSecret,Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(requireContext(),"Client Secret: "+ clientSecret,Toast.LENGTH_SHORT).show()
                     /// Lauch payment Flow
                     // paymentFlow()
                 }catch (e : JSONException){
@@ -323,8 +323,11 @@ class OrderConfirmationFragment : Fragment() {
             override fun getParams(): Map<String, String> {
                 val param: HashMap<String,String> = HashMap<String,String>()
                 param.put("customer" ,customerId)
-                param.put("amount" ,"10"+"00")
-                param.put("currency" ,"usd")
+                val str = amount.toString()
+                val delim = "."
+                val list = str.split(delim)
+                param.put("amount", "${list.get(0)}${list.get(1)}0")
+                param.put("currency" , preference.getData(Constants.TOCURRENCY).toString())
                 param.put("automatic_payment_methods[enabled]" ,"true")
                 return param
             }
