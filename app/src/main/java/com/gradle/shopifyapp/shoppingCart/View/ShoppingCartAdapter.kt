@@ -82,9 +82,6 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
         holder.item.setOnClickListener {
             cartOnClickListener.onClickProduct(shoppingCartItems[position])
         }
-//        holder.favorite.setOnClickListener{
-//            cartOnClickListener.onDeleteProduct(shoppingCartItems[position].draft_order!!.id.toString())
-//        }
     }
 
     override fun getItemCount(): Int {

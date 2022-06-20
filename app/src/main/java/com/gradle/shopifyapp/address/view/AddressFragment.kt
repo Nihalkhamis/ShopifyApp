@@ -82,10 +82,8 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
             }
         })
 
-        //(requireActivity() as PaymentActivity).
-
         binding.backBtn.setOnClickListener {
-           requireActivity().finish()
+            requireActivity().finish()
         }
 
         binding.addAddressBtn.setOnClickListener {
@@ -96,7 +94,6 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
             val line_items = (requireActivity() as PaymentActivity).lineItems
             val total_prices = (requireActivity() as PaymentActivity).totalPrice
             findNavController(this)?.navigate(R.id.addresstopayment)
-
         }
     }
 
@@ -104,18 +101,13 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
 
         settingsAddressAdapter = SettingsAddressAdapter(requireContext(), ArrayList(), this)
         binding.addressRow.adapter = settingsAddressAdapter
-
         settingsAddressViewModel.getAllAddresses(
             requireContext(),
             preference.getData(Constants.USERID)!!
         )
-
     }
 
     override fun onClick(address: Addresse) {
-        Log.i("onclick inside first fragment",address.toString())
-//        var bundel = Bundle()
-//        bundel.putSerializable("myAddress",address)
         paymentCommunicator.orderOnClickListener(address)
         findNavController(this)?.navigate(R.id.addresstopayment)
     }
@@ -142,6 +134,7 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
                         preference.getData(Constants.USERID)!!,
                         swipedProduct.id.toString()
                     )
+                    settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
 
                 }
             }

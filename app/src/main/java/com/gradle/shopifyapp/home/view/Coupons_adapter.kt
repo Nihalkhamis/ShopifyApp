@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.DiscountCode
 
-class Coupons_adapter(var context: Context): RecyclerView.Adapter<Coupons_adapter.ViewHolder>() {
+class Coupons_adapter(var context: Context,var onBrandClickListener : OnBrandClickListener): RecyclerView.Adapter<Coupons_adapter.ViewHolder>() {
 
     private var coupons = emptyList<DiscountCode>()
 
@@ -54,13 +54,15 @@ class Coupons_adapter(var context: Context): RecyclerView.Adapter<Coupons_adapte
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
             clipboard.text = text
-            Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
+            onBrandClickListener.onCouponClickListener("Text Copied!")
+         //   Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
 
         } else {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("Text Copied!", text)
             clipboard.setPrimaryClip(clip)
-            Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
+            onBrandClickListener.onCouponClickListener("Text Copied!")
+      //      Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
         }
     }
 
