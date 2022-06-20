@@ -184,7 +184,6 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.orderBtn.setOnClickListener {
 
             //line items email discount code shipping address method for payment
-            var result_order_Model = makeOrderModel()
 
             if(_binding!!.creditRadioBtn.isChecked )
                 paymentFlow()
@@ -192,27 +191,7 @@ class OrderConfirmationFragment : Fragment() {
                 Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
             if(_binding!!.cashRadioBtn.isChecked)
             {
-                if(InternetConnection.isInternetAvailable(requireContext())){
-                    orderConfirmationVm.postOrder(result_order_Model)
-                    binding.progressbar.visibility = View.VISIBLE
-                    orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
-                        if (it.isSuccessful){
-                            for (id in draftOrderIds){
-                                shoppingCartVm.deleteProductFromDraftOrder(id.toString())
-                            }
-                            binding.progressbar.visibility = View.GONE
-                            Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
-                            startActivity(Intent(requireContext(),MainTabsActivity::class.java))
-                            activity?.finish()
-                        }
-                        else{
-                            Log.i("order",it.errorBody().toString())
-                        }
-                }
-
-                }else{
-                    showSnackBar("We can't place your order check your connection")
-                }
+                placeOrder("cash")
 
             }
         }
@@ -221,6 +200,31 @@ class OrderConfirmationFragment : Fragment() {
         return root
     }
 
+    private fun placeOrder(paymentMethod:String){
+        var result_order_Model = makeOrderModel()
+        result_order_Model.order?.processing_method =paymentMethod
+        if(InternetConnection.isInternetAvailable(requireContext())){
+            orderConfirmationVm.postOrder(result_order_Model)
+            binding.progressbar.visibility = View.VISIBLE
+            orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
+                if (it.isSuccessful){
+                    for (id in draftOrderIds){
+                        shoppingCartVm.deleteProductFromDraftOrder(id.toString())
+                    }
+                    binding.progressbar.visibility = View.GONE
+                    Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
+                    startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+                    activity?.finish()
+                }
+                else{
+                    Log.i("order",it.errorBody().toString())
+                }
+            }
+
+        }else{
+            showSnackBar("We can't place your order check your connection")
+        }
+    }
     private fun makeOrderModel():Order_Model {
         var orderModel =OrderModel()
         orderModel.email = preference.getData(Constants.USEREMAIL)
