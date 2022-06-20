@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.payment.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.draft_model.LineItem
@@ -12,11 +13,14 @@ class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
     var lineItems = ArrayList<LineItem>()
     var totalPrice = ArrayList<Total_price>()
     var myAddress:Addresse= Addresse()
+    var draftOrderId = ArrayList<Long>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         lineItems = intent.getSerializableExtra("line_items") as ArrayList<LineItem>
         totalPrice = intent.getSerializableExtra("total_prices") as ArrayList<Total_price>
+        draftOrderId = intent.getSerializableExtra("draft_order_id") as ArrayList<Long>
+        Log.i("DRAFTORDERID", draftOrderId.toString())
         orderConfirmationFragment = OrderConfirmationFragment()
     }
 
