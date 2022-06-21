@@ -217,7 +217,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapDialogCommunica
             intent.putExtra(Constants.CITY, cityName)
             intent.putExtra(Constants.COUNTRY, countryName)
             intent.putExtra(Constants.ZIPCODE, zipCode)
-            intent.putExtra(Constants.FROMMAPSTO, resultIntent)
+            if (resultIntent?.isNotEmpty() == true) {
+                intent.putExtra(Constants.FROMMAPSTO, resultIntent)
+            }
+            else{
+                intent.putExtra(Constants.FROMMAPSTO, "")
+            }
             startActivity(intent)
 
             finish()

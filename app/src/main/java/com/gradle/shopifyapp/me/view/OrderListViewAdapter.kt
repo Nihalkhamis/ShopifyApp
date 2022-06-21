@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.model.OrderModel
 import com.gradle.shopifyapp.orders.orders_list.view.OrderOnClickListener
-import com.gradle.shopifyapp.productdetails.views.OnclickInterface
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -44,33 +43,20 @@ class OrderListViewAdapter(var orders : List<OrderModel>, private val onclickInt
         var price = ((orders[position].total_price?.toDouble() ?: 0.0) * (preference.getData(
             Constants.CURRENCYRESULT)
             ?.toDouble() ?: 1.0)).toString()
-       // var date = orders[position].created_at?.let { convertDate(it) }
-//        var date = orders[position].created_at?.split(":",limit = 2)
-//        var day = date?.get(0)?.split("-")?.get(2)
-//        var resultDay = day?.let { convertToDate(it) }
 
-//        Log.d("TAG", "onBindViewHolder: WHOLE DATE->${orders[position].created_at}")
-//        Log.d("TAG", "onBindViewHolder: DATE->$date")
-//        Log.d("TAG", "onBindViewHolder: DAY->$day")
-//        Log.d("TAG", "onBindViewHolder: RESULT DAY->$resultDay")
+        var day = orders[position].created_at?.split("T")?.get(0)
+        var time = orders[position].created_at?.split("T")?.get(1)?.split("+")?.get(0)
 
-        holder.dateText.text = orders[position].created_at
+        Log.d("TAG", "onBindViewHolder: WHOLE DATE->${orders[position].created_at}")
+
+        Log.d("TAG", "onBindViewHolder: DAY->$day")
+        Log.d("TAG", "onBindViewHolder: DAY->$time")
+
+        holder.dateText.text = "$day, $time"
         holder.priceText.text =  "$price ${preference.getData(Constants.TOCURRENCY)}"
         holder.orderListItem.setOnClickListener {
             onclickInterface.orderOnClickListener(position)
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun convertToDate(dt : String) : String {
-//        val l = LocalDate.parse(dt, DateTimeFormatter.ofPattern("dd"))
-//        val unix = l.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond
-
-        val date = Date(dt.toLong())
-        val format = SimpleDateFormat("d", Locale.ENGLISH)
-        return format.format(date)
-
-//        return unix.toString()
     }
 
     override fun getItemCount(): Int {
