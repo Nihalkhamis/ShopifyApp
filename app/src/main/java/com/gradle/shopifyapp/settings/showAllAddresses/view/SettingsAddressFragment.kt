@@ -83,7 +83,8 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
 
         binding.backBtn.setOnClickListener {
             (requireActivity() as SettingsActivity).address = ""
-            findNavController(this)?.navigate(R.id.fragmentBack)
+//            findNavController(this)?.navigate(R.id.fragmentBack)
+            findNavController(this)?.popBackStack(R.id.mainScreenFragment,false)
         }
 
         binding.addAddressFloatBtn.setOnClickListener {
@@ -91,9 +92,15 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
             var intent = Intent(requireContext(),MapsActivity::class.java)
             intent.putExtra(Constants.FROMSETTINGSFRAGMENT,"from settings")
             startActivity(intent)
+            requireActivity().finish()
         }
     }
 
+
+    override fun onDestroyView() {
+        (requireActivity() as SettingsActivity).address = ""
+        super.onDestroyView()
+    }
 
     private fun setAdapter(){
 

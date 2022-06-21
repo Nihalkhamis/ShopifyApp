@@ -32,13 +32,10 @@ class SettingsActivity : AppCompatActivity() {
                city = intent.getStringExtra(Constants.CITY)!!
                country = intent.getStringExtra(Constants.COUNTRY)!!
                zipCode = intent.getStringExtra(Constants.ZIPCODE)!!
+           if (intent.getStringExtra(Constants.FROMMAPSTO) != ""){
                resultFromMaps = intent.getStringExtra(Constants.FROMMAPSTO)!!
+           }
 
        }
-
-
-
     }
-
-
 }

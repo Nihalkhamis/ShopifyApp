@@ -40,7 +40,10 @@ class AddAddressSettingsFragment : Fragment() {
         _binding = FragmentAddAddressSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    override fun onDestroyView() {
+        (requireActivity() as SettingsActivity).address = ""
+        super.onDestroyView()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -94,9 +97,10 @@ class AddAddressSettingsFragment : Fragment() {
                         binding.progressbar.visibility = View.VISIBLE
                     } else {
                         binding.progressbar.visibility = View.GONE
-                        if ((requireActivity() as SettingsActivity).resultFromMaps.isNotEmpty()){
+                        if ((requireActivity() as SettingsActivity).resultFromMaps != ""){
                             // comes from maps so return to addresses fragment
-                            findNavController(this)?.navigate(R.id.fragmentToAddresses)
+                            (requireActivity() as SettingsActivity).address=""
+                            findNavController(this)?.navigate(R.id.fragmentToAddresses);
                         }
                         else{
                             requireActivity().finish()
@@ -111,7 +115,7 @@ class AddAddressSettingsFragment : Fragment() {
 
         binding.cancelBtn.setOnClickListener {
 
-            if ((requireActivity() as SettingsActivity).resultFromMaps.isNotEmpty()){
+            if ((requireActivity() as SettingsActivity).resultFromMaps != ""){
                 // comes from maps so return to addresses fragment
                 findNavController(this)?.navigate(R.id.fragmentToAddresses)
             }
