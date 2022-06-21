@@ -40,8 +40,10 @@
             app:destination="@id/settingsAddressFragment"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/fade_out"
+
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_down" />
+
         <action
             android:id="@+id/fragmentToAddAddress"
             app:destination="@id/addAddressSettingsFragment"
@@ -57,13 +59,6 @@
         android:label="fragment_settings_address"
         tools:layout="@layout/fragment_settings_address">
 
-        <action
-            android:id="@+id/fragmentBack"
-            app:destination="@id/mainScreenFragment"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_down" />
 
      <!--   <action
             android:id="@+id/fragmentToAddAddress"
@@ -84,6 +79,7 @@
             android:id="@+id/fragmentToAddresses"
             app:destination="@id/settingsAddressFragment"
             app:enterAnim="@anim/slide_up"
+            app:popUpTo="@id/fragmentToMain"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_down" />
