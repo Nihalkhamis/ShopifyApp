@@ -6,12 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.model.ProductItem
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.RepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class ProductDetailsViewModel (private val repo : RepositoryInterface, private var context: Context) : ViewModel() {
@@ -22,6 +24,12 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     private val productList = MutableLiveData<Response<ProductItem>>()
     val liveDataProductList : LiveData<Response<ProductItem>> = productList
 
+
+    private val getDraftOrderList = MutableLiveData<List<DraftOrder>>()
+    val liveGetDraftOrderList : LiveData<List<DraftOrder>> = getDraftOrderList
+
+    private val updateDraftOrderList = MutableLiveData<Response<Draft_order>>()
+    val liveUpdateDraftOrderList : LiveData<Response<Draft_order>> = updateDraftOrderList
 
 
     fun postDraftOrder(order: Draft_order) {
@@ -43,6 +51,20 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     }
 
 
+    fun getDraftOrder(context: Context) {
+        viewModelScope.launch(Dispatchers.IO ) {
+            val response = repo.getDraftOrders()
+            getDraftOrderList.postValue(response.body()?.draft_orders)
+        }
+    }
+
+
+    fun updateDraftOrder(id:String, order:Draft_order){
+        viewModelScope.launch {
+            val response = repo.updateDraftOrders(id,order)
+            updateDraftOrderList.value = response
+        }
+    }
 
 
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewParent
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.ActivityProductDetailesBinding
@@ -203,30 +205,48 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                     var draft_orders = Draft_order()
                     order.email = preference.getData(Constants.USEREMAIL)
                     order.note = "cart"
+                    var position = 0
+                    var draftOrderIds = ArrayList<Long>()
+                    productDetailsVm.getDraftOrder(this)
+                    productDetailsVm.liveGetDraftOrderList.observe(this) {
+                        for(i in 0..it.size-1){
+                            if(it.get(i).email == order.email && it.get(i).note == "cart")
+                                draftOrderIds.add(it[i].line_items!![0].variant_id!!)
+                        }
+                    }
                     for (i in 0..product.variants!!.size - 1) {
                         if (product.variants!![i].option1 == selectedSize &&
                             product.variants!![i].option2 == selectedColor
                         ) {
-                            var lineItems = LineItem()
-                            lineItems.quantity = 1
-                            lineItems.variant_id = product.variants!![i].id
-                            order.line_items = listOf(lineItems)
-                            var note_attribute = NoteAttribute()
-                            note_attribute.name = "image"
-                            note_attribute.value = product.images!![0].src
-                            order.note_attributes = listOf(note_attribute)
-                            draft_orders = Draft_order(order)
-                            productDetailsVm.postDraftOrder(draft_orders)
-                            productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
-                                if (dOrder.isSuccessful) {
-                                    Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
-                                } else {
-                                    Log.d("TAG", "failed: ${dOrder.code()}")
-                                }
-                            }
+                            position = i
                             break
                         }
                     }
+
+                    if(product.variants!![position].id in draftOrderIds){
+                        Log.i("VARIANTSSS", product.variants!![position].id.toString())
+                        Log.i("VARIANTSSS222", draftOrderIds.toString())
+                        Snackbar.make(it,"Item already exists", Snackbar.LENGTH_SHORT).show()
+                    }else{
+                        var lineItems = LineItem()
+                        lineItems.quantity = 1
+                        lineItems.variant_id = product.variants!![position].id
+                        order.line_items = listOf(lineItems)
+                        var note_attribute = NoteAttribute()
+                        note_attribute.name = "image"
+                        note_attribute.value = product.images!![0].src
+                        order.note_attributes = listOf(note_attribute)
+                        draft_orders = Draft_order(order)
+                        productDetailsVm.postDraftOrder(draft_orders)
+                        productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
+                            if (dOrder.isSuccessful) {
+                                Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                            } else {
+                                Log.d("TAG", "failed: ${dOrder.code()}")
+                            }
+                        }
+                    }
+
                 }
                 else{
                     Toast.makeText(this, "You must select size and color first", Toast.LENGTH_LONG).show()
