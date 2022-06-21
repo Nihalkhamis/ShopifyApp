@@ -4,15 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.ViewParent
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
@@ -24,8 +19,6 @@ import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.NoteAttribute
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
-import com.gradle.shopifyapp.home.viewmodel.HomeViewModelFactory
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.model.ReviewModel
@@ -195,25 +188,23 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
             }
             startActivity(intent)
         }
+        var draftOrderIds = ArrayList<Long>()
+
+
+        productDetailsVm.getDraftOrder(this)
+        productDetailsVm.liveGetDraftOrderList.observe(this) {
+            for(i in 0..it.size-1){
+                if(it.get(i).email == preference.getData(Constants.USEREMAIL) && it.get(i).note == "cart")
+                    draftOrderIds.add(it[i].line_items!![0].variant_id!!)
+            }
+        }
 
         binding.addToCartBtn.setOnClickListener {
             if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
                 makeAlert()
             }else{
                 if (selectedSize != " " && selectedColor != " ") {
-                    var order = DraftOrder()
-                    var draft_orders = Draft_order()
-                    order.email = preference.getData(Constants.USEREMAIL)
-                    order.note = "cart"
                     var position = 0
-                    var draftOrderIds = ArrayList<Long>()
-                    productDetailsVm.getDraftOrder(this)
-                    productDetailsVm.liveGetDraftOrderList.observe(this) {
-                        for(i in 0..it.size-1){
-                            if(it.get(i).email == order.email && it.get(i).note == "cart")
-                                draftOrderIds.add(it[i].line_items!![0].variant_id!!)
-                        }
-                    }
                     for (i in 0..product.variants!!.size - 1) {
                         if (product.variants!![i].option1 == selectedSize &&
                             product.variants!![i].option2 == selectedColor
@@ -224,10 +215,12 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                     }
 
                     if(product.variants!![position].id in draftOrderIds){
-                        Log.i("VARIANTSSS", product.variants!![position].id.toString())
-                        Log.i("VARIANTSSS222", draftOrderIds.toString())
                         Snackbar.make(it,"Item already exists", Snackbar.LENGTH_SHORT).show()
                     }else{
+                        var order = DraftOrder()
+                        order.email = preference.getData(Constants.USEREMAIL)
+                        var draft_orders = Draft_order()
+                        order.note = "cart"
                         var lineItems = LineItem()
                         lineItems.quantity = 1
                         lineItems.variant_id = product.variants!![position].id
@@ -240,7 +233,8 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                         productDetailsVm.postDraftOrder(draft_orders)
                         productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
                             if (dOrder.isSuccessful) {
-                                Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                              Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                                draftOrderIds.add(lineItems.variant_id!!)
                             } else {
                                 Log.d("TAG", "failed: ${dOrder.code()}")
                             }
@@ -249,7 +243,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
                 }
                 else{
-                    Toast.makeText(this, "You must select size and color first", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "You must select size and color first", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -324,7 +318,7 @@ private fun makeAlert(){
             if (it.isSuccessful) {
                 hearted = false
                 binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
-                Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show()
             } else {
                 Log.d("TAG", "failed: ${it.code()}")
                 Log.d("TAG", "onCreate: ${it.errorBody()}")
@@ -358,7 +352,7 @@ private fun makeAlert(){
             if (it.isSuccessful) {
                 hearted = true
                 binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
-                Toast.makeText(this, "Added to wishlist", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show()
             } else {
                 Log.d("TAG", "failed: ${it.code()}")
                 Log.d("TAG", "onCreate: ${it.errorBody()}")

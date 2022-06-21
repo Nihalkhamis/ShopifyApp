@@ -70,9 +70,11 @@ class ShoppingCartAdapter(var context: Context,var cartOnClickListener: CartOnCl
             count = shoppingCartItems[position].draft_order!!.line_items!![0].quantity!!
             count = count-1
             if(count<1){
-                cartOnClickListener.onRemoveProduct(shoppingCartItems[position])
-                shoppingCartItems.removeAt(position)
-                notifyDataSetChanged()
+             //   cartOnClickListener.onRemoveProduct(shoppingCartItems[position])
+                Log.i("POSITIONNNN",position.toString())
+             //   shoppingCartItems.removeAt(position)
+             //   notifyDataSetChanged()
+
             }else{
                 holder.quantity.text = (count).toString()
                 cartOnClickListener.onRemoveProduct(shoppingCartItems[position])

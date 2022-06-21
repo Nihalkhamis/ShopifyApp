@@ -89,15 +89,14 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
         }
 
         binding.addAddressBtn.setOnClickListener {
-//            findNavController(this)?.navigate(R.id.fragmentToAddAddress)
             startActivity(Intent(requireContext(),MapsActivity::class.java))
         }
 
-        binding!!.paymentBtn.setOnClickListener {
-            val line_items = (requireActivity() as PaymentActivity).lineItems
-            val total_prices = (requireActivity() as PaymentActivity).totalPrice
-            findNavController(this)?.navigate(R.id.addresstopayment)
-        }
+//        binding!!.paymentBtn.setOnClickListener {
+//            val line_items = (requireActivity() as PaymentActivity).lineItems
+//            val total_prices = (requireActivity() as PaymentActivity).totalPrice
+//            findNavController(this)?.navigate(R.id.addresstopayment)
+//        }
     }
 
     private fun setAdapter() {

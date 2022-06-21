@@ -77,7 +77,7 @@ interface ApiInterface {
         "Accept: application/json",
         "X-Shopify-Access-Token: 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"
     )
-    @GET("2022-04/customers.json")
+    @GET("2022-04/customers.json?limit=250")
     suspend fun getCustomers(): Response<CustomersModel>
 
     //get customer by id
@@ -151,12 +151,12 @@ interface ApiInterface {
         "Accept: application/json",
         "X-Shopify-Access-Token: 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",
     )
-    @GET("2022-04/currencies.json")
+    @GET("2022-04/currencies.json?limit=250")
     suspend fun getAllCurrencies(): Response<CurrencyModel>
 
 
     // currency converter
-    @GET("convert?apikey=gy7qJtRtkvIcQ1NJY2fzdJXuPmtBeF54")
+    @GET("convert?apikey=uPBivblfC789xI8EkckRwW5W07V4Z808")
     suspend fun getConvertedCurrency(
         @Query("amount") amount: String,
         @Query("from") from: String,

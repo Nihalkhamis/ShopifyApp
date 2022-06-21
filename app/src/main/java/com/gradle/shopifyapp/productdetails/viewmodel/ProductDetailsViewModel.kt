@@ -28,10 +28,6 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
     private val getDraftOrderList = MutableLiveData<List<DraftOrder>>()
     val liveGetDraftOrderList : LiveData<List<DraftOrder>> = getDraftOrderList
 
-    private val updateDraftOrderList = MutableLiveData<Response<Draft_order>>()
-    val liveUpdateDraftOrderList : LiveData<Response<Draft_order>> = updateDraftOrderList
-
-
     fun postDraftOrder(order: Draft_order) {
         viewModelScope.launch {
             val response = repo.postDraftOrders(order)
@@ -57,15 +53,6 @@ class ProductDetailsViewModel (private val repo : RepositoryInterface, private v
             getDraftOrderList.postValue(response.body()?.draft_orders)
         }
     }
-
-
-    fun updateDraftOrder(id:String, order:Draft_order){
-        viewModelScope.launch {
-            val response = repo.updateDraftOrders(id,order)
-            updateDraftOrderList.value = response
-        }
-    }
-
 
 
 }
