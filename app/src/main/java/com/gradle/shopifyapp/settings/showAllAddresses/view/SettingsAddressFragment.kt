@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.settings.showAllAddresses.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,10 +20,12 @@ import com.gradle.shopifyapp.databinding.FragmentSettingsAddressBinding
 import com.gradle.shopifyapp.model.Addresse
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModel
 import com.gradle.shopifyapp.settings.showAllAddresses.viewmodel.SettingsAddressViewModelFactory
 import com.gradle.shopifyapp.settings.addAddress.view.OnAddressItemClickListener
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -36,6 +39,11 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
     lateinit var settingsAddressAdapter: SettingsAddressAdapter
     lateinit var vmFactory: SettingsAddressViewModelFactory
     lateinit var settingsAddressViewModel: SettingsAddressViewModel
+
+
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
 
     lateinit var preference: MyPreference
 
@@ -62,24 +70,41 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
 
         settingsAddressViewModel = ViewModelProvider(this, vmFactory).get(SettingsAddressViewModel::class.java)
 
-        setAdapter()
-        setUpSwipe()
 
-        settingsAddressViewModel.liveDataAddressesList.observe(viewLifecycleOwner){
-            Log.d("TAG", "setAdapter: returned addresses: ${it.customer!!.addresses}")
-            Log.d("TAG", "setAdapter: returned addresses: $3")
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
 
-            settingsAddressAdapter.setAddresses(it.customer!!.addresses!!)
+        connectionLiveData.observe(viewLifecycleOwner){
+            if(it){
+                dialog.dismiss()
+                setAdapter()
+                setUpSwipe()
+
+                settingsAddressViewModel.liveDataAddressesList.observe(viewLifecycleOwner){
+                    Log.d("TAG", "setAdapter: returned addresses: ${it.customer!!.addresses}")
+                    Log.d("TAG", "setAdapter: returned addresses: $3")
+
+                    settingsAddressAdapter.setAddresses(it.customer!!.addresses!!)
+                }
+
+
+                settingsAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
+                    if (it) {
+                        binding.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressbar.visibility = View.GONE
+                    }
+                })
+
+
+            }else{
+                dialog.show()
+            }
         }
 
 
-        settingsAddressViewModel.loading.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.progressbar.visibility = View.VISIBLE
-            } else {
-                binding.progressbar.visibility = View.GONE
-            }
-        })
+
 
         binding.backBtn.setOnClickListener {
             (requireActivity() as SettingsActivity).address = ""

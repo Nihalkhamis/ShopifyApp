@@ -23,13 +23,14 @@ import com.gradle.shopifyapp.authentication.login.viewmodel.LoginViewModelFactor
 import com.gradle.shopifyapp.databinding.FragmentLoginBinding
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
 
 class LoginFragment : Fragment() {
-
+    lateinit var connectionLiveData: ConnectionLiveData
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     lateinit var emailEditText: EditText
@@ -115,7 +116,7 @@ class LoginFragment : Fragment() {
                 }
 
             }else{
-                showSnackBar()
+                showSnackBar("Please check your internet connection")
             }
 
 
@@ -136,11 +137,33 @@ class LoginFragment : Fragment() {
         return Navigation.findNavController(view!!)
     }
 
-    private fun showSnackBar(){
+    private fun showSnackBar(msg:String){
         val snackBar = Snackbar.make(requireActivity().findViewById(R.id.content),
-            "Please check your internet connection ", Snackbar.LENGTH_LONG
+            msg, Snackbar.LENGTH_LONG
         )
         snackBar.show()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
+
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
     }
 
 
