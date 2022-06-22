@@ -27,6 +27,7 @@ import com.gradle.shopifyapp.model.Customer
 import com.gradle.shopifyapp.model.CustomerModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
@@ -44,6 +45,8 @@ class SignUpFragment : Fragment() {
     lateinit var lastName: EditText
     lateinit var phoneTxt: EditText
     var myCustomer: CustomerModel = CustomerModel()
+    lateinit var connectionLiveData: ConnectionLiveData
+
 
 
     lateinit var preference: MyPreference
@@ -131,7 +134,7 @@ class SignUpFragment : Fragment() {
                             }
                         }
                     }else{
-                        showSnackBar()
+                        showSnackBar("Please check your internet connection ")
                     }
 
                 }else{
@@ -152,11 +155,33 @@ class SignUpFragment : Fragment() {
         val view = fragment.view
         return Navigation.findNavController(view!!)
     }
-    private fun showSnackBar(){
+    private fun showSnackBar(msg:String){
         val snackBar = Snackbar.make(requireActivity().findViewById(R.id.content),
-            "Please check your internet connection ", Snackbar.LENGTH_LONG
+            msg, Snackbar.LENGTH_LONG
         )
         snackBar.show()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
+
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
     }
 
 }

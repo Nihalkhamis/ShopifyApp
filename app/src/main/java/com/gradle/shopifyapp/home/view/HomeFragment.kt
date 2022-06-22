@@ -39,6 +39,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     lateinit var connectionLiveData: ConnectionLiveData
+    var alreadyLoaded = false
 
 
     // This property is only valid between onCreateView and
@@ -69,6 +70,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     lateinit var preference: MyPreference
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,8 +79,6 @@ class HomeFragment : Fragment(), OnBrandClickListener {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-       // Alert.makeAlert(requireContext())
-        connectionLiveData = ConnectionLiveData(requireContext())
 
         //ads slideshow
         viewPager = binding.pageView
@@ -89,6 +89,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         createSlideshow()
 
 
+
         vmFactory = HomeViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
@@ -97,67 +98,71 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         )
 
         preference = MyPreference.getInstance(requireContext())!!
+        connectionLiveData = ConnectionLiveData(requireContext())
+        var dialog = Alert.makeAlert(requireContext())
+
 
         //check for the connection at first
-
         connectionLiveData.observe(viewLifecycleOwner){
             isNetworkAvaliable->
             if (isNetworkAvaliable){
-               // Alert.dismissAlert()
-                homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
+                    dialog.dismiss()
+                    homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
 
-                homeViewModel.getAllProducts(requireContext(), "", "", "")
-                homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
-                    myProducts = it.products
-                }
-
-                homeViewModel.getAllVendors(requireContext())
-                homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
-                    bindBrands(it)
-                }
-
-                homeViewModel.getAllDiscountCodes(requireContext())
-                homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
-                    bindCoupons(it)
-                }
-
-                // currency converter
-                homeViewModel.getAllConvertedCurrency(
-                    requireContext(), "1",
-                    "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
-                )
-                homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
-                    Log.d("TAG", "onCreateView: IT-> $it")
-                    preference.saveData(Constants.CURRENCYRESULT, it.toString())
-                    Log.d(
-                        "TAG",
-                        "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}"
-                    )
-                }
-                homeViewModel.loading.observe(viewLifecycleOwner, Observer {
-                    if (it) {
-                        binding.progressbar.visibility = View.VISIBLE
-                    } else {
-                        binding.progressbar.visibility = View.GONE
+                    homeViewModel.getAllProducts(requireContext(), "", "", "")
+                    homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
+                        myProducts = it.products
                     }
-                })
+
+                    homeViewModel.getAllVendors(requireContext())
+                    homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
+                        bindBrands(it)
+                    }
+
+                    homeViewModel.getAllDiscountCodes(requireContext())
+                    homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
+                        bindCoupons(it)
+                    }
+
+                    // currency converter
+                    homeViewModel.getAllConvertedCurrency(
+                        requireContext(), "1",
+                        "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
+                    )
+                    homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
+                        Log.d("TAG", "onCreateView: IT-> $it")
+                        preference.saveData(Constants.CURRENCYRESULT, it.toString())
+                        Log.d(
+                            "TAG",
+                            "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}"
+                        )
+                    }
+                    homeViewModel.loading.observe(viewLifecycleOwner, Observer {
+                        if (it) {
+                            binding.progressbar.visibility = View.VISIBLE
+                        } else {
+                            binding.progressbar.visibility = View.GONE
+                        }
+                    })
 
 
-                //Brands
-                brands_rv = binding.brandRowRv
-                brandsAdapter = Brands_adapter(requireContext(), this)
-                brands_rv.adapter = brandsAdapter
+                    //Brands
+                    brands_rv = binding.brandRowRv
+                    brandsAdapter = Brands_adapter(requireContext(), this)
+                    brands_rv.adapter = brandsAdapter
 
-                //coupons
-                coupons_rv = binding.couponsRowRv
-                gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
-                coupons_rv!!.layoutManager = gridLayoutManager
-                couponsAdapter = Coupons_adapter(requireContext(),this)
-                coupons_rv!!.adapter = couponsAdapter
+                    //coupons
+                    coupons_rv = binding.couponsRowRv
+                    gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
+                    coupons_rv!!.layoutManager = gridLayoutManager
+                    couponsAdapter = Coupons_adapter(requireContext(),this)
+                    coupons_rv!!.adapter = couponsAdapter
+                    alreadyLoaded = true
+
+
             }else{
-               // showSnackBar()
-                //makeAlert()
-                Alert.makeAlert(requireContext())
+                dialog.show()
+               // Alert.makeAlert(requireContext())
             }
         }
 
@@ -212,12 +217,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         couponsAdapter.setCoupons(coupons.discount_codes)
     }
 
-    private fun showSnackBar(){
-        val snackBar = Snackbar.make(requireActivity().findViewById(android.R.id.content),
-            "Please check your internet connection ", Snackbar.LENGTH_LONG
-        )
-        snackBar.show()
-    }
+
 
 
 }

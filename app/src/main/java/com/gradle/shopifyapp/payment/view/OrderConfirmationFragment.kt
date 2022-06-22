@@ -27,6 +27,7 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
@@ -55,6 +56,9 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var vmFactory: ShoppingCartViewModelFactory
     lateinit var shoppingCartVm: ShoppingCartViewModel
 
+    lateinit var connectionLiveData: ConnectionLiveData
+
+
     var line_items = ArrayList<LineItem>()
     var total_prices = ArrayList<Total_price>()
     var tax =0.0
@@ -79,6 +83,8 @@ class OrderConfirmationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         PaymentConfiguration.init(requireContext(),PUBLISH_KEY)
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
@@ -123,6 +129,7 @@ class OrderConfirmationFragment : Fragment() {
                 requireContext()
             ), requireContext()
         )
+
         shoppingCartVm = ViewModelProvider(this, vmFactory).get(ShoppingCartViewModel::class.java)
 
         _binding!!.backBtn.setOnClickListener {
@@ -182,8 +189,6 @@ class OrderConfirmationFragment : Fragment() {
         }
 
         _binding!!.orderBtn.setOnClickListener {
-
-            //line items email discount code shipping address method for payment
 
             if(_binding!!.creditRadioBtn.isChecked )
                 paymentFlow()
@@ -346,5 +351,24 @@ class OrderConfirmationFragment : Fragment() {
             PaymentSheet.CustomerConfiguration(customerId,ephericalKey)))
     }
 
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
 
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
+    }
 }

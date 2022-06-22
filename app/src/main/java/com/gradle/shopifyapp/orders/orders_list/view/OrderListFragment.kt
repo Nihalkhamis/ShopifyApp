@@ -10,22 +10,24 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.me.view.OrderListViewAdapter
 import com.gradle.shopifyapp.databinding.FragmentOrderListBinding
+import com.gradle.shopifyapp.network.ConnectionLiveData
 
 
 class OrderListFragment : Fragment(),OrderOnClickListener {
-
-    private lateinit var constraintLayout: ConstraintLayout
-
 
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
     //orders
     lateinit var ordersRecyclerView: RecyclerView
     lateinit var orderRecyclerAdapter: OrderListViewAdapter
+
+    lateinit var connectionLiveData: ConnectionLiveData
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +42,8 @@ class OrderListFragment : Fragment(),OrderOnClickListener {
         if(MeFragment.ordersList.isNullOrEmpty()){
             binding.background.setImageResource(R.drawable.orders)
 
-             //binding.orderListFragment.setBackgroundResource(R.drawable.orders)
         }else{
             orderRecyclerAdapter = OrderListViewAdapter(MeFragment.ordersList,this,requireContext())
-            Log.i("products",MeFragment.ordersList.toString())
             ordersRecyclerView.adapter=orderRecyclerAdapter
         }
 
@@ -66,5 +66,33 @@ class OrderListFragment : Fragment(),OrderOnClickListener {
         var bundel = Bundle()
         bundel.putInt("order_position",index)
         findNavController(this)?.navigate(R.id.fragmentToOrderDetails,bundel)
+    }
+    private fun showSnackBar(msg:String){
+        val snackBar = Snackbar.make(requireActivity().findViewById(android.R.id.content),
+            msg, Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
+
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
     }
 }

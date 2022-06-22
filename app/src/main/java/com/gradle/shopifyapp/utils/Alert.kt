@@ -13,18 +13,18 @@ class Alert {
     companion object{
         lateinit var dialog:AlertDialog
 
-        fun makeAlert(context:Context){
+        fun makeAlert(context:Context):AlertDialog{
             var binding = NoInternetScreenBinding.inflate(LayoutInflater.from(context))
             val builder = AlertDialog.Builder(context)
             builder.setView(binding.root)
             dialog = builder.create()
             dialog.setCancelable(false)
-            dialog.show()
-
+           // dialog.show()
+            return dialog
         }
-        fun dismissAlert(){
-            dialog.dismiss()
-        }
+//        fun dismissAlert(){
+//            dialog.dismiss()
+//        }
     }
 
 

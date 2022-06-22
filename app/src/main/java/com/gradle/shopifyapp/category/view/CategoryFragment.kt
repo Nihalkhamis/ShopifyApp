@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.category.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +32,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     private var _binding: FragmentCategoryBinding? = null
 
     private val binding get() = _binding!!
+
+    //for internet connection
     lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog :AlertDialog
+
 
 
     lateinit var productBrandAdapter: ProductBrandAdapter
@@ -56,7 +61,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     ): View {
 
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
+
+        //for internet connection
         connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
+
 
         return binding.root
 
@@ -93,10 +102,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
+                dialog.dismiss()
                 setAdapter()
 
             }else{
-                Alert.makeAlert(requireContext())
+                dialog.show()
             }
         }
 
@@ -140,12 +150,13 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
+                dialog.dismiss()
                 productBrandAdapter.deleteProductBrand()
                 productTypeAdapter.deleteProductTypes()
                 productTypeList.clear()
                 categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"","")
             }else{
-                Alert.makeAlert(requireContext())
+                dialog.show()
             }
         }
 
@@ -158,12 +169,13 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
+                dialog.dismiss()
                 productBrandAdapter.deleteProductBrand()
                 productTypeAdapter.deleteProductTypes()
                 productTypeList.clear()
                 categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"", "")
             }else{
-                Alert.makeAlert(requireContext())
+                dialog.show()
             }
         }
 
@@ -175,12 +187,13 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
+                dialog.dismiss()
                 productBrandAdapter.deleteProductBrand()
                 productTypeAdapter.deleteProductTypes()
                 productTypeList.clear()
                 categoryViewModel.getAllCategoriesProducts(requireContext(),categoryId,"","")
             }else{
-                Alert.makeAlert(requireContext())
+                dialog.show()
             }
         }
 
