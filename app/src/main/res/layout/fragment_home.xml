@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/off_white"
+    android:id="@+id/nestedScrollView"
     tools:context=".home.view.HomeFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pageView"
             android:layout_width="match_parent"
@@ -72,5 +71,8 @@
             android:indeterminateTint="@color/orange"
             android:visibility="gone" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

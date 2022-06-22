@@ -17,9 +17,11 @@ import com.gradle.shopifyapp.databinding.FragmentCategoryBinding
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productBrand.view.OnItemClickListener
 import com.gradle.shopifyapp.productBrand.view.ProductBrandAdapter
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -29,6 +31,8 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     private var _binding: FragmentCategoryBinding? = null
 
     private val binding get() = _binding!!
+    lateinit var connectionLiveData: ConnectionLiveData
+
 
     lateinit var productBrandAdapter: ProductBrandAdapter
     lateinit var vmFactory: CategoryViewModelFactory
@@ -52,6 +56,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     ): View {
 
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        connectionLiveData = ConnectionLiveData(requireContext())
 
         return binding.root
 
@@ -85,8 +90,15 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         categoryViewModel = ViewModelProvider(this, vmFactory).get(CategoryViewModel::class.java)
 
         categoryId = "273053712523"
+        connectionLiveData.observe(viewLifecycleOwner){
+                isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                setAdapter()
 
-        setAdapter()
+            }else{
+                Alert.makeAlert(requireContext())
+            }
+        }
 
     }
 
@@ -125,28 +137,55 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     private fun setWomenCategory() {
         categoryId = "273053712523"
         // delete old products to fetch new ones
-        productBrandAdapter.deleteProductBrand()
-        productTypeAdapter.deleteProductTypes()
-        productTypeList.clear()
-        categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"","")
+        connectionLiveData.observe(viewLifecycleOwner){
+                isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                productBrandAdapter.deleteProductBrand()
+                productTypeAdapter.deleteProductTypes()
+                productTypeList.clear()
+                categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"","")
+            }else{
+                Alert.makeAlert(requireContext())
+            }
+        }
+
     }
 
 
     private fun setMenCategory() {
         categoryId = "273053679755"
-        productBrandAdapter.deleteProductBrand()
-        productTypeAdapter.deleteProductTypes()
-        productTypeList.clear()
-        categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"", "")
+
+        connectionLiveData.observe(viewLifecycleOwner){
+                isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                productBrandAdapter.deleteProductBrand()
+                productTypeAdapter.deleteProductTypes()
+                productTypeList.clear()
+                categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"", "")
+            }else{
+                Alert.makeAlert(requireContext())
+            }
+        }
+
     }
 
 
     private fun setKidsCategory() {
         categoryId = "273053745291"
-        productBrandAdapter.deleteProductBrand()
-        productTypeAdapter.deleteProductTypes()
-        productTypeList.clear()
-        categoryViewModel.getAllCategoriesProducts(requireContext(),categoryId,"","")
+        connectionLiveData.observe(viewLifecycleOwner){
+                isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                productBrandAdapter.deleteProductBrand()
+                productTypeAdapter.deleteProductTypes()
+                productTypeList.clear()
+                categoryViewModel.getAllCategoriesProducts(requireContext(),categoryId,"","")
+            }else{
+                Alert.makeAlert(requireContext())
+            }
+        }
+
+
+
     }
 
     override fun onDestroyView() {

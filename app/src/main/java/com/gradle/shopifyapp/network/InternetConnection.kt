@@ -2,31 +2,67 @@ package com.gradle.shopifyapp.network
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat.getSystemService
 
 
 class InternetConnection {
     companion object{
+//        fun isInternetAvailable(context: Context): Boolean {
+//
+//            var connected = false
+//            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//            val networkInfo = cm.activeNetworkInfo
+//            if (networkInfo != null && networkInfo.isAvailable && networkInfo.isConnected.also {
+//                    connected = it
+//                }) {
+//                Log.i("con", "connected : $connected")
+//                return connected
+//            }
+//            return connected
+//
+//        }
+
+
         fun isInternetAvailable(context: Context): Boolean {
 
-            var connected = false
-            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkInfo = cm.activeNetworkInfo
-            if (networkInfo != null && networkInfo.isAvailable && networkInfo.isConnected.also {
-                    connected = it
-                }) {
-                Log.i("con", "connected : $connected")
-                return connected
+            // register activity with the connectivity manager service
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+            // if the android version is equal to M
+            // or greater we need to use the
+            // NetworkCapabilities to check what type of
+            // network has the internet connection
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                // Returns a Network object corresponding to
+                // the currently active default data network.
+                val network = connectivityManager.activeNetwork ?: return false
+
+                // Representation of the capabilities of an active network.
+                val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+                return when {
+                    // Indicates this network uses a Wi-Fi transport,
+                    // or WiFi has network connectivity
+                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                    // Indicates this network uses a Cellular transport. or
+                    // Cellular has network connectivity
+                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                    // else return false
+                    else -> false
+                }
+            } else {
+                // if the android version is below M
+                @Suppress("DEPRECATION") val networkInfo =
+                    connectivityManager.activeNetworkInfo ?: return false
+                @Suppress("DEPRECATION")
+                return networkInfo.isConnected
             }
-            return connected
-//            return try {
-//                val ipAddr: InetAddress = InetAddress.getByName("google.com")
-//                !ipAddr.equals("")
-//            } catch (e: Exception) {
-//                false
-//            }
-           // return connected
         }
     }
 }

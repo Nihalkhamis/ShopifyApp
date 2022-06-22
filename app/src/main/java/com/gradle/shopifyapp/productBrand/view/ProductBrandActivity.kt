@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.databinding.ActivityProductBrandBinding
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
@@ -22,6 +24,7 @@ import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
     private var binding: ActivityProductBrandBinding? = null
+    lateinit var connectionLiveData: ConnectionLiveData
 
 
     lateinit var productBrandAdapter: ProductBrandAdapter
@@ -40,6 +43,8 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
         binding = ActivityProductBrandBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+        connectionLiveData = ConnectionLiveData(this)
+
 
         brandID = intent.getStringExtra(Constants.BRANDID).toString()
         brandName = intent.getStringExtra(Constants.BRANDNAME).toString()
@@ -96,23 +101,31 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         )
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(ProductBrandViewModel::class.java)
-        homeViewModel.getAllBrandsProducts(this,"", "", brandName)
 
-        setAdapter()
+        connectionLiveData.observe(this){
+            isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                homeViewModel.getAllBrandsProducts(this,"", "", brandName)
 
-        homeViewModel.liveDataBrandsProductList.observe(this) {
-            Log.d("TAG", "onCreateView: $it")
-            myProducts = it.products
-            productBrandAdapter.setProductsBrand(it.products)
-        }
+                setAdapter()
 
-        homeViewModel.loading.observe(this, Observer {
-            if (it) {
-                binding!!.progressbar.visibility = View.VISIBLE
-            } else {
-                binding!!.progressbar.visibility = View.GONE
+                homeViewModel.liveDataBrandsProductList.observe(this) {
+                    Log.d("TAG", "onCreateView: $it")
+                    myProducts = it.products
+                    productBrandAdapter.setProductsBrand(it.products)
+                }
+
+                homeViewModel.loading.observe(this, Observer {
+                    if (it) {
+                        binding!!.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding!!.progressbar.visibility = View.GONE
+                    }
+                })
+            }else{
+                showSnackBar()
             }
-        })
+        }
 
     }
 
@@ -128,5 +141,12 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("product",productModel)
         intent.putExtra("price",price)
         startActivity(intent)
+    }
+
+    private fun showSnackBar(){
+        val snackBar = Snackbar.make(this.findViewById(android.R.id.content),
+            "Please check your internet connection ", Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
     }
 }
