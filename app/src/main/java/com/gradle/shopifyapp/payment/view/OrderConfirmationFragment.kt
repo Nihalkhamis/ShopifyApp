@@ -268,6 +268,7 @@ class OrderConfirmationFragment : Fragment() {
     fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
         if (paymentSheetResult is PaymentSheetResult.Completed) {
             Toast.makeText(requireContext(), "Payment Success!!", Toast.LENGTH_SHORT).show()
+            placeOrder("Stripe")
         }
     }
 
