@@ -27,6 +27,7 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.*
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
@@ -55,6 +56,9 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var vmFactory: ShoppingCartViewModelFactory
     lateinit var shoppingCartVm: ShoppingCartViewModel
 
+    lateinit var connectionLiveData: ConnectionLiveData
+
+
     var line_items = ArrayList<LineItem>()
     var total_prices = ArrayList<Total_price>()
     var tax =0.0
@@ -79,6 +83,8 @@ class OrderConfirmationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         PaymentConfiguration.init(requireContext(),PUBLISH_KEY)
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
@@ -123,6 +129,7 @@ class OrderConfirmationFragment : Fragment() {
                 requireContext()
             ), requireContext()
         )
+
         shoppingCartVm = ViewModelProvider(this, vmFactory).get(ShoppingCartViewModel::class.java)
 
         _binding!!.backBtn.setOnClickListener {
@@ -182,36 +189,13 @@ class OrderConfirmationFragment : Fragment() {
 
         _binding!!.orderBtn.setOnClickListener {
 
-            //line items email discount code shipping address method for payment
-            var result_order_Model = makeOrderModel()
-
             if(_binding!!.creditRadioBtn.isChecked )
                 paymentFlow()
             if(!_binding!!.creditRadioBtn.isChecked && !_binding!!.cashRadioBtn.isChecked)
                 Toast.makeText(requireContext(),"Choose a payment method!",Toast.LENGTH_LONG).show()
             if(_binding!!.cashRadioBtn.isChecked)
             {
-                if(InternetConnection.isInternetAvailable(requireContext())){
-                    orderConfirmationVm.postOrder(result_order_Model)
-                    binding.progressbar.visibility = View.VISIBLE
-                    orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
-                        if (it.isSuccessful){
-                            for (id in draftOrderIds){
-                                shoppingCartVm.deleteProductFromDraftOrder(id.toString())
-                            }
-                            binding.progressbar.visibility = View.GONE
-                            Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
-                            startActivity(Intent(requireContext(),MainTabsActivity::class.java))
-                            activity?.finish()
-                        }
-                        else{
-                            Log.i("order",it.errorBody().toString())
-                        }
-                }
-
-                }else{
-                    showSnackBar("We can't place your order check your connection")
-                }
+                placeOrder("cash")
 
             }
         }
@@ -220,6 +204,31 @@ class OrderConfirmationFragment : Fragment() {
         return root
     }
 
+    private fun placeOrder(paymentMethod:String){
+        var result_order_Model = makeOrderModel()
+        result_order_Model.order?.processing_method =paymentMethod
+        if(InternetConnection.isInternetAvailable(requireContext())){
+            orderConfirmationVm.postOrder(result_order_Model)
+            binding.progressbar.visibility = View.VISIBLE
+            orderConfirmationVm.liveOrderModel.observe(viewLifecycleOwner){
+                if (it.isSuccessful){
+                    for (id in draftOrderIds){
+                        shoppingCartVm.deleteProductFromDraftOrder(id.toString())
+                    }
+                    binding.progressbar.visibility = View.GONE
+                    Toast.makeText(requireContext(),"Your Order Is Added Successfully",Toast.LENGTH_LONG).show()
+                    startActivity(Intent(requireContext(),MainTabsActivity::class.java))
+                    activity?.finish()
+                }
+                else{
+                    Log.i("order",it.errorBody().toString())
+                }
+            }
+
+        }else{
+            showSnackBar("We can't place your order check your connection")
+        }
+    }
     private fun makeOrderModel():Order_Model {
         var orderModel =OrderModel()
         orderModel.email = preference.getData(Constants.USEREMAIL)
@@ -258,6 +267,7 @@ class OrderConfirmationFragment : Fragment() {
     fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
         if (paymentSheetResult is PaymentSheetResult.Completed) {
             Toast.makeText(requireContext(), "Payment Success!!", Toast.LENGTH_SHORT).show()
+            placeOrder("Stripe")
         }
     }
 
@@ -341,5 +351,24 @@ class OrderConfirmationFragment : Fragment() {
             PaymentSheet.CustomerConfiguration(customerId,ephericalKey)))
     }
 
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
 
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
+    }
 }

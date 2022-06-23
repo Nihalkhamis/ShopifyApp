@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.settings.currency.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +18,10 @@ import com.gradle.shopifyapp.databinding.FragmentCurrencyBinding
 import com.gradle.shopifyapp.model.Currency
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.settings.currency.viewmodel.CurrencyViewModel
 import com.gradle.shopifyapp.settings.currency.viewmodel.CurrencyViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -34,6 +37,10 @@ class CurrencyFragment : Fragment(), OnCurrencyItemClickListener {
     lateinit var currencyViewModel: CurrencyViewModel
 
     lateinit var preference : MyPreference
+
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +68,20 @@ class CurrencyFragment : Fragment(), OnCurrencyItemClickListener {
         )
 
         currencyViewModel = ViewModelProvider(this, vmFactory).get(CurrencyViewModel::class.java)
-        currencyViewModel.getAllCurrencies()
 
-        setAdapter()
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if(it){
+                dialog.dismiss()
+                currencyViewModel.getAllCurrencies()
+                setAdapter()
+            }else{
+                dialog.show()
+            }
+        }
+
 
     }
 

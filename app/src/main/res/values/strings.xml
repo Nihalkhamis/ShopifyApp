@@ -100,6 +100,8 @@
     <string name="no_fav">There is nothing in the wishlist</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="location">Location</string>
+    <string name="no_internet_connection">Internet connection lost We will connect you when the connection is back</string>
+    <string name="try_again">Try again</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

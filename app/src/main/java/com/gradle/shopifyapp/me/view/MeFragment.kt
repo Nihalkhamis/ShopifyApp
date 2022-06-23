@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.me.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -19,6 +20,8 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
+import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.orders.OrdersActivity
 import com.gradle.shopifyapp.orders.orders_list.view.OrderOnClickListener
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModel
@@ -27,6 +30,7 @@ import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.settings.SettingsActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
@@ -36,6 +40,13 @@ import com.gradle.shopifyapp.wishlist.view.WishlistAdapter
 class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
     private var _binding: FragmentMeBinding? = null
+
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
+
+
+
 
     //viewModel
     lateinit var vmFactory: OrderListViewModelFactory
@@ -64,8 +75,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
     lateinit var productLayoutManager: StaggeredGridLayoutManager
 
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -76,6 +86,12 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         preference = MyPreference.getInstance(requireContext())!!
+
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
+
+
 
         // orders
         orderRecyclerView = binding.ordersList
@@ -104,45 +120,52 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         )
         wishListviewModel = ViewModelProvider(this, wishListVmFactory).get(ShoppingCartViewModel::class.java)
 
-        val userId =preference.getData(Constants.USERID)
+        connectionLiveData.observe(viewLifecycleOwner){
+            if(it){
+                dialog.dismiss()
+                if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+                    binding.moreForOrders.visibility=View.GONE
+                    binding.moreForWishList.visibility=View.GONE
+                    binding.welcome.visibility =View.GONE
+                    binding.ordersText.visibility = View.GONE
+                    binding.wishListText.visibility = View.GONE
+                    binding.noUser.text = "You have to login at first"
+                }else{
+                    val userId =preference.getData(Constants.USERID)
+                    orderListViewModel.getOrders(userId!!)
+                    getFavProducts()
+                    orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
+                        if (it.isSuccessful) {
+                            ordersList= it.body()?.orders!!
+                            if (!ordersList.isNullOrEmpty()){
+                                if (ordersList.size<=2)
+                                {
+                                    orderRecyclerAdapter.orders= ordersList
+                                }else{
+                                    orderRecyclerAdapter.orders= ordersList.subList(0,2)
+                                }
+                            }
+                            else{
+                                binding.noOrders.visibility=View.VISIBLE
+                            }
 
-        orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
-            if (it.isSuccessful) {
-//                Log.i("order Result", it.body()?.orders?.get(0).toString())
-                ordersList= it.body()?.orders!!
-                if (!ordersList.isNullOrEmpty()){
-                    if (ordersList.size<=2)
-                    {
-                        orderRecyclerAdapter.orders= ordersList
-                    }else{
-                        orderRecyclerAdapter.orders= ordersList.subList(0,2)
+                            orderRecyclerAdapter.notifyDataSetChanged()
+                        }else{
+                            Log.i("order Result", it.code().toString())
+                            Log.i("order Result", "Error")
+                        }
                     }
-                }
-                else{
-                    binding.noOrders.visibility=View.VISIBLE
-                }
 
-//                orderRecyclerAdapter.orders= ordersList
-                orderRecyclerAdapter.notifyDataSetChanged()
+
+                }
             }else{
-                Log.i("order Result", it.code().toString())
-                Log.i("order Result", "Error")
+                dialog.show()
+
             }
+
         }
 
 
-        if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
-            binding.moreForOrders.visibility=View.GONE
-            binding.moreForWishList.visibility=View.GONE
-            binding.welcome.visibility =View.GONE
-            binding.ordersText.visibility = View.GONE
-            binding.wishListText.visibility = View.GONE
-            binding.noUser.text = "You have to login at first"
-            //binding.settingsImg.visibility = View.GONE
-        }else{
-            orderListViewModel.getOrders(userId!!)
-            getFavProducts()
-        }
 
 
 
@@ -192,6 +215,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
         wishListviewModel.getDraftOrder(requireContext())
         wishListviewModel.liveDraftOrderList.observe(viewLifecycleOwner) {
+            favProducts= arrayListOf()
 //            Log.d("TAG", "getFavProducts: ${it.size}")
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
@@ -249,4 +273,20 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
         startActivity(intent)
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+//            binding.moreForOrders.visibility=View.GONE
+//            binding.moreForWishList.visibility=View.GONE
+//            binding.welcome.visibility =View.GONE
+//            binding.ordersText.visibility = View.GONE
+//            binding.wishListText.visibility = View.GONE
+//            binding.noUser.text = "You have to login at first"
+//            //binding.settingsImg.visibility = View.GONE
+//        }else{
+//                getFavProducts()
+//
+//        }
+//    }
 }

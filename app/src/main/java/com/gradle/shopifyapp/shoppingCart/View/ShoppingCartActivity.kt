@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.shoppingCart.View;
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
@@ -19,11 +20,13 @@ import com.gradle.shopifyapp.draft_model.LineItem
 import com.gradle.shopifyapp.draft_model.Total_price
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.payment.view.PaymentActivity
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
@@ -39,7 +42,9 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     lateinit var gridLayoutManager: GridLayoutManager
 
     lateinit var preference: MyPreference
-
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
     //viewModel
     lateinit var vmFactory: ShoppingCartViewModelFactory
     lateinit var shoppingCartVm: ShoppingCartViewModel
@@ -57,6 +62,10 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         setContentView(binding.root)
         preference = MyPreference.getInstance(this)!!
 
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(this)
+        dialog = Alert.makeAlert(this)
+
         vmFactory = ShoppingCartViewModelFactory(
             Repository.getRepoInstance(
                 ApiClient.getClientInstance()!!,
@@ -73,16 +82,26 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         shoppingCartAdapter = ShoppingCartAdapter(this,this)
         shoppingCart_rv!!.adapter = shoppingCartAdapter
 
-        getDraftOrders()
-        setUpSwipe()
+        connectionLiveData.observe(this){
+            if (it){
+                dialog.dismiss()
+                getDraftOrders()
+                setUpSwipe()
 
-        shoppingCartVm.loading.observe(this, Observer {
-            if (it) {
-                binding.progressbar.visibility = View.VISIBLE
-            } else {
-                binding.progressbar.visibility = View.GONE
+                shoppingCartVm.loading.observe(this, Observer {
+                    if (it) {
+                        binding.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressbar.visibility = View.GONE
+                    }
+                })
+            }else{
+                dialog.show()
             }
-        })
+        }
+
+
+
 
         binding.checkoutBtn.setOnClickListener{
             if(InternetConnection.isInternetAvailable(this)){
@@ -104,20 +123,13 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             finish()
         }
 
-        shoppingCartVm.loading.observe(this, Observer {
-            if (it) {
-                binding!!.progressbar.visibility = View.VISIBLE
-            } else {
-                binding!!.progressbar.visibility = View.GONE
-            }
-        })
 
     }
 
     private fun getDraftOrders(){
         shoppingCartVm.getDraftOrder(this)
         shoppingCartVm.liveDraftOrderList.observe(this) {
-
+            products = arrayListOf()
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
 

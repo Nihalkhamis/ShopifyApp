@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.orders.order_details.view
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.databinding.FragmentOrderDetailsBinding
 import com.gradle.shopifyapp.home.view.HomeFragment
 import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.model.Product
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
@@ -27,6 +30,8 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
     lateinit var productRecyclerView:RecyclerView
     lateinit var productRecyclerViewAdapter: ProductInOrderAdapter
     lateinit var preference: MyPreference
+    lateinit var connectionLiveData: ConnectionLiveData
+
 
 
     var position:Int =0
@@ -48,8 +53,6 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
 
         var order = MeFragment.ordersList[position]
-        Log.i("order",order.toString())
-        Log.i("order",order.id.toString())
         binding.orderIdText.text= "ORDER ID - ${order.id.toString()}"
         binding.orderDateText.text = order.created_at
         binding.mobileNumberText.text = order.customer?.phone
@@ -95,6 +98,36 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         intent.putExtra("price",price)
         startActivity(intent)
 
+    }
+
+
+    private fun showSnackBar(msg:String){
+        val snackBar = Snackbar.make(requireActivity().findViewById(R.id.content),
+            msg, Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                // for not making it at the first time when entre the activity
+                if(!firstTime){
+                    showSnackBar("We back online")
+
+                }else{
+                    firstTime = false
+                }
+
+            }else{
+                showSnackBar("Be careful we lost the connection")
+
+            }
+        }
     }
 
 }

@@ -23,11 +23,13 @@ import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.model.ReviewModel
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModel
 import com.gradle.shopifyapp.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -60,6 +62,9 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
     lateinit var vmFactory: ProductDetailsViewModelFactory
     lateinit var productDetailsVm: ProductDetailsViewModel
 
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : android.app.AlertDialog
 
     var hearted : Boolean = false
 
@@ -74,6 +79,10 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         setContentView(binding.root)
 
         preference = MyPreference.getInstance(this)!!
+
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(this)
+        dialog = Alert.makeAlert(this)
 
         product = Product()
         vmFactory = ProductDetailsViewModelFactory(
@@ -102,30 +111,62 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         Log.d("TAG", "onCreate: $isFromWishlist")
         Log.d("TAG", "onCreate: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID, 1000)}")
 
+        connectionLiveData.observe(this){
+            if (it){
+                dialog.dismiss()
+                //comes from wishlist
+                if (isFromWishlist == "true"){
+                    Log.d("TAG", "onCreate: FROM WISHLIST")
+                    var selectedProductId = intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)
 
-        //comes from wishlist
-        if (isFromWishlist == "true"){
-            Log.d("TAG", "onCreate: FROM WISHLIST")
-            var selectedProductId = intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)
+                    Log.d("TAG", "onCreate: $selectedProductId")
 
-            Log.d("TAG", "onCreate: $selectedProductId")
+                    productDetailsVm.getProductById(selectedProductId.toString())
 
-            productDetailsVm.getProductById(selectedProductId.toString())
+                    productDetailsVm.liveDataProductList.observe(this, Observer {
+                        Log.d("TAG", "onCreate: ${it.body()}")
+                        Log.d("TAG", "onCreate: ${it.body()!!.product}")
+                        product = it.body()?.product ?: Product()
+                        initUIComponent()
 
-            productDetailsVm.liveDataProductList.observe(this, Observer {
-                Log.d("TAG", "onCreate: ${it.body()}")
-                Log.d("TAG", "onCreate: ${it.body()!!.product}")
-                product = it.body()?.product ?: Product()
-                initUIComponent()
+                    })
+                }
 
-            })
-        }
+                // comes from any product
+                else{
+                    product = intent.getSerializableExtra("product") as Product
+                    initUIComponent()
 
-        // comes from any product
-        else{
-            product = intent.getSerializableExtra("product") as Product
-            initUIComponent()
+                }
 
+                //check if this product exist in wishlist or not
+                wishlistViewModel.getDraftOrder(this)
+                wishlistViewModel.liveDraftOrderList.observe(this, Observer {
+                    Log.d("TAG", "getFavProducts: ${it.size}")
+                    for (i in 0..it.size - 1) {
+                        var email = preference.getData(Constants.USEREMAIL)
+
+                        if (it.get(i).email == email && it.get(i).note == "favourite") {
+                            if (product.id == it[i].line_items!![0].product_id) {
+
+                                //assign draft order id to this variable to use it in deletion
+                                draftOrderId = it[i].id!!
+
+                                binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
+                                hearted = true
+                                break
+                            } else {
+                                binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
+                                hearted = false
+                            }
+                        }
+                    }
+                    Log.d("TAG", "onCreate: DRAFT ORDER ID-------> $draftOrderId")
+
+                })
+            }else{
+                dialog.show()
+            }
         }
 
 
@@ -133,33 +174,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         binding.backBtn.setOnClickListener {
             finish()
         }
-
-        //check if this product exist in wishlist or not
-        wishlistViewModel.getDraftOrder(this)
-        wishlistViewModel.liveDraftOrderList.observe(this, Observer {
-            Log.d("TAG", "getFavProducts: ${it.size}")
-            for (i in 0..it.size - 1) {
-                var email = preference.getData(Constants.USEREMAIL)
-
-                if (it.get(i).email == email && it.get(i).note == "favourite") {
-                    if (product.id == it[i].line_items!![0].product_id) {
-
-                        //assign draft order id to this variable to use it in deletion
-                        draftOrderId = it[i].id!!
-
-                        binding.favoriteBtn.setImageResource(R.drawable.fav_heart_icon)
-                        hearted = true
-                        break
-                    } else {
-                        binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
-                        hearted = false
-                    }
-                }
-            }
-            Log.d("TAG", "onCreate: DRAFT ORDER ID-------> $draftOrderId")
-
-        })
-
         //wishlist
         binding.favoriteBtn.setOnClickListener {
             Log.d("TAG", "onCreate: Fav button clicked !")

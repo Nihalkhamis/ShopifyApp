@@ -49,7 +49,7 @@ data class OrderModel(
     val phone: String?= null,
     val presentment_currency: String?= null,
     val processed_at: String?= null,
-    val processing_method: String?= null,
+    var processing_method: String?= null,
     val referring_site: String?= null,
     val refunds: List<Refund?>?= null,
     var shipping_address: ShippingAddress?= null,

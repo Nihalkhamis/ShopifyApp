@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.productBrand.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,20 +9,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.databinding.ActivityProductBrandBinding
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModel
 import com.gradle.shopifyapp.productBrand.viewmodel.ProductBrandViewModelFactory
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 
 class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
     private var binding: ActivityProductBrandBinding? = null
+
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
+
 
 
     lateinit var productBrandAdapter: ProductBrandAdapter
@@ -40,6 +49,12 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
 
         binding = ActivityProductBrandBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(this)
+        dialog = Alert.makeAlert(this)
+
+
 
         brandID = intent.getStringExtra(Constants.BRANDID).toString()
         brandName = intent.getStringExtra(Constants.BRANDNAME).toString()
@@ -96,23 +111,33 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         )
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(ProductBrandViewModel::class.java)
-        homeViewModel.getAllBrandsProducts(this,"", "", brandName)
 
-        setAdapter()
+        connectionLiveData.observe(this){
+            isNetworkAvaliable->
+            if (isNetworkAvaliable){
+                dialog.dismiss()
+                homeViewModel.getAllBrandsProducts(this,"", "", brandName)
 
-        homeViewModel.liveDataBrandsProductList.observe(this) {
-            Log.d("TAG", "onCreateView: $it")
-            myProducts = it.products
-            productBrandAdapter.setProductsBrand(it.products)
-        }
+                setAdapter()
 
-        homeViewModel.loading.observe(this, Observer {
-            if (it) {
-                binding!!.progressbar.visibility = View.VISIBLE
-            } else {
-                binding!!.progressbar.visibility = View.GONE
+                homeViewModel.liveDataBrandsProductList.observe(this) {
+                    Log.d("TAG", "onCreateView: $it")
+                    myProducts = it.products
+                    productBrandAdapter.setProductsBrand(it.products)
+                }
+
+                homeViewModel.loading.observe(this, Observer {
+                    if (it) {
+                        binding!!.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding!!.progressbar.visibility = View.GONE
+                    }
+                })
+            }else{
+                dialog.show()
+               // showSnackBar()
             }
-        })
+        }
 
     }
 
@@ -128,5 +153,12 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("product",productModel)
         intent.putExtra("price",price)
         startActivity(intent)
+    }
+
+    private fun showSnackBar(){
+        val snackBar = Snackbar.make(this.findViewById(android.R.id.content),
+            "Please check your internet connection ", Snackbar.LENGTH_LONG
+        )
+        snackBar.show()
     }
 }

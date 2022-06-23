@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.wishlist.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +17,13 @@ import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.model.ProductModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
+import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
 import com.gradle.shopifyapp.shoppingCart.View.CartOnClickListener
 import com.gradle.shopifyapp.shoppingCart.View.ShoppingCartActivity
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -39,6 +42,10 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
     var favProducts: ArrayList<Draft_order> = ArrayList<Draft_order>()
 
     var lineItems = ArrayList<LineItem>()
+
+    //for internet connection
+    lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,42 +74,51 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
 
         viewModel = ViewModelProvider(this, vmFactory).get(ShoppingCartViewModel::class.java)
 
-        setAdapter()
+        //for internet connection
+        connectionLiveData = ConnectionLiveData(this)
+        dialog = Alert.makeAlert(this)
+        connectionLiveData.observe(this){
+            if (it){
+                dialog.dismiss()
+                setAdapter()
 
-        viewModel.liveDraftOrderList.observe(this) {
-            Log.d("TGGGGAG", "getFavProducts: ${it.size}")
-            favProducts.clear()
-            for (i in 0..it.size - 1) {
-                var email = preference.getData(Constants.USEREMAIL)
+                viewModel.liveDraftOrderList.observe(this) {
+                    Log.d("TGGGGAG", "getFavProducts: ${it.size}")
+                    favProducts.clear()
+                    for (i in 0..it.size - 1) {
+                        var email = preference.getData(Constants.USEREMAIL)
 
-                var df = Draft_order()
-                if (it[i].email == email && it[i].note == "favourite") {
-                    df.draft_order = it[i]
-                    favProducts.add(df)
-                    lineItems.add(df.draft_order!!.line_items!![0])
+                        var df = Draft_order()
+                        if (it[i].email == email && it[i].note == "favourite") {
+                            df.draft_order = it[i]
+                            favProducts.add(df)
+                            lineItems.add(df.draft_order!!.line_items!![0])
 
-                }
-            }
+                        }
+                    }
 
-            if (favProducts.isNullOrEmpty()) {
-                binding!!.background.setImageResource(R.drawable.orders)
-                wishlistAdapter.deleteFavProducts()
-            } else {
+                    if (favProducts.isNullOrEmpty()) {
+                        binding!!.background.setImageResource(R.drawable.orders)
+                        wishlistAdapter.deleteFavProducts()
+                    } else {
 
 //                wishlistAdapter.deleteFavProducts()
-                wishlistAdapter.setFavProducts(favProducts)
+                        wishlistAdapter.setFavProducts(favProducts)
 
+                    }
+                }
+
+                viewModel.loading.observe(this, Observer {
+                    if (it) {
+                        binding!!.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding!!.progressbar.visibility = View.GONE
+                    }
+                })
+            }else{
+                dialog.show()
             }
         }
-
-        viewModel.loading.observe(this, Observer {
-            if (it) {
-                binding!!.progressbar.visibility = View.VISIBLE
-            } else {
-                binding!!.progressbar.visibility = View.GONE
-            }
-        })
-
     }
 
 
