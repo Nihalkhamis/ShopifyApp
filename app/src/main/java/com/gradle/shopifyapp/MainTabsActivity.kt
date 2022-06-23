@@ -2,7 +2,6 @@ package com.gradle.shopifyapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -40,7 +39,6 @@ class MainTabsActivity : AppCompatActivity() {
         binding.topBar.setNavigationOnClickListener {
              val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
-          //  Toast.makeText(this,"Search Tap",Toast.LENGTH_LONG).show()
         }
         binding.topBar.setOnMenuItemClickListener { menuItem ->
 
@@ -49,16 +47,13 @@ class MainTabsActivity : AppCompatActivity() {
                     val intent = Intent(this, WishlistActivity::class.java).apply {
                     }
                     startActivity(intent)
-                   // Toast.makeText(this,"Favorite Tap",Toast.LENGTH_LONG).show()
                      true
-
                 }
 
                 R.id.cart -> {
                     val intent = Intent(this, ShoppingCartActivity::class.java).apply {
                     }
                     startActivity(intent)
-                   // Toast.makeText(this, "Cart Tap", Toast.LENGTH_LONG).show()
                      true
                 }
                 else ->
@@ -67,9 +62,6 @@ class MainTabsActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
@@ -83,9 +75,7 @@ class MainTabsActivity : AppCompatActivity() {
             var intent =Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-
         }
-
         builder.show()
     }
 }

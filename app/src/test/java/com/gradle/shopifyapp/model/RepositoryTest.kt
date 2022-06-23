@@ -50,4 +50,10 @@ class RepositoryTest() : TestCase() {
         val tasks = repo.getDraftOrders()
         assertEquals(1, tasks.body()?.draft_orders?.size)
     }
+
+    @Test
+    fun getAllOrders() = runBlocking {
+        val tasks = repo.getAllOrders("")
+        assertEquals(1, tasks.body()?.orders?.size)
+    }
 }

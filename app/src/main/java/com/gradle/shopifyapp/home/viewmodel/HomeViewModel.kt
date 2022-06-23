@@ -31,7 +31,7 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     val liveDataConvertCurrencyList : LiveData<Double> = convertedCurrencyList
 
     fun getAllProducts(context: Context, collection_id : String, product_type : String, vendor : String) {
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch {
             val response = repo.getAllProducts(collection_id, product_type, vendor)
             productList.postValue(response.body())
         }
@@ -41,13 +41,13 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
         viewModelScope.launch {
             val response = repo.getAllVendors()
             vendorList.postValue(response.body())
-          /*  withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     loading.value = false
                 } else {
                     loading.value = false
                 }
-            }*/
+            }
         }
     }
 

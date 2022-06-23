@@ -47,4 +47,15 @@ class HomeViewModelTest() : TestCase() {
         assertEquals(2,tasks.smart_collections.size)
     }
 
+    @Test
+    fun getProductsByBrand() = runBlockingTest {
+        // When tasks are requested from the tasks repository
+        val viewModel = HomeViewModel(repo,context)
+        viewModel.getAllProducts(context,"","","")
+        shadowOf(getMainLooper()).idle()
+        val tasks = viewModel.liveDataProductList.getOrAwaitValue()
+        // Then tasks are loaded from the remote data source
+        assertEquals(1,tasks.products.size)
+    }
+
 }
