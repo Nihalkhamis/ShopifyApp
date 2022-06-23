@@ -2,6 +2,7 @@ package com.gradle.shopifyapp.home.viewmodel
 
 import android.content.Context
 import android.os.Looper.getMainLooper
+import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gradle.shopifyapp.getOrAwaitValue
@@ -34,12 +35,13 @@ class HomeViewModelTest() : TestCase() {
         repo = Repository.getRepoInstance(remoteDataSource, context)
     }
 
+
     @Test
     fun getAllVendors() = runBlockingTest {
         // When tasks are requested from the tasks repository
         val viewModel = HomeViewModel(repo,context)
-        shadowOf(getMainLooper()).idle()
         viewModel.getAllVendors(context)
+        shadowOf(getMainLooper()).idle()
         val tasks = viewModel.liveVendorList.getOrAwaitValue()
         // Then tasks are loaded from the remote data source
         assertEquals(2,tasks.smart_collections.size)

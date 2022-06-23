@@ -94,13 +94,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             }else{
                 showSnackBar()
             }
-
-//            val intent = Intent(this, PaymentActivity::class.java)
-//            intent.putExtra("line_items",lineItems)
-//            intent.putExtra("total_prices",totalPrice)
-//            intent.putExtra("draft_order_id",draftOrderId)
-//            startActivity(intent)
         }
+
         binding.favoriteImg.setOnClickListener {
             startActivity(Intent(this,WishlistActivity::class.java))
 
@@ -200,19 +195,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         }
     }
 
-//    override fun onDeleteProduct(id: String) {
-//        shoppingCartVm.deleteProductFromDraftOrder(id)
-//        shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
-//            if(dOrder.isSuccessful){
-//                Log.d("TAG", "successful")
-//                products.remove(dOrder.body())
-//                calculateTotalPrice(products)
-//            }
-//            else{
-//                Log.d("TAG", "failed: ${dOrder.code()}")
-//            }
-//        }
-//    }
 
     override fun onClickProduct(draftOrder: Draft_order) {
         val intent = Intent(this, ProductDetailsActivity::class.java)
@@ -238,6 +220,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         if(dOrder.isSuccessful){
                             Log.d("TAG", "successful")
                             //error in calculations
+                            
                             products.remove(swipedProduct)
                             shoppingCartAdapter.notifyDataSetChanged()
                             calculateTotalPrice(products)
@@ -247,6 +230,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         }
                     }
                 }
+
             }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(shoppingCart_rv)
