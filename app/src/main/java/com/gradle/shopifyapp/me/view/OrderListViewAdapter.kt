@@ -47,11 +47,6 @@ class OrderListViewAdapter(var orders : List<OrderModel>, private val onclickInt
         var day = orders[position].created_at?.split("T")?.get(0)
         var time = orders[position].created_at?.split("T")?.get(1)?.split("+")?.get(0)
 
-        Log.d("TAG", "onBindViewHolder: WHOLE DATE->${orders[position].created_at}")
-
-        Log.d("TAG", "onBindViewHolder: DAY->$day")
-        Log.d("TAG", "onBindViewHolder: DAY->$time")
-
         holder.dateText.text = "$day, $time"
         holder.priceText.text =  "$price ${preference.getData(Constants.TOCURRENCY)}"
         holder.orderListItem.setOnClickListener {
