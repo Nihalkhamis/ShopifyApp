@@ -12,7 +12,10 @@ class FakeRemoteSource: RemoteSource {
         product_type: String,
         vendor: String
     ): Response<ProductModel> {
-        TODO("Not yet implemented")
+        var product: MutableList<Product> = mutableListOf()
+        product.add(Product(title = "Adidas"))
+        product.add(Product(title = "Reebok"))
+        return Response.success(200, ProductModel(product))
     }
 
     override suspend fun getAllVendors(): Response<VendorsModel> {

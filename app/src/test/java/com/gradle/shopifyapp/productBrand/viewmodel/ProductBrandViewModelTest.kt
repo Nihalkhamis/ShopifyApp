@@ -1,4 +1,4 @@
-package com.gradle.shopifyapp.home.viewmodel
+package com.gradle.shopifyapp.productBrand.viewmodel
 
 import android.content.Context
 import android.os.Looper.getMainLooper
@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gradle.shopifyapp.getOrAwaitValue
+import com.gradle.shopifyapp.home.viewmodel.HomeViewModel
 import com.gradle.shopifyapp.model.FakeRemoteSource
 import com.gradle.shopifyapp.model.Repository
 import junit.framework.TestCase
@@ -22,7 +23,7 @@ import org.robolectric.annotation.LooperMode
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @ExperimentalCoroutinesApi
-class HomeViewModelTest() : TestCase() {
+class ProductBrandViewModelTest : TestCase(){
     private lateinit var remoteDataSource: FakeRemoteSource
     private lateinit var repo: Repository
     private lateinit var context: Context
@@ -35,38 +36,14 @@ class HomeViewModelTest() : TestCase() {
         repo = Repository.getRepoInstance(remoteDataSource, context)
     }
 
-
     @Test
     fun getAllVendors() = runBlockingTest {
         // When tasks are requested from the tasks repository
-        val viewModel = HomeViewModel(repo,context)
-        viewModel.getAllVendors(context)
+        val viewModel = ProductBrandViewModel(repo,context)
+        viewModel.getAllBrandsProducts(context,"","","")
         shadowOf(getMainLooper()).idle()
-        val tasks = viewModel.liveVendorList.getOrAwaitValue()
-        // Then tasks are loaded from the remote data source
-        assertEquals(2,tasks.smart_collections.size)
-    }
-
-    @Test
-    fun getProductsByBrand() = runBlockingTest {
-        // When tasks are requested from the tasks repository
-        val viewModel = HomeViewModel(repo,context)
-        viewModel.getAllProducts(context,"","","")
-        shadowOf(getMainLooper()).idle()
-        val tasks = viewModel.liveDataProductList.getOrAwaitValue()
+        val tasks = viewModel.liveDataBrandsProductList.getOrAwaitValue()
         // Then tasks are loaded from the remote data source
         assertEquals(2,tasks.products.size)
     }
-
-    @Test
-    fun getAllDiscountCodes() = runBlockingTest {
-        // When tasks are requested from the tasks repository
-        val viewModel = HomeViewModel(repo,context)
-        viewModel.getAllDiscountCodes(context)
-        shadowOf(getMainLooper()).idle()
-        val tasks = viewModel.liveDiscountList.getOrAwaitValue()
-        // Then tasks are loaded from the remote data source
-        assertEquals(1,tasks.discount_codes.size)
-    }
-
 }

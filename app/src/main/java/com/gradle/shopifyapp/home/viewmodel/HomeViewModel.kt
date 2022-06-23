@@ -53,7 +53,7 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
 
 
     fun getAllDiscountCodes(context: Context) {
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch{
             val response = repo.getAllDiscountCodes()
             discountList.postValue(response.body())
         }
