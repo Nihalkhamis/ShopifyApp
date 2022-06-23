@@ -30,7 +30,7 @@ class ShoppingCartViewModel (private val repo : RepositoryInterface, private var
 
     fun getDraftOrder(context: Context) {
         loading.value = true
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch {
             val response = repo.getDraftOrders()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {

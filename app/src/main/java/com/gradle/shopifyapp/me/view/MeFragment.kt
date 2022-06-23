@@ -215,7 +215,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
         wishListviewModel.getDraftOrder(requireContext())
         wishListviewModel.liveDraftOrderList.observe(viewLifecycleOwner) {
-            favProducts.clear()
+            favProducts= arrayListOf()
 //            Log.d("TAG", "getFavProducts: ${it.size}")
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)

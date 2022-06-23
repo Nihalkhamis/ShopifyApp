@@ -175,7 +175,6 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         }
 
 
-
         //back btn
         binding.backBtn.setOnClickListener {
             finish()

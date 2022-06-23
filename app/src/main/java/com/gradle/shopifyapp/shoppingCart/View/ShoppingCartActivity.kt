@@ -128,20 +128,13 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             finish()
         }
 
-        shoppingCartVm.loading.observe(this, Observer {
-            if (it) {
-                binding!!.progressbar.visibility = View.VISIBLE
-            } else {
-                binding!!.progressbar.visibility = View.GONE
-            }
-        })
 
     }
 
     private fun getDraftOrders(){
         shoppingCartVm.getDraftOrder(this)
         shoppingCartVm.liveDraftOrderList.observe(this) {
-
+            products = arrayListOf()
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
 

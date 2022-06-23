@@ -100,7 +100,9 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         preference = MyPreference.getInstance(requireContext())!!
         connectionLiveData = ConnectionLiveData(requireContext())
         var dialog = Alert.makeAlert(requireContext())
-
+        if (!InternetConnection.isInternetAvailable(requireContext())){
+            dialog.show()
+        }
 
         //check for the connection at first
         connectionLiveData.observe(viewLifecycleOwner){
