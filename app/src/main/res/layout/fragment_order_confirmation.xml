@@ -140,44 +140,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email_textView" />
 
-        <TextView
-            android:id="@+id/shipping_method_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/shipping_method"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/first_line" />
-
-        <TextView
-            android:id="@+id/shipping_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:text="@string/shipping"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shipping_method_textView" />
-
-        <TextView
-            android:id="@+id/price_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:text="@string/price_EGP"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shipping_method_textView" />
-
-        <View
-            android:id="@+id/second_line"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/browser_actions_bg_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/price_text" />
 
         <TextView
             android:id="@+id/payment_method_textview"
@@ -188,7 +150,7 @@
             android:text="@string/payment_method"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/second_line" />
+            app:layout_constraintTop_toTopOf="@+id/first_line" />
 
         <RadioGroup
             android:id="@+id/payment_rg"

@@ -66,17 +66,4 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
         }
     }
 
-//    private fun onError(message: String) {
-//        errorMessage.value = message
-//        loading.value = false
-//    }
-//
-//    override fun onCleared() {
-//        super.onCleared()
-//        job?.cancel()
-//    }
-
-//    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
-//        throwable.printStackTrace()
-//    }
 }

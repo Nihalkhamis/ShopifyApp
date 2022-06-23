@@ -31,13 +31,13 @@ class Brands_adapter(var context: Context,var onBrandClickListener : OnBrandClic
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(brands[position].image.src).apply(
+        Glide.with(context).load(brands[position].image?.src).apply(
             RequestOptions().override(200, 200).placeholder(R.drawable.ic_launcher_background)
         ).into(holder.img)
         holder.img.setOnClickListener {
             onBrandClickListener.onClick((brands[position]))
         }
-        Log.i("TAG","BRAND IMAGE: "+brands[position].image.src)
+        Log.i("TAG","BRAND IMAGE: "+ brands[position].image!!.src)
     }
 
     override fun getItemCount(): Int {

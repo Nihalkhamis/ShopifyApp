@@ -140,9 +140,9 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)
         _binding!!.phoneTextView.text = preference.getData(Constants.USERMOBILEPHONE)
 
-        line_items = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).lineItems
-        total_prices = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).totalPrice
-        draftOrderIds = (requireActivity() as com.gradle.shopifyapp.payment.view.PaymentActivity).draftOrderId
+        line_items = (requireActivity() as PaymentActivity).lineItems
+        total_prices = (requireActivity() as PaymentActivity).totalPrice
+        draftOrderIds = (requireActivity() as PaymentActivity).draftOrderId
 
 
 
@@ -152,9 +152,9 @@ class OrderConfirmationFragment : Fragment() {
             tax += (total_prices[i].tax!!.toDouble() *(preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
         }
         amount = totalPrice.toString()
-        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
-        _binding!!.shipping.text = (String.format("%.2f",tax)) + preference.getData(Constants.TOCURRENCY)
-        _binding!!.subtotal.text = (String.format("%.2f",subtotal)) + preference.getData(Constants.TOCURRENCY)
+        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+        _binding!!.shipping.text = (String.format("%.2f",tax)) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+        _binding!!.subtotal.text = (String.format("%.2f",subtotal)) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
 
 
         orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
@@ -172,17 +172,16 @@ class OrderConfirmationFragment : Fragment() {
                 for(i in 0..discountCodes.discount_codes.size-1){
                     if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
                         discount = subtotal*0.1
-                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getData(Constants.TOCURRENCY)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                         _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
                         discountCode = discountCodes.discount_codes[i]
-                        ////////
                         break
                     }else{
                         discount = 0.0
-                        _binding!!.discount.text = discount.toString() + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.discount.text = discount.toString() + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                         _binding!!.verify.setImageResource(R.drawable.verify_icon)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getData(Constants.TOCURRENCY)
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                     }
                 }
             }
@@ -337,7 +336,7 @@ class OrderConfirmationFragment : Fragment() {
                 val delim = "."
                 val list = str.split(delim)
                 param.put("amount", "${list.get(0)}${list.get(1)}0")
-                param.put("currency" , preference.getData(Constants.TOCURRENCY).toString())
+                param.put("currency" , preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP").toString())
                 param.put("automatic_payment_methods[enabled]" ,"true")
                 return param
             }
