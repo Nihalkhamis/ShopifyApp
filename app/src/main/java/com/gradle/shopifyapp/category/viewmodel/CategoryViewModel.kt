@@ -37,8 +37,6 @@ class CategoryViewModel(private val repo : RepositoryInterface, private var cont
                     onError("Error : ${response.message()} ")
                 }
             }
-            Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllProducts: $response")
             categoriesProductList.postValue(response.body())
         }
     }

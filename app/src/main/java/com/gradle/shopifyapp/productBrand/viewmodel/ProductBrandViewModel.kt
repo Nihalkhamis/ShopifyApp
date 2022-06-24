@@ -26,7 +26,7 @@ class ProductBrandViewModel(private val repo : RepositoryInterface, private var 
 
     fun getAllBrandsProducts(context: Context, collection_id : String, product_type : String, vendor : String) {
         loading.value = true
-        viewModelScope.launch(Dispatchers.IO ) {
+        viewModelScope.launch{
             val response = repo.getAllProducts(collection_id, product_type, vendor)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -36,8 +36,6 @@ class ProductBrandViewModel(private val repo : RepositoryInterface, private var 
                     onError("Error : ${response.message()} ")
                 }
             }
-            Log.d("TAG", "getProductsDetails: ${response.raw().request().url()}")
-            Log.d("TAG", "getAllProducts: $response")
             brandsProductList.postValue(response.body())
         }
     }

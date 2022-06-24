@@ -2,6 +2,9 @@ package com.gradle.shopifyapp.shoppingCart.View;
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -113,13 +116,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             }else{
                 showSnackBar()
             }
-
-//            val intent = Intent(this, PaymentActivity::class.java)
-//            intent.putExtra("line_items",lineItems)
-//            intent.putExtra("total_prices",totalPrice)
-//            intent.putExtra("draft_order_id",draftOrderId)
-//            startActivity(intent)
         }
+
         binding.favoriteImg.setOnClickListener {
             startActivity(Intent(this,WishlistActivity::class.java))
 
@@ -212,19 +210,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
         }
     }
 
-//    override fun onDeleteProduct(id: String) {
-//        shoppingCartVm.deleteProductFromDraftOrder(id)
-//        shoppingCartVm.liveDeleteDraftOrderList.observe(this){ dOrder->
-//            if(dOrder.isSuccessful){
-//                Log.d("TAG", "successful")
-//                products.remove(dOrder.body())
-//                calculateTotalPrice(products)
-//            }
-//            else{
-//                Log.d("TAG", "failed: ${dOrder.code()}")
-//            }
-//        }
-//    }
 
     override fun onClickProduct(draftOrder: Draft_order) {
         val intent = Intent(this, ProductDetailsActivity::class.java)
@@ -259,6 +244,28 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         }
                     }
                 }
+
+                override fun onChildDraw(
+                    c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                    dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+                ) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX,
+                        dY, actionState, isCurrentlyActive
+                    )
+                    val background = ColorDrawable(Color.RED)
+                    background.setBounds(
+                        viewHolder.itemView.right,
+                        viewHolder.itemView.top,
+                        0,
+                        viewHolder.itemView.bottom
+                    )
+                    background.draw(c)
+
+                    Log.i("TAG", "onChildDraw: ")
+                }
+
+
             }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(shoppingCart_rv)

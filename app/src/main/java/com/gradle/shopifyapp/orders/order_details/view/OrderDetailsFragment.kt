@@ -54,7 +54,9 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
         var order = MeFragment.ordersList[position]
         binding.orderIdText.text= "ORDER ID - ${order.id.toString()}"
-        binding.orderDateText.text = order.created_at
+        var day = order.created_at?.split("T")?.get(0)
+        var time = order.created_at?.split("T")?.get(1)?.split("+")?.get(0)
+        binding.orderDateText.text =  "$day, $time"
         binding.mobileNumberText.text = order.customer?.phone
         //binding.addressTextInput.text = order.shipping_address?.address1 ?: "No address for that address "
         var address =order.customer?.default_address

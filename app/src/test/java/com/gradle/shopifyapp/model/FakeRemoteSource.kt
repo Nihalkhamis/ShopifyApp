@@ -1,7 +1,6 @@
 package com.gradle.shopifyapp.model
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import com.gradle.shopifyapp.draft_model.DraftOrder
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.Draft_orders_list
 import com.gradle.shopifyapp.network.RemoteSource
@@ -13,7 +12,10 @@ class FakeRemoteSource: RemoteSource {
         product_type: String,
         vendor: String
     ): Response<ProductModel> {
-        TODO("Not yet implemented")
+        var product: MutableList<Product> = mutableListOf()
+        product.add(Product(title = "Adidas"))
+        product.add(Product(title = "Reebok"))
+        return Response.success(200, ProductModel(product))
     }
 
     override suspend fun getAllVendors(): Response<VendorsModel> {
@@ -24,11 +26,15 @@ class FakeRemoteSource: RemoteSource {
     }
 
     override suspend fun getProductsByBrand(id: String): Response<ProductModel> {
-        TODO("Not yet implemented")
+        var product: MutableList<Product> = mutableListOf()
+        product.add(Product(title = "Pants"))
+        return Response.success(200, ProductModel(product))
     }
 
     override suspend fun getAllDiscountCodes(): Response<DiscountCodeModel> {
-        TODO("Not yet implemented")
+        var discount: MutableList<DiscountCode> = mutableListOf()
+        discount.add(DiscountCode(code = "SALE10OFF"))
+        return Response.success(200, DiscountCodeModel(discount))
     }
 
     override suspend fun postDraftOrders(order: Draft_order): Response<Draft_order> {
@@ -40,7 +46,9 @@ class FakeRemoteSource: RemoteSource {
     }
 
     override suspend fun getDraftOrders(): Response<Draft_orders_list> {
-        TODO("Not yet implemented")
+        var draftOrder: MutableList<DraftOrder> = mutableListOf()
+        draftOrder.add(DraftOrder(name = "First Draft Order"))
+        return Response.success(200, Draft_orders_list(draftOrder))
     }
 
     override suspend fun getAllCustomers(): Response<CustomersModel> {
@@ -48,8 +56,9 @@ class FakeRemoteSource: RemoteSource {
     }
 
     override suspend fun getAllOrders(id: String): Response<OrdersModel> {
-        TODO("Not yet implemented")
-    }
+        var order: MutableList<OrderModel> = mutableListOf()
+        order.add(OrderModel(name = "First Order"))
+        return Response.success(200, OrdersModel(order))    }
 
     override suspend fun postOrder(order: Order_Model): Response<Order_Model> {
         TODO("Not yet implemented")

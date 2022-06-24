@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gradle.shopifyapp.R
 import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.FragmentMainScreenBinding
@@ -50,6 +52,35 @@ class MainScreenFragment : Fragment() {
 
         binding.backBtn.setOnClickListener {
             activity?.finish()
+        }
+
+        binding.contactusTxt.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val view = layoutInflater.inflate(R.layout.contactus_bottomsheet, null)
+            val btnClose = view.findViewById<ImageView>(R.id.cancel_icon)
+
+            btnClose.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(false)
+            dialog.setContentView(view)
+            dialog.show()
+
+        }
+        binding.aboutUsTxt.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val view = layoutInflater.inflate(R.layout.aboutus_bottomsheet, null)
+            val btnClose = view.findViewById<ImageView>(R.id.cancel_icon)
+
+            btnClose.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(false)
+            dialog.setContentView(view)
+            dialog.show()
+
         }
 
         binding.currencyTxt.setOnClickListener {
