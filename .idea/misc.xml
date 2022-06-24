@@ -9,6 +9,7 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/aboutus_icon.xml" value="0.134" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/add_ic.xml" value="0.1695" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/back_button_icon.xml" value="0.162" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/bottomsheets_background.xml" value="0.1715" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/currency_icon.xml" value="0.134" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/fav_heart_icon.xml" value="0.173" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/filled_heat_icon.xml" value="0.162" />
@@ -21,6 +22,7 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/search_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/shopping_cart_icon.xml" value="0.162" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/drawable/tab_color_selector.xml" value="0.134" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/aboutus_bottomsheet.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_main_tabs.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_product_brand.xml" value="0.2" />
@@ -31,6 +33,7 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/activity_wishlist.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/address_item.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/address_row.xml" value="0.264" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/contactus_bottomsheet.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/currency_item.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_add_address.xml" value="0.13541666666666666" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_add_address_settings.xml" value="0.2" />

@@ -111,6 +111,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="contactUsPhoneBottomSheet">phone: 0100101055</string>
+    <string name="contactUsEmailBottomSheet">email: shopify@gmail.com</string>
+    <string name="aboutUsBriefBottomSheet">This is our ITI graduation project, it\'s our pleasure to try to use it and if you have any concern please don\'t hesitate to contact us.</string>
+    <string name="aboutUsTeamBottomsheet">Our team:\nHala Emad\nNihal Yasser\nRana Abdel Aziz</string>
 
 
 </resources>

@@ -2,6 +2,9 @@ package com.gradle.shopifyapp.settings.showAllAddresses.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -163,6 +166,27 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
                     settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
 
                 }
+
+                override fun onChildDraw(
+                    c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                    dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+                ) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX,
+                        dY, actionState, isCurrentlyActive
+                    )
+                    val background = ColorDrawable(Color.RED)
+                    background.setBounds(
+                        viewHolder.itemView.right,
+                        viewHolder.itemView.top,
+                        0,
+                        viewHolder.itemView.bottom
+                    )
+                    background.draw(c)
+
+                    Log.i("TAG", "onChildDraw: ")
+                }
+
             }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(binding.addressesRV)

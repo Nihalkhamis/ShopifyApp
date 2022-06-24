@@ -27,4 +27,5 @@
     <style name="Theme.ShopifyApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ShopifyApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

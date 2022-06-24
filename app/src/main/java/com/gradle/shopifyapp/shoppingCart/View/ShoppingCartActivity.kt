@@ -2,6 +2,9 @@ package com.gradle.shopifyapp.shoppingCart.View;
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -232,7 +235,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         if(dOrder.isSuccessful){
                             Log.d("TAG", "successful")
                             //error in calculations
-                            
                             products.remove(swipedProduct)
                             shoppingCartAdapter.notifyDataSetChanged()
                             calculateTotalPrice(products)
@@ -242,6 +244,27 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         }
                     }
                 }
+
+                override fun onChildDraw(
+                    c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                    dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+                ) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX,
+                        dY, actionState, isCurrentlyActive
+                    )
+                    val background = ColorDrawable(Color.RED)
+                    background.setBounds(
+                        viewHolder.itemView.right,
+                        viewHolder.itemView.top,
+                        0,
+                        viewHolder.itemView.bottom
+                    )
+                    background.draw(c)
+
+                    Log.i("TAG", "onChildDraw: ")
+                }
+
 
             }
         val itemTouchHelper = ItemTouchHelper(callback)
