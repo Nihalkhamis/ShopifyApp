@@ -64,11 +64,11 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
     //for internet connection
     lateinit var connectionLiveData: ConnectionLiveData
-    lateinit var dialog : android.app.AlertDialog
+    lateinit var dialog: android.app.AlertDialog
 
-    var hearted : Boolean = false
+    var hearted: Boolean = false
 
-    var draftOrderId : Long = 1000
+    var draftOrderId: Long = 1000
 
     private lateinit var wishlistFactory: ShoppingCartViewModelFactory
     lateinit var wishlistViewModel: ShoppingCartViewModel
@@ -111,13 +111,13 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         Log.d("TAG", "onCreate: $isFromWishlist")
         Log.d("TAG", "onCreate: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID, 1000)}")
 
-        connectionLiveData.observe(this){
-            if (it){
+        connectionLiveData.observe(this) {
+            if (it) {
                 dialog.dismiss()
                 //comes from wishlist
-                if (isFromWishlist == "true"){
+                if (isFromWishlist == "true") {
                     Log.d("TAG", "onCreate: FROM WISHLIST")
-                    var selectedProductId = intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)
+                    var selectedProductId = intent.getLongExtra(Constants.SELECTEDPRODUCTID, 1000)
 
                     Log.d("TAG", "onCreate: $selectedProductId")
 
@@ -133,7 +133,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                 }
 
                 // comes from any product
-                else{
+                else {
                     product = intent.getSerializableExtra("product") as Product
                     initUIComponent()
 
@@ -164,7 +164,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                     Log.d("TAG", "onCreate: DRAFT ORDER ID-------> $draftOrderId")
 
                 })
-            }else{
+            } else {
                 dialog.show()
             }
         }
@@ -177,16 +177,15 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
         //wishlist
         binding.favoriteBtn.setOnClickListener {
             Log.d("TAG", "onCreate: Fav button clicked !")
-            if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+            if (preference.getData(Constants.USEREMAIL).isNullOrEmpty()) {
                 makeAlert()
-            }else{
-                if (hearted){
+            } else {
+                if (hearted) {
                     //remove product from wishlist
                     removeProductFromWishlist(draftOrderId)
 //                    hearted = false
 //                    binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
-                }
-                else{
+                } else {
                     //add product to wishlist
                     addProductToWishlist()
 //                    hearted = true
@@ -207,16 +206,16 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
         productDetailsVm.getDraftOrder(this)
         productDetailsVm.liveGetDraftOrderList.observe(this) {
-            for(i in 0..it.size-1){
-                if(it.get(i).email == preference.getData(Constants.USEREMAIL) && it.get(i).note == "cart")
+            for (i in 0..it.size - 1) {
+                if (it.get(i).email == preference.getData(Constants.USEREMAIL) && it.get(i).note == "cart")
                     draftOrderIds.add(it[i].line_items!![0].variant_id!!)
             }
         }
 
         binding.addToCartBtn.setOnClickListener {
-            if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+            if (preference.getData(Constants.USEREMAIL).isNullOrEmpty()) {
                 makeAlert()
-            }else{
+            } else {
                 if (selectedSize != " " && selectedColor != " ") {
                     var position = 0
                     for (i in 0..product.variants!!.size - 1) {
@@ -228,9 +227,9 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                         }
                     }
 
-                    if(product.variants!![position].id in draftOrderIds){
-                        Snackbar.make(it,"Item already exists", Snackbar.LENGTH_SHORT).show()
-                    }else{
+                    if (product.variants!![position].id in draftOrderIds) {
+                        Snackbar.make(it, "Item already exists", Snackbar.LENGTH_SHORT).show()
+                    } else {
                         var order = DraftOrder()
                         order.email = preference.getData(Constants.USEREMAIL)
                         var draft_orders = Draft_order()
@@ -247,7 +246,7 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                         productDetailsVm.postDraftOrder(draft_orders)
                         productDetailsVm.liveDraftOrderList.observe(this) { dOrder ->
                             if (dOrder.isSuccessful) {
-                              Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "Added to cart", Toast.LENGTH_LONG).show()
                                 draftOrderIds.add(lineItems.variant_id!!)
                             } else {
                                 Log.d("TAG", "failed: ${dOrder.code()}")
@@ -255,9 +254,9 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
                         }
                     }
 
-                }
-                else{
-                    Toast.makeText(this, "You must select size and color first", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "You must select size and color first", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
@@ -265,20 +264,22 @@ class ProductDetailsActivity : AppCompatActivity(), OnclickInterface {
 
 
     }
-private fun makeAlert(){
-    val builder = AlertDialog.Builder(this)
-    builder.setTitle("Warning")
-    builder.setMessage("Sorry but you have to login at first")
-    builder.setNeutralButton("Cancel") { dialog, which -> }
-    builder.setPositiveButton("Login"){dialogInterface, which ->
-        var intent =Intent(this,MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
 
+    private fun makeAlert() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Warning")
+        builder.setMessage("Sorry but you have to login at first")
+        builder.setNeutralButton("Cancel") { dialog, which -> }
+        builder.setPositiveButton("Login") { dialogInterface, which ->
+            var intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+        }
+
+        builder.show()
     }
 
-    builder.show()
-}
     private fun initUIComponent() {
         // product Images
         viewPager = binding.productViewPager
@@ -289,7 +290,7 @@ private fun makeAlert(){
 
         //size
         sizeAdapter = SizeRecyclerAdapter(this, product.options!![0].values, this)
-       // selectedSize = product.options!![0].values[0]
+        // selectedSize = product.options!![0].values[0]
         selectedSize = " "
         sizeRecyclerView = binding.sizeRecyclerView
         sizeRecyclerView.adapter = sizeAdapter
@@ -297,7 +298,7 @@ private fun makeAlert(){
 
         //color
         colorAdapter = ColorRecyclerAdapter(this, product.options!![1].values, this)
-       // selectedColor = product.options!![1].values[0]
+        // selectedColor = product.options!![1].values[0]
         selectedColor = " "
         colorRecyclerView = binding.colorRecyclerView
         colorRecyclerView.adapter = colorAdapter
@@ -319,16 +320,19 @@ private fun makeAlert(){
         binding.descriptionText.text = product.body_html
         binding.productType.text = product.product_type
         binding.productName.text = product.title
-        binding.productPrice.text = String.format("%.2f",(product.variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
-            ?.toDouble() ?: 1.0))) + "${preference.getData(Constants.TOCURRENCY)}"
+        binding.productPrice.text = String.format(
+            "%.2f",
+            (product.variants!![0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)
+                ?.toDouble() ?: 1.0))
+        ) + "${preference.getData(Constants.TOCURRENCY)}"
 
         binding.ratingBar.rating = (product.variants!![0].inventory_quantity / 3).toFloat()
     }
 
-    private fun removeProductFromWishlist(id : Long?) {
+    private fun removeProductFromWishlist(id: Long?) {
         Log.d("TAG", "removeProductFromWishlist: $id")
         wishlistViewModel.deleteProductFromDraftOrder(id.toString())
-        wishlistViewModel.liveDeleteDraftOrderList.observe(this, Observer{
+        wishlistViewModel.liveDeleteDraftOrderList.observe(this, Observer {
             if (it.isSuccessful) {
                 hearted = false
                 binding.favoriteBtn.setImageResource(R.drawable.favorite_icon)
@@ -384,7 +388,6 @@ private fun makeAlert(){
         selectedSize = size
         sizeAdapter.notifyDataSetChanged()
     }
-
 
 
 }

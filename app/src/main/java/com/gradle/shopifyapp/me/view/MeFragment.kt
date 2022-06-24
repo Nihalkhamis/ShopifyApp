@@ -1,5 +1,7 @@
 package com.gradle.shopifyapp.me.view
 
+import android.R.attr.left
+import android.R.attr.right
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,11 +21,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gradle.shopifyapp.databinding.FragmentMeBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.LineItem
-import com.gradle.shopifyapp.me.viewmodel.MeViewModel
 import com.gradle.shopifyapp.model.Repository
 import com.gradle.shopifyapp.network.ApiClient
 import com.gradle.shopifyapp.network.ConnectionLiveData
-import com.gradle.shopifyapp.network.InternetConnection
 import com.gradle.shopifyapp.orders.OrdersActivity
 import com.gradle.shopifyapp.orders.orders_list.view.OrderOnClickListener
 import com.gradle.shopifyapp.orders.orders_list.viewmodel.OrderListViewModel
@@ -34,7 +36,6 @@ import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
-import com.gradle.shopifyapp.wishlist.view.WishlistAdapter
 
 
 class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
@@ -126,9 +127,9 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
                 if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
                     binding.moreForOrders.visibility=View.GONE
                     binding.moreForWishList.visibility=View.GONE
-                    binding.welcome.visibility =View.GONE
                     binding.ordersText.visibility = View.GONE
                     binding.wishListText.visibility = View.GONE
+                    binding.welcome.text = "Welcome to Shopify"
                     binding.noUser.text = "You have to login at first"
                 }else{
                     val userId =preference.getData(Constants.USERID)
@@ -151,8 +152,8 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
                             orderRecyclerAdapter.notifyDataSetChanged()
                         }else{
-                            Log.i("order Result", it.code().toString())
-                            Log.i("order Result", "Error")
+                            Toast.makeText(requireContext(), "Error while loading please try again later", Toast.LENGTH_SHORT).show()
+
                         }
                     }
 
@@ -268,8 +269,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
         intent.putExtra(Constants.FROMWISHLIST,"true")
 
-        Log.d("TAG", "onClickProduct: ${intent.getLongExtra(Constants.SELECTEDPRODUCTID,1000)}")
-        Log.d("TAG", "onClickProduct: ${intent.getStringExtra(Constants.FROMWISHLIST)}")
+
 
         startActivity(intent)
     }
