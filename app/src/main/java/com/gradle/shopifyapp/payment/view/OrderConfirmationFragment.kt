@@ -347,7 +347,7 @@ class OrderConfirmationFragment : Fragment() {
     }
 
     private fun paymentFlow() {
-        paymentSheet.presentWithPaymentIntent(clientSecret, PaymentSheet.Configuration("ITI",
+        paymentSheet.presentWithPaymentIntent(clientSecret, PaymentSheet.Configuration("SHOPIFY",
             PaymentSheet.CustomerConfiguration(customerId,ephericalKey)))
     }
 

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -34,6 +33,7 @@ import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.gradle.shopifyapp.wishlist.view.WishlistActivity
 import java.text.DecimalFormat
+
 
 
 class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
@@ -249,10 +249,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
                     dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
                 ) {
-                    super.onChildDraw(
-                        c, recyclerView, viewHolder, dX,
-                        dY, actionState, isCurrentlyActive
-                    )
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     val background = ColorDrawable(Color.RED)
                     background.setBounds(
                         viewHolder.itemView.right,
