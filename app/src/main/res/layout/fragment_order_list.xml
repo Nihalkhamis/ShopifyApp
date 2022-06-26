@@ -42,15 +42,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:id="@+id/ordersRecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/order_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:padding="@dimen/_8sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/order_list_item"
+        android:layout_marginBottom="@dimen/_24sdp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
