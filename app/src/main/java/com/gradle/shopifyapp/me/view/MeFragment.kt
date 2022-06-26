@@ -125,8 +125,8 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             if(it){
                 dialog.dismiss()
                 if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
-                    binding.moreForOrders.visibility=View.GONE
-                    binding.moreForWishList.visibility=View.GONE
+                    binding.moreForOrders.visibility = View.GONE
+                    binding.moreForWishList.visibility = View.GONE
                     binding.ordersText.visibility = View.GONE
                     binding.wishListText.visibility = View.GONE
                     binding.welcome.text = "Welcome to Shopify"
@@ -156,8 +156,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
 
                         }
                     }
-
-
                 }
             }else{
                 dialog.show()
@@ -165,16 +163,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             }
 
         }
-
-
-
-
-
-
-
-
-
-
         binding.settingsImg.setOnClickListener {
             var intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
@@ -183,9 +171,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         binding.moreForWishList.setOnClickListener {
             startActivity(Intent(requireContext(),WishlistActivity::class.java))
         }
-
-
-
 
         binding.moreForOrders.text = Html.fromHtml("<u>more</u>")
         binding.moreForOrders.setOnClickListener {
@@ -217,7 +202,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         wishListviewModel.getDraftOrder(requireContext())
         wishListviewModel.liveDraftOrderList.observe(viewLifecycleOwner) {
             favProducts= arrayListOf()
-//            Log.d("TAG", "getFavProducts: ${it.size}")
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)
 
@@ -235,22 +219,19 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
            if (!favProducts.isNullOrEmpty()){
                if (favProducts.size<=4)
                {
-                   orderRecyclerAdapter.orders= ordersList
-                   productRecyclerAdapter.favProducts=favProducts
-
+                  // orderRecyclerAdapter.orders = ordersList
+                   productRecyclerAdapter.favProducts = favProducts
 
                }else{
-                   productRecyclerAdapter.favProducts=favProducts.subList(0,4)
+                   productRecyclerAdapter.favProducts = favProducts.subList(0,4)
                }
            }else{
-               binding.noFavorite.visibility=View.VISIBLE
+               binding.noFavorite.visibility = View.VISIBLE
            }
 
             productLayoutManager.orientation =RecyclerView.VERTICAL
             productRecyclerView.layoutManager = productLayoutManager
             productRecyclerView.adapter = productRecyclerAdapter
-
-            //  wishlistAdapter.setFavProducts(favProducts)
         }
 
 
@@ -269,24 +250,6 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         intent.putExtra(Constants.SELECTEDPRODUCTID, draftOrder.draft_order?.line_items?.get(0)?.product_id)
         intent.putExtra(Constants.FROMWISHLIST,"true")
 
-
-
         startActivity(intent)
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
-//            binding.moreForOrders.visibility=View.GONE
-//            binding.moreForWishList.visibility=View.GONE
-//            binding.welcome.visibility =View.GONE
-//            binding.ordersText.visibility = View.GONE
-//            binding.wishListText.visibility = View.GONE
-//            binding.noUser.text = "You have to login at first"
-//            //binding.settingsImg.visibility = View.GONE
-//        }else{
-//                getFavProducts()
-//
-//        }
-//    }
 }

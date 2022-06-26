@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <TextView
             android:id="@+id/welcome"
             android:layout_width="wrap_content"
@@ -21,7 +19,9 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/welcome" />
+            android:text="@string/welcome"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
         <ImageView
             android:id="@+id/settings_img"
             app:layout_constraintEnd_toEndOf="parent"
