@@ -20,9 +20,11 @@
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/product_name"
-            android:layout_width="@dimen/_200sdp"
+            android:layout_width="0dp"
             android:textColor="@color/orange"
             android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="parent"/>

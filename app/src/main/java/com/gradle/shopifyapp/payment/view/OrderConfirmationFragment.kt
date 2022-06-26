@@ -152,10 +152,11 @@ class OrderConfirmationFragment : Fragment() {
             tax += (total_prices[i].tax!!.toDouble() *(preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
         }
         amount = totalPrice.toString()
-        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+        //////////////////////////////////
+        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount+50.0))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
         _binding!!.shipping.text = (String.format("%.2f",tax)) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
         _binding!!.subtotal.text = (String.format("%.2f",subtotal)) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
-
+        _binding!!.shippingTxtInput.text = "50.0${preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")}"
 
         orderConfirmationVmFactory = OrderConfirmationViewModelFactory(
             Repository.getRepoInstance(
@@ -173,7 +174,8 @@ class OrderConfirmationFragment : Fragment() {
                     if(_binding!!.couponEditText.text.toString() == discountCodes.discount_codes[i].code){
                         discount = subtotal*0.1
                         _binding!!.discount.text = "-" + (String.format("%.2f",(discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+                       ///////////////////////////
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount+50.0))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                         _binding!!.verify.setImageResource(R.drawable.verify_checked_icon)
                         discountCode = discountCodes.discount_codes[i]
                         break
@@ -181,7 +183,8 @@ class OrderConfirmationFragment : Fragment() {
                         discount = 0.0
                         _binding!!.discount.text = discount.toString() + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                         _binding!!.verify.setImageResource(R.drawable.verify_icon)
-                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
+                        /////////////////////////////////////
+                        _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount+50.0))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
                     }
                 }
             }

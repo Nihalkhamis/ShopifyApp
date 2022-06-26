@@ -46,11 +46,13 @@
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_main_screen.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_me.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_order_confirmation.xml" value="0.264" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_order_details.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_settings_address.xml" value="0.264" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.4" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_starting.xml" value="0.13703703703703704" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_subcategory.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/fragment_women.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/product_in_order_row.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/product_item.xml" value="0.2" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/product_type_item.xml" value="0.72" />
         <entry key="..\:/ITI/android/ShopifyApp/app/src/main/res/layout/shopping_cart_item.xml" value="0.13240740740740742" />

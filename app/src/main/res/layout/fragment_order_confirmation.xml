@@ -276,6 +276,26 @@
             app:layout_constraintTop_toTopOf="@+id/shipping_fee_tv" />
 
         <TextView
+            android:id="@+id/shipping_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/shipping_fee"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/discount_tv" />
+
+        <TextView
+            android:id="@+id/shipping_txt_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:text="@string/price_EGP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shipping_txt" />
+
+        <TextView
             android:id="@+id/discount_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
