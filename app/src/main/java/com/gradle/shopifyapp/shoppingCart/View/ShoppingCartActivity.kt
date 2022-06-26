@@ -88,6 +88,8 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
 
         connectionLiveData.observe(this){
             if (it){
+                totalPrice.clear()
+                lineItems.clear()
                 dialog.dismiss()
                 getDraftOrders()
                 setUpSwipe()
@@ -131,8 +133,11 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
     }
 
     private fun getDraftOrders(){
+
         shoppingCartVm.getDraftOrder(this)
         shoppingCartVm.liveDraftOrderList.observe(this) {
+            lineItems.clear()
+            totalPrice.clear()
             products = arrayListOf()
             for(i in 0..it.size-1){
                 var email = preference.getData(Constants.USEREMAIL)

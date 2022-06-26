@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.payment.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -40,7 +42,6 @@ import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import org.json.JSONException
 import org.json.JSONObject
-import java.math.BigDecimal
 import java.util.HashMap
 
 class OrderConfirmationFragment : Fragment() {
@@ -140,6 +141,13 @@ class OrderConfirmationFragment : Fragment() {
         _binding!!.emailTextView.text = preference.getData(Constants.USEREMAIL)
         _binding!!.phoneTextView.text = preference.getData(Constants.USERMOBILEPHONE)
 
+        line_items.clear()
+        total_prices.clear()
+
+        totalPrice =0.0
+        tax = 0.0
+        discount =0.0
+
         line_items = (requireActivity() as PaymentActivity).lineItems
         total_prices = (requireActivity() as PaymentActivity).totalPrice
         draftOrderIds = (requireActivity() as PaymentActivity).draftOrderId
@@ -151,6 +159,7 @@ class OrderConfirmationFragment : Fragment() {
             totalPrice += (total_prices[i].total!!.toDouble() * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
             tax += (total_prices[i].tax!!.toDouble() *(preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0))
         }
+
         amount = totalPrice.toString()
         //////////////////////////////////
         _binding!!.totalPriceTextview.text = (String.format("%.2f",(totalPrice-discount+50.0))) + preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY,"EGP")
@@ -168,6 +177,8 @@ class OrderConfirmationFragment : Fragment() {
 
 
         _binding!!.verify.setOnClickListener{
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
             orderConfirmationVm.getAllDiscountCodes(requireContext())
             orderConfirmationVm.liveDiscountList.observe(viewLifecycleOwner){discountCodes ->
                 for(i in 0..discountCodes.discount_codes.size-1){
@@ -374,5 +385,10 @@ class OrderConfirmationFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
     }
 }

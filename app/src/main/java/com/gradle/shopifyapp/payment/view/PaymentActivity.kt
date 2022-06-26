@@ -17,6 +17,10 @@ class PaymentActivity : AppCompatActivity() , PaymentCommunicator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+
+//        lineItems.clear()
+//        totalPrice.clear()
+
         lineItems = intent.getSerializableExtra("line_items") as ArrayList<LineItem>
         totalPrice = intent.getSerializableExtra("total_prices") as ArrayList<Total_price>
         draftOrderId = intent.getSerializableExtra("draft_order_id") as ArrayList<Long>

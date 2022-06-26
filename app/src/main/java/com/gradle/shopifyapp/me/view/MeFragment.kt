@@ -233,7 +233,7 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
             productLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
 
            if (!favProducts.isNullOrEmpty()){
-               if (favProducts.size<=2)
+               if (favProducts.size<=4)
                {
                    orderRecyclerAdapter.orders= ordersList
                    productRecyclerAdapter.favProducts=favProducts
