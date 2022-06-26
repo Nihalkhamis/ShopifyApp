@@ -2,6 +2,9 @@ package com.gradle.shopifyapp.address.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -148,15 +151,24 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val swipedProductPosition =
                         viewHolder.adapterPosition //position of swiped item in recyclerView
-                    val swipedProduct: Addresse =
-                        settingsAddressAdapter.getAddressPosition(swipedProductPosition)!!
-                    settingsAddressViewModel.deleteAddress(
-                        requireContext(),
-                        preference.getData(Constants.USERID)!!,
-                        swipedProduct.id.toString()
-                    )
-                    settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
+                    val swipedProduct: Addresse = settingsAddressAdapter.getAddressPosition(swipedProductPosition)!!
+                    makeAlert(swipedProduct,swipedProductPosition)
+                }
 
+                override fun onChildDraw(
+                    c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                    dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+                ) {
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    val background = ColorDrawable(Color.RED)
+                    background.setBounds(
+                        viewHolder.itemView.right,
+                        viewHolder.itemView.top,
+                        0,
+                        viewHolder.itemView.bottom
+                    )
+                    background.draw(c)
+                    Log.i("TAG", "onChildDraw: ")
                 }
             }
         val itemTouchHelper = ItemTouchHelper(callback)
@@ -167,6 +179,26 @@ class AddressFragment : Fragment(), OnAddressItemClickListener {
         val view = fragment.view
         return Navigation.findNavController(view!!)
     }
+
+
+     private fun makeAlert(swipedProduct: Addresse,swipedProductPosition: Int){
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Warning")
+        builder.setMessage("Are you sure you want to delete item?")
+        builder.setNeutralButton("Cancel") { dialog, which ->
+            settingsAddressAdapter.notifyDataSetChanged()
+        }
+        builder.setPositiveButton("Yes"){dialogInterface, which ->
+            settingsAddressViewModel.deleteAddress(
+                requireContext(),
+                preference.getData(Constants.USERID)!!,
+                swipedProduct.id.toString()
+            )
+            settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
+        }
+        builder.show()
+    }
+
 
 
 }

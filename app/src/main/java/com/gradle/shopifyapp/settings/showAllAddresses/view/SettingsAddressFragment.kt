@@ -162,8 +162,7 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
                     val swipedProductPosition =
                         viewHolder.adapterPosition //position of swiped item in recyclerView
                     val swipedProduct: Addresse = settingsAddressAdapter.getAddressPosition(swipedProductPosition)!!
-                    settingsAddressViewModel.deleteAddress(requireContext(), preference.getData(Constants.USERID)!!, swipedProduct.id.toString())
-                    settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
+                    makeAlert(swipedProduct,swipedProductPosition)
 
                 }
 
@@ -190,5 +189,23 @@ class SettingsAddressFragment : Fragment(), OnAddressItemClickListener {
             }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(binding.addressesRV)
+    }
+
+    private fun makeAlert(swipedProduct: Addresse,swipedProductPosition: Int){
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Warning")
+        builder.setMessage("Are you sure you want to delete item?")
+        builder.setNeutralButton("Cancel") { dialog, which ->
+            settingsAddressAdapter.notifyDataSetChanged()
+        }
+        builder.setPositiveButton("Yes"){dialogInterface, which ->
+            settingsAddressViewModel.deleteAddress(
+                requireContext(),
+                preference.getData(Constants.USERID)!!,
+                swipedProduct.id.toString()
+            )
+            settingsAddressAdapter.deleteAddressByPosition(swipedProductPosition)
+        }
+        builder.show()
     }
 }

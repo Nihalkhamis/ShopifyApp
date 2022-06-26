@@ -156,7 +156,7 @@ interface ApiInterface {
 
 
     // currency converter
-    @GET("convert?apikey=uPBivblfC789xI8EkckRwW5W07V4Z808")
+    @GET("convert?apikey=AHq9FdMClpJSt5RdeWdrQOcDk5QISvEL")   //k0kUAodnr0vH0P7djGr0Dw0h6Deo0tQj  // old -> uPBivblfC789xI8EkckRwW5W07V4Z808
     suspend fun getConvertedCurrency(
         @Query("amount") amount: String,
         @Query("from") from: String,

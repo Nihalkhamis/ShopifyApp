@@ -43,7 +43,7 @@ class SplashScreenActivity : AppCompatActivity() {
 //        }
 
         splashScreenScope.launch(Dispatchers.Default) {
-            delay(2000)
+            delay(5000)
 
             sharedPreference = MyPreference.getInstance(this@SplashScreenActivity)!!
             val check = sharedPreference.getData(Constants.USERID)

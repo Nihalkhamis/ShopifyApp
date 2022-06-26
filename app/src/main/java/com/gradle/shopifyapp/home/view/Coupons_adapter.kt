@@ -54,15 +54,13 @@ class Coupons_adapter(var context: Context,var onBrandClickListener : OnBrandCli
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
             clipboard.text = text
-            onBrandClickListener.onCouponClickListener("Text Copied!")
-         //   Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
+            onBrandClickListener.onCouponClickListener("Discount Code Copied!")
 
         } else {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("Text Copied!", text)
             clipboard.setPrimaryClip(clip)
-            onBrandClickListener.onCouponClickListener("Text Copied!")
-      //      Toast.makeText(context,"Text Copied!", Toast.LENGTH_SHORT).show()
+            onBrandClickListener.onCouponClickListener("Discount Code Copied!")
         }
     }
 

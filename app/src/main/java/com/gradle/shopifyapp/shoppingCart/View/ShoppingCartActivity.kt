@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.gradle.shopifyapp.R
+import com.gradle.shopifyapp.authentication.MainActivity
 import com.gradle.shopifyapp.databinding.ActivityShoppingCartBinding
 import com.gradle.shopifyapp.draft_model.Draft_order
 import com.gradle.shopifyapp.draft_model.LineItem
@@ -230,19 +231,7 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                     val swipedProductPosition =
                         viewHolder.adapterPosition //position of swiped item in recyclerView
                     val swipedProduct: Draft_order = shoppingCartAdapter.getProductId(swipedProductPosition)!!
-                    shoppingCartVm.deleteProductFromDraftOrder(swipedProduct.draft_order!!.id.toString())
-                    shoppingCartVm.liveDeleteDraftOrderList.observe(this@ShoppingCartActivity){ dOrder->
-                        if(dOrder.isSuccessful){
-                            Log.d("TAG", "successful")
-                            //error in calculations
-                            products.remove(swipedProduct)
-                            shoppingCartAdapter.notifyDataSetChanged()
-                            calculateTotalPrice(products)
-                        }
-                        else{
-                            Log.d("TAG", "failed: ${dOrder.code()}")
-                        }
-                    }
+                    makeAlert(swipedProduct)
                 }
 
                 override fun onChildDraw(
@@ -258,7 +247,6 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
                         viewHolder.itemView.bottom
                     )
                     background.draw(c)
-
                     Log.i("TAG", "onChildDraw: ")
                 }
 
@@ -272,6 +260,31 @@ class ShoppingCartActivity : AppCompatActivity(),CartOnClickListener {
             "You can't check out check your connection ", Snackbar.LENGTH_LONG
         )
         snackBar.show()
+    }
+
+    private fun makeAlert(swipedProduct: Draft_order){
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Warning")
+        builder.setMessage("Are you sure you want to delete item?")
+        builder.setNeutralButton("Cancel") { dialog, which ->
+            shoppingCartAdapter.notifyDataSetChanged()
+        }
+        builder.setPositiveButton("Yes"){dialogInterface, which ->
+            shoppingCartVm.deleteProductFromDraftOrder(swipedProduct.draft_order?.id.toString())
+            shoppingCartVm.liveDeleteDraftOrderList.observe(this@ShoppingCartActivity){ dOrder->
+                if(dOrder.isSuccessful){
+                    products.remove(swipedProduct)
+                    shoppingCartAdapter.notifyDataSetChanged()
+                    calculateTotalPrice(products)
+                }
+                else{
+                    Log.d("TAG", "failed: ${dOrder.code()}")
+                }
+            }
+
+        }
+
+        builder.show()
     }
 
 }

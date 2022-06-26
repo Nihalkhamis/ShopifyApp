@@ -226,14 +226,15 @@ class OrderConfirmationFragment : Fragment() {
             }
 
         }else{
-            showSnackBar("We can't place your order check your connection")
+            showSnackBar("We can't place your order, please check your connection")
         }
     }
+
     private fun makeOrderModel():Order_Model {
         var orderModel =OrderModel()
         orderModel.email = preference.getData(Constants.USEREMAIL)
         orderModel.shipping_address?.address1 ="${myAddress.address1 } ${myAddress.country} ${myAddress.city} ${myAddress.zip}"
-        orderModel.discount_codes?.get(0)?.code =discountCode.code
+        orderModel.discount_codes?.get(0)?.code =discount.toString()
 
         for (lineItem in line_items){
             var li = OrderModel.LineItem()

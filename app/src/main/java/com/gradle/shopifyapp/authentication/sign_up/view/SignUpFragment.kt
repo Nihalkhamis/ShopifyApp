@@ -171,7 +171,7 @@ class SignUpFragment : Fragment() {
             if (it){
                 // for not making it at the first time when entre the activity
                 if(!firstTime){
-                    showSnackBar("We back online")
+                    showSnackBar("We are back online")
 
                 }else{
                     firstTime = false

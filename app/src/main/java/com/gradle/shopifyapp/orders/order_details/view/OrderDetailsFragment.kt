@@ -66,11 +66,11 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
        // (productsBrand[position].variants[0].price.toDouble() * (preference.getData(Constants.CURRENCYRESULT)?.toDouble() ?: 1.0)).toString()
 
         binding.subTotalText.text="$constantForCurrency ${order.subtotal_price?.toDouble()?.times(constantForPrice)}"
-        binding.discountText.text= "-$constantForCurrency ${order.total_discounts?.toDouble()?.times(constantForPrice)}"
+        Log.i("DISCOUNTTT", order.total_discounts?.get(0)?.code.toString())
+        binding.discountText.text= "-$constantForCurrency ${order.total_discounts?.get(0)?.code?.toDouble()?.times(constantForPrice)}"
+
         binding.totalPriceText.text = "$constantForCurrency ${order.total_price?.toDouble()?.times(constantForPrice)}"
         binding.shippingFeeText.text = "$constantForCurrency ${(order.total_shipping_price_set?.presentment_money?.amount?.toDouble() ?: 0.0) + (order.total_shipping_price_set?.shop_money?.amount?.toDouble() ?: 0.0)}"
-
-
 
 
         //to get all the products that are exist in that order
