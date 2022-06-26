@@ -34,7 +34,8 @@
             android:text="@string/title_item"
             android:textColor="@color/orange"
             android:textStyle="bold"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/shoppingCartImg"
             app:layout_constraintTop_toTopOf="parent" />
 
