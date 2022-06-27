@@ -92,9 +92,6 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
             ), requireContext()
         )
 
-        // 273053745291 -> kid
-        // 273053679755 -> men
-        // 273053712523 -> women
 
         categoryViewModel = ViewModelProvider(this, vmFactory).get(CategoryViewModel::class.java)
 
@@ -125,7 +122,6 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         setWomenCategory()
 
         categoryViewModel.liveDataCategoriesProductList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: $it")
 
             productBrandAdapter.setProductsBrand(it.products)
             for (productType in it.products){
@@ -145,14 +141,14 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     }
 
     private fun setWomenCategory() {
-        categoryId = "273053712523"
-        // delete old products to fetch new ones
+        categoryId = "274329436299"
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
                 dialog.dismiss()
                 productBrandAdapter.deleteProductBrand()
                 productTypeAdapter.deleteProductTypes()
+                // delete old products to fetch new ones
                 productTypeList.clear()
                 categoryViewModel.getAllCategoriesProducts(requireContext(), categoryId,"","")
             }else{
@@ -164,7 +160,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
 
     private fun setMenCategory() {
-        categoryId = "273053679755"
+        categoryId = "274329403531"
 
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
@@ -183,7 +179,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
 
     private fun setKidsCategory() {
-        categoryId = "273053745291"
+        categoryId = "274329469067"
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){

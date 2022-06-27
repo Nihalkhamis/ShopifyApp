@@ -121,6 +121,14 @@ class HomeFragment : Fragment(), OnBrandClickListener {
                         bindBrands(it)
                     }
 
+                homeViewModel.loading.observe(viewLifecycleOwner, Observer {
+                    if (it) {
+                        binding.progressbar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressbar.visibility = View.GONE
+                    }
+                })
+
                     homeViewModel.getAllDiscountCodes(requireContext())
                     homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
                         bindCoupons(it)
@@ -132,20 +140,9 @@ class HomeFragment : Fragment(), OnBrandClickListener {
                         "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
                     )
                     homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
-                        Log.d("TAG", "onCreateView: IT-> $it")
                         preference.saveData(Constants.CURRENCYRESULT, it.toString())
-                        Log.d(
-                            "TAG",
-                            "onCreateView: CURRENCY RESULT-> ${preference.getData(Constants.CURRENCYRESULT)}"
-                        )
                     }
-                    homeViewModel.loading.observe(viewLifecycleOwner, Observer {
-                        if (it) {
-                            binding.progressbar.visibility = View.VISIBLE
-                        } else {
-                            binding.progressbar.visibility = View.GONE
-                        }
-                    })
+
 
 
                     //Brands

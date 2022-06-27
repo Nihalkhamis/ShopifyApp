@@ -40,9 +40,9 @@ class HomeViewModel(private val repo : RepositoryInterface, private var context:
     fun getAllVendors(context: Context) {
         viewModelScope.launch {
             val response = repo.getAllVendors()
-            vendorList.postValue(response.body())
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
+                    vendorList.postValue(response.body())
                     loading.value = false
                 } else {
                     loading.value = false
