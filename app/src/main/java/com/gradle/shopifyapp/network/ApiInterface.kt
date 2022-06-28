@@ -154,7 +154,7 @@ interface ApiInterface {
     @GET("2022-04/currencies.json?limit=250")
     suspend fun getAllCurrencies(): Response<CurrencyModel>
 
-
+    //fgNVdBJ1niDUlpOhfcKJmFTljSOjG4JN
     // currency converter
     @GET("convert?apikey=AHq9FdMClpJSt5RdeWdrQOcDk5QISvEL")   //k0kUAodnr0vH0P7djGr0Dw0h6Deo0tQj  // old -> uPBivblfC789xI8EkckRwW5W07V4Z808
     suspend fun getConvertedCurrency(

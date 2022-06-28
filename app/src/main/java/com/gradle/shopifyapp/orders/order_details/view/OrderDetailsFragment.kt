@@ -60,7 +60,6 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
 
             }else{
                 dialog.show()
-
             }
         }
         productRecyclerView = binding.productRecyclerView
