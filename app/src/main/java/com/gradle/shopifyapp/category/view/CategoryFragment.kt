@@ -141,7 +141,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
     }
 
     private fun setWomenCategory() {
-        categoryId = "274329436299"
+        categoryId = "274500059275"
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
@@ -160,7 +160,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
 
     private fun setMenCategory() {
-        categoryId = "274329403531"
+        categoryId = "274500026507"
 
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
@@ -179,7 +179,7 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
 
 
     private fun setKidsCategory() {
-        categoryId = "274329469067"
+        categoryId = "274500092043"
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
