@@ -1,6 +1,7 @@
 package com.gradle.shopifyapp.orders.order_details.view
 
 import android.R
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import com.gradle.shopifyapp.me.view.MeFragment
 import com.gradle.shopifyapp.model.Product
 import com.gradle.shopifyapp.network.ConnectionLiveData
 import com.gradle.shopifyapp.productdetails.views.ProductDetailsActivity
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 
@@ -31,6 +33,8 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
     lateinit var productRecyclerViewAdapter: ProductInOrderAdapter
     lateinit var preference: MyPreference
     lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
+
 
 
 
@@ -46,7 +50,19 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
         position = arguments?.getInt("order_position") ?: 0
         preference = MyPreference.getInstance(requireContext())!!
 
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
 
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                    dialog.dismiss()
+
+            }else{
+                dialog.show()
+
+            }
+        }
         productRecyclerView = binding.productRecyclerView
         productRecyclerViewAdapter =ProductInOrderAdapter(arrayListOf(),requireContext(),this)
         productRecyclerView.adapter=productRecyclerViewAdapter
@@ -112,25 +128,6 @@ class OrderDetailsFragment : Fragment(),ProductOnclickListener {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        var  firstTime = true
-        connectionLiveData = ConnectionLiveData(requireContext())
-        connectionLiveData.observe(viewLifecycleOwner){
-            if (it){
-                // for not making it at the first time when entre the activity
-                if(!firstTime){
-                    showSnackBar("We back online")
 
-                }else{
-                    firstTime = false
-                }
-
-            }else{
-                showSnackBar("Be careful we lost the connection")
-
-            }
-        }
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.gradle.shopifyapp.payment.view
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,6 +34,7 @@ import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModel
 import com.gradle.shopifyapp.payment.viewmodel.OrderConfirmationViewModelFactory
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModel
 import com.gradle.shopifyapp.shoppingCart.viewmodel.ShoppingCartViewModelFactory
+import com.gradle.shopifyapp.utils.Alert
 import com.gradle.shopifyapp.utils.Constants
 import com.gradle.shopifyapp.utils.MyPreference
 import com.stripe.android.PaymentConfiguration
@@ -56,6 +58,8 @@ class OrderConfirmationFragment : Fragment() {
     lateinit var shoppingCartVm: ShoppingCartViewModel
 
     lateinit var connectionLiveData: ConnectionLiveData
+    lateinit var dialog : AlertDialog
+
 
 
     var line_items = ArrayList<LineItem>()
@@ -83,6 +87,9 @@ class OrderConfirmationFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var  firstTime = true
+        connectionLiveData = ConnectionLiveData(requireContext())
+        dialog = Alert.makeAlert(requireContext())
 
 
         PaymentConfiguration.init(requireContext(),PUBLISH_KEY)
@@ -121,6 +128,17 @@ class OrderConfirmationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentOrderConfirmationBinding.inflate(inflater, container, false)
+
+        connectionLiveData.observe(viewLifecycleOwner){
+            if (it){
+                dialog.dismiss()
+
+            }else{
+                dialog.show()
+                //showSnackBar("Be careful we lost the connection")
+
+            }
+        }
         preference = MyPreference.getInstance(requireContext())!!
         vmFactory = ShoppingCartViewModelFactory(
             Repository.getRepoInstance(
@@ -364,29 +382,7 @@ class OrderConfirmationFragment : Fragment() {
             PaymentSheet.CustomerConfiguration(customerId,ephericalKey)))
     }
 
-    override fun onStart() {
-        super.onStart()
-        var  firstTime = true
-        connectionLiveData = ConnectionLiveData(requireContext())
-        connectionLiveData.observe(viewLifecycleOwner){
-            if (it){
-                // for not making it at the first time when entre the activity
-                if(!firstTime){
-                    showSnackBar("We back online")
 
-                }else{
-                    firstTime = false
-                }
 
-            }else{
-                showSnackBar("Be careful we lost the connection")
 
-            }
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-    }
 }

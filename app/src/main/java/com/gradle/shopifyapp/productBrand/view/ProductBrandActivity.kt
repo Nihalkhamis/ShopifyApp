@@ -135,7 +135,6 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
                 })
             }else{
                 dialog.show()
-               // showSnackBar()
             }
         }
 
@@ -155,10 +154,5 @@ class ProductBrandActivity : AppCompatActivity(), OnItemClickListener {
         startActivity(intent)
     }
 
-    private fun showSnackBar(){
-        val snackBar = Snackbar.make(this.findViewById(android.R.id.content),
-            "Please check your internet connection ", Snackbar.LENGTH_LONG
-        )
-        snackBar.show()
-    }
+
 }
