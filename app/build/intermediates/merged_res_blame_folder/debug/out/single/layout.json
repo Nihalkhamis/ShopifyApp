@@ -1,0 +1,178 @@
+[
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\slideshow_layout.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\slideshow_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_me.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_me.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\coupons_row.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\coupons_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_settings.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\address_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\address_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_address.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_address.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_starting.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_starting.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_order_confirmation.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_confirmation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\wish_list_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\wish_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\no_internet_screen.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\no_internet_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_maps.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_maps.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_category.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_settings_address.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_settings_address.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_currency.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_currency.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\size_color_row.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\size_color_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\map_dialog.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\map_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_product_detailes.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_product_detailes.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_order_details.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_sign_up.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_add_address_settings.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_add_address_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_product_brand.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_product_brand.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_shopping_cart.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_shopping_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\product_in_order_row.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_in_order_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_search.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\contactus_bottomsheet.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\contactus_bottomsheet.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main_tabs.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_main_tabs.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\aboutus_bottomsheet.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\aboutus_bottomsheet.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\product_type_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_type_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash_screen.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\currency_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\currency_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\review_row.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\review_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\product_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_wishlist.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_wishlist.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_orders.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_main_screen.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_main_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_login.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\brands_row.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\brands_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\shopping_cart_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\shopping_cart_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_payment.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_payment.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\sub_category_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\sub_category_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_order_list.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\order_list_item.xml",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\order_list_item.xml"
+    }
+]

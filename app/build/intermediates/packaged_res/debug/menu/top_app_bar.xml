@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favorite"
+        android:title="@string/favorite"
+        android:iconTint="@color/dark_color"
+        android:icon="@drawable/filled_heat_icon"
+        android:contentDescription="@string/favorite"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/cart"
+        android:title="@string/cart"
+        android:iconTint="@color/dark_color"
+        android:icon="@drawable/shopping_cart_icon"
+        android:contentDescription="@string/cart"
+        app:showAsAction="ifRoom"/>
+</menu>
