@@ -1,0 +1,27 @@
+[
+  {
+    "name": "authentication_navigation",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "mobile_navigation",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "orders_navigation",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "payment_navigation",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "settings_navigation",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  }
+]

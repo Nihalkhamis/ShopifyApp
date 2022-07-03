@@ -1,0 +1,610 @@
+[
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_rounded_border_edittext.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\rounded_border_edittext.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_shopping.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-mdpi\\shopping.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_home_black_24dp.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_in_left.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_in_left.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_logout_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\logout_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_no_internet_screen.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\no_internet_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_up.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_add_ic.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\add_ic.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_arrow_forward.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\arrow_forward.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_main_screen.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_main_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottomsheets_background.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\bottomsheets_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_settings.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_edit_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\edit_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_shopping.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxhdpi\\shopping.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_location_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\location_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_back_button_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\back_button_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_nike.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\nike.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_orders.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_order_list_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\order_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_wish_list_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\wish_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_brands_row.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\brands_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_product_detailes.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_product_detailes.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_order_confirmation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_confirmation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_product_brand.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_product_brand.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_slideshow_layout.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\slideshow_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_shopping_foreground.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\shopping_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_shopping_round.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\shopping_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_shopping_cart_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\shopping_cart_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_settings_address.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_settings_address.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_payment.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_payment.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_shopping.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\shopping.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_shopping.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xhdpi\\shopping.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_aboutus_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\aboutus_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_verify_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\verify_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\navigation_payment_navigation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\navigation\\payment_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_no_internet_connection.jpg.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\no_internet_connection.jpg"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_address.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_address.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_address_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\address_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_shopping_foreground.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-mdpi\\shopping_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_product_type_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_type_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_home_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\home_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_address_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\address_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\navigation_orders_navigation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\navigation\\orders_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_tab_color_selector.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\tab_color_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_login.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_sub_category_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\sub_category_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_fade_in.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\fade_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_promo.jpg.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\promo.jpg"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_shopping_foreground.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxhdpi\\shopping_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_search.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_down.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_down.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_review_row.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\review_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_out_right.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_out_right.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_sign_up.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_favorite_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\favorite_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_search_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\search_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_shopping_foreground.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xhdpi\\shopping_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\raw_splash.json.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\raw\\splash.json"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_no_order_image.jpg.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\no_order_image.jpg"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_google.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\google.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_add_address_settings.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_add_address_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_payment_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\payment_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_out_left.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_out_left.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_verify_checked_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\verify_checked_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_fade_in_forsplash.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\fade_in_forsplash.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_product_type_unselected_background.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable-v24\\product_type_unselected_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_adidas.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\adidas.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_cartoon.jpg.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable-v24\\cartoon.jpg"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_shopping_round.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxhdpi\\shopping_round.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_map_dialog.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\map_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_converse.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\converse.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_code.jpg.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\code.jpg"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_currency.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_currency.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_shopping_cart_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\shopping_cart_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_button_rounded.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\button_rounded.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_contactus_bottomsheet.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\contactus_bottomsheet.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_shape.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_fav_heart_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\fav_heart_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_date_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\date_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_add_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\add_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_shopping_background.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\shopping_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_remove_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\remove_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_order_details.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_settings_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\settings_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\navigation_authentication_navigation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\navigation\\authentication_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_order_list.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_order_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\menu_top_app_bar.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\menu\\top_app_bar.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_dress.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\dress.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_delete_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\delete_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_shopping_cart.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_shopping_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_person_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\person_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_product_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_aboutus_bottomsheet.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\aboutus_bottomsheet.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_coupons.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\coupons.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_orders.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\orders.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\navigation_settings_navigation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\navigation\\settings_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_slide_in_right.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\slide_in_right.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_shopping.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\shopping.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_shopping_foreground.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-hdpi\\shopping_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_starting.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_starting.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\anim_fade_out.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\anim\\fade_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_size_color_row.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\size_color_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_recycler_view_shape.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\recycler_view_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_shopping_round.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\shopping_round.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\color_bottom_nav_color.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\color\\bottom_nav_color.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_password_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\password_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_product_type_selected_background.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable-v24\\product_type_selected_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_close_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\close_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_shopping.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-hdpi\\shopping.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_radius_view.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable-v24\\radius_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_filled_heat_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\filled_heat_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_wishlist.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_wishlist.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_shopping_round.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xhdpi\\shopping_round.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_product_in_order_row.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\product_in_order_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_email_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\email_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main_tabs.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_main_tabs.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_login_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\login_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_category.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_shopping_round.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-mdpi\\shopping_round.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_phone_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\phone_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_currency_item.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\currency_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_pic1.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\pic1.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_edittext.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\edittext.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_shopping_round.png.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\mipmap-hdpi\\shopping_round.png"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_money_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\money_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_splash_screen.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_me.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\fragment_me.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_maps.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\activity_maps.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\layout_coupons_row.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\layout\\coupons_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_currency_icon.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\currency_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_button_shape.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\button_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\build\\intermediates\\merged_res\\debug\\drawable_home_orange.xml.flat",
+        "source": "C:\\Users\\2y\\Documents\\GitHub\\ShopifyApp\\app\\src\\main\\res\\drawable\\home_orange.xml"
+    }
+]

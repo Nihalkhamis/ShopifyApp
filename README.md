@@ -16,12 +16,13 @@ User can pay with cash on delivery or by card.
 User can see history of his orders.
 User can change the currency.
 
+Shopify App is an E-commerce Android App Using Kotlin and MVVM Architecture. 
 Technologies used:
-Shopify API
-Stripe API
-ApiLayer exchangerates
-Glide
-Volley
-Retrofit
-MVVM Architecture design pattern
-Navigation Graph
+-Shopify API
+-Stripe API
+-ApiLayer exchangerates
+-Navigation Graph
+-Glide
+-Volley
+-Retrofit
+-Coroutines and more.
