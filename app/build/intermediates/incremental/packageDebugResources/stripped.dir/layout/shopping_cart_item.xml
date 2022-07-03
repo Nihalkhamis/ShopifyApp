@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_100sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:padding="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:elevation="@dimen/_3sdp"
+    android:id="@+id/shopping_cart_item">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/shoppingCartImg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/title_item"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shoppingCartImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+     <!--   <ImageView
+            android:id="@+id/favorite_img"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/favorite_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /> -->
+
+        <TextView
+            android:id="@+id/size_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/title_item"
+            android:textColor="@color/dark_color"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/shoppingCartImg"
+            app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
+
+        <Button
+            android:id="@+id/remove_btn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/remove_icon"
+            android:src="@drawable/remove_icon"
+            app:layout_constraintEnd_toStartOf="@+id/count_editText"
+            app:layout_constraintTop_toTopOf="@+id/count_editText" />
+
+        <TextView
+            android:id="@+id/count_editText"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center"
+            android:shadowColor="@color/black"
+            android:background="@drawable/edittext"
+            app:layout_constraintEnd_toStartOf="@+id/add_btn"
+            app:layout_constraintTop_toTopOf="@+id/add_btn" />
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:background="@drawable/add_icon"
+            android:src="@drawable/add_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/favorite_img" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:textColor="@color/dark_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/price_item"
+            app:layout_constraintBottom_toBottomOf="@+id/shoppingCartImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shoppingCartImg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
