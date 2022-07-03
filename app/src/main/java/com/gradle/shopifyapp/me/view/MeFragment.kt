@@ -121,42 +121,43 @@ class MeFragment : Fragment(),OrderOnClickListener,OnWishListItemClick {
         )
         wishListviewModel = ViewModelProvider(this, wishListVmFactory).get(ShoppingCartViewModel::class.java)
 
+        if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
+            binding.moreForOrders.visibility = View.GONE
+            binding.moreForWishList.visibility = View.GONE
+            binding.ordersText.visibility = View.GONE
+            binding.wishListText.visibility = View.GONE
+            binding.welcome.text = "Welcome to Shopify"
+            binding.noUser.text = "You have to login at first"
+        }else{
+            val userId =preference.getData(Constants.USERID)
+            orderListViewModel.getOrders(userId!!)
+            getFavProducts()
+            orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
+                if (it.isSuccessful) {
+                    ordersList= it.body()?.orders!!
+                    if (!ordersList.isNullOrEmpty()){
+                        if (ordersList.size<=2)
+                        {
+                            orderRecyclerAdapter.orders= ordersList
+                        }else{
+                            orderRecyclerAdapter.orders= ordersList.subList(0,2)
+                        }
+                    }
+                    else{
+                        binding.noOrders.visibility=View.VISIBLE
+                    }
+
+                    orderRecyclerAdapter.notifyDataSetChanged()
+                }else{
+                    Toast.makeText(requireContext(), "Error while loading please try again later", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+        }
         connectionLiveData.observe(viewLifecycleOwner){
             if(it){
                 dialog.dismiss()
-                if(preference.getData(Constants.USEREMAIL).isNullOrEmpty()){
-                    binding.moreForOrders.visibility = View.GONE
-                    binding.moreForWishList.visibility = View.GONE
-                    binding.ordersText.visibility = View.GONE
-                    binding.wishListText.visibility = View.GONE
-                    binding.welcome.text = "Welcome to Shopify"
-                    binding.noUser.text = "You have to login at first"
-                }else{
-                    val userId =preference.getData(Constants.USERID)
-                    orderListViewModel.getOrders(userId!!)
-                    getFavProducts()
-                    orderListViewModel.ordersResponseLiveData.observe(viewLifecycleOwner){
-                        if (it.isSuccessful) {
-                            ordersList= it.body()?.orders!!
-                            if (!ordersList.isNullOrEmpty()){
-                                if (ordersList.size<=2)
-                                {
-                                    orderRecyclerAdapter.orders= ordersList
-                                }else{
-                                    orderRecyclerAdapter.orders= ordersList.subList(0,2)
-                                }
-                            }
-                            else{
-                                binding.noOrders.visibility=View.VISIBLE
-                            }
 
-                            orderRecyclerAdapter.notifyDataSetChanged()
-                        }else{
-                            Toast.makeText(requireContext(), "Error while loading please try again later", Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-                }
             }else{
                 dialog.show()
 

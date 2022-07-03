@@ -145,26 +145,6 @@ class LoginFragment : Fragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        var  firstTime = true
-        connectionLiveData = ConnectionLiveData(requireContext())
-        connectionLiveData.observe(viewLifecycleOwner){
-            if (it){
-                // for not making it at the first time when entre the activity
-                if(!firstTime){
-                    showSnackBar("We back online")
-
-                }else{
-                    firstTime = false
-                }
-
-            }else{
-                showSnackBar("Be careful we lost the connection")
-
-            }
-        }
-    }
 
 
 }

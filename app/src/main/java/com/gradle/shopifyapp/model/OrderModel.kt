@@ -57,7 +57,7 @@ data class OrderModel(
     val source_identifier: String?= null,
     val source_name: String?= null,
     val source_url: String?= null,
-    val subtotal_price: Int?= null,
+    val subtotal_price: Double?= null,
     val subtotal_price_set: SubtotalPriceSet?= null,
     val tags: String?= null,
     val tax_lines: List<TaxLine?>?= null,
