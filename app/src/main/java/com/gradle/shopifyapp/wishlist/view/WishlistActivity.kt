@@ -77,44 +77,45 @@ class WishlistActivity : AppCompatActivity(), CartOnClickListener {
         //for internet connection
         connectionLiveData = ConnectionLiveData(this)
         dialog = Alert.makeAlert(this)
+        setAdapter()
+
+        viewModel.liveDraftOrderList.observe(this) {
+            Log.d("TGGGGAG", "getFavProducts: ${it.size}")
+            favProducts.clear()
+            for (i in 0..it.size - 1) {
+                var email = preference.getData(Constants.USEREMAIL)
+
+                var df = Draft_order()
+                if (it[i].email == email && it[i].note == "favourite") {
+                    df.draft_order = it[i]
+                    favProducts.add(df)
+                    lineItems.add(df.draft_order!!.line_items!![0])
+
+                }
+            }
+
+            if (favProducts.isNullOrEmpty()) {
+                binding!!.background.setImageResource(R.drawable.orders)
+                wishlistAdapter.deleteFavProducts()
+            } else {
+
+//                wishlistAdapter.deleteFavProducts()
+                wishlistAdapter.setFavProducts(favProducts)
+
+            }
+        }
+
+        viewModel.loading.observe(this, Observer {
+            if (it) {
+                binding!!.progressbar.visibility = View.VISIBLE
+            } else {
+                binding!!.progressbar.visibility = View.GONE
+            }
+        })
         connectionLiveData.observe(this){
             if (it){
                 dialog.dismiss()
-                setAdapter()
 
-                viewModel.liveDraftOrderList.observe(this) {
-                    Log.d("TGGGGAG", "getFavProducts: ${it.size}")
-                    favProducts.clear()
-                    for (i in 0..it.size - 1) {
-                        var email = preference.getData(Constants.USEREMAIL)
-
-                        var df = Draft_order()
-                        if (it[i].email == email && it[i].note == "favourite") {
-                            df.draft_order = it[i]
-                            favProducts.add(df)
-                            lineItems.add(df.draft_order!!.line_items!![0])
-
-                        }
-                    }
-
-                    if (favProducts.isNullOrEmpty()) {
-                        binding!!.background.setImageResource(R.drawable.orders)
-                        wishlistAdapter.deleteFavProducts()
-                    } else {
-
-//                wishlistAdapter.deleteFavProducts()
-                        wishlistAdapter.setFavProducts(favProducts)
-
-                    }
-                }
-
-                viewModel.loading.observe(this, Observer {
-                    if (it) {
-                        binding!!.progressbar.visibility = View.VISIBLE
-                    } else {
-                        binding!!.progressbar.visibility = View.GONE
-                    }
-                })
             }else{
                 dialog.show()
             }

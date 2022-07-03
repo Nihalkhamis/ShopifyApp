@@ -96,11 +96,11 @@ class CategoryFragment : Fragment(), TabLayout.OnTabSelectedListener, OnItemClic
         categoryViewModel = ViewModelProvider(this, vmFactory).get(CategoryViewModel::class.java)
 
         categoryId = "273053712523"
+        setAdapter()
         connectionLiveData.observe(viewLifecycleOwner){
                 isNetworkAvaliable->
             if (isNetworkAvaliable){
                 dialog.dismiss()
-                setAdapter()
 
             }else{
                 dialog.show()

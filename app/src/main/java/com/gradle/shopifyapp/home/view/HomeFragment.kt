@@ -103,65 +103,62 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         if (!InternetConnection.isInternetAvailable(requireContext())){
             dialog.show()
         }
+        homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
+
+        homeViewModel.getAllProducts(requireContext(), "", "", "")
+        homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
+            myProducts = it.products
+        }
+
+        homeViewModel.getAllVendors(requireContext())
+        homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
+            bindBrands(it)
+        }
+
+        homeViewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.progressbar.visibility = View.VISIBLE
+            } else {
+                binding.progressbar.visibility = View.GONE
+            }
+        })
+
+        homeViewModel.getAllDiscountCodes(requireContext())
+        homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
+            bindCoupons(it)
+        }
+
+        // currency converter
+        homeViewModel.getAllConvertedCurrency(
+            requireContext(), "1",
+            "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
+        )
+        homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
+            preference.saveData(Constants.CURRENCYRESULT, it.toString())
+        }
+
+
+
+        //Brands
+        brands_rv = binding.brandRowRv
+        brandsAdapter = Brands_adapter(requireContext(), this)
+        brands_rv.adapter = brandsAdapter
+
+        //coupons
+        coupons_rv = binding.couponsRowRv
+        gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
+        coupons_rv!!.layoutManager = gridLayoutManager
+        couponsAdapter = Coupons_adapter(requireContext(),this)
+        coupons_rv!!.adapter = couponsAdapter
+        alreadyLoaded = true
 
         //check for the connection at first
         connectionLiveData.observe(viewLifecycleOwner){
             isNetworkAvaliable->
             if (isNetworkAvaliable){
                     dialog.dismiss()
-                    homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
-
-                    homeViewModel.getAllProducts(requireContext(), "", "", "")
-                    homeViewModel.liveDataProductList.observe(viewLifecycleOwner) {
-                        myProducts = it.products
-                    }
-
-                    homeViewModel.getAllVendors(requireContext())
-                    homeViewModel.liveVendorList.observe(viewLifecycleOwner) {
-                        bindBrands(it)
-                    }
-
-                homeViewModel.loading.observe(viewLifecycleOwner, Observer {
-                    if (it) {
-                        binding.progressbar.visibility = View.VISIBLE
-                    } else {
-                        binding.progressbar.visibility = View.GONE
-                    }
-                })
-
-                    homeViewModel.getAllDiscountCodes(requireContext())
-                    homeViewModel.liveDiscountList.observe(viewLifecycleOwner) {
-                        bindCoupons(it)
-                    }
-
-                    // currency converter
-                    homeViewModel.getAllConvertedCurrency(
-                        requireContext(), "1",
-                        "EGP", preference.getDataWithCustomDefaultValue(Constants.TOCURRENCY, "EGP")!!
-                    )
-                    homeViewModel.liveDataConvertCurrencyList.observe(viewLifecycleOwner) {
-                        preference.saveData(Constants.CURRENCYRESULT, it.toString())
-                    }
-
-
-
-                    //Brands
-                    brands_rv = binding.brandRowRv
-                    brandsAdapter = Brands_adapter(requireContext(), this)
-                    brands_rv.adapter = brandsAdapter
-
-                    //coupons
-                    coupons_rv = binding.couponsRowRv
-                    gridLayoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
-                    coupons_rv!!.layoutManager = gridLayoutManager
-                    couponsAdapter = Coupons_adapter(requireContext(),this)
-                    coupons_rv!!.adapter = couponsAdapter
-                    alreadyLoaded = true
-
-
             }else{
                 dialog.show()
-               // Alert.makeAlert(requireContext())
             }
         }
 
