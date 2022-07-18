@@ -363,7 +363,7 @@ class OrderConfirmationFragment : Fragment() {
             override fun getParams(): Map<String, String> {
                 val param: HashMap<String,String> = HashMap<String,String>()
                 param.put("customer" ,customerId)
-                val str = amount.toString()
+                val str = (amount!!.toDouble()+50.0).toString()
                 val delim = "."
                 val list = str.split(delim)
                 param.put("amount", "${list.get(0)}${list.get(1)}0")
